@@ -11,7 +11,7 @@
 
 http://literarybibliography.eu
 
-![alt_text](-Computations/Harmonize/blob/main/Zrzut ekranu 2022-12-19 o 17.45.07.png?raw=true)
+![alt_text](https://github.com/CHC-Computations/Harmonize/blob/main/Zrzut%20ekranu%202022-12-19%20o%2017.45.07.png?raw=true)
 
 # Publications / How to cite 
 
