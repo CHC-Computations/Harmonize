@@ -7,6 +7,12 @@
 
 # Use cases
 
+**European Literary Bibliography
+
+http://literarybibliography.eu
+
+![alt_text](-Computations/Harmonize/blob/main/Zrzut ekranu 2022-12-19 o 17.45.07.png?raw=true)
+
 # Publications / How to cite 
 
 ## Articles
