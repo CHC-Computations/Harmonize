@@ -17,4 +17,6 @@
 
 # Installation guide
 
+# Getting help
+
 # License
