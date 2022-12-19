@@ -7,7 +7,7 @@
 
 # Use cases
 
-**European Literary Bibliography
+**European Literary Bibliography**
 
 http://literarybibliography.eu
 
