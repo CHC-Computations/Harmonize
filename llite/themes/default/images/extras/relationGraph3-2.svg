@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="123.78008mm"
+   height="149.28545mm"
+   viewBox="0 0 123.78011 149.28544"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="relationGraph3-2.svg"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.466344"
+     inkscape:cx="180.72158"
+     inkscape:cy="383.26614"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-39.335358,-39.989124)">
+    <rect
+       style="fill:none;stroke:none;stroke-width:3.9876;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4453"
+       width="123.78008"
+       height="61.055828"
+       x="39.335358"
+       y="39.989124" />
+    <path
+       style="fill:none;stroke:#c5c5c5;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 41.149522,189.1423 15.766756,-0.29289 44.056532,-84.31279"
+       id="path7410-1"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#c5c5c5;stroke-width:0.142738px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 41.135422,128.96238 15.770512,-0.0852 44.067026,-24.53267 45.45126,24.42767 13.10636,0.19023"
+       id="path7410-1-4" />
+    <path
+       style="fill:none;stroke:#c5c5c5;stroke-width:0.161292px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 41.13623,73.080819 15.770257,0.10879 44.066313,31.325571 45.45052,-31.191501 13.10615,-0.24291"
+       id="path7410-1-4-6" />
+  </g>
+</svg>

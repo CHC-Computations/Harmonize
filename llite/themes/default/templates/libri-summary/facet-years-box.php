@@ -1,0 +1,4 @@
+
+	
+<?= $this->helper->drawTimeGraph($facets); ?>
+	

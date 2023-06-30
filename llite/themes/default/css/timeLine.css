@@ -1,0 +1,13 @@
+
+
+.line-time {display: table; border-spacing: 0px;}
+.line-time-row {display:table-row;  }
+.line-time-point, .line-time-break, .line-time-year, .line-time-name 
+	{
+	display:table-cell; 
+	}
+.line-time-year {text-align:right; color:#777; font-size:0.9em;}
+
+.line-time-point {width:30px; background-image: url('../images/extras/timeLine-Point.svg'); background-position:center; background-repeat: no-repeat; background-size: 30%;}
+.line-time-break {width:30px; background-image: url('../images/extras/timeLine-Break.svg'); background-position:center; background-repeat: repeat-y; background-size: 30%;}
+.line-time-name .langCode {color:#777; font-size:0.9em;}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 197.94411 257.16083"
+   enable-background="new 0 0 365 560"
+   xml:space="preserve"
+   sodipodi:docname="circle_top.svg"
+   width="197.94411"
+   height="257.16083"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs9"><filter
+     inkscape:collect="always"
+     style="color-interpolation-filters:sRGB"
+     id="filter984"
+     x="-0.2919496"
+     y="-0.90447128"
+     width="1.5838992"
+     height="2.8089426"><feGaussianBlur
+       inkscape:collect="always"
+       stdDeviation="26.156035"
+       id="feGaussianBlur986" /></filter></defs><sodipodi:namedview
+   id="namedview7"
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1.0"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   showgrid="false"
+   fit-margin-top="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-bottom="0"
+   inkscape:zoom="0.73482143"
+   inkscape:cx="-146.97448"
+   inkscape:cy="276.25759"
+   inkscape:window-width="1920"
+   inkscape:window-height="1009"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<ellipse
+   style="mix-blend-mode:normal;fill:#666666;fill-opacity:1;stroke-width:3.526;filter:url(#filter984)"
+   id="path884"
+   cx="-168.08322"
+   cy="229.77264"
+   rx="107.50911"
+   ry="34.702309"
+   transform="matrix(0.46677042,0,0,0.6756939,177.41317,36.040383)" />
+<ellipse
+   style="fill:#f39844;fill-opacity:1;stroke:#f39844;stroke-width:36;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.533333"
+   id="path855"
+   cx="98.972054"
+   cy="96.250305"
+   rx="80.972054"
+   ry="78.250305" /></svg>
