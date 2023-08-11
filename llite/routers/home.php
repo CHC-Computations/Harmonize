@@ -22,7 +22,7 @@ if ($currPage['url']=='home') {
 			<div class="container" id="content">
 				<div class="main">
 		';
-	echo '<h1 class="ubuntu-title">'.$currPage['title'].'</h1>';
+	echo '<h1 class="ubuntu-title">'.$this->transEsc($this->settings->www->title).'</h1>';
 	echo $currPage['script'];
 	echo '<div class="home-page-menu">';
 	$icons = $this->getIniParam('search','searchCoresIcons');
