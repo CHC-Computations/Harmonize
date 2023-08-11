@@ -1,7 +1,7 @@
 <?php
 
 $Llp = 0;
-$statBoxes = $this->getIniParam('persons','statBoxes');
+$statBoxes = $this->getIniParam('institutions','statBoxes');
 
 #echo $this->helper->pre($stat);
 #echo $this->helper->pre($compareStats);
@@ -11,9 +11,9 @@ $compareStatsStr = '<div class="compareStats">';
 $compareStatsStr.= '
 		<div class="compareRow">
 			<div class="compareHeader"></div>
-			<div class="compareHeader"><h4>'.$this->transEsc('As main author').'</h4></div>
-			<div class="compareHeader"><h4>'.$this->transEsc('As co-author').'</h4></div>
-			<div class="compareHeader"><h4>'.$this->transEsc('As subject person').'</h4></div>
+			<div class="compareHeader"><h4>'.$this->transEsc('As author/co-author').'</h4></div>
+			<div class="compareHeader"><h4>'.$this->transEsc('As subject').'</h4></div>
+			<div class="compareHeader"><h4>'.$this->transEsc('As publisher').'</h4></div>
 		</div>';	
 foreach ($statBoxes as $facet=>$facetName) {
 	$Llp++;
@@ -50,6 +50,7 @@ foreach ($statBoxes as $facet=>$facetName) {
 	}
 $compareStatsStr .='</div>';
 $compareStatsStr.= $this->transEsc('The charts show only the most popular options.');
+$compareStatsStr.= $this->helper->pre($compareStats);
 
 
 $PRE = '';
@@ -119,12 +120,14 @@ $this->addJS("results.maps.addInstitutionRelatations('".$this->wiki->record->id.
 				<?= $this->render('wiki/row.php', ['label'=>$this->transEsc('Date of Inception'),  'value'=>$this->wiki->getDate('P571')]) ?>
 				<?= $this->render('wiki/link.place.php', ['label'=>$this->transEsc('Headquarters location'),  'value'=>$this->wiki->getPropIds('P159'), 'time'=>$this->wiki->getClearDate('P571')]) ?>
 				<?= $this->render('wiki/link.php', ['label'=>$this->transEsc('Countries'),  'value'=>$this->wiki->getPropIds('P27')]) ?>
+				<?= $this->render('wiki/link.php', ['label'=>$this->transEsc('Other (old) names'),  'value'=>$this->wiki->getPropIds('P1365')]) ?> 
 				
 				
 				<?= $this->render('wiki/link.php', ['label'=>$this->transEsc('Field of work'),  'value'=>$this->wiki->getPropIds('P101')]) ?>
 				<?= $this->render('wiki/link.php', ['label'=>$this->transEsc('Commons category'),  'value'=>$this->wiki->getPropIds('P373')]) ?>
 				<?= $this->render('wiki/link.out.php', ['label'=>$this->transEsc('Official website'),  'value'=>$this->wiki->getStrVal('P856')]) ?>
-				<?= $this->render('wiki/link.viaf.php', ['label'=>$this->transEsc('Viaf ID'),  'value'=>$this->wiki->getViafId()]) ?>
+				<?= $this->render('wiki/link.isni.php', ['label'=>$this->transEsc('ISNI'),  'value'=>$this->wiki->getStrVal('P213')]) ?>
+				<?= $this->render('wiki/link.viaf.php', ['label'=>$this->transEsc('Viaf'),  'value'=>$this->wiki->getViafId()]) ?>
 				
 				
 			</ul>

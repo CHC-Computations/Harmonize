@@ -6,11 +6,19 @@ class solr {
 	public function __construct($config = []) {
 		
 		$this->options = new stdclass;
-		foreach ($config['solr'] as $k=>$v)
-			$this->options->$k = $v;
-		
 		$this->config = $config;
-		
+		$this->settings = json_decode(@file_get_contents('./config/settings.json'));
+		if (empty($this->settings)) {
+			die("settings.json file not found or file error");
+			}
+		foreach ($this->settings->solr as $k=>$v)
+			$this->options->$k = $v;
+		}
+	
+	public function getOption($name) {
+		if (!empty($this->options->$name))
+			return ($this->options->$name);
+		return '';
 		}
 	
 	public function register($key, $value) {
@@ -19,10 +27,10 @@ class solr {
 	
 	
 	public function querySelect($core, $query) {
-		$core = 'lite.'.$core;
+		$core = $this->getOption('coresPrefix').$core;
 		
 		$TQ = [];
-		#echo "<pre>".print_r($query,1).'</pre>';
+		#echo "querySolr<pre>".print_r($query,1).'</pre>';
 		foreach ($query as $k=>$v) {
 			if (!empty($v['field']) && !empty($v['value']))
 				$TQ[] = $v['field'] .'='.urlencode($v['value']);
@@ -262,10 +270,12 @@ class solr {
 						$Tres[$k][$key] = $v2;
 				}
 			$this->facets = new stdClass;
-			$this->facets->list = $Tres;	
-			return $Tres;	
-			} else 			
-			return [];
+			if (!empty($Tres)) {
+				$this->facets->list = $Tres;	
+				return $Tres;
+				}
+			}  			
+		return [];
 		}
 	
 	public function resultsList() {
@@ -294,6 +304,49 @@ class solr {
 			return $result->response->docs[0];
 			else 
 			return null;
+		}
+	
+	public function getRoles($core, $field, $string) {
+		$string = $string.'|';
+		$query['q']=[
+				'field' => 'q',
+				'value' => '*:*'
+				];
+		$query['limit']=[
+				'field' => 'facet.limit',
+				'value' => 100
+				];
+		$query['prefix']=[
+				'field' => 'facet.prefix',
+				'value' => $string
+				];
+		$query[]=[ 
+				'field' => 'facet',
+				'value' => 'true'
+				];
+		$query[]=[ 
+				'field' => 'rows',
+				'value' => '0'
+				];
+		$query[]=[ 
+				'field' => 'facet.field',
+				'value' => $field
+				];		
+		$json = $this->querySelect($core, $query);
+		
+		if (!empty($json->facet_counts->facet_fields->$field)) {
+			#echo '<pre>'.print_r($json->facet_counts->facet_fields->$field,1).'</pre>';
+			
+			foreach ($json->facet_counts->facet_fields->$field as $k=>$v) {
+				if ($k % 2 == 0) {
+					$key = str_replace($string, '', $v);
+					} else 
+					$Tres[$key] = $v;
+				}
+			return $Tres;	
+			
+			}  			
+		return [];
 		}
 	
 	public function getFacets($core, $facets = array(), $options = []) {
@@ -337,6 +390,10 @@ class solr {
 				$this->facets = $json->facets;
 				else 
 				$this->facets = new stdclass;
+			if (!empty($json->facet_counts->facet_pivot))
+				$this->facet_pivot = $json->facet_counts->facet_pivot;
+				else 
+				$this->facet_pivot = new stdclass;
 			
 			#echo "getFacets<pre>".print_r($query,1)."</pre>";
 			#echo "getFacets:options:<pre>".print_r($options,1)."</pre>";
@@ -376,8 +433,7 @@ class solr {
 		$searchFields = ['author_facet_s', 'topic_person_str_mv'];
 		$id = str_replace('viaf_id', 'viaf/', $id);
 		foreach ($searchFields as $facet) {
-			$path = $this->options->hostname.':8983/solr/'.$this->options->bibliocore.'/select?facet.contains='.$id.'&facet.field='.$facet.'&facet.sort=count&facet=true&q.op=OR&q=*%3A*&rows=0';
-			
+			$path = $this->options->hostname.':8983/solr/'.$this->options->cores->biblio.'/select?facet.contains='.$id.'&facet.field='.$facet.'&facet.sort=count&facet=true&q.op=OR&q=*%3A*&rows=0';
 			
 			try {
 				$er = error_reporting();
@@ -431,7 +487,7 @@ class solr {
 		$urlquery = urlencode(implode(' OR ',$urlqueries));
 			 
 		$facetFields = implode('&facet.field=', $statFields);
-		$path = $this->options->hostname.':'.$this->options->port."/solr/".$this->options->$core."/select?q=*:*&fq={$urlquery}&facet=true&facet.mincount=1&rows=0&facet.limit={$limit}&facet.field={$facetFields}";
+		$path = $this->options->hostname.':'.$this->options->port."/solr/".$this->options->cores->$core."/select?q=*:*&fq={$urlquery}&facet=true&facet.mincount=1&rows=0&facet.limit={$limit}&facet.field={$facetFields}";
 	 
 		#echo "$fullName<br/>";
 		#echo "$path<br/>";
@@ -600,7 +656,7 @@ class solr {
 		$res = new stdclass;
 		
 		// &facet.limit=10
-		$path = $this->options->hostname.':'.$this->options->port."/solr/".$this->options->bibliocore."/select?q=*:*&facet=true&rows=0&facet.field={$facetName}&facet.limit=10000";
+		$path = $this->options->hostname.':'.$this->options->port."/solr/".$this->options->cores->biblio."/select?q=*:*&facet=true&rows=0&facet.field={$facetName}&facet.limit=10000";
 	 
 		$this->alert[] = "<div style='padding:5px; background-color:rgba(255,255,255,0.8); position:absolute; left:5px; top:5px; z-index:10000; border:solid 1px black; border-radius:5px;'><a href='$path' target=_blank>solr query</a></div>"; 
 		$file = @file_get_contents($path);
@@ -645,7 +701,7 @@ class solr {
 		
 		$urlquery = urlencode('(subject_person_str_mv:"'.$fullName.'")OR(author_facet_s:"'.$fullName.'")');
 		 
-		$path = $this->options->hostname.':'.$this->options->port."/solr/".$this->options->bibliocore."/select?q=*:*&fq={$urlquery}&facet=true&facet.mincount=1&rows=0&facet.limit=5&facet.field=info_resource_str_mv&facet.field=format_major&facet.field=article_resource_str_mv&facet.field=author_facet_s&facet.field=author_facet_c&facet.field=genre_major&facet.field=subject_person_str_mv&facet.field=container_title_2&facet.field=language&facet.field=era_facet&facet.field=geographic_facet";
+		$path = $this->options->hostname.':'.$this->options->port."/solr/".$this->options->cores->biblio."/select?q=*:*&fq={$urlquery}&facet=true&facet.mincount=1&rows=0&facet.limit=5&facet.field=info_resource_str_mv&facet.field=format_major&facet.field=article_resource_str_mv&facet.field=author_facet_s&facet.field=author_facet_c&facet.field=genre_major&facet.field=subject_person_str_mv&facet.field=container_title_2&facet.field=language&facet.field=era_facet&facet.field=geographic_facet";
 	 
 		#echo "$fullName<br/>";
 		#echo "$path<br/>";

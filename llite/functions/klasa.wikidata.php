@@ -69,6 +69,7 @@ class wikidata {
 								$data->aliases			= (object) ["set" => json_encode($wiki->getAliases())];
 								$data->descriptions		= (object) ["set" => json_encode($wiki->getDescriptions())];
 								
+								/*
 								if ($wiki->recType() == 'person') {
 									$data->related_place = $wiki->getPropIds('P551');
 									$data->birth_date = $wiki->getDate('P569');
@@ -107,7 +108,7 @@ class wikidata {
 										}
 									$data->country = str_replace('Q', '', $wiki->getPropId('P17'));
 									}
-								
+								*/
 								
 								$postdata = json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE);
 								
@@ -160,6 +161,7 @@ class wikidata {
 		}
 	
 	function getML($source, $langs = [], $sep = '|') {
+		$return = [];
 		foreach ($langs as $lang) {
 			if (!empty($this->record->$source->$lang))
 				$return[$lang] = $this->getValue($this->record->$source->$lang);
@@ -298,6 +300,9 @@ class wikidata {
 				'Q2085381', // publisher
 				'Q43229', // organization
 				'Q79913', // non-governmental organization
+				'Q22806', // national library
+				'Q28564', // public library
+				'Q1438040', // research library
 				];
 		
 		if (!empty($this->record->claims->P31)) {

@@ -1,17 +1,57 @@
 {
+"testMode" : false,
+"www" : {
+	"host" : "http://testlibri.ucl.cas.cz/harmonize/",
+	"ignorePath" : "harmonize/",
+	"logo" : "harmonize_logo.svg",
+	"title" : "Harmonize",
+	"theme" : "default"
+	},
 "solr" : {
 	"hostname" : "http://localhost",
 	"port" : "8983",
+	"reserve" : { 
+		"hostname" :"http://147.231.80.162",
+		"port" : "8983"
+		},
+	"coresPrefix" : "lite.",
 	"cores" : {
 		"biblio" : "lite.biblio",
 		"persons" : "lite.persons",
 		"places" : "lite.places",
 		"wiki"	: "lite.wikidata"
-		}
+		}, 
+	"errorWebHook" : "http://giersz.pl/solrDownError.php?core={{currentlink}}"	
+	},
+"multiLanguage" : {
+	"order" : ["en", "cs", "pl", "fi", "es"]
 	},
 "externalHosts" : {
-	"wikidata" : "https://www.wikidata.org/"
+	"wikidata" : "https://www.wikidata.org/",
+	"wikimedia" : "https://www.wikimedia.org/"
 	},
+"searchEngines" : {
+	"bing" : {
+		"link" : "https://www.bing.com/search?q=",
+		"logo" : "themes/default/images/logos/bing.png"
+		},	
+	"duckduck" : {
+		"link" : "https://duckduckgo.com/?q=",
+		"logo" : "themes/default/images/logos/DuckDuckGo.png"
+		},	
+	"google" : {
+		"link" : "https://www.google.com/search?q=",
+		"logo" : "themes/default/images/logos/google.png"
+		},	
+	"wikipedia" : {
+		"link" : "https://en.wikipedia.org/w/index.php?search=",
+		"logo" : "themes/default/images/logos/wikipedia.png"
+		}	
+	},
+"pretest" : {
+	"desc" : "fields we need to pre-tests to prepare list of labes contected with wikiQ",
+	"list" : ["author","author2","subject_person_str_mv", "geographic", "geographicpublication_str_mv", "geoevents_str_mv"]
+	}, 
 	
 "facets" : {
 	"solrIndexes" : {
@@ -153,6 +193,13 @@
 			"formatter": "formatWiki", 
 			"translated" : false 
 			},
+		"persons_with_roles" : {
+			"name": "Co-Author", 
+			"importFunction" : "getWithRoles",
+			"importParam" : "person",
+			"formatter": "formatPerson", 
+			"translated" : false 
+			},
 		"author_corporate" : {
 			"name": "Corporate Author", 
 			"importFunction" : "getCorporateAuthor",
@@ -163,6 +210,69 @@
 			"name": "Corporate Author", 
 			"importFunction" : "getCorporateAuthorFull",
 			"formatter": null, 
+			"translated" : false 
+			},
+		"corporate_wiki" : {
+			"name": "Corporate Author", 
+			"importFunction" : "getCorporateWiki",
+			"importParam" : "any",
+			"formatter": "formatWiki", 
+			"translated" : false 
+			},
+		"corporate_author_wiki" : {
+			"name": "Corporate Author", 
+			"importFunction" : "getCorporateWiki",
+			"importParam" : "as author",
+			"formatter": "formatWiki", 
+			"translated" : false 
+			},
+		"corporate_subject_wiki" : {
+			"name": "Corporate Author", 
+			"importFunction" : "getCorporateWiki",
+			"importParam" : "as subject",
+			"formatter": "formatWiki", 
+			"translated" : false 
+			},
+		"corporate_publisher_wiki" : {
+			"name": "Corporate Author", 
+			"importFunction" : "getCorporateWiki",
+			"importParam" : "as publisher",
+			"formatter": "formatWiki", 
+			"translated" : false 
+			},
+		"corporate_fs_wiki" : {
+			"name": "Corporate Author", 
+			"importFunction" : "getCorporateFullStr",
+			"importParam" : "any",
+			"formatter": "formatCorporate", 
+			"translated" : false 
+			},
+		"corporate_author_fs_wiki" : {
+			"name": "Corporate Author", 
+			"importFunction" : "getCorporateFullStr",
+			"importParam" : "as author",
+			"formatter": "formatCorporate", 
+			"translated" : false 
+			},
+		"corporate_subject_fs_wiki" : {
+			"name": "Corporate Author", 
+			"importFunction" : "getCorporateFullStr",
+			"importParam" : "as subject",
+			"formatter": "formatCorporate", 
+			"translated" : false 
+			},
+		"corporate_publisher_fs_wiki" : {
+			"name": "Corporate Author", 
+			"importFunction" : "getCorporateFullStr",
+			"importParam" : "as publisher",
+			"formatter": "formatCorporate", 
+			"translated" : false 
+			},
+		"corporates_with_roles" : {
+			"name": "Co-Author", 
+			"importFunction" : "getWithRoles",
+			"importParam" : "corporate",
+			"formatter": "formatCorporate", 
 			"translated" : false 
 			},
 		"title" : {
@@ -238,7 +348,7 @@
 			"translated" : false 
 			},
 		"subject_person_wiki" : {
-			"name" : "Co-Author", 
+			"name" : "Subject person", 
 			"importFunction" : "getSubjectPersonsWiki",
 			"formatter" : "formatWiki", 
 			"translated" : false 
@@ -329,7 +439,7 @@
 			},
 	
 		"geographic" : {
-			"name" : "", 
+			"name" : "Subject place", 
 			"importFunction" : "getRegion",
 			"formatter" : null, 
 			"translated" : false 
@@ -349,7 +459,7 @@
 		"geoevents_str_mv" : {
 			"name" : "Events place", 
 			"importFunction" : "getEventsPlace",
-			"formatter" : null, 
+			"formatter" : "formatPlace", 
 			"translated" : false 
 			},
 		"geo_wiki" : {
@@ -358,11 +468,11 @@
 			"formatter" : "formatWiki", 
 			"translated" : false 
 			},
-		"geo_ML_wiki" : {
-			"name" : "Place", 
-			"importFunction" : "getGeoWikiML",
-			"formatter" : "formatWiki", 
-			"params" : ["en","cs","fi","pl"], 
+		"places_with_roles" : {
+			"name": "Co-Author", 
+			"importFunction" : "getWithRoles",
+			"importParam" : "place",
+			"formatter": "formatPlace", 
 			"translated" : false 
 			},
 		"responsibility_str_mv" : {
@@ -464,7 +574,7 @@
 		"persons_str_mv" : {
 			"name" : "Person", 
 			"importFunction" : "getPersons",
-			"formatter" : null, 
+			"formatter" : "formatPerson", 
 			"translated" : false 
 			},
 		"persons_viaf_str_mv" : {
@@ -482,7 +592,7 @@
 		"geowikifull_str_mv" : {
 			"name" : "Place", 
 			"importFunction" : "getGeoWikiFull",
-			"formatter" : "formatWiki", 
+			"formatter" : null, 
 			"translated" : false 
 			},
 		"geowiki_str_mv" : {
@@ -553,7 +663,8 @@
 					},
 				"corpAuthors" : {
 					"name" : "Corporate Author",
-					"solr_index" : "author_corporate",
+					"solr_index" : "corporate_author_wiki",
+					"formatter" : "formatWiki",
 					"psql_query" : ""
 					},
 				"events" : {
@@ -622,7 +733,7 @@
 						}
 					},
 				"centuries" : {
-					"name" : "Centuriues",
+					"name" : "Time",
 					"solr_index" : "centuries_str_mv",
 					"psql_query" : "",
 					"facetLimit" : "all",
@@ -663,7 +774,17 @@
 			"solr_index" : "geographicpublication_str_mv",
 			"psql_query" : ""
 			},			
-	
+		"publicationCountry" : {
+			"name" : "Publication Country",
+			"formatter" : "formatWiki",
+			"solr_index" : "geo_pub_country_wiki",
+			"psql_query" : "",
+			"child" : {
+				"name" : "Publication place",
+				"solr_index" : "geographicpublication_str_mv",
+				"psql_query" : ""
+				}
+			},			
 		"Year of Publication" : {
 			"name" : "Year of Publication",
 			"template" : "timeGraph",

@@ -21,7 +21,7 @@ if (!empty($facet->translated))
 if (!empty($facet->formatter))
 	$stepSetting->formatter = $facet->formatter;
 
-$query[] = $uf = $this->buffer->getFacets($this->sql, $this->facetsCode);	
+$query[] = $uf = $this->buffer->getFacets( $this->facetsCode);	
 if (!empty($this->GET['sj'])) {
 	$query['q'] = [ 'field' => 'q',	'value' => $this->solr->advandedSearch($this->GET['sj'])];
 	} else 

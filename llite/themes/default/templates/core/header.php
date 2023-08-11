@@ -34,7 +34,7 @@ $myListCount = $this->buffer->myListCount();
 					<div class="core-menu-items">
 						<?= $this->render('cms/header-menu.php') ?>
 					</div>
-					<a class="core-menu-brand" href="<?= $this->basicUri('') ?>" title="<?= $this->transEsc('Home page') ?>"><img src="<?= $this->HOST ?>/themes/default/images/libri_logo_simple.svg" alt="logo Libri"><span class="sr-only"><?= $this->transEsc('Literary Bibliography Research Infrastructure') ?></span></a>
+					<a class="core-menu-brand" href="<?= $this->basicUri('') ?>" title="<?= $this->transEsc('Home page') ?>"><img src="<?= $this->HOST ?>/themes/default/images/<?= $this->settings->www->logo?>" alt="<?= $this->settings->www->title ?>"><span class="sr-only"><?= $this->transEsc('Literary Bibliography Research Infrastructure') ?></span></a>
 				</div>
 			</div>
   

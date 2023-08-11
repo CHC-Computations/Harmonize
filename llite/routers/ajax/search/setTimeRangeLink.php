@@ -12,7 +12,7 @@ $this->addClass('solr', new solr($this->config));
 $this->facetsCode = $this->routeParam[1];
 $sort = $this->routeParam[0];
 
-if (is_array($this->buffer->getFacets($this->sql, $this->facetsCode))) {
+if (is_array($this->buffer->getFacets($this->facetsCode))) {
 	$usedFacets = $this->buffer->usedFacetsStr;
 	}
 
@@ -35,8 +35,11 @@ if (!empty($this->GET['change'])) {
 ##				Wyświetlanie
 ################################################################################	
 	
-
-$redirectLink = $this->buildUri('search/results',['page'=>'1']);
+if (empty($this->routeParam[2]))
+	$searchCore = 'search';
+	else 
+	$searchCore = $this->routeParam[2];	
+$redirectLink = $this->buildUri($searchCore.'/results',['page'=>'1']);
 
 echo '	<div class="text-center" style="padding-bottom:15px; margin-top:-20px; padding-top:-20px;">
 			<button type=button class="btn btn-default disabled" >'.$this->transEsc('Redirecting...').'</button>

@@ -6,7 +6,7 @@ require_once('functions/klasa.forms.php');
 require_once('functions/klasa.converter.php');
 
 $this->addClass('buffer', 	new marcBuffer()); 
-$this->addClass('solr', 	new solr($this->config)); 
+$this->addClass('solr', 	new solr($this->settings)); 
 $this->addClass('helper', 	new helper()); 
 $this->addClass('forms', 	new forms()); 
 $this->addClass('convert', 	new converter());
@@ -71,7 +71,7 @@ if ($this->getCurrentPage()<100) {
 
 	if (!empty($this->routeParam[3])) {
 		$this->facetsCode = $this->routeParam[3];	
-		$query[] = $this->buffer->getFacets($this->sql, $this->facetsCode);	
+		$query[] = $this->buffer->getFacets($this->facetsCode);	
 		} else 
 		$this->facetsCode = 'null';		
 

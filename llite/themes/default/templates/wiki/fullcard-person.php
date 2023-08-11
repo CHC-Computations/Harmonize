@@ -199,11 +199,12 @@ $this->addJS("results.maps.addPersonRelatations('".$this->wiki->record->id."')")
 			}
 	$heWroteAboutStr .= $heWroteAboutStrOnlyNames;	
 	
-
 	
 	$extraTabs['map'] = ['label' => $this->transEsc('Map'), 'content' => $mapDraw];
 	$extraTabs['bstats'] = ['label' => $this->transEsc('Bibliographical statistics'), 'content' => $stats];
 	$extraTabs['cStats'] = ['label' => $this->transEsc('Comparison of roles in bibliography'), 'content' => $compareStatsStr];
+	
+	
 	
 	if (($llp>0)or($rlp>0)) {
 		$topMargin = 'margin-top: 264px; ';
@@ -241,6 +242,17 @@ $this->addJS("results.maps.addPersonRelatations('".$this->wiki->record->id."')")
 		$extraTabs['rpersons'] = ['label' => $this->transEsc('Related persons').$badge, 'content' => $relatedPersons];
 		}
 	#$extraTabs['graph'] = ['label' => $this->transEsc('Some strange graph'), 'content' => 'Może powinniśmy tego użyć do "related persons"?<br/><div id="neo4jd3" style="height: 600px; overflow: hidden;"></div>	<small><a href="https://github.com/eisman/neo4jd3">neo4jd3 on GitHub</a></small>'];
+	
+	$relatedCorporatesStr = '';
+	if (!empty($relatedCorporates) && is_array($relatedCorporates)) {
+		foreach ($relatedCorporates as $AC) {
+			# $relatedCorporatesStr.= $this->helper->pre($AP);
+			
+			$this->addJS("page.post('relatedCorporates{$AC->wikiq}', 'wiki/corporate/box/{$AC->wikiq}', ".json_encode($AC).");");
+			$relatedCorporatesStr.= '<div class="person-info" id="relatedCorporates'.$AC->wikiq.'">'.$AC->wiki.'</div>';
+			}
+		$extraTabs['rCorpo'] = ['label' => $this->transEsc('Related corporations').' <span class="badge">'.count($relatedCorporates).'</span>', 'content' => $relatedCorporatesStr];
+		}
 	
 	echo $this->helper->tabsCarousel( $extraTabs , 'map');
 		

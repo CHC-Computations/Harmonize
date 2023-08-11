@@ -49,7 +49,7 @@ if (!empty($this->getIniParam('search', 'sortoptions')[$this->getUserParam('sort
 				'value' => $sort
 				];
 	}
-$query[] = $this->buffer->getFacets($this->sql, $this->facetsCode);	
+$query[] = $this->buffer->getFacets($this->facetsCode);	
 $query[] = $this->solr->lookFor($lookfor, $type);			
 $query[]=[ 
 		'field' => 'facet',

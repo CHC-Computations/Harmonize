@@ -3,8 +3,6 @@
 
 class marcBuffer{
 	
-	public $cAPI = 'http://testlibri.ucl.cas.cz/lite/functions/marc21/marc2jsonF.php';
-	
 	public function __construct() {
 		$dirList = [
 			'./files',
@@ -31,56 +29,6 @@ class marcBuffer{
 		$this->$name = $var;
 		}
 	
-	public function getJsonRecord($id, $marc) {
-		$fileCode = substr($id, 0, 5);
-		
-		#file_get_contents($this->cAPI.'?'.$fileCode.'/'.$id);
-		
-		if (!is_dir('./files/json/'.$fileCode)) {
-			mkdir('./files/json/'.$fileCode);
-			chmod('./files/json/'.$fileCode, 0775);
-			}
-		if (!is_dir('./files/marc/'.$fileCode)) {
-			mkdir('./files/marc/'.$fileCode);
-			chmod('./files/marc/'.$fileCode, 0775);
-			}
-		$jsonfile = './files/json/'.$fileCode.'/'.$id.'.json';	
-		if (file_exists($jsonfile)) {
-			# echo "Reading $id";	
-			$json = file_get_contents($jsonfile);
-			if ($json!=='') 
-				return json_decode($json);
-			} 
-		file_put_contents('./files/marc/'.$fileCode.'/'.$id.'.mrc', $marc);
-		#echo "Creating $id";	
-		$json = json_decode(file_get_contents($this->cAPI.'?'.$fileCode.'/'.$id));
-		$json->errors = "Error reading buffer";
-		return $json;
-		}
-	
-	public function getRecord($core,$id) {
-		if ($core == 'biblio') {
-			$fileCode = substr($id, 0, 5);
-			if (file_exists('./files/json/'.$fileCode.'/'.$id.'.json')) {
-				$json = file_get_contents('./files/json/'.$fileCode.'/'.$id.'.json');
-				return json_decode($json);
-				} else 
-				return null;
-			}
-		}
-	
-	public function getRecordJsonFile($core,$id) {
-		if ($core == 'biblio') {
-			$fileCode = substr($id, 0, 5);
-			if (file_exists('./files/json/'.$fileCode.'/'.$id.'.json')) {
-				$json = file_get_contents('./files/json/'.$fileCode.'/'.$id.'.json');
-				return $json;
-				} else 
-				return null;
-			}
-		}
-	
- 
 	public function shortHash($str) {
 		return hash('crc32b', trim($str));
 		}
@@ -100,10 +48,10 @@ class marcBuffer{
 			else 
 			$key = $this->shortHash($str);
 		
-		$res = $sql->query("SELECT * FROM lite_facets_queries WHERE code='$key';");
+		$res = $this->cms->psql->querySelect("SELECT * FROM facets_queries WHERE code='$key';");
 		
-		if ($res->num_rows==0) {
-			$sql->query("INSERT INTO lite_facets_queries (code, query) VALUES ('$key', '$str');");
+		if (!is_array($res)) {
+			$this->cms->psql->query("INSERT INTO facets_queries (code, query) VALUES ('$key', '$str');");
 			}
 		return $key;	
 		}
@@ -174,11 +122,11 @@ class marcBuffer{
 				];	
 		}
 
-	public function getFacets($sql, $facetsCode) {
+	public function getFacets($facetsCode) {
 		
-		$res = $sql->query("SELECT * FROM lite_facets_queries WHERE code='{$facetsCode}';");
-		if ($res->num_rows>0) {
-			$row = mysqli_fetch_assoc($res);
+		$res = $this->cms->psql->querySelect("SELECT * FROM facets_queries WHERE code='{$facetsCode}';");
+		if (is_array($res)) {
+			$row = current($res);
 			if ($row['query']<>'') {
 				parse_str($row['query'], $fl);
 				foreach ($fl as $filter) {
@@ -222,16 +170,6 @@ class marcBuffer{
 			}
 		}
 	
-	
-	public function recordsInSql() {
-		
-		$res = $this->sql->query($Q="SELECT count(id_biblio) FROM libri_biblio_core; ");
-		if ($res->num_rows>0) {
-			$row = mysqli_fetch_assoc($res);
-			return $row['count'];	
-			}
-		
-		}
 	
 	
 	##################################################################################################################
@@ -290,224 +228,6 @@ class marcBuffer{
 		}
 	
 	
-	public function isNull($v) {
-		if (empty($v)or($v == ''))
-			return 'NULL';
-			else 
-			return "'".$v."'";
-		}
-	
-	
-	public function getSourceId($type, $source) {
-		if (!empty($this->SourceId[$type][$source]))
-			return $this->SourceId[$type][$source];
-		
-		$res = $this->sql->query($Q="SELECT * FROM libri_sources WHERE type='$type' AND name='$source'; ");
-		if ($res->num_rows>0) {
-			$row = mysqli_fetch_assoc($res);
-			$this->SourceId[$type][$source] = $row['id'];
-			return $row['id'];
-			} else {
-			$res = $this->sql->query("SELECT id FROM libri_sources ORDER BY id DESC LIMIT 1");
-			$row = mysqli_fetch_assoc($res);
-			$id = $row['id']+1;
-			$this->SourceId[$type][$source] = $id;
-			$this->sql->query("INSERT INTO libri_sources (id, type, name) VALUES ('$id', '$type', '$source');");
-			return $id;
-			}
-		}
-	
-	function loadPerson($id) {
-		$id = str_replace('viaf_id','', $id);
-		$res = $this->sql->query($Q="SELECT * FROM libri_persons WHERE viafid='$id'; ");
-					
-		if ($res->num_rows>0) {
-			$row = mysqli_fetch_assoc($res);
-			
-			$person = (object)$row;
-			$person->dates = new stdClass;
-			if (!empty($row['date_birth']))
-				$person->dates->birth = $row['date_birth'];
-			if (!empty($row['date_death']))
-				$person->dates->death = $row['date_death'];
-			if (!empty($row['date_range']))
-				$person->dates->range = $row['date_range'];
-			
-			if (!empty($row['date_birth']) && !empty($row['date_death'])) {
-				$person->dates->wasLiving = date("Y", strtotime($row['date_death']))-date("Y",strtotime($row['date_birth']));
-				if (empty($person->dates->range))
-					$person->dates->range = '('. date("Y", strtotime($row['date_birth'])) .'-'. date("Y",strtotime($row['date_death'])) .')';
-				}
-			if (!empty($row['date_birth']) && empty($row['date_death'])) {
-				$person->dates->age = date("Y") - date("Y", strtotime($row['date_birth']));
-				if (empty($person->dates->range))
-					$person->dates->range = '('.date("Y", strtotime($row['date_birth'])).'-)';
-				}
-			
-			
-			$res = $this->sql->query($Q="SELECT * FROM libri_persons_names WHERE id_person='{$person->id}'; ");
-			if ($res->num_rows>0) {
-				$person->names = new stdClass;
-				while ($row = mysqli_fetch_assoc($res)) {
-					if (!empty($row['ton']))
-						$typeOfName = $row['ton'];
-						else 
-						$typeOfName = 'name';
-					$person->names->{$row['id_lang']} = new stdClass;
-					$person->names->{$row['id_lang']}->$typeOfName = $row['name'];
-					}
-				}
-				
-			$res = $this->sql->query($Q="SELECT * FROM libri_persons_desc WHERE id_person='{$person->id}'; ");
-			if ($res->num_rows>0) {
-				$person->desc = new stdClass;
-				while ($row = mysqli_fetch_assoc($res)) {
-					$person->desc->{$row['id_lang']} = $row['description'];
-					}
-				}
-				
-			$res = $this->sql->query($Q="SELECT * FROM libri_persons_ids WHERE id_person='{$person->id}'; ");
-			if ($res->num_rows>0) {
-				$person->ids = new stdClass;
-				while ($row = mysqli_fetch_assoc($res)) {
-					$person->ids->{$row['toi']} = $row['idvalue'];
-					}
-				}
-			
-			$res = $this->sql->query($Q="SELECT tom,description,url FROM libri_persons_media WHERE id_person='{$person->id}'; ");
-			if ($res->num_rows>0) {
-				$person->media = new stdClass;
-				while ($row = mysqli_fetch_assoc($res)) {
-					$person->media->{$row['tom']}[] = (object)$row;
-					}
-				}
-				
-			return $person;
-			} else 
-			return null;
-		}
-	
-	
-	public function saveBiblio(
-						$id_biblio, 
-						$leader,
-						$publish_year,
-						$id_source,
-						$date_c
-						) {
-		$res = $this->sql->query("SELECT * FROM libri_biblio WHERE id_biblio='$id_biblio' AND leader='$leader' AND publish_year='$publish_year' AND id_source='$id_source' AND date_c='$date_c';");
-		if ($res->num_rows>0) {
-			// record exist !
-			return 'exists';
-			} else {
-			$this->sql->query($Q="INSERT INTO libri_biblio (id_biblio, leader, publish_year, id_source, date_c) 
-					VALUES (
-						".$this->isNull($id_biblio).", 
-						".$this->isNull($leader).", 
-						".$this->isNull($publish_year).", 
-						".$this->isNull($id_source).", 
-						".$this->isNull($date_c)." ); ");	
-			return 'added';
-			}
-		}
-	
-	function addBiblioPerson($id_biblio, $person) {
-		$p = $person;
-		// nadanie wartości domyśnych // sets default values 
-		isset($p['name']) || $p['name'] = null;
-		isset($p['date']) || $p['date'] = null;
-		isset($p['viafid']) || $p['viafid'] = null;
-		
-		
-		$res = $this->sql->query($Q="SELECT * FROM libri_biblio_persons WHERE name={$this->isNull($p['name'])} AND dates={$this->isNull($p['date'])} AND viafid={$this->isNull($p['viafid'])}; ");
-		if (!empty($res->num_rows) && ($res->num_rows>0)) {
-			$row = mysqli_fetch_assoc($res);
-			return $row['id_person'];	
-			} else {
-			$this->sql->query($Q="INSERT INTO libri_biblio_persons (name, dates, viafid) 
-					VALUES (
-						".$this->isNull($p['name']).", 
-						".$this->isNull($p['date']).", 
-						".$this->isNull($p['viafid'])."
-							); ");	
-			#echo " $Q\n";				 
-			$res = $this->sql->query($Q="SELECT * FROM libri_biblio_persons WHERE name={$this->isNull($p['name'])} AND dates={$this->isNull($p['date'])} AND viafid={$this->isNull($p['viafid'])}; ");
-			if (!empty($res->num_rows) && ($res->num_rows>0)) {
-				$row = mysqli_fetch_assoc($res);
-				return $row['id_person'];	
-				}
-				
-			}
-			
-		}	
-	
-	function addAcIndex($index_id, $value) {
-		$res = $this->sql->query($Q="SELECT * FROM libri_ac_indeks WHERE index_id={$this->isNull($index_id)} AND string={$this->isNull($value)}; ");
-		#echo " $Q\n";				 
-		if (!empty($res->num_rows) && ($res->num_rows>0)) {
-			$row = mysqli_fetch_assoc($res);
-			$id = $row['id'];
-			$meter = $row['meter']+1;
-			$this->sql->query($Q="UPDATE libri_ac_indeks SET meter='$meter' WHERE id='$id'; ");
-			return $meter;	
-			} else {
-			$this->sql->query($Q="INSERT INTO libri_ac_indeks (index_id, string, meter) 
-					VALUES (".$this->isNull($index_id).", ".$this->isNull($value).", ".$this->isNull('1')."	); ");	
-			#echo " $Q\n";				 
-			return 1;	
-			}
-			
-		}
-	
-	function savePerson($id, $person) {
-		$res = $this->sql->query($Q="SELECT * FROM libri_persons WHERE viafid='$id'; ");
-		if ($res->num_rows>0) {
-			// person exist = update
-			$this->sql->query("UPDATE libri_persons SET  
-						date_birth={$this->isNull($person->dates->birth)}, 
-						date_death={$this->isNull($person->dates->death)}, 
-						gender={$this->isNull($person->gender)}, 
-						id_source_doc={$this->isNull($person->id_source_doc)}  
-					WHERE viafid='$id';");
-			} else {
-			// no-person = insert	
-			$this->sql->query($Q="INSERT INTO libri_persons (viafid, date_birth, date_death, gender, id_source_doc) 
-					VALUES (
-						".$this->isNull($id).", 
-						".$this->isNull(substr($person->dates->birth, 1, 10)).", 
-						".$this->isNull(substr($person->dates->death, 1, 10)).", 
-						".$this->isNull($person->gender).", 
-						".$this->isNull($person->id_source_doc)." ); ");
-			echo "$Q";
-			$res = $this->sql->query($Q="SELECT * FROM libri_persons WHERE viafid='$id'; ");
-			if ($res->num_rows>0) {
-				$row = mysqli_fetch_assoc($res);
-				$id = $row['id'];
-				if (!empty($person->ids) && is_object($person->ids))
-					foreach ($person->ids as $k=>$v)
-						$this->sql->query("INSERT INTO libri_persons_ids (id_person, toi, idvalue) VALUES ('$id', '$k', '$v');");
-				
-				if (!empty($person->desc) && is_object($person->desc))
-					foreach ($person->desc as $id_lang=>$value)
-						if (!empty($value))
-							$this->sql->query("INSERT INTO libri_persons_desc (id_person, id_lang, description) VALUES ('$id', '$id_lang', '$value');");
-				
-				if (!empty($person->name) && is_object($person->name))
-					foreach ($person->name as $id_lang=>$value)
-						if (!empty($value))
-							$this->sql->query("INSERT INTO libri_persons_names (id_person, id_lang, name) VALUES ('$id', '$id_lang', '$value');");
-				
-				if (!empty($person->image) && is_object($person->image)) {
-					$img = $person->image;
-					if (!empty($img->fname))
-						$this->sql->query("INSERT INTO libri_persons_media (id_person, tom, url, description) VALUES ('$id', 'image', '{$img->fname}', 'image {$img->width},{$img->height}');");
-					}
-				}
-			}
-		
-		}
-	
-	
 	function partOf($t) {
 		foreach ($t as $row) {
 			$T[$row] = strlen($row);
@@ -562,7 +282,7 @@ class marcBuffer{
 			} else {
 			$opts = array('http'=>array('header'=>"User-Agent: LiBRI 3.0\r\n"));
 			$context = stream_context_create($opts);
-			$res = json_decode(file_get_contents('http://nominatim.openstreetmap.org/search/?format=json&q='.urlencode($placeName), false, $context));
+			$res = json_decode(@file_get_contents('http://nominatim.openstreetmap.org/search/?format=json&q='.urlencode($placeName), false, $context));
 			if (!empty($res[0])) {
 				$row['name'] = $placeName;
 				$row['lat'] = $res[0]->lat;

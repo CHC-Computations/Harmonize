@@ -3,6 +3,7 @@ if (empty($this)) die;
 require_once('functions/klasa.maps.php');
 require_once('functions/klasa.persons.php');
 require_once('functions/klasa.places.php');
+require_once('functions/klasa.wikidata.libri.php');
 require_once('functions/klasa.wikidata.php');
 
 
@@ -47,20 +48,15 @@ function personFromStr($str, $field, $count) {
 $stat = [];
 switch ($this->wiki->recType()) {
 	case 'person' :
-
 			$rec_id = $this->wiki->getViafId();
-			$this->addClass('person', 
-					new person(
-						$persJson = $this->buffer->loadPerson($rec_id)
-							)
-						);
+			$this->addClass('person', 	new wikiLibri($this->user->lang['userLang'], $this->solr->getRecord('persons',$wikiId))); 
 						
-			
+			$corporates = 
 			$heWroteAbout =
 			$theyWroteAbout = [];
 			$statFields = $this->getIniParam('persons','statList','statFields');
 			
-			$activePerson = $this->wiki->getActivePersonValues();
+			$activePerson = $this->person->getActivePersonValues();
 			
 			$stats = [];
 			
@@ -90,6 +86,21 @@ switch ($this->wiki->recType()) {
 						}
 					}
 				}
+			# echo $this->helper->pre($activePerson);
+			
+			$query['q'] = ['field' => 'q', 'value' => 'persons_wiki_str_mv:"'.$wikiIdInt.'"'];
+			$results = $this->solr->getFacets('biblio', ['corporate_wiki'], $query);
+			if (!empty($results['corporate_wiki'])) {
+				foreach ($results['corporate_wiki'] as $corporate=>$count) {
+					$AC = new stdClass;
+					$AC->wiki = 'Q'.$corporate;
+					$AC->wikiq = $corporate;
+					$AC->bottomLink = $this->buildUri('search/results/1/r/'.$this->buffer->createFacetsCode($this->sql, ["persons_wiki_str_mv:\"{$wikiIdInt}\"", "corporate_wiki:\"{$corporate}\""]));
+					$AC->bottomStr = $this->transEsc('Go to bibliographic records');
+					$AC->bottomCount = $count;
+					$corporates[] = $AC;
+					}
+				}
 			
 			
 			
@@ -107,14 +118,23 @@ switch ($this->wiki->recType()) {
 					
 	
 			$stat = $this->solr->getStats(
-								'bibliocore',
+								'biblio',
 								[$wikiIdInt], 
 								['persons_wiki_str_mv'],
 								$this->getIniParam('persons','statList','statFields')
 								);	
 			
 			$renderer = 'wiki/fullcard-person.php';
-			$params = [ 'photo'=>$photo, 'audio'=>$audio, 'stat'=>$stat, 'compareStats'=>$stats, 'activePerson'=>$activePerson, 'heWroteAbout' => $heWroteAbout, 'theyWroteAbout' => $theyWroteAbout];
+			$params = [ 
+					'photo'=>$photo, 
+					'audio'=>$audio, 
+					'stat'=>$stat, 
+					'compareStats'=>$stats, 
+					'activePerson'=>$activePerson, 
+					'heWroteAbout' => $heWroteAbout, 
+					'theyWroteAbout' => $theyWroteAbout,
+					'relatedCorporates' => $corporates
+					];
 			break;
 	
 	case 'institution' :
@@ -138,13 +158,15 @@ switch ($this->wiki->recType()) {
 					}
 				}
 			
-			$query['q'] = ['field' => 'q', 'value' => 'corporate_wiki:"'.$wikiIdInt.'"'];
+			$fields = ['corporate_author_wiki', 'corporate_subject_wiki', 'corporate_publisher_wiki'];
 			$query['limit'] = ['field' => 'facet.limit', 'value' => 6];
-			$stats['corporate_wiki'] = $this->solr->getFacets('biblio', $statFields, $query);
-					
-	
+			foreach ($fields as $field) {
+				$query['q'] = ['field' => 'q', 'value' => $field.':"'.$wikiIdInt.'"'];
+				$stats[$field] = $this->solr->getFacets('biblio', $statFields, $query);
+				}
+			
 			$stat = $this->solr->getStats(
-								'bibliocore',
+								'biblio',
 								[$wikiIdInt], 
 								['corporate_wiki'],
 								$this->getIniParam('persons','statList','statFields')
@@ -165,7 +187,7 @@ switch ($this->wiki->recType()) {
 				$biblioNames[] = $this->wiki->get('labels');
 			
 			$stat = $this->solr->getStats(
-							'bibliocore',
+							'biblio',
 							[$wikiIdInt], 
 							['geowiki_str_mv'],
 							$this->getIniParam('places','statList','statFields')
@@ -213,7 +235,7 @@ switch ($this->wiki->recType()) {
 					}
 			if (!empty($Twords))
 				$stat = $this->solr->getStats(
-								'bibliocore',
+								'biblio',
 								$Twords, 
 								['allfields'], 
 								$this->getIniParam('persons','statList','statFields')

@@ -29,7 +29,7 @@ if (!empty($this->GET['sj']))
 			];
 if (!empty($this->routeParam[1])) {
 		$this->facetsCode = $this->routeParam[1];	
-		$query['fq'] = $this->buffer->getFacets($this->sql, $this->facetsCode);	
+		$query['fq'] = $this->buffer->getFacets($this->facetsCode);	
 		} else 
 		$this->facetsCode = 'null';		
 
@@ -184,7 +184,7 @@ if (!empty ($this->postParam('options'))) {
 					
 					}
 					break;
-			case 'json':	{
+			case 'json.old':	{
 					$exportFile = $folder.'/'.$currentStep->name.'.json.part';
 					if (!file_exists($exportFile))
 						file_put_contents($exportFile, '[');	
@@ -549,7 +549,7 @@ if (!empty ($this->postParam('options'))) {
 						echo $this->helper->loader($this->transEsc("Compressing..."));
 					} 		
 					break;
-			case 'json-v2':	{
+			case 'json':	{
 					$exportFile = $folder.'/'.$currentStep->name.'.json.part';
 					if (!file_exists($exportFile))
 						file_put_contents($exportFile, '[');	
@@ -596,14 +596,14 @@ if (!empty ($this->postParam('options'))) {
 											$person->fromWiki->placeD = $wiki->getPropId('P20');
 											$person->fromWiki->sstring = $wiki->getSearchString();
 											}
-										
+										$person->roles = $this->solr->getRoles('biblio', 'persons_with_roles', $result);
 										$Tjson [] = json_encode($person);
 										}
 									file_put_contents($exportFile, implode(",\n",$Tjson), FILE_APPEND);	
 									}
 								break;
 						
-						case 'events' :
+						case 'places' :
 								$query['limit']=[
 									'field' => 'facet.limit',
 									'value' => $recPerStep
@@ -628,16 +628,28 @@ if (!empty ($this->postParam('options'))) {
 								if (!empty($results[$currentStep->facetName])) {
 									foreach ($results[$currentStep->facetName] as $result=>$count) {
 										$lp++;
+										$place = new stdClass;
 										$t = explode('|', $result);
-										$event = new stdClass;
-										$event->name = $t[0];
-										$event->year = $t[1];
-										$event->place = $t[2];
-										$event->recCount = $count;
+										$place->wiki = $t[0];
+										$place->name = $t[3];
+										unset($t[0], $t[3]);
+										$place->alterNames = array_unique($t); 
+										if (!empty($place->wiki)) {
+											$wiki = new wikidata('Q'.$place->wiki);
+											$place->fromWiki = new stdClass;
+											$place->fromWiki->coordinates = $wiki->getSolrValue('long_lat');
+											$place->alterLabelsInBiblioRec = $wiki->getSolrValue('biblio_labels');
+											} else {
+											# file_put_contents($folder.'/queries.'.$currentStep->name.'.json.part', $Q."\n", FILE_APPEND);	
+											$place->coordinates = '';
+											$place->wiki = '';
+											}
 										
-										$Tjson [] = json_encode($event);
+										$place->recCount = $count;
+										$place->roles = $this->solr->getRoles('biblio', 'places_with_roles', $result);
+										$Tjson [] = json_encode($place);
 										}
-									file_put_contents($exportFile, implode(",\n",$Tjson), FILE_APPEND);	
+									file_put_contents($folder.'/'.$currentStep->name.'.json.part', implode(",\n",$Tjson), FILE_APPEND);	
 									}
 								break;
 						
@@ -671,12 +683,50 @@ if (!empty ($this->postParam('options'))) {
 										$person->viaf = $t[1];
 										$person->wiki = $t[2];
 										$person->recCount = $count;
-										
+										$person->roles = $this->solr->getRoles('biblio', 'corporates_with_roles', $result);
 										$Tjson [] = json_encode($person);
 										}
 									file_put_contents($folder.'/'.$currentStep->name.'.json.part', implode(",\n",$Tjson), FILE_APPEND);	
 									}
+								break;								
+						case 'events' :
+								$query['limit']=[
+									'field' => 'facet.limit',
+									'value' => $recPerStep
+									];
+								$query[]=[ 
+									'field' => 'facet.field',
+									'value' => $currentStep->facetName
+									];
+								$query[]=[ 
+									'field' => 'facet.offset',
+									'value' => $currentStep->startAt
+									];
+								$query[]=[ 
+									'field' => 'rows',
+									'value' => 0
+									];
+								
+								$results = $this->solr->getFacets('biblio', [$currentStep->facetName], $query); 
+								#echo "<pre>".print_r($results,1).'<pre>';
+								$lp = $currentStep->startAt;
+								
+								if (!empty($results[$currentStep->facetName])) {
+									foreach ($results[$currentStep->facetName] as $result=>$count) {
+										$lp++;
+										$t = explode('|', $result);
+										$event = new stdClass;
+										$event->name = $t[0];
+										$event->year = $t[1];
+										$event->place = $t[2];
+										$event->recCount = $count;
+										$event->roles = $this->solr->getRoles('biblio', 'events_with_roles', $result);
+										$Tjson [] = json_encode($event);
+										}
+									file_put_contents($exportFile, implode(",\n",$Tjson), FILE_APPEND);	
+									}
 								break;
+						
 						
 						case 'series' :
 								$query['limit']=[
@@ -715,14 +765,14 @@ if (!empty ($this->postParam('options'))) {
 						case 'magazines' :
 								$query['facet.limit']=[
 									'field' => 'facet.limit',
-									'value' => 2 //$recPerStep
+									'value' => $recPerStep
 									];
 								$query['facet.field']=[ 
 									'field' => 'facet.field',
 									'value' => $currentStep->facetName
 									];
 								$query['facet.offset']=[ 
-									'field' => 'facet.offset',
+									'field' => 'f.magazines_str_mv.facet.offset', // keeping offset only on first field
 									'value' => $currentStep->startAt
 									];
 								$query['rows']=[ 
@@ -730,24 +780,15 @@ if (!empty ($this->postParam('options'))) {
 									'value' => 0
 									];
 								
-								$querySub = $query;
-								$querySub['facet.mincount']=[
-									'field' => 'facet.limit',
+								$query['facet.pivot.mincount'] = [
+									'field' => 'facet.pivot.mincount',
 									'value' => 1
 									];
-								$querySub['facet.limit']=[
-									'field' => 'facet.limit',
-									'value' => 1000
+								$facetPivot = 'magazines_str_mv,publishDate,article_resource_related_str_mv';
+								$query['facet.pivot'] = [
+									'field' => 'facet.pivot',
+									'value' => $facetPivot
 									];
-								$querySub['facet.field']=[ 
-									'field' => 'facet.field',
-									'value' => 'publishDate'
-									];
-								$querySub['facet.offset']=[ 
-									'field' => 'facet.offset',
-									'value' => 0
-									];
-								
 								$results = $this->solr->getFacets('biblio', [$currentStep->facetName], $query); 
 								#echo "<pre>".print_r($results,1).'<pre>';
 								$lp = $currentStep->startAt;
@@ -756,110 +797,44 @@ if (!empty ($this->postParam('options'))) {
 									foreach ($results[$currentStep->facetName] as $result=>$count) {
 										$lp++;
 										$cresult = str_replace(['{','}'], '', $result);
-										$t = explode(', issn=', $cresult);
-										$place = new stdClass;
-										$place->name = trim(str_replace('name=','', $t[0]));
+										$t = explode('|', $cresult);
+										
+										$magazine = new stdClass;
+										$magazine->name = $t[0];
 										if (!empty($t[1]))
-											$place->issn = substr($t[1],0,9);
+											$magazine->issn = substr($t[1],0,9);
 											else 
-											$place->issn = '';
-										$place->recCount = $count;
+											$magazine->issn = '';
+										$magazine->recCount = $count;
+										$magazine->years = [];
 										
-										$place->years = [];
-										
-										
-										####
-										
-										$Tuf = [];
-										if (!empty($this->buffer->usedFacetsStr)) 
-											$Tuf = $this->buffer->usedFacetsStr;
-										$Tuf['step'] = $this->buffer->facetLine($currentStep->facetName, $result);
-										
-										$querySub['fq'] = $this->buffer->getFacetsFromStr(http_build_query($Tuf));	
-										
-										$tmp = $this->solr->getCleanedYears('biblio', ['publishDate'], $querySub); 
-										if (!empty($tmp['publishDate'])) {
-											$resSub = $tmp['publishDate'];
-											foreach ($resSub as $k=>$v)
-												if ($v == 0)
-													unset($resSub[$k]);
-													else {
-													$inYear = new stdClass;
-													$inYear->recCount = $v;
-													
-													
-													$Tuf['step2'] = $this->buffer->facetLine('publishDate', $k);
-													$querySub['fq'] = $this->buffer->getFacetsFromStr(http_build_query($Tuf));	
-													
-													$inYear->recList = $this->solr->getFacets('biblio', ['article_resource_related_str_mv'], $querySub)['article_resource_related_str_mv']; 
-													
-													$resSub[$k] = $inYear;
-													}
-											$place->years = $resSub;
+										if (!empty($this->solr->facet_pivot->$facetPivot)) {
+											foreach ($this->solr->facet_pivot->$facetPivot as $magazinePivot) {
+												if (!empty($magazinePivot->pivot)) 
+													foreach ($magazinePivot->pivot as $yearValues) {
+														$Tres = [];
+														if (!empty($yearValues->pivot))
+															foreach ($yearValues->pivot as $res) 
+																$Tres[$res->value] = $res->count;
+														$magazine->years[$yearValues->value] = (object)[
+															'recCount' => $yearValues->count,
+															'recList' => $Tres
+															];
+														}
+												}
 											}
-										
-									
 										
 										
 										####
 										
 										
-										$Tjson [] = json_encode($place);
+										$Tjson [] = json_encode($magazine);
 										}
 									file_put_contents($folder.'/'.$currentStep->name.'.json.part', implode(",\n",$Tjson), FILE_APPEND);	
 									}
 								break;
 								
-						case 'places' :
-								$query['limit']=[
-									'field' => 'facet.limit',
-									'value' => $recPerStep
-									];
-								$query[]=[ 
-									'field' => 'facet.field',
-									'value' => $currentStep->facetName
-									];
-								$query[]=[ 
-									'field' => 'facet.offset',
-									'value' => $currentStep->startAt
-									];
-								$query[]=[ 
-									'field' => 'rows',
-									'value' => 0
-									];
-								
-								$results = $this->solr->getFacets('biblio', [$currentStep->facetName], $query); 
-								#echo "<pre>".print_r($results,1).'<pre>';
-								$lp = $currentStep->startAt;
-								
-								if (!empty($results[$currentStep->facetName])) {
-									foreach ($results[$currentStep->facetName] as $result=>$count) {
-										$lp++;
-										$place = new stdClass;
-										$t = explode('|', $result);
-										$place->name = $t[0];
-										$place->wiki = $t[1];
-										
-										$t = $this->psql->querySelect($Q = "SELECT * FROM places_wiki WHERE wiki = {$this->psql->isNull($place->wiki)};");
-										if (is_array($t)) {
-											$add = current($t);	 
-											if (($add['lat']<>'') && ($add['lon']))
-												$place->coordinates = $add['lat'].','.$add['lon'];
-												else 
-												$place->coordinates = '';	
-											} else {
-											# file_put_contents($folder.'/queries.'.$currentStep->name.'.json.part', $Q."\n", FILE_APPEND);	
-											$place->coordinates = '';
-											$place->wiki = '';
-											}
-										$place->recCount = $count;
-										
-										$Tjson [] = json_encode($place);
-										}
-									file_put_contents($folder.'/'.$currentStep->name.'.json.part', implode(",\n",$Tjson), FILE_APPEND);	
-									}
-								break;
-								
+
 						case 'biblio' :
 								$query[]=[
 									'field' => 'fl',
@@ -882,7 +857,7 @@ if (!empty ($this->postParam('options'))) {
 									$record = $this->solr->getRecord('biblio', $result->id);
 									file_put_contents($folder.'/'.$currentStep->name.'.'.$record->record_format.'.part', $record->fullrecord, FILE_APPEND);
 									# unset($result->fullrecord);
-									$Tjson [] = $this->buffer->getRecordJsonFile('biblio', $result->id);
+									$Tjson [] = json_encode($record);
 									}
 								file_put_contents(
 										$folder.'/'.$currentStep->name.'.json.part', 
@@ -893,7 +868,7 @@ if (!empty ($this->postParam('options'))) {
 								break;
 						
 						default: 
-							echo "nie wiem co robić z <b>{$currentStep->name}</b>";
+							echo "I don't have instrutions for: <b>{$currentStep->name}</b>";
 						
 						} // switch table name
 					$total = floatval($currentStep->totalResults);
@@ -914,7 +889,7 @@ if (!empty ($this->postParam('options'))) {
 					
 					$OC = "results.ExportStart(\"{$exportParams->fileFormat}\", \"{$this->facetsCode}\", ".json_encode($exportParams).");";
 					$this->addJS($OC);
-					# echo "<button OnClick='$OC'>next</button>";
+					// echo "<button OnClick='$OC'>next</button>";
 					if (count($exportParams->exportTable)==0)
 						echo $this->helper->loader($this->transEsc("Compressing..."));
 					} 		
@@ -1003,44 +978,6 @@ if (!empty ($this->postParam('options'))) {
 		switch ($exportParams->fileFormat) {
 			case 'json' : 
 						$indexes = [
-							'magazines'=>'magazines_str_mv',
-							'persons'=>'persons_str_mv',
-							'corporates'=>'corporate_str_mv',
-							'events'=>'events_str_mv',
-							'series'=>'series_str_mv',
-							'pub_places'=>'geographicpublication_str_mv',
-							'sub_places'=>'geographic_facet',
-							'event_places'=>'geoevents_str_mv',
-							];
-						$indexesD = [
-							'persons'=>'Persons',
-							'corporates'=>'Publishing houses',
-							'magazines'=>'Magazines', // publication_place_str_mv ?
-							'events'=>'Events',
-							'series'=>'Publication series',
-							'pub_places'=>'Publication places',
-							'sub_places'=>'Subject places',
-							'event_places'=>'Events places',
-							];
-						
-						foreach ($indexes as $exportName=>$indexName)
-							$query[] =  $this->solr->facetsCountCode($indexName);
-						
-						$res = $this->solr->getFacets('biblio', $indexes, $query);
-						
-						foreach ($indexes as $exportName=>$indexName) {
-							$exportParams->exportTable->$exportName = new stdClass;
-						
-							$exportParams->exportTable->$exportName->name = $exportName;
-							$exportParams->exportTable->$exportName->displayName = $indexesD[$exportName];
-							$exportParams->exportTable->$exportName->facetName = $indexName;
-							$exportParams->exportTable->$exportName->startAt = 0;
-							$exportParams->exportTable->$exportName->totalResults = $this->solr->getFacetsCount($indexName);
-							}
-						break;	
-			
-			case 'json-v2' : 
-						$indexes = [
 							'persons'=>'persons_str_mv',
 							'places'=>'geowikifull_str_mv',
 							'corporates'=>'corporate_str_mv',
@@ -1051,7 +988,7 @@ if (!empty ($this->postParam('options'))) {
 						$indexesD = [
 							'places'=>'Places',
 							'persons'=>'Persons',
-							'corporates'=>'Publishing houses',
+							'corporates'=>'Corporates',
 							'magazines'=>'Magazines', // publication_place_str_mv ?
 							'events'=>'Events',
 							'series'=>'Publication series',

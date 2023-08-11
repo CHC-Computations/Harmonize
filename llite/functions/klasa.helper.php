@@ -851,6 +851,27 @@ class helper {
 		
 		return $res[1]; 
 		}	
+		
+	public function formatMultiLangStr($k) {
+		/*
+		0 - wikiq
+		1..n - names
+		*/
+		
+		$res = explode('|',$k);
+		if ($res[0] == 'not found')
+			return $res[1];
+		
+		$languages = $this->cms->settings->multiLanguage->order;
+		$lp = 0;
+		foreach ($languages as $lang) {
+			$lp++;
+			if (($lang == $this->cms->user->lang['userLang']) && !empty($res[$lp]))
+				return $res[$lp];
+			}
+		
+		return $res[1]; 
+		}	
 	
 	public function formatEvent($k) {
 		/*
@@ -896,6 +917,20 @@ class helper {
 			}
 		
 		return $name.$date; //.$ID 
+		}
+	
+	public function formatCorporate($k) {
+		/*
+		0 - name
+		1 - viaf
+		3 - wikiq
+		4 - roles 
+		*/
+		$res = explode('|',$k);
+		$name = $date = $viaf = $wikiq = '';
+		$name = $res[0]; 
+		
+		return $name; //.$ID 
 		}
 
 	

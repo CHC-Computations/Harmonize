@@ -51,8 +51,9 @@ if (!empty($_SESSION['facets_chosen'][$currFacet]))
 		if (!empty($this->GET['q']))
 			unset($this->GET['q']);
 		
+		$this->facetsCode = $key;
 		$choosen .='<div class="text-right">';
-		$choosen .='<a href="'.$this->buildUri('search/results/1/'.$this->getUserParam('sort').'/'.$key).'" class="btn btn-success"><i class="fa fa-check"></i> '.$this->transEsc('Use choosen').'</a>';
+		$choosen .='<a href="'.$this->buildUri('search/results').'" class="btn btn-success"><i class="fa fa-check"></i> '.$this->transEsc('Use choosen').'</a>';
 		#$choosen .="<button type=submit class='btn btn-success'><i class='fa fa-check'></i> ".$this->transEsc('Use choosen').'</button>';
 		$choosen .='</div>';
 		$choosen .="</form>";

@@ -15,12 +15,12 @@
 		<div class="pi-head">
 			<h4>
 			  <a href="<?= $this->buildUri('wiki/record/Q'.$activePerson->wikiq); ?>" title="<?= $this->transEsc('card of')?>...">
-				<?= $result->wiki->get('labels') ?> 
-				<small><?= $this->render('persons/dateRange.php', ['b'=>$result->wiki->getDate('P569'), 'd'=>$result->wiki->getDate('P570')]) ?></small>
+				<?= $result->wiki->getStr('labels') ?> 
+				<small><?= $this->render('persons/dateRange.php', ['b'=>$result->wiki->getSolrValue('birth_year'), 'd'=>$result->wiki->getSolrValue('death_year')]) ?></small>
 			  </a>
 			</h4>
 		</div>
-		<p><?= $this->helper->setLength($result->wiki->get('descriptions'),155) ?></p>
+		<p><?= $this->helper->setLength($result->wiki->getStr('descriptions'),155) ?></p>
 		<?php if (empty($activePerson->bottomLink)): ?>
 			<a class="pi-bottom-link" href="<?= $this->buildUri('wiki/record/Q'.$activePerson->wikiq); ?>" title="<?= $this->transEsc('card of')?>..."><?= $this->transEsc('More about') ?>...</a>
 		<?php else: ?>	

@@ -5,14 +5,14 @@ require_once('functions/klasa.helper.php');
 #$this->addJS("$('.collapse'+'.sidefl').collapse('hide');");
 
 $this->addClass('helper', new helper()); 
-$this->addClass('solr', new solr($this->config)); 
+$this->addClass('solr', new solr($this->settings)); 
 $this->addClass('buffer', 	new marcBuffer()); 
 
 $facetsOptions = $this->getConfig('facets');
 
 if (!empty($this->routeParam[1])) {
 	$this->facetsCode = $this->routeParam[1];
-	$query['facets'] = $this->buffer->getFacets($this->sql, $this->facetsCode);	
+	$query['facets'] = $this->buffer->getFacets($this->facetsCode);	
 	} else 
 	$this->facetsCode = 'null';	
 

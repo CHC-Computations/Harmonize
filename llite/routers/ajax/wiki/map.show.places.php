@@ -15,6 +15,9 @@ if (count($this->GET)>0) {
 	} 
 
 $WAR = "lon IS NOT NULL AND lat IS NOT NULL AND wikiq IS NOT NULL";
+
+// ?q=*:*&q.op=OR&indent=true&fq=latitiude:[51 TO 53]&fq=longitiude:[15 TO 23]&sort=total_count desc
+
 if (!empty ($this->GET['lookfor'])) {
 	$sstring = $this->urlName2($this->GET['lookfor']);
 	$WAR .= " AND sstring ILIKE '%{$sstring}%'";

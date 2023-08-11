@@ -1,7 +1,6 @@
 <div class='main'>
 	<div class='sidebar'>
-		<?= $this->render('persons/facets-sidebar.php', ['labels'=>$facets]) ?>
-		<?= $this->helper->pre($facets) ?>
+		<?= $this->render('persons/facets-sidebar.php', ['facets'=>$facets]) ?>
 		
 	</div>
 	<div class='mainbody' id='content'>
@@ -16,7 +15,7 @@
 					$result->wiki = new wikiLibri($this->user->lang['userLang'], $result);
 					$result->activePerson = $result->wiki->getActivePersonValues();
 					
-					$photo = $this->buffer->loadWikiMediaUrl($result->wiki->getStrVal('P18'));
+					$photo = $result->wiki->getSolrValue('picture');
 
 					echo '<div class="person-info" id="person_'.$result->id.'">';
 					echo $this->render('persons/results/list-wiki-solr.php',['activePerson'=>$result->activePerson, 'photo'=>$photo, 'result'=>$result]);

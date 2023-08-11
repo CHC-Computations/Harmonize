@@ -13,7 +13,7 @@ $next = $page+1;
 $limit = 100;
 
 
-$query[] = $W = $this->buffer->getFacets($this->sql, $this->routeParam[1]);	
+$query[] = $W = $this->buffer->getFacets( $this->routeParam[1]);	
 $query[]=[ 
 		'field' => 'q',
 		'value' => '*:*'

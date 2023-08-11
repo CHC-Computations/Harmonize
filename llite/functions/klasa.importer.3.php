@@ -17,6 +17,7 @@ class importer {
 		$this->buffer = new stdclass;
 		$this->buffer->wikiq = [];
 		$solr = $this->settings->solr;
+		
 		$this->solrUrl = $solr->hostname.':'.$solr->port.'/solr/'.$solr->cores->biblio.'/update';
 		$this->solrWikiUrl = $solr->hostname.':'.$solr->port.'/solr/'.$solr->cores->wiki.'/update';
 		$this->config->commitStep = 5000;  
@@ -160,74 +161,183 @@ class importer {
 		return number_format($this->lp,0,'','.').". ".round(($this->buffSize/$this->fullFileSize)*100)."% rec: (".$id.")    ".$this->WorkTime($workTime)." s. ".str_repeat(' ',$this->lastLen)."  \r";
 			
 		}
+		
+	function addMuliLanguageLabels($wikisIds) {
+		if (is_string($wikisIds)) {
+			$a = $wikisIds;
+			$wikisIds = array($a);
+			}
+		$res = [];
+		if (is_Array($wikisIds))
+			foreach($wikisIds as $wikiq) {
+				if (!empty($this->buffer->wikiq[$wikiq]['ml_label']))
+					$res[] = $wikiq.'|'.$this->buffer->wikiq[$wikiq]['ml_label'];
+					else {
+					$wiki = new wikidata($wikiq);
+					$this->buffer->wikiq[$wikiq]['ml_label'] = $wiki->getML('labels', $this->settings->multiLanguage->order);
+					$res[] = $wikiq.'|'.$this->buffer->wikiq[$wikiq]['ml_label'];
+					}
+				}
+		return $this->removeArrayKeys($res);		
+		}
+	
+	function loadWikiMediaUrl($fileName) {
+		if (!empty($fileName)) {
+			# $fileName = $wiki->getStrVal($claim);
+			$t = $this->psql->querySelect("SELECT url,width,height FROM wiki_media_urls WHERE file_name={$this->psql->isNull($fileName)}; ");
+			if (is_array($t))
+				return current($t)['url'];
+				else {
+				$file = @file_get_contents("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=imageinfo&iilimit=5&iiprop=timestamp|size|url&titles=File:".urlencode($fileName));
+				$json = json_decode($file);
+				if (!empty($json->query->pages->{'-1'}->imageinfo[0]->url)) {
+					$url = $json->query->pages->{'-1'}->imageinfo[0]->url;
+					$width = $json->query->pages->{'-1'}->imageinfo[0]->width;
+					$height = $json->query->pages->{'-1'}->imageinfo[0]->height;
+					$this->psql->query("INSERT INTO wiki_media_urls (file_name, url, width, height, time) VALUES ({$this->psql->isNull($fileName)}, {$this->psql->isNull($url)}, {$this->psql->isNull($width)}, {$this->psql->isNull($height)}, now())");
+					return $url;
+					}
+				}
+			}
+		}
+	
 	
 	function saveCheckingResults() {
-		
+		$usedRecLinks = [];
+		$solrSettings = $this->settings->solr;
 		if (!empty($this->buffer->wikiq) && count($this->buffer->wikiq)>0) {
 			$lp = 0;		
 			$max = count($this->buffer->wikiq);
 			foreach ($this->buffer->wikiq as $wikiq=>$values) {
+				$recCore = null;
 				$wikiId = 'Q'.$wikiq;
 				$wiki = new wikidata($wikiId);
 				$lp++;
 				$solr_strings = $values['biblio_labels'];
 				asort($solr_strings);
 				$data = (object) ["id" => 'Q'.$wikiq];
-				// $sss = [];
-				// foreach ($solr_strings as $string=>$count)
-					// $sss[] = $string;
+				
+				$data->labels			= (object) ["set" => json_encode($wiki->getLabels())];
+				$data->aliases			= (object) ["set" => json_encode($wiki->getAliases())];
+				$data->descriptions		= (object) ["set" => json_encode($wiki->getDescriptions())];
+				
+				$data->picture			= (object) ["set" => $this->loadWikiMediaUrl($wiki->getStrVal('P18'))];  
+					
 				$sss = array_keys($solr_strings);
 				$data->biblio_labels = (object) ["set" => $sss];	
 				
-				if (!empty($values['roles'])) 
-					foreach ($values['roles'] as $as=>$biblioIds) {
-						$fieldName = str_replace(' ','_',$as).'_count';
-						$data->$fieldName = count($biblioIds); 
-						switch ($as) {
-							case 'total' : $data->biblio_count = count($biblioIds); break;
-							case 'author' : $data->as_author = count($biblioIds); break;
-							case 'author2' : $data->as_coauthor = count($biblioIds); break;
-							case 'subject place' : 
-							case 'topic' : $data->as_subject = count($biblioIds); break;
-							case 'publication place' : $data->as_pub_place = count($biblioIds); break;
-							case 'event place' : $data->as_event = count($biblioIds); break;
+				if ($wiki->recType() == 'person') {
+					$recCore = 'persons';
+					$data->viaf 			= (object) ["set" => $wiki->getViafId()]; 
+				
+					$data->related_place = $this->addMuliLanguageLabels ($wiki->getPropIds('P551'));
+					$data->birth_date = $wiki->getDate('P569');
+					$data->death_date = $wiki->getDate('P570');
+					if (!empty($data->birth_date)) {
+						$data->birth_year = intval( explode('-', $data->birth_date)[0] );
+						}
+					if (!empty($data->death_date)) {
+						$data->death_year = intval( explode('-', $data->death_date)[0] );
+						}
+					$data->birth_place = $this->addMuliLanguageLabels( $wiki->getPropIds('P19') );
+					$data->death_place = $this->addMuliLanguageLabels( $wiki->getPropIds('P20') );
+					if (!empty($data->birth_place))
+						foreach ($data->birth_place as $place)
+							$data->related_place[] = $place;
+					if (!empty($data->death_place))
+						foreach ($data->death_place as $place)
+							$data->related_place[] = $place;
+					if (!empty($data->related_place))
+						$data->related_place = $this->removeArrayKeys( $data->related_place );
+					
+					$data->country = $this->addMuliLanguageLabels( $wiki->getPropIds('P27') );
+					$data->occupation = $this->addMuliLanguageLabels( $wiki->getPropIds('P106') );
+					$data->genres = $this->addMuliLanguageLabels( $wiki->getPropIds('P136') );
+					$data->gender = $this->addMuliLanguageLabels( $wiki->getPropIds('P21') );
+					
+					}
+				
+				
+				if ($wiki->recType() == 'place') {
+					$recCore = 'places';
+					$value = $wiki->getCoordinates('P625');
+					if (!empty($value->longitude)) {
+						$data->longitiude = str_replace(',','.',$value->longitude);
+						$data->latitiude = str_replace(',','.',$value->latitude);
+						$data->latlon = $data->latitiude.','.$data->longitiude;
+						$data->latlon2 = $data->latitiude.','.$data->longitiude;
+						}
+					$data->country = str_replace('Q', '', $wiki->getPropId('P17'));
+					}
+				
+				if ($wiki->recType() == 'corporate') {
+					#$recCore = 'corporates';
+					}
+				
+				if (!empty($recCore)) {
+					if (!empty($values['roles'])) 
+						foreach ($values['roles'] as $as=>$biblioIds) {
+							$fieldName = str_replace(' ','_',$as).'_count';
+							$data->$fieldName = count($biblioIds); 
+							switch ($as) {
+								case 'total' : $data->biblio_count = count($biblioIds); break;
+								case 'author' : $data->as_author = count($biblioIds); break;
+								case 'author2' : $data->as_coauthor = count($biblioIds); break;
+								case 'subject place' : 
+								case 'topic' : $data->as_subject = count($biblioIds); break;
+								case 'publication place' : $data->as_pub_place = count($biblioIds); break;
+								case 'event place' : $data->as_event = count($biblioIds); break;
+								}
+							}
+									
+					$postdata = json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE);
+				
+					file_put_contents($this->outPutFolder.'updates.'.$recCore.'.json', $postdata."\n"); // , FILE_APPEND
+					#  $json = $imp->saveSolrUpdateFile($destination_path, $record, $fname, $postdata);  // zapisz plik buffora  - może ta funkcja powinna trafić do klasy buffer?
+					
+					$ch = curl_init($recLink = $solrSettings->hostname.':'.$solrSettings->port.'/solr/'.$solrSettings->cores->$recCore.'/update'); 
+					@$usedRecLinks[$recLink]++;
+					curl_setopt($ch, CURLOPT_POST, 1);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, '['.$postdata.']');
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+					curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+					$result = curl_exec($ch);
+					$resDecoded = json_decode($result);
+					
+					if (!isset($resDecoded->responseHeader->status)) {
+						echo "\nSolr not responding. Try to restart Solr and type Y to continue? (Y/n) - ";
+
+						$stdin = fopen('php://stdin', 'r');
+						$response = fgetc($stdin);
+						if ($response != 'Y') {
+						   echo "Aborted.\n";
+						   exit;
+							}
+						} elseif ($resDecoded->responseHeader->status == 0) {
+						#echo "ok ";
+						} else {
+						echo "error ";	
+						$g = glob ("./import/errors/*.*");
+						if (count($g)<$this->config->maxErrorFiles) {
+							#file_put_contents("./import/errors/$id.json", json_encode($record) );
+							file_put_contents("./import/errors/{$wikiId}_send.json", $postdata );
+							file_put_contents("./import/errors/{$wikiId}_res.json", $result );
+							$isOK = 'error';
 							}
 						}
-								
-				$postdata = json_encode($data, JSON_INVALID_UTF8_SUBSTITUTE);
-			
-				file_put_contents($this->outPutFolder.'jsonupdates.json', $postdata."\n"); // , FILE_APPEND
-				#  $json = $imp->saveSolrUpdateFile($destination_path, $record, $fname, $postdata);  // zapisz plik buffora  - może ta funkcja powinna trafić do klasy buffer?
-				
-				$ch = curl_init($this->solrWikiUrl); 
-				curl_setopt($ch, CURLOPT_POST, 1);
-				curl_setopt($ch, CURLOPT_POSTFIELDS, '['.$postdata.']');
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-				curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-				$result = curl_exec($ch);
-				$resDecoded = json_decode($result);
-				if ($resDecoded->responseHeader->status == 0) {
-					#echo "ok ";
-					} else {
-					echo "error ";	
-					$g = glob ("./import/errors/*.*");
-					if (count($g)<$this->config->maxErrorFiles) {
-						#file_put_contents("./import/errors/$id.json", json_encode($record) );
-						file_put_contents("./import/errors/{$id}_send.json", $postdata );
-						file_put_contents("./import/errors/{$id}_res.json", $result );
-						$isOK = 'error';
-						}
+					curl_close($ch);
+
+					
+					$workTime = time()-$this->startTime;
+					echo "Saving to solr: ".round(($lp/$max)*100.0)."% ".$this->WorkTime($workTime)." s. wiki: Q$wikiq             \r";
 					}
-				curl_close($ch);
-				
-				$workTime = time()-$this->startTime;
-				echo "Saving to solr: ".round(($lp/$max)*100.0)."% ".$this->WorkTime($workTime)." s. wiki: Q$wikiq             \r";
-				
 				if ($lp % $this->config->commitStep == 0) 
-					file_get_contents($this->solrWikiUrl.'?commit=true');
+					foreach ($usedRecLinks as $recLink=>$usedTimes)
+						file_get_contents($recLink.'?commit=true');
 				}
 			}	
-		file_get_contents($this->solrWikiUrl.'?commit=true');
+		foreach ($usedRecLinks as $recLink=>$usedTimes)	
+			file_get_contents($recLink.'?commit=true');
 		}
 	
 	function checkRecord() {
@@ -301,8 +411,8 @@ class importer {
 				unset ($val);
 				if (!empty($indexSettings->importFunction)) {
 					$functionName = $indexSettings->importFunction;
-					if (!empty($indexSettings->params))
-						$val = $this->$functionName($indexSettings->params);
+					if (!empty($indexSettings->importParam))
+						$val = $this->$functionName($indexSettings->importParam);
 						else 
 						$val = $this->$functionName();
 					}
@@ -332,7 +442,7 @@ class importer {
 			$result = curl_exec($ch);
 			$resDecoded = json_decode($result);
 			if (!isset($resDecoded->responseHeader->status)) {
-				echo "Solr not responding. Try to restart Solr and type Y to continue? (Y/N) - ";
+				echo $this->solrUrl."\nSolr not responding. Try to restart Solr and type Y to continue? (Y/N) - ";
 
 				$stdin = fopen('php://stdin', 'r');
 				$response = fgetc($stdin);
@@ -368,7 +478,10 @@ class importer {
 			}
 		
 		$workTime = time()-$this->startTime;
-		$returnStr = number_format($this->lp,0,'','.').". \e[92m".round(($this->buffSize/$this->fullFileSize)*100)."%\e[0m  rec: (".$this->setLen($id,20).")    ".$this->WorkTime($workTime)." s. ";
+		$returnStr = number_format($this->lp,0,'','.').
+			". \e[92m".round(($this->buffSize/$this->fullFileSize)*100).
+			"%\e[0m  rec: (".$this->setLen($id,20).")    ".
+			$this->WorkTime($workTime)." s. ";
 					
 		file_put_contents($this->outPutFolder."counter.txt", $this->lp."\n".$id);
 		$this->lastLen = strlen($id);
@@ -378,10 +491,11 @@ class importer {
 		}
 	
 	function setLen($str, $elen) {
-		$len = $str;
+		$len = strlen($str);
 		if ($len >= $elen)
 			return substr($str, 0, $elen);
-		return $str.str_repeat(' ',$elen-$len);
+		if ($elen-$len > 0)
+			return $str.str_repeat(' ',$elen-$len);
 		}
 	
 	function fileSize($file) {
@@ -919,6 +1033,7 @@ class importer {
 		$ndesc['year_death'] =
 		$ndesc['viaf_id'] = 
 		$ndesc['wiki_q'] = '';
+		$desc['role'] = [];
 		
 		if (!empty($desc['a'])) 
 			if (is_Array($desc['a']))
@@ -972,8 +1087,9 @@ class importer {
 				$desc['role'][$this->transleteCrativeRoles($desc['e'])] = $this->transleteCrativeRoles($desc['e']);
 				}
 			}
-		if (empty($desc['role']))
+		if (empty($desc['role']) && (($as =='author')or($as == 'author2')))
 			$desc['role'][] = 'Unknown';
+			
 		$roles = implode(', ',$desc['role']);
 
 		
@@ -1024,6 +1140,10 @@ class importer {
 			$fp = fopen($this->outPutFolder.'persons.csv', 'a');
 			fputcsv($fp, $csvLine, ';');
 			fclose ($fp);
+			
+			if (!empty($as))
+				foreach ($desc['role'] as $role)
+					$this->work->withRoles['person'][] = $solr_str.'|'.$as.':'.$role;					
 			
 			$this->work->persons[$skey] = $personLine;
 			if (!empty($ndesc['viaf_id']))
@@ -1137,6 +1257,10 @@ class importer {
 		return null;
 		}
 	
+	public function getWithRoles($field) {
+		if (!empty($this->work->withRoles[$field]))
+			return $this->removeArrayKeys($this->work->withRoles[$field]);
+		}
 	
 	function getWiki4Name($name, $role = '') {
 		$name = $this->clearName($name);
@@ -1158,6 +1282,7 @@ class importer {
 					}
 				}
 			
+			$this->work->withRoles['place'][] = "$wikiq|$name|$role";
 			$this->work->geoWikiFull[$name] = "$wikiq|$name";
 			$this->work->geoWiki[$wikiq] = $wikiq;
 			}
@@ -1371,9 +1496,12 @@ class importer {
 	public function getMainOtherAuthorsRoles() {
 		$field = '700';
 		$roles = [];
+		$hasCoAuthors = false;
 		
 		if (is_array($this->record) && (!empty($this->record[$field])) ) {
 			foreach ($this->record[$field] as $sf) {
+				if (!empty($sf['code']['a']))
+					$hasCoAuthors = true;
 				if (!empty($sf['code']['e']) && is_Array($sf['code']['e']))
 					foreach ($sf['code']['e'] as $z) {
 						$roles[$z] = $this->transleteCrativeRoles($z);	
@@ -1392,7 +1520,7 @@ class importer {
 						}
 				}
 			}
-		if (empty($roles))
+		if (empty($roles) && $hasCoAuthors)
 			$roles[] = 'Unknown';
 		return $this->removeArrayKeys($roles);	
 		}
@@ -1412,8 +1540,8 @@ class importer {
 	public function getCorporateAuthorFull() {
 		#$fields = [110,111,710,711];
 		$fields = [
-			110 => 'main author',
-			710 => 'co-author',
+			110 => 'as author', // main author
+			710 => 'as author', // co-autor or publisher (look at 4 subfield)
 			610 => 'as subject',
 			260 => 'as publisher',
 			264 => 'as publisher'
@@ -1424,43 +1552,82 @@ class importer {
 		foreach ($fields as $field=>$role) {
 			$desc = $this->getMarcFirst($field);
 			
+			if (($field == 710) && (!empty($desc['4']) && ($desc['4'] == 'pbl')))
+				$role = 'as publisher';
+			
 			if (!empty($desc['a']) && is_string($desc['a'])) {
 				$corp = [
 					'name' => '',
 					'viaf' => '',
-					'wiki' => ''
+					'wiki' => '',
+					'roles' => ''
 					]; 
 				$corp['name'] = $desc['a'];
 				if (!empty($desc['1'])) {
 					$corp['viaf'] = $this->viafFromStr( $desc['1'] );
 					$corp['wiki'] = $this->viaf2wiki($corp['viaf']);
+					$this->work->coporations[$role] = $corp['wiki'];
+					$this->work->coporations['any'] = $corp['wiki'];
 					}
-				$cauthors[] = implode('|', $corp); 
+				if (!empty($desc['4']) && is_string($desc['4'])) {
+					$corp['roles'] = $desc['4'];
+					}
+				if (!empty($desc['4']) && is_array($desc['4'])) {
+					$corp['roles'] = implode(',',$desc['4']);
+					}
+				$this->work->withRoles['corporate'][] = implode('|', $corp).'|'.$role;					
+				$cauthors[] = 
+				$this->work->coporationsFS[$role] = 
+				$this->work->coporationsFS['any'] = implode('|', $corp);
 				}
 			if (!empty($desc['a']) && is_array($desc['a'])) 
 				foreach ($desc['a'] as $k=>$v) {
 					$corp = [
 						'name' => '',
 						'viaf' => '',
-						'wiki' => ''
+						'wiki' => '',
+						'roles' => ''
 						];
 				
 					$corp['name'] = $v;
 					if (!empty($desc['1'][$k])) {
 						$corp['viaf'] = $this->viafFromStr( $desc['1'][$k] );
 						$corp['wiki'] = $this->viaf2wiki($corp['viaf']);
+						$this->work->coporations[$role] = $corp['wiki'];
+						$this->work->coporations['any'] = $corp['wiki'];
 						}
+					if (!empty($desc['4']) && is_string($desc['4'])) {
+						$corp['roles'] = $desc['4'];
+						}
+					if (!empty($desc['4']) && is_array($desc['4'])) {
+						$corp['roles'] = implode(',',$desc['4']);
+						}
+					
+					$this->work->withRoles['corporate'][] = implode('|', $corp).'|'.$role;					
+					$this->work->coporationsFS[$role] = 
+					$this->work->coporationsFS['any'] =
 					$cauthors[] = implode('|', $corp); 
 					}
 			}
 		return $cauthors;
 		}
 	
+	public function getCorporateWiki($role) {
+		if (!empty($this->work->coporations[$role]))
+			return $this->work->coporations[$role];
+		}
+	
+	public function getCorporateFullStr($role) {
+		if (!empty($this->work->coporationsFS[$role]))
+			return $this->work->coporationsFS[$role];
+		}
+	
 	public function getCorporateAuthorWiki() {
+		# zrób analizę co występuje w podpolu 4 (pbl = publisher, ale mogą być inne)
 		#$fields = [110,111,710,711];
 		$fields = [
 			110 => 'main author',
-			710 => 'co-author',
+			710 => 'co-author', // bez 4 co-author, z 4 publisher
 			610 => 'as subject',
 			260 => 'as publisher',
 			264 => 'as publisher'
@@ -2141,7 +2308,7 @@ class importer {
 				}
 			}
 			
-		return array_unique($res);	
+		return $this->removeArrayKeys($res);	
 		}
 	
 	public function getPublished() {
@@ -2220,17 +2387,18 @@ class importer {
 			$field = '773';
 			if (is_Array($this->record) && (!empty($this->record[$field])) ) {
 				foreach ($this->record[$field] as $sf) {
-					$sres = [];
-					if (!empty($sf['code']['s']))
-						$sres['name'] = $sf['code']['s'];
-						else if (!empty($sf['code']['t']))
-							$sres['name'] = $sf['code']['t'];
+					$tmp['name'] = 
+					$tmp['issn'] = '';
+					if (!empty($sf['code']['s']) && is_string($sf['code']['s']))
+						$tmp['name'] = $sf['code']['s'];
+						else if (!empty($sf['code']['t']) && is_string($sf['code']['t']))
+							$tmp['name'] = $sf['code']['t'];
 					
-					if (!empty($sf['code']['x']))
-						$sres['issn'] = $sf['code']['x'];
+					if (!empty($sf['code']['x']) && is_string($sf['code']['x']))
+						$tmp['issn'] = $sf['code']['x'];
 							
-					if (!empty($sres['name']))
-						$res[] = $sres;	 
+					if (!empty($tmp['name']))
+						$res[] = implode('|', $tmp);	 
 					}
 				}
 			}
@@ -2674,7 +2842,7 @@ class importer {
 		}
 	
 	function removeArrayKeys($array) {
-		return array_unique(array_values($array));
+		return array_values(array_unique($array));
 		}
 	
 	function onlyNumbers($string) {

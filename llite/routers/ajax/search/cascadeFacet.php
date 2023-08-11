@@ -24,7 +24,7 @@ if (!empty($facet->child))
 
 switch ($stepSetting->template) {
 	case 'box' : 
-			$query[] = $uf = $this->buffer->getFacets($this->sql, $this->facetsCode);	
+			$query[] = $uf = $this->buffer->getFacets( $this->facetsCode);	
 			if (!empty($this->GET['sj'])) {
 				$query['q'] = [ 'field' => 'q',	'value' => $this->solr->advandedSearch($this->GET['sj'])];
 				} else 
@@ -96,7 +96,7 @@ switch ($stepSetting->template) {
 			
 			break;			
 	case 'graph' :		
-			$filter = $this->buffer->getFacets($this->sql, $this->facetsCode);	
+			$filter = $this->buffer->getFacets($this->facetsCode);	
 			if (!empty($filter))
 				$query[] = $filter;
 			if (!empty($this->GET['sj'])) {

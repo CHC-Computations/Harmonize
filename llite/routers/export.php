@@ -55,7 +55,7 @@ if (!empty($this->GET['swl'])) { // start with letter ...
 
 if (!empty($this->routeParam[3])) {
 	$this->facetsCode = $this->routeParam[3];	
-	$query[] = $this->buffer->getFacets($this->sql, $this->facetsCode);	
+	$query[] = $this->buffer->getFacets( $this->facetsCode);	
 	} else 
 	$this->facetsCode = 'null';		
 

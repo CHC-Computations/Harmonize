@@ -49,11 +49,7 @@ switch ($format) {
 
 
 				$regions = $this->record->getRegion();
-				if (!empty($regions) && is_Array($regions))
-					foreach ($regions as $placeName) {
-						$place = $this->buffer->getPlaceParams($placeName);
-						$Tmap[] = $this->maps->addPoint($place);
-						}
+				
 				
 				if ($this->routeParam[0]=='inmodal') {
 					$i = count($this->routeParam)-1;

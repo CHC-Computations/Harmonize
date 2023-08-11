@@ -64,8 +64,8 @@ if (!empty ($this->GET['q'])) {
 				];
 	*/
 	}
-if (!empty($this->buffer->getFacets($this->sql, $this->facetsCode)))	
-	$queryoptions[] = $this->buffer->getFacets($this->sql, $this->facetsCode);
+if (!empty($this->buffer->getFacets($this->facetsCode)))	
+	$queryoptions[] = $this->buffer->getFacets($this->facetsCode);
 $queryoptions[] = $this->solr->lookFor($lookfor = $this->getParam('GET', 'lookfor'), $type = $this->getParam('GET', 'type') );			
 $queryoptions[]=[ 
 				'field' => 'facet.mincount',

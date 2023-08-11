@@ -129,16 +129,18 @@ var facets = {
 			$('#trow_'+i).removeClass('active');
 			},
 		
-		timeFacetLink : function(x,a,f,i) { 
+		timeFacetLink : function(x,a,f,i,c = 'search') { 
 			$("#recalculateLink").css("opacity","0.4");
 			var u = $("#hf_base_url").val();
 			var l = $("#hf_user_language").val();
 			var g = $("#hf_get").val();
 			
-			$.ajax({url: u+l+"/ajax/search/setTimeRangeLink/"+f+"/"+i+"?"+x+"="+a+"&"+g, success: function(result){
+			
+			$.ajax({url: u+l+"/ajax/search/setTimeRangeLink/"+f+"/"+i+"/"+c+"?"+x+"="+a+"&"+g, success: function(result){
 				  $("#recalculateLink").html(result);
 				}});	
 			},	
+
 		
 		cascade : function(p,k,f,n,c) { 
 			// $("#facetLink"+k).css("opacity","0.4");
@@ -254,18 +256,69 @@ var facets = {
 			},
 		
 	
-		InModal : function(t,n,fc) {
+		InModal : function(t,n,c = '') {
 			var u = $("#hf_base_url").val();
 			var l = $("#hf_user_language").val();
 			var k = $("#hf_request_uri").val();
 			$("#inModalTitle").html(t);
 			
-			$.ajax({url: u+l+"/ajax/inModalFacet/build/"+n+k, success: function(result){
+			$.ajax({url: u+l+"/ajax/inModalFacet"+c+"/build/"+n+k, success: function(result){
 				  $("#inModalBox").html(result);
 				}});
 			$("#myModal").modal("show"); 
-			}
+			},
 		
+		cores : {
+			
+			InModal : function(t,n) {
+				var u = $("#hf_base_url").val();
+				var l = $("#hf_user_language").val();
+				var k = $("#hf_request_uri").val();
+				$("#inModalTitle").html(t);
+				
+				$.ajax({url: u+l+"/ajax/inModalFacetCore/build/"+n+k, success: function(result){
+					  $("#inModalBox").html(result);
+					}});
+				$("#myModal").modal("show"); 
+				},
+			Search : function() { 
+				var u = $("#hf_base_url").val();
+				var l = $("#hf_user_language").val();
+				var k = $("#hf_request_uri").val();
+				var n = $("#hf_facet").val();
+				var q = $("#ajaxSearchInput").val();
+				var s = $("input[name='facetsort']:checked").val();
+				
+				if (k.includes("?"))
+					var operator = "&";
+					else 
+					var operator = "?";
+				
+				$.ajax({url: u+l+"/ajax/inModalFacetCore/search/"+n+k+operator+"q="+q+"&sort="+s, success: function(result){
+					  $("#ajaxSearchBox").html(result);
+					}});	
+				},	
+			
+			AddRemove : function(x,a,i) { 
+				var u = $("#hf_base_url").val();
+				var l = $("#hf_user_language").val();
+				var k = $("#hf_request_uri").val();
+				var n = $("#hf_facet").val();
+				var q = $("#ajaxSearchInput").val();
+				var s = $("input[name='facetsort']:checked").val();
+				
+				if (k.includes("?"))
+					var operator = "&";
+					else 
+					var operator = "?";
+				
+				$.ajax({url: u+l+"/ajax/inModalFacetCoreChosen/search/"+n+k+operator+"q="+q+"&sort="+s+"&"+x+"="+a+"&lp="+i, success: function(result){
+					  $("#ajaxSearchChosen").html(result);
+					}});	
+					
+				},		
+				
+			}
 		
 		}
 

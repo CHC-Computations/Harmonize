@@ -458,6 +458,22 @@ class marc21 {
 			return null;
 		}
 	
+	public function getPublisher() {
+		if (!empty($this->solrRecord->corporate_publisher_fs_wiki) ) {
+			$corporations = $this->corporateToObjects('corporate_publisher_fs_wiki');
+			return $this->cms->render('record/corporate-link.php',['corporations' => $corporations ]);
+			} 
+		return null;
+		}
+	public function getCorporateAuthor() {
+		
+		if (!empty($this->solrRecord->corporate_author_fs_wiki) ) {
+			$corporations = $this->corporateToObjects('corporate_author_fs_wiki');
+			return $this->cms->render('record/corporate-link.php',['corporations' => $corporations ]);
+			}
+		return null;
+		}
+		
 	
 	public function getMainAuthorName() {
 		$desc = $this->getMainAuthor();
@@ -467,8 +483,31 @@ class marc21 {
 			return null;
 		}
 		
-		
-	public function getCorporateAuthor() {
+	
+	public function corporateToObjects($field) {
+		$array = $this->solrRecord->$field;
+		$return = [];
+		if (is_string($array)) {
+			$t[] = $array;
+			$array = $t;
+			}
+		if (is_array($array)) 
+			foreach ($array as $str) {
+				$tmp = explode ('|', $str); 
+				$res = new stdclass;
+				$res->name = $tmp[0];
+				$res->viaf = $tmp[1];
+				$res->wikiq = $tmp[2]; 
+				$res->roles = explode(',', $tmp[3]);
+				$res->field = $field;
+				$res->solr_str = $str;
+				$return[] = $res;
+				}
+		return $return;
+		}
+	
+
+	public function getEventAuthor() {
 		$desc = $this->getMarcFirst('111');
 		if (!empty($desc)) {
 			
@@ -494,7 +533,7 @@ class marc21 {
 			
 			#echo "<pre>".print_r($auth,1)."</pre>";
 			#echo "<pre>".print_r($desc,1)."</pre>";
-			return $this->cms->render('record/corporate-author-link.php',['author' => $desc ]);
+			return $this->cms->render('record/event-author-link.php',['author' => $desc ]);
 			} else 
 			return null;
 		}
@@ -1256,8 +1295,10 @@ class marc21 {
 		$coreFields['biblio'] = array (
 			'getStatmentOfResp' => 'Statement of Responsibility',
 			'getMainAuthorLink' => 'Main Author', 
+			'getEventAuthor' => 'Event as Author', 
 			'getCorporateAuthor' => 'Corporate Author', 
 			'getOtherAuthors' => 'Other Authors', 
+			# 'getPublisher' => 'Publisher', 
 			'getFormatTranslated' => 'Format',
 			'getLanguage' => 'Language',
 			'getGenre' => 'Form / Genre',

@@ -42,10 +42,13 @@ if (is_array($list))
 echo "Searching for a files in $source_path\n";
 $lp = 0;
 $list = glob ($source_path.'/*.mrk');
+echo "files found: \e[94m".count($list)."\e[0m\n";
 
 if (is_array($list))
 	foreach ($list as $file) {
-		echo "\nreading: \e[94m$file\e[0m                             \n";
+		$lp++;
+		$fileName = str_Replace($source_path, '', $file);
+		echo "\n$lp. reading: \e[94m$fileName\e[0m                             \n";
 		
 		$fname = str_Replace($source_path, '', $file);
 		$imp->setFileName($fname);

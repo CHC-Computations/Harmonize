@@ -1,14 +1,3 @@
-<?php 
-/*
-$labelsList = [];
-if (is_array($labels))
-	foreach ($labels as $labelName=>$labelCount) {
-		$labelsList[] = '<div class="facetTop"><a href=""><span class="text">'.$this->transEsc($labelName).'</span> <span class="badge">'.$this->helper->numberFormat($labelCount).'</span></a></div>';
-		}
-	*/
-	$labelsList = [];
-?>
-
 <div class="facets-header">
 <span type="button" class="ico-btn" id="slideoutbtn" onclick="facets.SlideOut(); " title="<?= $this->transEsc('Hide facet panel') ?>"><i class="fa fa-angle-left"></i></span>
 
@@ -20,12 +9,51 @@ if (is_array($labels))
 
 
  
-<?= 
-$this->helper->PanelCollapse(
-			uniqid(),
-			$this->transEsc("Persons lists"),
-			implode('',$labelsList)
-			);
-	?>
+<?php 
+
+if (!empty($this->buffer->usedFacets)) 
+	echo $this->render('persons/facets-active.php', ['activeFacets' => $this->buffer->usedFacets ] );
+		
+
+foreach ($this->persons->facets->facetsMenu as $facet) {
+	
+	$stepSetting = clone $this->persons->facets->defaults;
+	if (!empty($facet->template))
+		$stepSetting->template = $facet->template;
+	if (!empty($facet->translated))
+		$stepSetting->translated = $facet->translated;
+	if (!empty($facet->formatter))
+		$stepSetting->formatter = $facet->formatter;
+	if (!empty($facet->child))
+		$stepSetting->child = $facet->child;
+				
+	switch ($stepSetting->template) {
+		case 'box' :
+				if (!empty($facets[$facet->solr_index]))
+					echo $this->render('persons/facet-box.php', [
+							'facet'		 => $facet,
+							'facets'	 => $facets[$facet->solr_index],
+							'stepSetting' => $stepSetting
+							] );
+				break;			
+		case 'timeGraph' :
+				if (!empty($facets[$facet->solr_index]) && is_array($facets[$facet->solr_index]) && (count($facets[$facet->solr_index])>0)) {
+					ksort($facets[$facet->solr_index]);
+					echo $this->render('persons/facet-years-box.php', [
+							'facet' 	=> $facet->solr_index, 
+							'facetName' => $facet->name, 
+							'facets' => $facets[$facet->solr_index],
+							'currFacet' => $facet->solr_index,
+							] );
+					}
+				break;	
+		}
+
+	}
+
+
+
+
+?>
 
 	

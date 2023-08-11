@@ -28,7 +28,7 @@ if (!empty($this->getIniParam('search', 'sortoptions')[$sort])) {
 	}
 
 if (!empty($this->facetsCode)) {
-	$query[] = $this->buffer->getFacets($this->sql, $this->facetsCode);	
+	$query[] = $this->buffer->getFacets($this->facetsCode);	
 	} else 
 	$this->facetsCode = 'null';		
 	

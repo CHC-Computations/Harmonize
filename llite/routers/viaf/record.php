@@ -108,7 +108,7 @@ switch ($this->wiki->recType()) {
 					
 	
 			$stat = $this->solr->getStats(
-								'bibliocore',
+								'biblio',
 								[$wikiIdInt], 
 								['persons_wiki_str_mv'],
 								$this->getIniParam('persons','statList','statFields')
@@ -129,7 +129,7 @@ switch ($this->wiki->recType()) {
 				$biblioNames[] = $this->wiki->get('labels');
 			
 			$stat = $this->solr->getStats(
-							'bibliocore',
+							'biblio',
 							[$wikiIdInt], 
 							['geowiki_str_mv'],
 							$this->getIniParam('places','statList','statFields')
@@ -177,7 +177,7 @@ switch ($this->wiki->recType()) {
 					}
 			if (!empty($Twords))
 				$stat = $this->solr->getStats(
-								'bibliocore',
+								'biblio',
 								$Twords, 
 								['allfields'], 
 								$this->getIniParam('persons','statList','statFields')

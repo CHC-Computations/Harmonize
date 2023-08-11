@@ -11,10 +11,10 @@ class CMS {
 	
 	public function __construct($sql = null) {
 
-		$this->start_time=$this->gen_www();	
+		$this->start_time = $this->gen_www();	
 		$this->settings = json_decode(@file_get_contents('./config/settings.json'));
 		if (empty($this->settings)) {
-			die("settings.json file not found");
+			die("settings.json file not found or file error");
 			}
 		$conFiles = glob ('./config/*.ini'); 
 		if (is_array($conFiles))
@@ -29,16 +29,17 @@ class CMS {
 		$this->langCode = 'en';
 		$this->userLang = 'en';
 		$this->defaultLanguage = 'en';
+		#echo '<pre>'.print_r($_SERVER,1).'</pre>';
+		if (!empty($this->settings->www->host)) {
+			$this->HOST = $this->settings->www->host;
+			$this->ignorePath = $this->settings->www->ignorePath;
+			} else if (!empty($_SERVER['HTTP_HOST']))
+			$this->HOST = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/';
 		
-		if (!empty($_SERVER['HTTP_HOST']))
-			$this->HOST = 'http://'.$_SERVER['HTTP_HOST'].'/lite/';
 		$this->SERVER = new stdclass;
 		if (!empty($_SERVER['SERVER_NAME']))
 			$this->SERVER->domain = $_SERVER['SERVER_NAME'];
-		$this->ignorePath = 'lite/';
-		
-		if (empty($this->HOST))
-			$this->HOST = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/';
+
 		if (!empty($_SERVER['REQUEST_URI']))
 			$this->REQUEST_URI = $_SERVER['REQUEST_URI'];
 			else 
@@ -60,68 +61,49 @@ class CMS {
 			else 
 			$this->router='home';
 		
-		if (stristr($_SERVER['REQUEST_URI'], '/functions/')){
-			/* ############################### ajax mode ########################### */
-			
-			$this->AjaxMode = true;
-			
-			if (is_array($_SESSION)) {
-				foreach ($_SESSION as $k=>$v)
-					$this->$k = $v;
-				echo "AjaX Mode SESSION<pre>".print_r($_SESSION ,1)."</pre>";
-				} else {
-				$this->addError('Your session faild :-(');
-				$this->redirectTo = $this->HOST;	
+		
+		$this->AjaxMode = false;	
+		
+		$langGlobalDir = './languages/';
+		$langFiles = glob ($langGlobalDir.'*', GLOB_ONLYDIR);
+		foreach ($langFiles as $langDir) {
+			$langCode = str_replace($langGlobalDir, '', $langDir);
+			if ((file_exists($langDir.'/'.$langCode.'.ini'))and(file_exists($langDir.'/settings.ini'))) {
+				$langSetting = parse_ini_file( $langDir.'/settings.ini' );
+				$this->lang['available'][$langCode]=$langSetting['langName'];
 				}
+			}
+		if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+			$clang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+			if (array_key_exists($clang, $this->lang['available'])) {
+				$this->langCode = $clang;
+				$this->userLang = $clang;
+				$this->defaultLanguage = $clang;
+				}
+			}
+		
+		if (array_key_exists($this->linkParts[1], $this->lang['available'])) { // not in langList
+			$this->userLang = $this->lang['userLang'] = $this->linkParts[1];
+			$this->translations = parse_ini_file( $langGlobalDir.$this->userLang.'/'.$this->userLang.'.ini' );
+			# echo "trans: <pre>".print_r($this->translations,1)."</pre>";
 			
 			} else {
-			/* ############################### normal mode ########################### */
-		
-			$this->AjaxMode = false;	
-			
-			$langGlobalDir = './languages/';
-			$langFiles = glob ($langGlobalDir.'*', GLOB_ONLYDIR);
-			foreach ($langFiles as $langDir) {
-				$langCode = str_replace($langGlobalDir, '', $langDir);
-				if ((file_exists($langDir.'/'.$langCode.'.ini'))and(file_exists($langDir.'/settings.ini'))) {
-					$langSetting = parse_ini_file( $langDir.'/settings.ini' );
-					$this->lang['available'][$langCode]=$langSetting['langName'];
-					}
-				}
-			if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-				$clang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-				if (array_key_exists($clang, $this->lang['available'])) {
-					$this->langCode = $clang;
-					$this->userLang = $clang;
-					$this->defaultLanguage = $clang;
-					}
-				}
-			
-			if (array_key_exists($this->linkParts[1], $this->lang['available'])) { // not in langList
-				$this->userLang = $this->lang['userLang'] = $this->linkParts[1];
-				$this->translations = parse_ini_file( $langGlobalDir.$this->userLang.'/'.$this->userLang.'.ini' );
-				# echo "trans: <pre>".print_r($this->translations,1)."</pre>";
-				
-				} else {
-				$this->redirectTo = $this->HOST.$this->defaultLanguage.'/';	
-				# header( "Location: ".$this->redirectTo );
-				}
-			
-			parse_str(urldecode($_SERVER['QUERY_STRING']), $this->GET);
-			#echo urldecode($_SERVER['QUERY_STRING'])."<pre>".print_r($this->GET,1)."</pre>";
-			
-			$_SESSION['lang'] = $this->lang;	
-			$_SESSION['GET'] = $this->GET;	
-			$_SESSION['parentParams'] = $this->params;
-			$_SESSION['parentRouter'] = $this->router;
-			
-			
-			
+			$this->redirectTo = $this->HOST.$this->defaultLanguage.'/';	
+			# header( "Location: ".$this->redirectTo );
 			}
+		
+		parse_str(urldecode($_SERVER['QUERY_STRING']), $this->GET);
+		#echo urldecode($_SERVER['QUERY_STRING'])."<pre>".print_r($this->GET,1)."</pre>";
+		
+		$_SESSION['lang'] = $this->lang;	
+		$_SESSION['GET'] = $this->GET;	
+		$_SESSION['parentParams'] = $this->params;
+		$_SESSION['parentRouter'] = $this->router;
+			
+			
 				
 		$this->POST = $_POST;
 		}
-	
 	
 	
 
@@ -158,6 +140,13 @@ class CMS {
 			}
 		}
 
+	
+	public function loadJsonSettings($fileName) {
+		$this->$fileName = json_decode(@file_get_contents('./config/'.$fileName.'.json'));
+		if (empty($this->$fileName)) {
+			die($fileName.".json file not found or file error");
+			}
+		}
 	
 	
 	public function getConfig($iniFile) {
@@ -579,12 +568,15 @@ class CMS {
 
 	
 	public function footer() {
+		if (file_exists('./config/analytics.js')) 
+			$this->JS[] = file_get_contents('./config/analytics.js');
+		
 		if (count($this->JS)>0)
 			return '<script>
-				$(document).ready(function(){
-					'.implode("\n",$this->JS).'
-					});
-				</script>';
+$(document).ready(function(){
+					'.implode(";\n",$this->JS).'
+		});
+</script>';
 		}	
 		
 	public function Alert($klasa,$tresc) {

@@ -12,7 +12,6 @@ if (!empty($author['wikiq'])) {
 	}
 
 ?>
-
 <?php if (!empty($author['name'])): ?>
 	<?php if (!empty($author['relation'])): ?> 
 		<label><?= $author['relation'] ?></label> 
@@ -57,5 +56,3 @@ if (!empty($author['wikiq'])) {
 			echo $author['t'];
 	?>	
 <?php endif; ?>
-
-

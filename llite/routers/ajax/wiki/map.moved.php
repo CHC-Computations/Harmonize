@@ -47,6 +47,11 @@ $WAR.=" AND lat<'{$this->POST['bN']}' AND lat>'{$this->POST['bS']}' AND lon<'{$t
 	
 $t = $this->psql->querySelect($Q = "SELECT count(*) as recsum, max(subjecthits+pubplacehits+personhits) as recmax FROM places_on_map a WHERE $WAR;");
 #echo "$Q";
+
+
+
+// ?q=*:*&q.op=OR&indent=true&fq=latitiude:[51 TO 53]&fq=longitiude:[15 TO 23]&sort=total_count desc
+
 if (is_array($t)) {
 	$res = current($t);
 	$recSum = $res['recsum'];

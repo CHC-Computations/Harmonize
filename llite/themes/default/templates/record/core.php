@@ -131,11 +131,12 @@ if (!empty($similar) && (count($similar)>0)) {
 			
 			<ul class="detailsview">
 				<?php foreach ($coreFields as $func=>$current): ?>
-					<dl class="detailsview-item">
-					  <dt class="dv-label"><?=$this->transEsc($current['label'])?>:</dt>
-					  <dd class="dv-value"><?= $this->render('helpers/CollapseBox.php', ['desc'=>$current['content'], 'minSize'=>130]) ?></dd>
-					</dl>
-					
+					<?php if (!empty($current['content'])): ?>
+						<dl class="detailsview-item">
+						  <dt class="dv-label"><?=$this->transEsc($current['label'])?>:</dt>
+						  <dd class="dv-value"><?= $this->render('helpers/CollapseBox.php', ['desc'=>$current['content'], 'minSize'=>130]) ?></dd>
+						</dl>
+					<?php endif; ?>
 				<?php endforeach; ?>
 				<?php if (!empty($this->record->getDescription())): // na prośbe B.Wachek 2022-12-12 ?>
 					<dl class="detailsview-item">

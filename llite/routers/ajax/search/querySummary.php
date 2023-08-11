@@ -167,7 +167,7 @@ if (!empty($_SESSION['facetsChosen'])) {
 	#echo "<pre>".print_R($facetsList,1).'</pre>';
 	if (!empty($facetsList)) {
 		$this->facetsCode = $this->buffer->createFacetsCode($this->sql, $facetsList);
-		$query[] = $this->buffer->getFacets($this->sql, $this->facetsCode);	
+		$query[] = $this->buffer->getFacets($this->facetsCode);	
 		}
 	}	
 if ($activeFacetsStr !== '')
