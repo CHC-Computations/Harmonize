@@ -26,7 +26,7 @@ Umerle, T., & Malínek, V. (2022). Literarybibliography. eu—modelový příkla
 
 
 Hubar, P.; Malinek, V.; Peter, R. (2022). Literarybibliography.eu: harmonizing European bibliographical data on literature. DH_BUDAPEST_2022 & DARIAH DAYS 3rd International Digital Humanities Conference.
-
+Hubar, P.; Giersz, M. (2023). European Literary Bibliography: aggregation and harmonization of literary bibliographical data. TRIPLE 2023 Conference.
 ## How to cite?
 
 Instytut Badań Literackich PAN. (2023). *Harmonize (Version 1.0)* [Software]. 
