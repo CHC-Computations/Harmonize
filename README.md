@@ -26,6 +26,13 @@ http://literarybibliography.eu
 
 # Installation guide
 
+## Prerequisites:
+
+- Apache HTTP Server (https://httpd.apache.org/)
+- PHP (https://www.php.net/manual/en/install.php)
+- PostgreSQL/MariaDB/MySQL database
+- SOLR (https://solr.apache.org/guide/solr/latest/getting-started/solr-tutorial.html)
+
 # Getting help
 
 # License
