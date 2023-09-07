@@ -216,16 +216,13 @@ During its operation, Harmonize may generate and save various temporary files.
 - `/files/exports/`: Contains temporary export files and files available for user download during exports. You can freely delete older files and folders.
 
 
-
-
-
-
-
-
-
 # Getting help
 
+**Get in touch**: computations@ibl.waw.pl
+
 # License
+
+GNU General Public License v3.0	gpl-3.0
 
 --- 
 
