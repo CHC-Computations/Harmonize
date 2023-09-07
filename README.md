@@ -177,6 +177,44 @@ sudo rm -rf {{hamonize_home}}/files/solr/lite_biblio/data/index {{hamonize_home}
 sudo rm -rf {{hamonize_home}}/files/solr/lite_wikidata/data/index {{hamonize_home}}/files/solr/lite_wikidata/data/spell*
 ```
 
+## Templates
+
+In the `/themes/{your_template}/templates` directory, you can place your template files. The lite version has limited template support, so it's recommended to copy and modify the default template. You can use your own name and specify it in `settings.json`, although this hasn't been extensively tested.
+
+- `/themes/{your_template}/css`: Place for storing CSS files. All CSS files in this directory will be added to the `<head>` section of the generated webpage.
+- `/themes/{your_template}/js`: Place for storing JavaScript files. All JavaScript files in this directory will be added to the `<head>` section of the generated webpage.
+- `/themes/{your_template}/images`: A place for your graphics.
+- `/themes/{your_template}/templates`: A place for PHP visualization files. Access these templates in executable files via `echo $this->render(pathToFile)`.
+
+For example, `echo $this->render('persons/core.php', $params)` will execute the file `/themes/{your_template}/templates/persons/core.php`, and all variables passed as `$params` will be available to the template file. You can also refer to global and system variables via `$this->variable_name`.
+
+## Modules
+
+You can freely extend the system by adding your own classes (groups of functions) and individual sub-addresses within the system's domain.
+
+### Classes
+
+In the `/functions` folder, you will find function classes. If you want to add a new class and have its methods available throughout the program, place your class in this folder.
+
+For instance, if you include a `public function register($key, $value)` method, you can register other active classes under the `$this->cms` variable in your class, giving methods of that class access to the system's resources.
+
+### Routers
+
+In the `/routers` folder, you will find executable files. For example, `/routers/testy/test.php` will be executed when you visit `http://yourDomain/en/testy/test`.
+
+## How to Administer
+
+### Solr
+
+For stable system operation, it is good practice to regularly restart Solr. This clears its temporary files and frees up memory.
+
+### Temporary Files
+
+During its operation, Harmonize may generate and save various temporary files.
+
+- `/files/downloaded/`: Buffer files downloaded from other services are saved here. You can freely delete the contents to free up disk space.
+- `/files/exports/`: Contains temporary export files and files available for user download during exports. You can freely delete older files and folders.
+
 
 
 
