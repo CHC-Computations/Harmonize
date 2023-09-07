@@ -141,7 +141,41 @@ If you want to include additional code at the end of the displayed page within a
 Additional settings are located in the `/config/import` and `/config/properties` folders. Explanations for these files can be found in the comments within the files.
 
 
+## Data Indexing
 
+### Viaf to Wikidata ID
+
+To convert VIAF identifiers to Wikidata IDs, you'll need a dump file downloaded from VIAF [here](https://viaf.org/viaf/data/viaf-{currentDate}-links.txt.gz). Save and unzip this file in the `/import` folder.
+
+Then run the following command from the Harmonize system installation folder:
+
+```bash
+php /import/viaf2wiki.php
+```
+This script will extract identifier pairs from the downloaded file and feed them into the `viaf2wiki` function used during pre-indexing and indexing.
+
+### Pre-Indexing
+
+In the `/import/config.php` folder, there's an additional import configuration file, which includes the path to the `.mrk` files you want to import.
+
+To initiate pre-indexing, execute the following command:
+
+```bash
+php /import/pre.read.php
+```
+
+## Main Indexing
+
+This process can be preceded by pre-indexing. During main indexing, the `lite_biblio` collection will be filled with data.
+
+## Cleaning and Reindexing
+
+To clean and reindex, execute the following commands:
+
+```bash
+sudo rm -rf {{hamonize_home}}/files/solr/lite_biblio/data/index {{hamonize_home}}/files/solr/lite_biblio/data/spell*
+sudo rm -rf {{hamonize_home}}/files/solr/lite_wikidata/data/index {{hamonize_home}}/files/solr/lite_wikidata/data/spell*
+```
 
 
 
