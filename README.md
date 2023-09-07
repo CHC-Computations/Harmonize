@@ -107,6 +107,38 @@ Each index is also linked to its display name in the system. Information on whic
 
 > **Note**: Some export parameters are set in the `exports.ini` file (described below).
 
+### persons.json
+File with a structure similar to `settings.json`, defining the menu and some settings for the list of persons.  
+- **sorting**: New section that defines available sorting methods by linking the sorting code (visible in the URL) with the displayed name and the corresponding Solr command.
+
+### author-classification.ini
+Configuration file prepared by VuFind creators. It associates creative role codes in works with their names. You can extend it with your unique codes if they appear in your bibliographic records.
+
+### cookies.ini
+Defines cookie messages in all interface languages. If a message is missing in the selected language, the first line of the file will be displayed.
+
+### export.ini
+Defines available (displayed) data export methods in the system. You can delete/comment out any line if you want to hide a particular sorting method or add a new one (this will require you to program a new method). In future versions, these settings will be moved to `settings.json`.
+
+### institutions.ini
+Defines indexes and their headers displayed in "Bibliographical statistics" and "Comparison of roles in bibliography" on the template card of corporate authors.
+
+### persons.ini
+Defines indexes and their headers displayed in "Bibliographical statistics" and "Comparison of roles in bibliography" on the template card of persons.
+
+### places.ini
+Defines indexes and their headers displayed in "Bibliographical statistics" and "Comparison of roles in bibliography" on the template card of places.
+
+### search.ini
+Defines some settings for searching bibliographic records.
+
+### analytics.js
+If you want to include additional code at the end of the displayed page within a `<script>` tag, place it in this file. Useful for page view analytics codes (e.g., Matomo or Google Analytics).
+
+---
+
+**Additional Settings**:  
+Additional settings are located in the `/config/import` and `/config/properties` folders. Explanations for these files can be found in the comments within the files.
 
 
 
