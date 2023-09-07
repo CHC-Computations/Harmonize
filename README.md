@@ -33,6 +33,36 @@ http://literarybibliography.eu
 - PostgreSQL/MariaDB/MySQL database
 - SOLR (https://solr.apache.org/guide/solr/latest/getting-started/solr-tutorial.html)
 
+**Download and place all files in the folder to be installed.**
+
+
+## Preparing the database
+
+After selecting and creating the database, you'll need to create the tables required for the system. 
+You can find the relevant SQL commands in the /files/sql/create.sql folder.
+
+## Preparing SOLR
+
+You need to create four Solr cores. The schema.xml file for each core can be found in the respective folders: /files/solr/lite_biblio, /files/solr/lite_wiki, /files/solr/lite_persons, and /files/solr/lite_places.
+
+## Config Files
+
+All configuration files are located in the /config folder.
+
+### db.php
+
+Enter your SQL database access credentials here.
+
+```php
+$psqldb = [
+  'tablePrefix' => '', // if you want to have
+  'host' => '127.0.0.1', // ip or host name of your SQL host
+  'dbname' => 'your_db_name',
+  'user' => 'your_db_user',
+  'password' => 'your_db_password'
+];
+
+
 # Getting help
 
 # License
