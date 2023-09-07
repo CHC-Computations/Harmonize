@@ -27,7 +27,7 @@ http://literarybibliography.eu
 Instytut Badań Literackich PAN. (2023). *Harmonize (Version 1.0)* [Software]. 
 
 
-    ```latex
+    ```
     @software{harmonize2023,
         author = {Instytut Badań Literackich PAN},
         title = {Harmonize},
