@@ -34,7 +34,7 @@ Instytut Badań Literackich PAN. (2023). *Harmonize (Version 1.0)* [Software].
         year = {2023},
         version = {1.0},
     }
- ```
+     ```
 
 
 # Installation guide
