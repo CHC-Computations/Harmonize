@@ -61,8 +61,7 @@ $psqldb = [
   'user' => 'your_db_user',
   'password' => 'your_db_password'
 ];
-
-
+```
 # Getting help
 
 # License
