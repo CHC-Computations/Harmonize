@@ -90,6 +90,34 @@ The most crucial configuration file. It contains Solr server access information,
 - **externalHosts**: Addresses of external servers used by the system's API during data search (you can set up your own Wikidata or Wikimedia server if you want wiki data to be searched on your servers).
 
 - **searchEngines**: External search engines to which the system will redirect when an object cannot be found on the Wikidata server.
+- **pretest**: A list of Solr indexes that must be checked during pre-indexing (functions that populate these indexes will be described below in the `facets/solrIndexes` section of this same file).
+
+#### Facets
+
+- **solrIndexes**: A list of all Solr indexes in the `biblio` core. If you want to change something about the indexing, this is where you'll find the method names from `class.import.php` used during data population. If the data comes directly from a specific field in MRK files, you'll find an `importField` here, indicating the data address in the MRK file.  
+Each index is also linked to its display name in the system. Information on which formatter (from `class.helper.php`) should be used for formatting data display on the page is included, along with whether the displayed data should be translated.
+
+- **defaults**: Contains default settings for the facet menu of the `biblio` section.
+
+- **facetsMenu**: Defines the facet filter menu.
+
+#### Export
+
+- **max**: The maximum number of records in exported files (important for your server's performance. Exporting consumes a lot of Solr resources, disk space, and CPU and memory during export compression). A full copy of the exported files is stored on disk during each export. How to delete old export files is described in the administration section. Leftover files (files prepared for earlier exports) are automatically removed during each export if they were created a day before the current operation.
+
+> **Note**: Some export parameters are set in the `exports.ini` file (described below).
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Getting help
 
