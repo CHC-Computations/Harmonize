@@ -20,7 +20,12 @@ http://literarybibliography.eu
 
 ## Articles
 
+Umerle, T., & Malínek, V. (2022). Literarybibliography. eu—modelový příklad pro tvorbu mezinárodní oborové bibliografie. Ceska Literatura, (5).
+
 ## Presentations
+
+
+Hubar, P.; Malinek, V.; Peter, R. (2022). Literarybibliography.eu: harmonizing European bibliographical data on literature. DH_BUDAPEST_2022 & DARIAH DAYS 3rd International Digital Humanities Conference.
 
 ## How to cite?
 
