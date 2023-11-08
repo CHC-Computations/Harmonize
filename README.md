@@ -175,9 +175,10 @@ This script will extract identifier pairs from the downloaded file and feed them
 
 ### Pre-Indexing
 
-In the `/import/config.php` folder, there's an additional import configuration file, which includes the path to the `.mrk` files you want to import.
+There is an additional import configuration file in the `/import/config.php` folder. Among other things, it contains the path to the mrk files you want to import.
+To run the pre-indexation, you type the php script /import/pre.read.php in the terminal in the system installation folder (call php /import/pre.read.php in the terminal). The script will look through all the attached mrk files and, based on these, create a list of people, places, corporations and events. The data in these lists will be enriched (if they do not have) with wikidata identifiers. In the browsing process, solr core: wikidata will populate with data taken from wikidata for each of the objects found.
+Then, the selected data for found persons, places, etc will be written to the persons, places, etc collections, and as a side effect, the wikidata collection will be populated with all objects describing the processed data (gender records, occupations, species, etc).
 
-To initiate pre-indexing, execute the following command:
 
 ```bash
 php /import/pre.read.php
@@ -185,7 +186,9 @@ php /import/pre.read.php
 
 ## Main Indexing
 
-This process can be preceded by pre-indexing. During main indexing, the `lite_biblio` collection will be filled with data.
+The process may (not necessarily) be preceded by a pre-indexation. If we precede the main indexation with a pre-indexation, the people and places appearing in the bibliographic records will be 'linked' to the corresponding wikidata records.
+During indexation, the lite_biblio collection will be populated with data.
+
 
 ## Cleaning and Reindexing
 
