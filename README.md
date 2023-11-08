@@ -217,6 +217,17 @@ In the `/functions` folder, you will find function classes. If you want to add a
 
 For instance, if you include a `public function register($key, $value)` method, you can register other active classes under the `$this->cms` variable in your class, giving methods of that class access to the system's resources.
 
+### Default classes
+####class.cms.php
+It's a content management system class. It contains basic functions that’s allowed to control content of the webpage.
+####class.importer.php
+Contains all important import methods. This class methods are working only in terminal mode (doesn’t take a part in web creating process). Methods of this class prepare data for solr by converting mrk fields and subfields into solr indexes. 
+####class.buffer.php
+Contains all buffering methods. All connections with external api services should be realized by using methods of this class. 
+####class.helper.php
+contains less important methods f.e. visualization, acceleration of code creations or other helpful methods which are universal for template content.  
+
+
 ## Routers
 The /routers folder contains executable files.
 For example, the file: /routers/tests/test.php will be executed after calling the address of http://yourDomain/en/tests/test
