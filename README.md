@@ -217,7 +217,7 @@ In the `/functions` folder, you will find function classes. If you want to add a
 
 For instance, if you include a `public function register($key, $value)` method, you can register other active classes under the `$this->cms` variable in your class, giving methods of that class access to the system's resources.
 
-### Routers
+## Routers
 The /routers folder contains executable files.
 For example, the file: /routers/tests/test.php will be executed after calling the address of http://yourDomain/en/tests/test
 If you call the address
@@ -225,14 +225,14 @@ http://yourDomain/en/tests/test/word1/word2?a=b etc
 subsequent phrases placed in the called address will be available in your executable under the array variable $this->routeParams, the array index (from zero) contains subsequent phrases. In the above case, $this->routeParams[0] is "word1" and $this->routeParams[1] will be "word2".
 $this->GET keeps the values of the $_GET variable converted by the urldecode function.
 In our example $this->GET[‘a’] == ‘b’ 
-## Default routers
-# home
+### Default routers
+#### home
 Handles the presentation of the permanent content of the website: homepage, instructions, about us page
-# search 
+#### search 
 Responsible for the presentation and search of bibliographic resources
-# persons
+#### persons
 Responsible for presenting and searching indexed persons (authors, co-authors, subject persons)
-# places
+#### places
 Responsible for presenting and searching indexed places and geographic information.
 
 
