@@ -189,6 +189,14 @@ This process can be preceded by pre-indexing. During main indexing, the `lite_bi
 
 ## Cleaning and Reindexing
 
+1. stop solr
+
+2. ```bash sudo rm -rf {{hamonize_home}}/files/solr/lite_biblio/data/index {{hamonize_home}}/files/solr/lite_biblio/data/spell* ```
+3. ``` bashsudo rm -rf {{hamonize_home}}/files/solr/lite_wikidata/data/index {{hamonize_home}}/files/solr/lite_wikidata/data/spell* ```
+ note: clearing this index extends the reindexing considerably. The collection contains only clean wikidata. If you keep this collection during subsequent indexations, the importer will not need to query external servers. Other methods update selected wikidata records (based on their frequency of use and estimated probability of change, e.g. records of living people are updated more frequently because they are more likely to have a new date and place).
+4. start solr
+
+
 To clean and reindex, execute the following commands:
 
 ```bash
@@ -218,13 +226,13 @@ In the `/functions` folder, you will find function classes. If you want to add a
 For instance, if you include a `public function register($key, $value)` method, you can register other active classes under the `$this->cms` variable in your class, giving methods of that class access to the system's resources.
 
 ### Default classes
-####class.cms.php
+#### class.cms.php
 It's a content management system class. It contains basic functions that’s allowed to control content of the webpage.
-####class.importer.php
+#### class.importer.php
 Contains all important import methods. This class methods are working only in terminal mode (doesn’t take a part in web creating process). Methods of this class prepare data for solr by converting mrk fields and subfields into solr indexes. 
-####class.buffer.php
+#### class.buffer.php
 Contains all buffering methods. All connections with external api services should be realized by using methods of this class. 
-####class.helper.php
+#### class.helper.php
 contains less important methods f.e. visualization, acceleration of code creations or other helpful methods which are universal for template content.  
 
 
