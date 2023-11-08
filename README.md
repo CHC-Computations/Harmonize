@@ -180,10 +180,6 @@ To run the pre-indexation, you type the php script /import/pre.read.php in the t
 Then, the selected data for found persons, places, etc will be written to the persons, places, etc collections, and as a side effect, the wikidata collection will be populated with all objects describing the processed data (gender records, occupations, species, etc).
 
 
-```bash
-php /import/pre.read.php
-```
-
 ## Main Indexing
 
 The process may (not necessarily) be preceded by a pre-indexation. If we precede the main indexation with a pre-indexation, the people and places appearing in the bibliographic records will be 'linked' to the corresponding wikidata records.
