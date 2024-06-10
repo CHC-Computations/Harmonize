@@ -50,13 +50,11 @@
 				if ($this->buffer->isActiveFacet($facet,$k)) {
 					$active = "active";
 					$key = $this->buffer->createFacetsCode(
-							$this->sql, 
 							$this->buffer->removeFacet($facet, $k)
 							);
 					} else {
 					$active = '';	
 					$key = $this->buffer->createFacetsCode(
-							$this->sql, 
 							$this->buffer->addFacet($facet, $k)
 							);
 					}
@@ -81,10 +79,7 @@
 	if (!empty($extraFacets) && (count($extraFacets)>0))
 		foreach ($extraFacets as $name=>$count) {
 			if ($this->buffer->isActiveFacet($facet,$name)) {
-					$key = $this->buffer->createFacetsCode(
-							$this->sql, 
-							$this->buffer->removeFacet($facet, $name)
-							);
+					$key = $this->buffer->createFacetsCode(	$this->buffer->removeFacet($facet, $name) );
 					$extra .= '<div class="facetTop">
 					  <a href="'.$this->buildUri('search/results/1/'.$this->getUserParam('sort').'/'.$key, $this->GET).'" id="" class="facet js-facet-item active" data-title="'.$name.'" data-count="'.$count.'">
 						<span class="text">'.$this->transEsc($name).'</span>
@@ -92,10 +87,7 @@
 					  </a>
 					</div>';		
 					} else {
-					$key = $this->buffer->createFacetsCode(
-							$this->sql, 
-							$this->buffer->addFacet($facet, $name)
-							);
+					$key = $this->buffer->createFacetsCode(	$this->buffer->addFacet($facet, $name) );
 					if ($count>0)		
 					$extra .= '<div class="facetTop">
 					  <a href="'.$this->buildUri('search/results/1/'.$this->getUserParam('sort').'/'.$key, $this->GET).'" id="" class="facet js-facet-item" data-title="'.$name.'" data-count="'.$count.'">

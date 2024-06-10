@@ -1,11 +1,8 @@
 <?php 
 if (empty($this)) die;
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', new helper()); 
-$this->addClass('solr', new solr($this->config)); 
-
-$this->buffer->setSql($this->sql);
-#echo "<prE>".print_r($this,1)."</pre>";
+$this->addClass('solr', new solr($this)); 
 
 
 $facets = $this->getConfig('facets');

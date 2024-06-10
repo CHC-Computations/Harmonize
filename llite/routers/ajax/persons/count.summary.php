@@ -2,9 +2,9 @@
 if (empty($this)) die;
 $this->JS[] = "page.ajax('col2', 'persons/full.list/viafid')";
 
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', new helper()); 
-$this->addClass('solr', new solr($this->config)); 
+$this->addClass('solr', new solr($this)); 
 
 $this->buffer->setSql($this->sql);
 $facets = $this->getConfig('facets');

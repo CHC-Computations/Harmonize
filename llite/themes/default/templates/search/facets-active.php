@@ -1,16 +1,11 @@
 <?php 
+$currentCore = 'biblio';
 $key ='';
 $active = '';
-$formattedFacets = $this->getConfigParam('facets', 'formattedFacets');
-$transletedFacets = $this->getConfigParam('facets', 'facetOptions', 'transletedFacets');
 
 foreach ($activeFacets as $groupCode=>$arr) {
-	$translated = false;
-	if (in_array($groupCode, $transletedFacets))
-		$translated = true;
-		
 	
-	$active .= '<div style="padding:5px;">'.$this->transEsc( $this->settings->facets->solrIndexes->$groupCode->name ).':</div>';
+	$active .= '<div style="padding:5px;">'.$this->transEsc( $this->configJson->$currentCore->facets->solrIndexes->$groupCode->name ).':</div>';
 	$lp=0;
 	foreach ($arr as $k=>$v) {
 		$lp++;
@@ -40,12 +35,9 @@ foreach ($activeFacets as $groupCode=>$arr) {
 		*/
 		
 		$tvalue = $this->helper->convert($groupCode, $value);
-		$key = $this->buffer->createFacetsCode(
-							$this->sql, 
-							$this->buffer->removeFacet($groupCode, $value)
-							);
+		$key = $this->buffer->createFacetsCode($this->buffer->removeFacet($groupCode, $value));
 		
-		$active .= '<a href="'.$this->buildUri('search/results/1/'.$this->getUserParam('sort').'/'.$key).'" class="facet">
+		$active .= '<a href="'.$this->buildUri('results', ['core'=>'biblio', 'page'=>1, 'facetsCode'=>$key]).'" class="facet">
 				<span class="text" style="padding-left:1.5rem;">'.( (($v['operator']=='or')&($lp>1)) ?  $this->transEsc('or').' ' : '' ).$tvalue.'</span>
 				<i class="right-icon fa fa-remove"></i>
 				</a>';

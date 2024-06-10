@@ -1,35 +1,39 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.converter.php');
-require_once('functions/klasa.maps.php');
-require_once('functions/klasa.wikidata.php');
+require_once('functions/class.record.bibliographic.php');
+require_once('functions/class.helper.php');
+require_once('functions/class.converter.php');
+require_once('functions/class.maps.php');
+require_once('functions/class.wikidata.php');
 
-$x = count($this->routeParam)-1;
 
-$tmp = explode('.', $this->routeParam[$x]);
+$recordCalled = $fn = end($this->routeParam);
+$tmp = explode('.', $recordCalled);
+$format = end($tmp);
+$x = count($tmp)-1;
+unset($tmp[$x]);
+$rec_id = implode('.',$tmp);
 
-$this->addClass('solr', new solr($this->config));
-$this->addClass('buffer', new marcBuffer()); 
+
+$this->addClass('solr', new solr($this));
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', 	new helper()); 
 $this->addClass('maps', 	new maps()); 
 $this->addClass('convert', 	new converter()); 
-$this->buffer->setSql($this->sql);
+$this->addClass('wikiData', new wikiData($this)); 
 
-$rec_id = current($tmp);
-$format = end($tmp);
-$fn = $rec_id.'.'.$format; 
+
+$record = $this->solr->getRecord('biblio', $rec_id);
 
 switch ($format) {
 	case 'html' : 
 			$Tmap = [];
-			$rec_id=str_replace('.html', '', $this->routeParam[$x]);
-			$record = $this->solr->getRecord('biblio', $rec_id);
+			
 			if (!empty($record->id)) {
-				#$marcJson = $this->buffer->getJsonRecord($record->id, $record->fullrecord);
 				$marcJson = $this->convert->mrk2json($record->fullrecord);
-				$this->addClass('record', new marc21($marcJson, $record));
-				$this->setTitle($this->record->getTitle());
+				$this->addClass('record', new bibliographicRecord($record, $marcJson));
+				
+				$this->setTitle($this->record->elbRecord->title);
 
 				$similar = [];
 				if (!empty($this->record->solrRecord->title_sort)) {
@@ -46,10 +50,6 @@ switch ($format) {
 					$similar = $this->solr->resultsList();
 					}
 					
-
-
-				$regions = $this->record->getRegion();
-				
 				
 				if ($this->routeParam[0]=='inmodal') {
 					$i = count($this->routeParam)-1;
@@ -61,8 +61,8 @@ switch ($format) {
 					echo $this->render('head.php');
 					echo $this->render('core/header.php');
 					echo '<div class="main">';
-					
-					echo $this->render('record/core.php', ['rec'=>$record, 'Tmap'=>$Tmap, 'regions'=>$regions, 'similar'=>$similar ]);
+					echo $this->render('record/core.php', ['rec'=>$record, 'Tmap'=>$Tmap, 'similar'=>$similar ]);
+					#echo $this->helper->pre($this->record);
 					echo '</div>';
 					echo $this->render('core/footer.php');
 					}		
@@ -84,7 +84,7 @@ switch ($format) {
 			#$marcJson = $this->buffer->getJsonRecord($record->id, $record->fullrecord);
 			$marcJson = $this->convert->mrk2json($record->fullrecord);
 
-			require_once('functions/klasa.exporter.php');
+			require_once('functions/class.exporter.php');
 			$this->addClass('exporter', new exporter()); 
 
 			$plik = $this->exporter->toMRK($marcJson);
@@ -102,7 +102,7 @@ switch ($format) {
 			#$marcJson = $this->buffer->getJsonRecord($record->id, $record->fullrecord);
 			$marcJson = $this->convert->mrk2json($record->fullrecord);
 
-			require_once('functions/klasa.exporter.php');
+			require_once('functions/class.exporter.php');
 			$this->addClass('exporter', new exporter()); 
 			
 			if ($record->record_format == 'marc') {
@@ -131,7 +131,7 @@ switch ($format) {
 			#$marcJson = $this->buffer->getJsonRecord($record->id, $record->fullrecord);
 			$marcJson = $this->convert->mrk2json($record->fullrecord);
 
-			require_once('functions/klasa.exporter.php');
+			require_once('functions/class.exporter.php');
 			$this->addClass('exporter', new exporter()); 
 
 			$plik = $this->exporter->XMLheader();

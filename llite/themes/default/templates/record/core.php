@@ -1,81 +1,52 @@
 <?php 
 
-$citeThis = $this->render('search/record/inmodal/cite.php');
-$citeThisB = base64_encode($citeThis);
-
-$coreFields = $this->record->getCoreFields();
 
 
-$formats = $this->getConfig('export');
-foreach ($formats['ExportFormats'] as $k=>$v)
-	$exportMenu[] = array (
-		'title' => $v,
-		'link' 	=> $this->selfUrl('.html', '.'.$k)
-		);
+$mapChecksCount = 6;
+$mapDraw = '<br/>';
+$mapDraw.= $this->maps->drawWorldMap([]); // $placesList.
+$mapDraw.= '<div id="mapRelationsAjaxArea">'.$this->helper->loader2();
+$mapDraw.= '<form id="mapDrowCheckboxes">';
+for ($i = 1; $i<=$mapChecksCount; $i++) 
+	$mapDraw .= '<input type="checkbox" checked id="map_checkbox_'.$i.'" >';
+$mapDraw .= '</form>';
+$mapDraw .= '</div>';
+$this->addJS('results.maps.addBiblioRecRelatations("'.$this->record->getId().'")');			
+$this->addJS('results.btnPrevNext("'.$this->record->getId().'");');
+$this->addJS('results.collapseLongValues();');
 
-		
-		
-$sideMenu[] = array (
-		'ico' 	=> 'fa fa-asterisk',
-		'title' => $this->transEsc('Cite this'),
-		'onclick' => "results.citeThis('{$this->transEsc('Cite this')}', '{$rec->id}');",
-		);
-
-$sideMenu[] = array (
-		'ico' 	=> 'fa fa-download',
-		'title' => $this->transEsc('Export record to').'...',
-		'submenu'=> $exportMenu
-		);
-/*
-$sideMenu[] = array (
-		'ico' 	=> 'fa fa-star',
-		'title' => $this->transEsc('Save to List'),
-		'link' 	=> $this->selfUrl()
-		);
-*/
-
-
-if (is_array($this->buffer->isOnMyLists($rec->id)))
-	$sideMenu[] = array (
-		'ico' 	=> 'fa fa-minus',
-		'title' => $this->transEsc('Remove from Book Bag'),
-		'id'	=> 'ch_'.$rec->id,
-		'onclick' 	=> "results.myList('{$rec->id}', 'myListSingleRec')",
-		'class'	=> 'active'
-		);
-	else 
-	$sideMenu[] = array (
-		'ico' 	=> 'fa fa-plus',
-		'title' => $this->transEsc('Add to Book Bag'),
-		'id'	=> 'ch_'.$rec->id,
-		'onclick' 	=> "results.myList('{$rec->id}', 'myListSingleRec')"
-		);
-
-
-$barMenu = $this->helper->drawSideMenu($sideMenu);
-
-
-$placesList = '';
-if (is_array($regions))
-	foreach ($regions as $place) {
-		$placesList .= $this->render('record/place-link-simple.php', ['place'=>$place]);
-		}
-$mapDraw = $this->maps->drawWorldMap($Tmap); // $placesList.
-$mapDraw.= '<div id="mapRelationsAjaxArea">'.$this->helper->loader2().'
-				<input type="checkbox" checked id="map_checkbox_1" >
-				<input type="checkbox" checked id="map_checkbox_2" >
-				<input type="checkbox" checked id="map_checkbox_3" >
-				<input type="checkbox" checked id="map_checkbox_4" >
-				<input type="checkbox" checked id="map_checkbox_5" >
-				<input type="checkbox" checked id="map_checkbox_6" >
-			</div>';
-$this->addJS("results.maps.addBiblioRecRelatations('".$rec->id."')");			
 
 $extraTabs = [
-			'details' 	=> ['label' => $this->transEsc('Marc view'),	'content' => $this->record->drawMarc()],
-			'jsonview' 	=> ['label' => $this->transEsc('Json view'), 	'content' => "<pre style='background-color:transparent; border:0px;'>".print_r($this->record->fullRecord, 1)."</pre>" ],
-			'map' 		=> ['label' => $this->transEsc('Map'), 			'content' => $mapDraw],
+			'details' 	=> [
+					'label' => $this->transEsc('Marc view'),	
+					'content' => '<br/>'.$this->record->drawMarc()
+					],
+			# 'jsonview' 	=> ['label' => $this->transEsc('Json view'), 	'content' => "<br/><pre style='background-color:transparent; border:0px;'>".print_r($this->record->marcJson, 1)."</pre>" ],
+			'jsonrel' 	=> [
+					'label' => $this->transEsc('ELB fields'), 	
+					'content' => '<br/><pre id="json-renderer" style="background-color:transparent; border:0px;">'.print_r($this->record->elbRecord, 1).'</pre>' 
+					],
+			'map' 		=> [
+					'label' => $this->transEsc('Map'), 			
+					'content' => $mapDraw
+					],
 			];
+
+$this->addJS('
+	var data = '.json_encode($this->record->elbRecord).'
+	$("#json-renderer").jsonViewer(data,  {collapsed: true, rootCollapsable : false, withLinks: false, bigNumbers: true});
+	');
+
+if (!empty(($relRec->linkedResources))) {
+	foreach ($relRec->linkedResources as $linkedResource)
+		if (!empty($linkedResource->fullText) && $linkedResource->fullText) {
+			$extraTabs['fullText'] = [
+				'label' => $this->transEsc('Full text'), 	
+				'content' => '<iframe src="'.$linkedResource->link.'" title="'.$linkedResource->desc.'" style="width:100%; height:30vh; border: 0"></iframe><br/><br/> Content from: <a href="'.$linkedResource->link.'">'.$linkedResource->link.'</a>' 
+				];
+			}
+	}
+
 $bottomMenu = $this->record->getELaA_full();
 if (is_array($bottomMenu))
 	foreach ($bottomMenu as $k=>$ln) {
@@ -93,19 +64,18 @@ if (is_array($bottomMenu))
 				];
 		}
 
-if (!empty($similar) && (count($similar)>0)) {
-	$simStr = '<div class=" results-list">';
-	foreach ($similar as $simRec) {
-		#$simStr .= '<a href="'.$this->buildUrl('search/record/'.$simRec->id.'.html').'"><b>'.$simRec->title.'</b></a><br>';
-		$simStr .= $this->render('record/by-link.php', ['rec' => (array)$simRec, 'lp'=>$simRec->lp] );
-		}
+if ($this->record->hasSimilar()) {
+	$this->addJS('page.post("recHasSimilar", "results/record.has.similars", '.json_encode($this->record->get('similars')).')');
+	
+	$simStr = '<div class="results" id="recHasSimilar">';
+	$simStr .= $this->helper->loader2();
 	$simStr.='</div>';
+	
 	$extraTabs['similar'] = [
 			'label' => $this->transEsc('Other versions'),
 			'content' => $simStr
 			];
 	}
-
 
 
 ?> 
@@ -130,84 +100,116 @@ if (!empty($similar) && (count($similar)>0)) {
 			<?= $this->record->getRETpic() ?>
 			
 			<ul class="detailsview">
-				<?php foreach ($coreFields as $func=>$current): ?>
-					<?php if (!empty($current['content'])): ?>
-						<dl class="detailsview-item">
-						  <dt class="dv-label"><?=$this->transEsc($current['label'])?>:</dt>
-						  <dd class="dv-value"><?= $this->render('helpers/CollapseBox.php', ['desc'=>$current['content'], 'minSize'=>130]) ?></dd>
-						</dl>
-					<?php endif; ?>
-				<?php endforeach; ?>
-				<?php if (!empty($this->record->getDescription())): // na prośbe B.Wachek 2022-12-12 ?>
-					<dl class="detailsview-item">
-					  <dt class="dv-label"><?=$this->transEsc('Annotation')?>:</dt>
-					  <dd class="dv-value"><?= $this->render('helpers/CollapseBox.php', ['desc'=>$this->record->getDescription(), 'minSize'=>130]) ?></dd>
-					</dl>
-				<?php endif; ?>
-					
+				<?= $this->render('record/fields/only-text.php', [
+							'label'=>$this->transEsc('Statement of Responsibility'),  	
+							'value'=>$this->record->get('StatmentOfResp')
+							]) ?>
+				<?= $this->render('record/fields/authors-link.php', [
+							'label'=>$this->transEsc('Main author'),  					
+							'value'=>$this->record->get('persons', 'mainAuthor')
+							]) ?>
+				<?= $this->render('record/fields/authors-link.php', [
+							'label'=>$this->transEsc('Corporate as main author'),  	
+							'value'=>$this->record->get('corporates', 'mainAuthor')
+							]) ?>
+				<?= $this->render('record/fields/authors-link.php', [
+							'label'=>$this->transEsc('Other authors'),  				
+							'value'=>$this->record->get('persons', 'coAuthor')
+							]) ?>
+				<?= $this->render('record/fields/authors-link.php', [
+							'label'=>$this->transEsc('Corporate Author'),  			
+							'value'=>$this->record->get('corporates', 'coAuthor')
+							]) ?>
+				<?= $this->render('record/fields/biblio-link.php', 	[
+							'label'=>$this->transEsc('Format'), 				
+							'facetField'=>'format_major', 		
+							'translated'=>true,
+							'value'=>$this->record->get('majorFormat')
+							]) ?>
+				<?= $this->render('record/fields/biblio-link.php', 	[
+							'label'=>$this->transEsc('Publication language'),  
+							'facetField'=>'language', 
+							'translated'=>true,
+							'value'=>$this->record->get('language','publication')
+							]) ?>
+				<?= $this->render('record/fields/biblio-link.php', 	[
+							'label'=>$this->transEsc('Original language'),  	
+							'facetField'=>'language_o_str_mv', 	
+							'translated'=>true,
+							'value'=>$this->record->get('language','original')
+							]) ?>
+				
+				<?= $this->render('record/fields/places-link.php', 	[
+							'label'=>$this->transEsc('Publication place'),  	
+							'facetField'=>'geographicpublication_str_mv', 	
+							'translated'=>true,
+							'value'=>$this->record->get('places','publication')
+							]) ?>
+				
+				<?= $this->render('record/fields/biblio-link.php', 	[
+							'label'=>$this->transEsc('In'),  			
+							'facetField'=>'magazines_str_mv', 	
+							'value'=>$this->record->get('publishedIn')
+							]) ?>
+				<?= $this->render('record/fields/biblio-link.php', 	[
+							'label'=>$this->transEsc('Edition'),  		
+							'facetField'=>'edition', 	
+							'linkValue'=>$this->record->get('edition')->no ?? $this->record->get('edition'),
+							'value'=>$this->record->get('edition')->str ?? $this->record->get('edition')
+							]) ?>
+				<?= $this->render('record/fields/refered-work.php', 	[
+							'label'=>$this->transEsc('Referred work'), 
+							'value'=>$this->record->get('referedWork')
+							]) ?>
+				<?= $this->render('record/fields/biblio-link.php', 	[
+							'label'=>$this->transEsc('Seria'),  		
+							'facetField'=>'series', 
+							'value'=>$this->record->get('seria')
+							]) ?>
+				
+				<?= $this->render('record/fields/formGenre-link.php', 	[
+							'label'=>$this->transEsc('Form / Genre'),  
+							'value'=>$this->record->get('subject','formGenre')
+							]) ?>
+				<?= $this->render('record/fields/UDC-link.php', 		[
+							'label'=>$this->transEsc('Universal Decimal Classification'),  
+							'facetField'=>'udccode_str_mv', 
+							'value'=>$this->record->get('subject','UDC')]) 
+							?>
+				<?= $this->render('record/fields/authors-link.php', 	[
+							'label'=>$this->transEsc('Subject persons'), 
+							'value'=>$this->record->get('persons', 'subjectPerson')
+							]) ?>
+				<?= $this->render('record/fields/subjects-link.php', 	[
+							'label'=>$this->transEsc('Subjects'), 	
+							'facetField'=>'subjects_str_mv', 
+							'value'=>$this->record->get('subject','strings')
+							]) ?>
+				<?= $this->render('record/fields/only-text.php', [
+							'label'=>$this->transEsc('Annotation'),  	
+							'value'=>$this->record->get('description')
+							]) ?>
+
 			</ul>
 			
 			
 		</div>
 		<div class="record-right-panel">
-			<?= $barMenu ?>
+			<?= $this->render('record/side-menu.php'); ?>
 		</div>
 	</div>
 
-
-	
-	<span class="Z3988" title="<?=$this->record->getCoinsOpenURL() ?>"></span>
-	
-	<?php 
-	
-	if (!empty($this->record->bottomLists->persons)) {
-		echo '<div class="hidden">';
-		$personsList = $this->record->bottomLists->persons;
-
-		foreach ($personsList as $key=>$personLine) {
-			$AP = (object)$personLine;
-			if (!empty($AP->wikiq)) {
-				$wikiIDint = $AP->wikiq;
-				$wikiId = 'Q'.$AP->wikiq;
-				$wiki = new wikidata($wikiId);
-				$activePerson = $wiki->getActivePersonValues();
-				$activePerson->wiki = $wiki;
-				$AP->field = "personBoxQ".$AP->wikiq;
-				
-				$activePerson->wiki = new wikidata($wikiId); 
-				$activePerson->wiki->setUserLang($this->user->lang['userLang']);
-
-				$photo = $this->buffer->loadWikiMediaUrl($activePerson->wiki->getStrVal('P18'));
-
-				echo '<div class="person-info" id="'.$AP->field.'">';
-				echo $this->render('persons/results/list-wiki.php',['activePerson'=>$activePerson, 'photo'=>$photo]);
-				echo '</div>';
-				
-				$this->addJS("$('.personBox{$AP->wikiq}').html($('#{$AP->field}').html());"); 
-				
-				} 
-			}
-		echo '</div>';
-		}
-	?>
 	
 	<div class="tabs-panel">
 		<?= 
 		$this->helper->tabsCarousel( $extraTabs , 'map');
 		?>
-	  
     </div>
 	  
-	 
+	<span class="Z3988" title="<?=$this->record->getCoinsOpenURL() ?>"></span> 
   </div>
 </div>
 <div id="recordAjaxAddsOn"></div>
 
-<?php 
-	$tabId = $this->helper->lastId; 
-	$this->addJS("results.btnPrevNext('{$rec->id}');");
-	#$this->addJS("$('.ind_{$tabId}').removeClass('active'); $('#ind_{$tabId}_0').addClass('active');$('#myCarousel{$tabId}').carousel(0);");
 
-	
-?>
 

@@ -9,16 +9,7 @@ $this->addJS("advancedSearch.summary();");
 	<div class="main">
 		<br/>
 		<div class="row">
-			<div class="col-sm-3">
-				<?php 
-				if (is_Array($helpMenu))
-					foreach ($helpMenu as $k=>$help) {
-						echo $this->helper->panelCollapse($k, $help['title'], $help['content'], '', false);
-						}
-				?>
-				<div id="techView"></div>
-			</div>
-			<div class="col-sm-6"> 
+			<div class="col-sm-8"> 
 				<div id="formBox">
 					<?= $this->helper->loader2() ?>
 				</div>
@@ -30,7 +21,7 @@ $this->addJS("advancedSearch.summary();");
 				</div>
 				
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-4">
 				<div class="panel panel-default">
 					<div class="panel-heading"><?= $this->transEsc("Search summary") ?></div>
 					<div class="panel-body">

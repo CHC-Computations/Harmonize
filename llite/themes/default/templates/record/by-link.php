@@ -7,8 +7,8 @@
 		<?php if(!empty($rec['nr'])) $rec['nr'].', '; ?>
 		<?php if(!empty($rec['pages'])) $rec['pages'].', '; ?>
 		<br/>
-	<?= $rec['author']?><br/>
+	<?php if (!empty($rec['author'])) echo current($rec['author']) ?><br/>
 </div>
-<!-- pre><?=print_r($rec,1)?></pre -->
+<pre><?=print_r($rec,1)?></pre>
 
 <?php $this->JS[] = "results.miniPreView('$rec[id]', '$lp');";

@@ -1,26 +1,29 @@
 <?php 
 if (empty($this)) die;
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', new helper()); 
-$this->addClass('solr', new solr($this->config)); 
+$this->addClass('solr', new solr($this)); 
 
+# echo $this->helper->pre($this->routeParam); 
 
 $currAction = $this->routeParam[0];
 $currFacet = $this->routeParam[1];
 $userLang = $this->routeParam[2];
-$core = $this->routeParam[3];
-$this->facetsCode = $this->routeParam[count($this->routeParam)-1];
+$core = $this->routeParam[4];
+$this->facetsCode = $this->routeParam[6] ?? null;
 
-if (($core == '') or ($core == 'biblio') or ($core == 'search')) $core = 'settings';
-	else 
-	$this->loadJsonSettings($core);
+$this->loadJsonSettings($core);
 
-$facetName = $this->$core->facets->facetsMenu->$currFacet->name;
+@$facetName = $this->configJson->$core->facets->solrIndexes->$currFacet->name ?? $this->configJson->$core->facets->facetsMenu->$currFacet->name;
 
 $queryoptions=[];
 $queryoptions[]=[ 
 				'field' => 'facet.sort',
 				'value' => 'count'
+				];
+$queryoptions['limit']=[ 
+				'field' => 'facet.limit',
+				'value' => 19
 				];
 
 if (!empty ($this->GET['q'])) {
@@ -43,6 +46,7 @@ if (!empty($this->GET['sj'])) {
 			];
 	}
 	
+	
 if (!empty ($this->GET['add'])) {
 	$_SESSION['facets_chosen'][$currFacet][$this->GET['add']]='ok';
 	}	
@@ -55,7 +59,7 @@ if (!empty ($this->GET['remove'])) {
 
 switch ($currAction) {
 	case 'build' :
-			if (!empty($this->persons->facets->facetsMenu->$currFacet)) {
+			if (!empty($facetName)) {
 
 				$results = $this->solr->getFacets($core, [$currFacet], $queryoptions);
 				echo $this->render('search/inmodal/facet-search-box-core.php', ['facetName'=>$facetName, 'currFacet'=>$currFacet, 'facets'=>$results[$currFacet], 'core'=>$core ] );
@@ -64,7 +68,7 @@ switch ($currAction) {
 				}
 		break;		
 	case 'search' : 			
-			if (!empty($this->persons->facets->facetsMenu->$currFacet)) {
+			if (!empty($facetName)) {
 				$results = $this->solr->getFacets($core, [$currFacet], $queryoptions);
 				if (empty($results[$currFacet])) 
 					echo $this->render('search/inmodal/no-results.php');

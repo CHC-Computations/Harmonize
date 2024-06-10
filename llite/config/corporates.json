@@ -1,0 +1,155 @@
+{
+"title" : "Corporates",
+"summaryBarMenu" : {
+	"view" : {
+		"default" : "simplelist",
+		"title" : "View",
+		"optionsAvailable" : {
+			"default-box" : {
+				"name" :"Boxes",
+				"value" : "default-box",
+				"icon" : "ph-bold ph-rows"
+				},
+			"simplelist" : {
+				"name" : "simple list",
+				"value" : "simplelist",
+				"icon" : "ph-bold ph-list-dashes"
+				}
+			}
+		},
+	"sorting" : {
+		"default" : "r",
+		"title" : "Sorting",
+		"optionsAvailable" : {
+			"r" : {"name" : "Relevance", "value" : "biblio_count desc"}, 
+			"dd" : {"name" : "Inception year desc", "value" : "year_start desc"},
+			"a" : {"name" : "Name", "value" : "biblio_labels asc"}
+			}
+		},
+
+	"pagination" : {
+		"title" : "Results per page",
+		"default" : "20",
+		"optionsAvailable" : ["20","50","100"],
+		"maxPagesAllowed" : "100"
+		}
+	},
+"facets" : {
+	"solrIndexes" : {
+		"year_start" : {
+			"name": "Year of inception", 
+			"formatter": null, 
+			"translated" : true 
+			},
+		"years_activity" : {
+			"name" : "Years of Activity",
+			"translated" : false,
+			"solr_index" : "years_activity",
+			"template" 	 : "timeGraph"
+			},
+		"spellingShingle" : {
+			"name" : "", 
+			"importFunction" : "getSpellingShingle",
+			"formatter" : null, 
+			"translated" : false 
+			}
+		},
+	"defaults" : {
+		"template" : "box",
+		"facetLimit" : 6,
+		"formatter" : null,
+		"translated" : false,
+		"child" : null
+		},
+	"facetsMenu" : {
+		"location" : {
+			"name" : "Location",
+			"translated" : false,
+			"solr_index" : "location",
+			"formatter" : "formatMultiLang"
+			},	
+		"country" : {
+			"name" : "Country",
+			"translated" : false,
+			"solr_index" : "country",
+			"formatter" : "formatMultiLang"
+			},	
+		"year_start" : {
+			"name" : "Year of Inception",
+			"translated" : false,
+			"solr_index" : "year_start",
+			"template" 	 : "timeGraph"
+			},
+		"type_of" : {
+			"name" : "Type of ",
+			"translated" : false,
+			"solr_index" : "type_of",
+			"formatter" : "formatMultiLang"
+			}
+		}
+	}, 
+"sorting" : {
+	"na" : {
+		"name" : "Name",
+		"solrField" : "biblio_labels asc"
+		},
+	"bd" : {
+		"name" : "Date of birth",
+		"solrField" : "birth_date asc"
+		},
+	"tc" : {
+		"name" : "number of occurrences",
+		"solrField" : "biblio_count desc"
+		},
+	"ac" : {
+		"name" : "number of occurrences as main author",
+		"solrField" : "author_count desc"
+		},
+	"cc" : {
+		"name" : "number of occurrences as co-author",
+		"solrField" : "author2_count desc"
+		},
+	"sc" : {
+		"name" : "number of occurrences as subject",
+		"solrField" : "topic_count desc"
+		}
+	},
+"statBoxes" : { 
+	"maxResultsOnGraphs" : "5", 
+	"graphs" : {
+		"source_db_str" : {
+				"title" : "Source Database",
+				"indexField" : "source_db_str",
+				"graphMode" : "pieGraph"
+			},
+		"format_major" : {  
+				"indexField" : "format_major",
+				"graphMode" : "pieGraph" 
+				},
+		"genre_major" : {  
+				"indexField" : "genre_major",
+				"graphMode" : "pieGraph" 
+				},
+		"magazines_str_mv" : {  
+				"indexField" : "magazines_str_mv",
+				"graphMode" : "pieGraph" 
+				},
+		"language" : {  
+				"indexField" : "language",
+				"graphMode" : "pieGraph" 
+				},
+		"topic" : {  
+				"indexField" : "topic",
+				"graphMode" : "pieGraph" 
+				},
+		"publishDate" : {
+				"indexField" : "publishDate",
+				"maxResultsOnGraphs" : "all",
+				"graphMode" : "timeLine"
+				}
+		}
+	},
+"related" : {
+	
+	}		
+}

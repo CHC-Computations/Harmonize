@@ -1,13 +1,13 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.converter.php');
+require_once('functions/class.helper.php');
+require_once('functions/class.converter.php');
 $x = count($this->routeParam)-1;
 
 $tmp = explode('.', $this->routeParam[$x]);
 
-$this->addClass('solr', new solr($this->config));
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('solr', new solr($this));
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', 	new helper()); 
 $this->addClass('convert', 	new converter()); 
 

@@ -1,199 +1,213 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
+$this->addClass('buffer', 	new buffer($this)); 
+$this->addClass('solr', 	new solr($this)); 
 
-$facets = $this->getConfig('search');
-$facets = $this->getConfig('facets');
+# echo "routeParam".$this->helper->pre($this->routeParam);
 
-$this->addClass('buffer', 	new marcBuffer()); 
-$this->addClass('solr', 	new solr($this->config)); 
-$this->addClass('helper', 	new helper()); 
+$currentRecId = $this->routeParam[0];
+if (!empty($this->getUserParam('biblio:GET')))
+	$this->GET = json_decode($this->getUserParam('biblio:GET'), true);
+$currentCore = $this->GET['core'] ?? 'biblio';
+$currentPage = $this->GET['page'] ?? 1;
+if ($currentPage == 0) $currentPage = 1;
+$maxPage = $this->configJson->$currentCore->summaryBarMenu->pagination->maxPagesAlowed ?? 100;
+$limit = $this->GET['pagination'] ?? 10;
 
-$curr_id = $this->routeParam[0];
+# echo "GET".$this->helper->pre($this->GET);
 
-$last_search 	= $this->user->loadParam('last_search');
-$lookfor 		= $this->user->loadParam('lookfor');
-$type 			= $this->user->loadParam('type');
-$curr_page 		= $this->user->loadParam('curr_page');
-$this->facetsCode 	= $this->user->loadParam('facetsCode');
-
-# echo "<div style='position: fixed; top: 150px; right:100px; border:solid 1px red; background:yellow; padding:20px;'>Page: #$curr_page</div>";
-if (!empty($_SESSION['cp'][$curr_id]))  {
-	$curr_page = $_SESSION['cp'][$curr_id];
-	# echo "<div style='position: fixed; top: 200px; right:100px; border:solid 1px red; background:yellow; padding:20px;'>switch to: $curr_page</div>";
+if ($currentPage < $maxPage) {
 	
-	
-	$this->user->saveParam('curr_page', $curr_page);
+	if (!empty($this->GET['swl'])) { // start with letter ...
+		$sl = strtolower(substr($this->GET['swl'],0,1));
+		switch ($sort) {
+			case 'author_sort asc': $sfield = 'author_sort'; break;
+			case 'title_sort asc': $sfield = 'title_sort'; break;
+			default : $sfield = '';
+			}
+		if ($sfield<>'')
+			$query[] = [
+					'field' => 'q',
+					'value' => "($sfield:$sl*)"
+					];
+		}
 
-	}
-if (!empty($_SESSION['cp']))
-	unset($_SESSION['cp']);	
+	if (!empty($this->routeParam[3])) {
+		$this->facetsCode = $this->routeParam[3];	
+		$query[] = $this->buffer->getFacets($this->facetsCode);	
+		} else 
+		$this->facetsCode = 'null';		
 
-if (!empty($this->getUserParam('limit')))
-	$limit = $this->getUserParam('limit');
-	else 
-	$limit = $this->config['search']['pagination']['default_rpp'];
+	$lookfor = $this->getParam('GET', 'lookfor');
+	$type = $this->getParam('GET', 'type');
 
-if (empty($this->getUserParam('sort')))
-	$ksort = $this->config['search']['pagination']['default_sort'];
-	else 
-	$ksort = $this->getUserParam('sort');
 
-// query building 
-
-if (!empty($this->getIniParam('search', 'sortoptions')[$this->getUserParam('sort')])) {
-	$sort = $this->getIniParam('search', 'sortoptions')[$this->getUserParam('sort')];
-	if ($sort!=='relevance') 
-		$query[]=[ 
-				'field' => 'sort',
-				'value' => $sort
+	if (!empty($this->GET['sj'])) {
+		$query['q'] = [ 
+				'field' => 'q',
+				'value' => $this->solr->advandedSearch($this->GET['sj'])
 				];
-	}
-$query[] = $this->buffer->getFacets($this->facetsCode);	
-$query[] = $this->solr->lookFor($lookfor, $type);			
-$query[]=[ 
-		'field' => 'facet',
-		'value' => 'false'
-		];
-$query['rows']=[ 
-		'field' => 'rows',
-		'value' => $limit
-		];
-$query[]=[ 
-		'field' => 'facet.limit',
-		'value' => '10'
-		];		
-$query['start']=[ 
-		'field' => 'start',
-		'value' => $curr_page*$limit - $limit
-		];		
+		} else 
+		$query['q'] = $this->solr->lookFor($lookfor, $type );		
 	
-$results = $this->solr->getQuery('biblio',$query); 
-$results = $this->solr->resultsList();
-$first = $lp = $curr_lp = $this->solr->firstResultNo();
+	$query['facet']=[ 
+				'field' => 'facet',
+				'value' => 'true'
+				];
+			
+	$query['rows']=[ 
+			'field' => 'rows',
+			'value' => $this->getUserParam($currentCore.':pagination')
+			];
+	
+	
+	if (!empty($this->getCurrentPage()>1))
+		$query['start']=[ 
+			'field' => 'start',
+			'value' => $this->getCurrentPage()*$this->getUserParam($currentCore.':pagination') - $this->getUserParam($currentCore.':pagination')
+			];		
+	
+	$query['q.op']=[ 
+			'field' => 'q.op',
+			'value' => 'OR'
+			];
+	
+	$query['fl']=[ 
+			'field' => 'fl',
+			'value' => 'id, title, title_short'
+			];
+	
 
+	$results = $this->solr->getQuery('biblio',$query); 
+	$results = $this->solr->resultsList();
+	$first = $lp = $this->solr->firstResultNo();
+	
+	$curr_lp = '??';
+	
+	
 
-$is_curr = false;
-$next = '';
+	$is_current = false;
+	$next = '';
+	$prev = '';
+	$lp = 1;
 
-$pozList = '<div class="hiddenList">';
-$span = '';
-$cp_link = $cn_link = '';
+	$pozList = '<div class="hiddenList">';
+	$span = '';
+	$cp_link = $cn_link = '';
 
-foreach ($results as $row) {
-	$title = $this->helper->setLength($row->title,40);
-	if (($is_curr) && ($next == '')) {
-		$next = $row->id;
-		$next_title = $row->title;
-		}
-	if ($curr_id == $row->id) {
-		$span = '<a class="list-group-item active">'; 
-		$curr_lp = $lp;
-		$is_curr = true;
-		} else {
-		$span = '<a href="'.$row->id.'.html" class="list-group-item">';
-		}
-	if (!$is_curr) {
+	if (!empty($results))
+		foreach ($results as $row) {
+			$title = $this->helper->setLength($row->title,40);
+			if (($is_current) && ($next == '')) {
+				$next = $row->id;
+				$next_title = $row->title;
+				}
+			if ($currentRecId == $row->id) {
+				$span = '<a class="list-group-item active">'; 
+				$curr_lp = $lp;
+				$is_current = true;
+				} else {
+				$span = '<a href="'.$row->id.'.html" class="list-group-item">';
+				}
+			if (!$is_current) {
+				$prev = $row->id;
+				$prev_title = $row->title;
+				}
+			$pozList .= $span.$title.'</a>';
+			$lp++;
+			}
+	$pozList.= "</div>";
+
+	/*
+	if (($curr_lp == $first) && ($currentPage>1)) { 
+		$query['rows']=[ 
+			'field' => 'rows',
+			'value' => 1
+			];
+		$query['start']=[ 
+			'field' => 'start',
+			'value' => $currentPage*$limit-$limit-1
+			];		
+		
+		$results = $this->solr->getQuery('biblio',$query); 
+		$results = $this->solr->resultsList();
+		$row = current($results);
 		$prev = $row->id;
 		$prev_title = $row->title;
+		$_SESSION['cp'][$row->id] = ($currentPage-1);
 		}
-	$pozList .= $span.$title.'</a>';
-	$lp++;
-	}
-$pozList.= "</div>";
 
-
-
-if (($curr_lp == $first) && ($curr_page>1)) { 
-	$query['rows']=[ 
-		'field' => 'rows',
-		'value' => 1
-		];
-	$query['start']=[ 
-		'field' => 'start',
-		'value' => $curr_page*$limit-$limit-1
-		];		
 	
-	$results = $this->solr->getQuery('biblio',$query); 
-	$results = $this->solr->resultsList();
-	$row = current($results);
-	$prev = $row->id;
-	$prev_title = $row->title;
-	$_SESSION['cp'][$row->id] = ($curr_page-1);
-	}
-
-$lr = $this->solr->lastResultNo();
 	
-
-if (($curr_lp == $lr) && ($lp<$this->solr->totalResults())) { 
-	
-	$query['rows']=[ 
-		'field' => 'rows',
-		'value' => 1
-		];
-	$query['start']=[ 
-		'field' => 'start',
-		'value' => $curr_page*$limit
-		];		
-	# echo "<pre>".print_R($query,1)."</pre>";
-	
-	$results = $this->solr->getQuery('biblio',$query); 
-	$results = $this->solr->resultsList();
-	$row = current($results);
-	$next = $row->id;
-	$next_title = $row->title;
-	$_SESSION['cp'][$row->id] = ($curr_page+1);
-	
-	}
-
-
-
-# echo "<pre style='border:0px; background:transparent;'>".print_r($this->routeParam,1)."</pre>";
-# echo "<pre style='border:0px; background:transparent;'>".print_r($results,1)."</pre>";
-$curr_results_page = $this->buildUri('search/results',[
-				'page'=>$curr_page,
-				'sort'=> $ksort,
-				'lookfor' => $lookfor,
-				'type' => $type
-				]);
-?>
-
-<?php if (!empty($last_search)): ?>
-	<div class="btn-breadcrumbs">
-		<a href="<?= $curr_results_page ?>"><i style="transform: rotate(-90deg);" class="glyphicon glyphicon-share-alt"></i> <?= '#'.$curr_lp.' '.$this->transEsc('of').' '.$this->helper->numberFormat($this->solr->totalResults())  ?></a>			
-		<?= $pozList ?>
-	</div>
-	
-<?php endif; ?>
-
-
-<?php if (!empty($last_search)): ?>
-	<div class="border-nav border-nav-left">
-
-		<a href="<?= $last_search ?>" class="btn-slide">
-			<div class="label-solid"><i style="transform: rotate(-90deg);" class="glyphicon glyphicon-share-alt"></i></div>
-			<div class="label-slider"><span><?= $this->transEsc('Back to list') ?></span></div>
-		</a>			
-
-		<?php if (!empty($prev_title)): ?>  
-			<a href="<?= $prev ?>.html"  class="btn-slide" rel="nofollow">
-				<div class="label-solid"><i class="glyphicon glyphicon-arrow-left"></i></div>
-				<div class="label-slider"><?= $this->helper->setLength($prev_title,17) ?></div>
-			</a>
-		<?php endif; ?>
+	$lr = $this->solr->lastResultNo();
+	if (($curr_lp == $lr) && ($lp<$this->solr->totalResults())) { 
 		
-	</div>	
+		$query['rows']=[ 
+			'field' => 'rows',
+			'value' => 1
+			];
+		$query['start']=[ 
+			'field' => 'start',
+			'value' => $currentPage*$limit
+			];		
+		# echo "<pre>".print_R($query,1)."</pre>";
+		
+		$results = $this->solr->getQuery('biblio',$query); 
+		$results = $this->solr->resultsList();
+		$row = current($results);
+		$next = $row->id;
+		$next_title = $row->title;
+		
+		}
+	*/
+		
+	$currentResultsPage = $this->buildUri('results',[
+					'core' => $currentCore,
+					'page'=>$currentPage,
+					'sort'=> $this->GET['sorting'] ?? 'r',
+					'lookfor' => $lookfor,
+					'type' => $type
+					]);
+	}
 
-	<?php if (!empty($next_title)): ?>  
-		<div class="border-nav border-nav-right">	
+	?>
 
-			<a href="<?= $next ?>.html<?= $cn_link ?>" class="btn-slide" rel="nofollow">
-				<div class="label-solid"><i class="glyphicon glyphicon-arrow-right"></i></div>
-				<div class="label-slider"><?= $this->helper->setLength($next_title,17) ?></div>
-			</a>
+	<?php if (!empty($this->solr->totalResults())): ?>
+		<div class="btn-breadcrumbs">
+			<a href="<?= $currentResultsPage ?>"><i style="transform: rotate(-90deg);" class="glyphicon glyphicon-share-alt"></i> <?= '#'.$curr_lp.' '.$this->transEsc('of').' '.$this->helper->numberFormat($this->solr->totalResults())  ?></a>			
+			<?= $pozList ?>
 		</div>
+		
 	<?php endif; ?>
-<?php endif; ?>
+
+
+	<?php if ($is_current): ?>
+		<div class="border-nav border-nav-left">
+
+			<a href="<?= $currentResultsPage ?>" class="btn-slide">
+				<div class="label-solid"><i style="transform: rotate(-90deg);" class="glyphicon glyphicon-share-alt"></i></div>
+				<div class="label-slider"><span><?= $this->transEsc('Back to list') ?></span></div>
+			</a>			
+
+			<?php if (!empty($prev_title)): ?>  
+				<a href="<?= $prev ?>.html"  class="btn-slide" rel="nofollow">
+					<div class="label-solid"><i class="glyphicon glyphicon-arrow-left"></i></div>
+					<div class="label-slider"><?= $this->helper->setLength($prev_title,17) ?></div>
+				</a>
+			<?php endif; ?>
+			
+		</div>	
+
+		<?php if (!empty($next_title)): ?>  
+			<div class="border-nav border-nav-right">	
+
+				<a href="<?= $next ?>.html<?= $cn_link ?>" class="btn-slide" rel="nofollow">
+					<div class="label-solid"><i class="glyphicon glyphicon-arrow-right"></i></div>
+					<div class="label-slider"><?= $this->helper->setLength($next_title,17) ?></div>
+				</a>
+			</div>
+		<?php endif; ?>
+	<?php endif; ?>
 
 <script>
 	

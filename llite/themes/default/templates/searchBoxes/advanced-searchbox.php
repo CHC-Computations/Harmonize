@@ -1,0 +1,1 @@
+<h1><?= $this->transEsc('Advanced search')?></h1>

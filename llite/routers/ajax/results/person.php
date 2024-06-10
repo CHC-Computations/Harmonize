@@ -1,13 +1,13 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.persons.php');
+require_once('functions/class.helper.php');
+require_once('functions/class.persons.php');
 
 $rec_id = str_replace('.html', '', $this->routeParam[1]);
 
 
-$this->addClass('solr', new solr($this->config));
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('solr', new solr($this));
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', 	new helper()); 
 
 $this->buffer->setSql($this->sql);

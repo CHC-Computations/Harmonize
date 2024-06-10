@@ -2,23 +2,21 @@
 if (empty($this)) die;
 $lp = $this->GET['lp'];
 
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', new helper()); 
-$this->addClass('solr', new solr($this->config)); 
+$this->addClass('solr', new solr($this)); 
 
-$this->buffer->setSql($this->sql);
 #echo "<prE>".print_r($this->GET,1)."</pre>";
-
-
-$facets = $this->getConfig('facets');
-
 
 $currAction=$this->routeParam[0];
 $currFacet=$this->routeParam[1];
+
+$facets = $this->configJson->biblio->facets->solrIndexes;
+
 $this->facetsCode = $this->routeParam[count($this->routeParam)-1];
+$facetName = $facets->$currFacet->name ?? 'unknown label';
 
 #echo 'facetCode: '.$this->facetsCode;
-$facetName = $facets['facetList'][$currFacet];
 
 	
 if (!empty ($this->GET['add'])) {

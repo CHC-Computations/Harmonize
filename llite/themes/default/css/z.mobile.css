@@ -29,12 +29,22 @@
 	.header-right .navbar-nav {display:table; position:fixed; top:0px; right:16px; min-width:50vw; }
 	.header-right .navbar-nav li {display:table-cell; background-color:#fafafa;}
 	
+	header .header2 .header2-left { width: 10%; }
+	header .header2 .header2-middle { width: 60%; }
+	header .header2 .header2-right { width: 30%; }
+	.userBox-toggle { padding-right:0px; }
+	.userBox-toggle a {font-size: 2em;}
+	.cms_title h1 { padding-top:20px; padding-bottom:30px; font-size:24px; }
+	.header2-middle h1 {padding-left:20px; font-size:24px;}
+	
 	#searchForm_type {width:46px;}
 	.serachSubmitBtn .btn {padding-left:16px; padding-right:16px;}
 	
 	
 	.userBox-menu {min-width: 90vw; }
 	header .core-menu-items.active {width: 100%;}
+		
+	.searchInput-ac.active {height:40vh; width:80vw; }
 	
 	.container {width: 100%;}
 	
@@ -56,7 +66,8 @@
 	.result-number {display:none !important;}
 	.result-actions {display:none !important;}
 	
-
+	.home-page-menu {display:block; }
+	.home-page-menu .core-menu-block {display:block; width:70%; margin:5px; margin-left:15%; height:auto;}
 	
 	.graybox {padding: 4px; padding-top:20px;}
 	.infopage {padding:0px; margin-top:0px;}

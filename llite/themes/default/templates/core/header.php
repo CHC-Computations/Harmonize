@@ -1,15 +1,14 @@
 <?php 
-require_once('functions/klasa.forms.php');
+require_once('functions/class.forms.php');
 $this->addClass('forms', 	new forms()); 
 $this->forms->values($this->GET);
 $facets = $this->getConfig('search');
 $cookies = $this->getConfig('cookies');
 
-if (!empty($this->params[2]))
-	$currentSE = $this->params[2];
+if (!empty($this->params[3]))
+	$currentCore = $this->params[3];
 	else
-	$currentSE = 'home';
-
+	$currentCore = 'home';
 
 
 foreach ($this->getIniParam('search', 'basicSearches') as $k=>$v) {
@@ -27,22 +26,25 @@ $myListCount = $this->buffer->myListCount();
 	<?= $this->render('core/cookies.php', ['msg' =>$cookies]) ?>
 	<header class="hidden-print">
 		<a class="sr-only" href="#content"><?= $this->transEsc('Skip to content') ?></a>
-		<div class="navbar header">
-	
-			<div class="header-left">
-				<div class="core-menu">
-					<div class="core-menu-items">
-						<?= $this->render('cms/header-menu.php') ?>
-					</div>
-					<a class="core-menu-brand" href="<?= $this->basicUri('') ?>" title="<?= $this->transEsc('Home page') ?>"><img src="<?= $this->HOST ?>/themes/default/images/<?= $this->settings->www->logo?>" alt="<?= $this->settings->www->title ?>"><span class="sr-only"><?= $this->transEsc('Literary Bibliography Research Infrastructure') ?></span></a>
+		
+		<div class="header2">
+			<div class="header2-left">
+				<a class="header2-brand" href="<?= $this->basicUri('/') ?>" title="<?= $this->transEsc('Home page') ?>"><img src="<?= $this->HOST ?>/themes/<?= $this->configJson->settings->www->theme ?>/images/<?= $this->configJson->settings->www->logo ?>" alt="logo Libri"><span class="sr-only"><?= $this->transEsc('Literary Bibliography Research Infrastructure') ?></span></a>
+				<div class="core-menu-items">
+					<?= $this->render('cms/header-menu.php') ?>
 				</div>
 			</div>
-  
-			<div class="header-right" id="header-collapse">
-				<nav>
-				
+			<div class="header2-middle">
+				<?php 
+				if ($this->templatesExists("searchBoxes/$currentCore-searchbox.php", ['currentCore'=> $currentCore]))
+					echo $this->render("searchBoxes/$currentCore-searchbox.php", ['currentCore'=> $currentCore]); 
+					else 
+					echo $this->render("searchBoxes/default-searchbox.php", ['currentCore'=> $currentCore]);
+				?>
+			</div>
+			<div class="header2-right">
+							<nav>
 					<?php if (empty($this->user->LoggedIn)): ?>
-						
 						<div id="loginOptions" class="userBox">
 							<div class="userBox-toggle">
 								<a OnClick="coreMenu.Show();$('.userBox-menu').hide();" ><i class="ph-list-bold"></i><span class="sr-only">menu</span></a>
@@ -118,23 +120,10 @@ $myListCount = $this->buffer->myListCount();
 							</div>
 						</div>
 					<?php endif; ?>
-						
-	
 				</nav>
-				
-				
 			</div>
-  
-			<div class="header-body">
-				<?php 
-				if ($this->templatesExists("searchBoxes/$currentSE-searchbox.php"))
-					echo $this->render("searchBoxes/$currentSE-searchbox.php") 
-				?>
-			</div> 
-
-  
-
 		</div>
+		
 	</header>
 	<div class="breadcrumbs"></div>
 	<div class="bg-off" OnClick="coreMenu.Hide(); $('.userBox-menu').hide();"></div>

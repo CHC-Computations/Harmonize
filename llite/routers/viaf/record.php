@@ -1,19 +1,19 @@
 <?php
 if (empty($this)) die;
-require_once('functions/klasa.maps.php');
-require_once('functions/klasa.persons.php');
-require_once('functions/klasa.places.php');
-require_once('functions/klasa.wikidata.php');
+require_once('functions/class.maps.php');
+require_once('functions/class.persons.php');
+require_once('functions/class.places.php');
+require_once('functions/class.wikidata.php');
 
 
 $wikiId = $this->routeParam[0];
 $wikiIdInt = substr($wikiId,1);
 $this->clearGET();
 
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('buffer', 	new buffer()); 
 $this->addClass('helper', 	new helper()); 
 $this->addClass('maps', 	new maps()); 
-$this->addClass('solr', 	new solr($this->config));  
+$this->addClass('solr', 	new solr($this));  
 $this->addClass('wiki', 	new wikidata($wikiId)); 
 
 $this->buffer->setSQL($this->sql);
@@ -72,7 +72,7 @@ switch ($this->wiki->recType()) {
 				foreach ($results['subject_person_str_mv'] as $person=>$count) {
 					if ($person<>$activePerson->solr_str) {
 						$AP = personFromStr($person, 'as_topic', $count);
-						$AP->bottomLink = $this->buildUri('search/results/1/r/'.$this->buffer->createFacetsCode($this->sql, ["author_facet:\"{$activePerson->solr_str}\"", "subject_person_str_mv:\"{$AP->solr_str}\""]));
+						$AP->bottomLink = $this->buildUri('search/results/1/r/'.$this->buffer->createFacetsCode(["author_facet:\"{$activePerson->solr_str}\"", "subject_person_str_mv:\"{$AP->solr_str}\""]));
 						$AP->bottomStr = $this->transEsc('Go to bibliographic records');
 						$heWroteAbout[] = $AP;
 						}
@@ -85,7 +85,7 @@ switch ($this->wiki->recType()) {
 				foreach ($results['author_facet'] as $person=>$count) {
 					if ($person<>$activePerson->solr_str) {
 						$AP = personFromStr($person, 'as_author', $count);
-						$AP->bottomLink = $this->buildUri('search/results/1/r/'.$this->buffer->createFacetsCode($this->sql, ["subject_person_str_mv:\"{$activePerson->solr_str}\"", "author_facet:\"{$AP->solr_str}\""]));
+						$AP->bottomLink = $this->buildUri('search/results/1/r/'.$this->buffer->createFacetsCode(["subject_person_str_mv:\"{$activePerson->solr_str}\"", "author_facet:\"{$AP->solr_str}\""]));
 						$AP->bottomStr = $this->transEsc('Go to bibliographic records');
 						$theyWroteAbout[] = $AP;
 						}

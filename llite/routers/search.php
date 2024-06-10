@@ -1,20 +1,19 @@
 <?php 
 if (empty($this)) die;
 
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.forms.php');
-require_once('functions/klasa.converter.php');
+require_once('functions/class.helper.php');
+require_once('functions/class.forms.php');
+require_once('functions/class.converter.php');
 
-$this->addClass('buffer', 	new marcBuffer()); 
-$this->addClass('solr', 	new solr($this->settings)); 
-$this->addClass('helper', 	new helper()); 
-$this->addClass('forms', 	new forms()); 
-$this->addClass('convert', 	new converter());
+$this->addClass('buffer', 	new marcBuffer($this)); 
+$this->addClass('solr', 	new solr($this)); 
+$this->addClass('helper', 	new helper($this)); 
+$this->addClass('forms', 	new forms($this)); 
+$this->addClass('convert', 	new converter($this));
 
 
 if ($this->getCurrentPage()<100) {
 
-	$this->buffer->setSql($this->sql);
 	$this->forms->values($this->GET);
 
 	if (!empty($this->GET['limit']))
@@ -93,7 +92,7 @@ if ($this->getCurrentPage()<100) {
 				'value' => $this->solr->advandedSearch($this->GET['sj'])
 				];
 		} else 
-		$query['q'] = $this->solr->lookFor($lookfor, $type );			
+		$query['q'] = $this->solr->lookFor($lookfor, $type );		
 			
 	$query['facet']=[ 
 				'field' => 'facet',
@@ -110,6 +109,12 @@ if ($this->getCurrentPage()<100) {
 			'field' => 'start',
 			'value' => $this->getCurrentPage()*$this->getUserParam('limit') - $this->getUserParam('limit')
 			];		
+	
+	$query['q.op']=[ 
+			'field' => 'q.op',
+			'value' => 'OR'
+			];
+	
 	/*		
 	$query[]=[ 
 			'field' => 'hl',
@@ -140,6 +145,8 @@ if ($this->getCurrentPage()<100) {
 	#$_SESSION['curr_results'] = $results;
 	#$_SESSION['last_search'] = $this->selfUrl();
 
+	if (!empty($lookfor))
+		$this->buffer->saveSearch('biblio', $lookfor);
 
 	} else {
 	$results = new stdClass;

@@ -1,13 +1,13 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
+require_once('functions/class.helper.php');
 
 $export = $this->getConfig('export');
 $facets = $this->getConfig('search');
 $facets = $this->getConfig('facets');
 
-$this->addClass('buffer', 	new marcBuffer()); 
-$this->addClass('solr', 	new solr($this->config)); 
+$this->addClass('buffer', 	new buffer()); 
+$this->addClass('solr', 	new solr($this)); 
 $this->addClass('helper', 	new helper()); 
 
 

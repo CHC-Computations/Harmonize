@@ -1,73 +1,157 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.maps.php');
-$this->addClass('helper', new helper()); 
-$this->addClass('maps',	new maps()); 
+require_once('functions/class.helper.php');
+require_once('functions/class.maps.php');
 
-$bufferFileName = './files/maps/'.$this->langCode.'-fullMap.js';
+$marcRecord = false;
+$this->addClass('buffer', new buffer()); 
+$this->addClass('helper', 	new helper()); 
+$this->addClass('maps', 	new maps()); 
+$this->addClass('solr', 	new solr($this)); 
 
-$addStr = '';
-if (count($this->GET)>0) {
-	foreach ($this->GET as $k=>$v)
-		$parts[]= $k.'='.$v;
-	$addStr = implode('&', $parts);	
-	} 
 
-$WAR = "lon IS NOT NULL AND lat IS NOT NULL AND wikiq IS NOT NULL";
+$currentCore = 'places';
 
-// ?q=*:*&q.op=OR&indent=true&fq=latitiude:[51 TO 53]&fq=longitiude:[15 TO 23]&sort=total_count desc
 
-if (!empty ($this->GET['lookfor'])) {
-	$sstring = $this->urlName2($this->GET['lookfor']);
-	$WAR .= " AND sstring ILIKE '%{$sstring}%'";
-	}
+if (!empty($this->configJson->$currentCore)) {
+	if (!empty($this->configJson->$currentCore->title))
+		$title = $this->configJson->$currentCore->title;
+		else 
+		$title = $this->configJson->$currentCore->title = UcFirst($currentCore);
 
-	###########################################################################################################################################
-	##
-	##										FIRST STEP
-	##
-	###########################################################################################################################################
+	require_once('functions/class.wikidata.php');
+	require_once('functions/class.wikidata.libri.php');
 	
-$t = $this->psql->querySelect($Q = "SELECT count(*) as recsum, max(subjecthits+pubplacehits+personhits) as recmax FROM places_on_map WHERE $WAR;");
-if (is_array($t)) {
-	$res = current($t);
-	$recSum = $res['recsum'];
-	$recMax = $res['recmax'];
-		
-	###########################################################################################################################################
-	##
-	##										Drawing points 
-	##
-	###########################################################################################################################################
-	$step = 100;
+	$this->setTitle($this->transEsc($title));
+
+	$this->addClass('buffer', 		new buffer()); 
+	$this->addClass('helper', 		new helper()); 
+	$this->addClass('solr', 		new solr($this)); 
 	
-	$colorTop = '#f3984e';
-	$colorMiddle = '#f0cc41';
-	$colorBottom = '#88d167';
+	$this->configJson->$currentCore->default_view = $this->configJson->$currentCore->default_view ?? 'default-box';
+	if (!empty($this->GET['view']))
+		$this->saveUserParam('view',$this->GET['view']);
+		else if (empty($this->getUserParam('view')))
+		$this->saveUserParam('view', $this->configJson->$currentCore->default_view);
 	
-	// meybe usefull? https://github.com/moravcik/Leaflet.TextIcon
+	if (!empty($this->GET['limit']))
+		$this->saveUserParam('limit',$this->GET['limit']);
+		else if (empty($this->getUserParam('limit')))
+		$this->saveUserParam('limit', $this->configIni['search']['pagination']['default_rpp']);
+
+
 	
-	$PlaceCircleBasic = "color: '#76679B', fillColor: '#5F3D8D', weight: 2, fillOpacity: 0.5";
-	$PlaceCircleHover = "color: 'red', fillColor: 'yellow', weight: 1, fillOpacity: 0.5";
-	$emptyStr = ''; //$this->transEsc('Point on map to see details');
-		
-	$t = $this->psql->querySelect("SELECT DISTINCT *, (subjecthits+pubplacehits+personhits) as totalhits FROM places_on_map WHERE $WAR ORDER BY totalhits DESC LIMIT $step;"); 
-	if (is_array($t)) {
-		$lp = 0;
-		$partCount = count($t);
-		$last = end($t);
-		$recMin = $last['totalhits'];
-		
-		$colStep = ($recMax-$recMin)/3;
-		$col1 = $recMax-$colStep;
-		$col2 = $recMin+$colStep;
-		
-		foreach ($t as $res) {
+	if (!empty($this->routeParam[3])) {
+		$this->facetsCode = $this->routeParam[3];	
+		$query[] = $this->buffer->getFacets( $this->facetsCode);	
+		} else 
+		$this->facetsCode = 'null';	
+
+	$lookfor = $this->postParam('lookfor');
+	if (empty($lookFor) && !empty($this->GET['lookfor'])) {
+		$lookfor = $this->GET['lookfor'];
+		$query['q']=[ 
+				'field' => 'q',
+				'value' => $lookfor
+				];
+		} else 
+		$query['q']=[ 
+				'field' => 'q',
+				'value' => '*:*'
+				];
+
+	if (!empty($this->routeParam[2])) 
+		$this->sortCode = $this->routeParam[2]; 
+		else 
+		$this->sortCode = 'bc';
+	if (!empty($this->configJson->$currentCore->sorting->{$this->sortCode}->solrField)) {
+		$query['sort']=[ 
+			'field' => 'sort',
+			'value' => $this->configJson->$currentCore->sorting->{$this->sortCode}->solrField
+			];
+		} else {
+		$this->sortCode = 'bc';
+		$query['sort']=[ 
+			'field' => 'sort',
+			'value' => 'biblio_count desc'
+			];
+		}
+
+
+	$query['facet']=[ 
+				'field' => 'facet',
+				'value' => 'true'
+				];
+	$query['facet.limit']=[ 
+				'field' => 'facet.limit',
+				'value' => 6
+				];
+	$query['facet.mincount ']=[ 
+				'field' => 'facet.mincount',
+				'value' => 1
+				];
+
+	foreach ($this->configJson->$currentCore->facets->facetsMenu as $facetField) {
+		if (!empty($facetField->template) && ($facetField->template == 'timeGraph'))
+			$query['facet.offset'.$facetField->solr_index]=[ 
+					'field' => 'f.'.$facetField->solr_index.'.facet.limit', // keeping offset only on first field
+					'value' => 9999
+					];
+		$query[]=[ 
+					'field' => 'facet.field',
+					'value' => $facetField->solr_index
+					];
+		}
+	 
+	$query['rows']=[ 
+			'field' => 'rows',
+			'value' => 50
+			];
 			
-			############################################################ adding point to map
+	if (!empty($this->getCurrentPage()>1))
+		$query[]=[ 
+			'field' => 'start',
+			'value' => $this->getCurrentPage()*$this->getUserParam('limit') - $this->getUserParam('limit')
+			];		
+
+	$times = [];
+	$results = $this->solr->getQuery($currentCore, $query); 
+	$results = $this->solr->resultsList();
+	$facets = $this->solr->facetsList();
+	$totalResults = $recSum = $this->solr->totalResults();
+
+	if ($recSum > 0) {
+		$first = current($results);
+		$recMax = $first->biblio_count;
+		$last = end($results);
+		$recMin = $last->biblio_count;
+			
+		###########################################################################################################################################
+		##
+		##										Drawing points 
+		##
+		###########################################################################################################################################
+		
+		$colorTop = '#f3984e';
+		$colorMiddle = '#f0cc41';
+		$colorBottom = '#88d167';
+		
+		$rolesFields = [
+				'publication_place_count'=>'Publication place',
+				'subject_place_count'=>'Subject place',
+				'event_place_count'=>'Event place',
+				'person_place_count' => 'Person place'
+				];
+		
+		// meybe usefull? https://github.com/moravcik/Leaflet.TextIcon
+		
+		$PlaceCircleBasic = "color: '#76679B', fillColor: '#5F3D8D', weight: 2, fillOpacity: 0.5";
+		$PlaceCircleHover = "color: 'red', fillColor: 'yellow', weight: 1, fillOpacity: 0.5";
+		$emptyStr = ''; //$this->transEsc('Point on map to see details');
+		
+		$lp = 0;
+		foreach ($results as $place) {
 			$lp++;
-			$place = $res;
 			$pjs = [];
 			
 			$icon = 'SBottom';
@@ -75,26 +159,35 @@ if (is_array($t)) {
 			if ($lp<6) { $label = 'Middle'; $icon = 'None'; }
 			if ($lp<3) { $label = 'Top'; $icon = 'None'; }
 			
-			$tlat[] = $place['lat'];
-			$tlon[] = $place['lon'];
+			$tlat[] = $place->latitiude;
+			$tlon[] = $place->longitiude;
 			
-			$wikiName = $this->helper->formatWiki($res['wikiq']);
-			$place['link'] = "<h3><a href='{$this->buildUrl('wiki/record/Q'.$res['wikiq'])}'>$wikiName</a></h3>";
-			#if (!empty($res['names'])) 	$place['link'] .= $this->transEsc('Other names: ').$res['names'].'<br/><br/>';
-			$place['link'] .= $this->transEsc('Exists as').':<br/>';
-			$place['link'] .= $this->transEsc('Subject place').': '.$res['subjecthits'].'<br/>';
-			$place['link'] .= $this->transEsc('Publication place').': '.$res['pubplacehits'].'<br/>';
-			$place['link'] .= $this->transEsc('Person place').': '.$res['personhits'].'<br/>';
-			$key = $res['wikiq'];
+			$placeWiki = new wikiLibri($this->userLang, $place);
+			$wikiName = $placeWiki->getStr('labels');
 			
-			$pjs[] = "var smarker_$res[wikiq] = L.marker([$place[lat], $place[lon]], {icon: Circle$icon }); ";
-			$pjs[] = "smarker_$res[wikiq].addTo(map);";
-			if ($lp<10) $pjs[] = "smarker_$res[wikiq].bindTooltip('".$this->helper->badgeFormat($place['totalhits'])."' , {permanent: true, direction: 'center', className: 'label-{$label}' });";
-			$pjs[] = "smarker_$res[wikiq].on({click: function () { $('#poitedDet').html(\"$place[link]\");	}});";
-			$pjs[] = "smarker_$res[wikiq].bindPopup(\"{$place['link']}\")";
+			if (!empty($placeWiki->solrRecord->picture))
+				$place->link = "<div class='box-Image'><img div class='box-img-exists' style='background-image: url({$this->buffer->convertPicturePath(current($placeWiki->solrRecord->picture), 'small')});'></div></div>";
+				else 
+				$place->link = '';
+			
+			$place->link .= "<h3><a href='{$this->buildUrl('wiki/record/'.$place->wikiq)}'>{$wikiName}</a></h3>";
+			$place->link .= '<p>'.$placeWiki->getStr('descriptions').'</p>';
+			
+			foreach ($rolesFields as $roleField => $roleName)
+				if (!empty($place->$roleField)) $place->link .= $this->transEsc($roleName).': '.$place->$roleField.'<br/>';
+			$key = $place->wikiq;
+			
+			$pjs[] = "var smarker_$key = L.marker([$place->latitiude, $place->longitiude], {icon: Circle$icon }); ";
+			$pjs[] = "smarker_$key.addTo(map);";
+			if ($lp<10) $pjs[] = "smarker_$key.bindTooltip('".$this->helper->badgeFormat($place->biblio_count)."' , {permanent: true, direction: 'center', className: 'label-{$label}' });";
+			$pjs[] = "smarker_$key.on({click: function () { $('#poitedDet').html(\"$place->link\");	}});";
+			$pjs[] = "smarker_$key.bindPopup(\"{$place->link}\")";
 			$js[] = implode("\n", $pjs);
 			}
 		
+
+		
+		$addStr = http_build_query($this->GET);
 		$lon['min'] = min($tlon);
 		$lat['min'] = min($tlat);
 		$lon['max'] = max($tlon);
@@ -103,7 +196,7 @@ if (is_array($t)) {
 		$js[] = "$('#mapStartZoom').val(map.getZoom());";
 		# $js[] = "map.on('zoomend', function() { $('#mapLastAction').html('zoom end'); });";
 		$js[] = "map.on('moveend', function() { 
-					// page.ajax('ajaxBox','wiki/places.show.on.map?$addStr&N='+map.getBounds().getNorth()+'S='+map.getBounds().getSouth()+'W='+map.getBounds().getWest()+'E='+map.getBounds().getEast());
+					//page.ajax('ajaxBox','wiki/maps.show.places?$addStr&N='+map.getBounds().getNorth()+'&S='+map.getBounds().getSouth()+'&W='+map.getBounds().getWest()+'&E='+map.getBounds().getEast());
 					$('#mapBoundN').val(map.getBounds().getNorth());
 					$('#mapBoundS').val(map.getBounds().getSouth());
 					$('#mapBoundE').val(map.getBounds().getEast());
@@ -113,10 +206,11 @@ if (is_array($t)) {
 					});";
 		$this->addJS(implode("\n", $js));	
 
-		$t = $this->psql->querySelect($Q = "SELECT sum(subjecthits) as subjects, sum(pubplacehits) as pubplaces, sum(personhits) as personplaces  FROM places_on_map WHERE $WAR;");
+			
 		
 		$OMO = "$('#poitedDet').html(this.title);";
 		$sums = '<div style="margin-top:10px; margin-bottom:10px; width:100%; text-align:center;"><div class="btn-group">';
+		/*
 		if (is_array($t)) {
 			$res = current($t);
 			$sums .= '<button class="btn btn-xs" OnMouseOver="'.$OMO.'" OnMouseOut="$(\'#poitedDet\').html(\'\');" title="'.$this->transEsc('Subject places shown on the map').'"><i class="ph-notebook-bold"></i> '.$this->helper->numberFormat($res['subjects']).'</button>';
@@ -124,17 +218,19 @@ if (is_array($t)) {
 			$sums .= '<button class="btn btn-xs" OnMouseOver="'.$OMO.'" OnMouseOut="$(\'#poitedDet\').html(\'\');" title="'.$this->transEsc('Places of birth or death of persons appearing in the bibliography').'"><i class="ph-person-simple-bold"></i> '.$this->helper->numberFormat($res['personplaces']).'</button>';
 			
 			}
+		*/	
 		$sums.="</div></div>";
 		
 		echo '<div class="detailsview">';
-		echo '<dl class="detailsview-item"><dt class="dv-label">'.$this->transEsc("Total results").':</dt><dd class="dv-value"><strong>'.$this->helper->numberFormat($recSum).'</strong></dd></dl>';
+		echo '<dl class="detailsview-item"><dt class="dv-label">'.$this->transEsc("Total results").':</dt><dd class="dv-value"><strong>'.$this->helper->numberFormat($totalResults).'</strong></dd></dl>';
 		echo '<dl class="detailsview-item"><dt class="dv-label">'.$this->transEsc("Shown on map").':</dt><dd class="dv-value"><strong id="mapMovedActions">'.$this->helper->numberFormat($lp).'</strong></dd></dl>';
 		echo '</div>';
 		echo $sums;
 		#echo $this->transEsc("Max publications/point").": <strong>".$this->helper->numberFormat($pmax).'</strong><br/>';
 		echo "<div id='poitedDet'>".$emptyStr."</div>";
+		
 		echo '
-			<div id="mapLastAction" class="text-center" style="display:none;">
+			<div id="mapLastAction" class="text-center" >
 				<hr><small>The part below will disappear when I`m done with it</small><br/>
 				N: <input id="mapBoundN"><br/>
 				S: <input id="mapBoundS"><br/>
@@ -144,19 +240,9 @@ if (is_array($t)) {
 				Z: <input id="mapZoom"><br/>
 				<button class="btn btn-success" type="button" OnClick="results.maps.moved('.$recSum.', '.$lp.');"><i class="ph-bold ph-map-pin"></i> Reload</button>
 			</div>';
-				
+		
+		
 		}
-		
-		
-		
-	} else {
-	echo $this->tranEsc('No results');	
 	}
-		
 	
-	
-
-	
-
-
 ?>

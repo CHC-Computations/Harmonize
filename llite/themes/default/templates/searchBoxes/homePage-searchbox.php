@@ -12,7 +12,7 @@ if (!empty($this->GET['lookfor']))
 
 
 <nav class="nav searchbox hidden-print" id="search-collapse">
-	<form id="searchForm" class="searchForm" method="get" action="<?= $this->buildUrl('/search/results') ?>" name="searchForm" autocomplete="off">
+	<form id="searchForm" class="searchForm" method="get" action="<?= $this->buildUrl('results', ['core'=>'biblio']) ?>" name="searchForm" autocomplete="off">
 		<div class="searchInput" id="searchInput">
 			<div class="searchInputMain"><input id="searchForm_lookfor" class="search-query autocomplete ac-auto-submit" required type="text" name="lookfor" value="<?= $this->getParam('GET','lookfor')?>"  aria-label="Hasła" placeholder="<?= $this->transEsc('Search for') ?>..."/></div>
 			<?= $cleanLink ?>

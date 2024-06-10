@@ -1,9 +1,9 @@
 <?php 
 if (empty($this)) die;
-	require_once('functions/klasa.buffer.php');
-	require_once('functions/klasa.places.php');
-	$this->addClass('solr', new solr($this->config));
-	$this->addClass('buffer', new marcBuffer());
+	require_once('functions/class.buffer.php');
+	require_once('functions/class.places.php');
+	$this->addClass('solr', new solr($this));
+	$this->addClass('buffer', new buffer());
 	$this->buffer->setSQL($this->sql);
 	$this->addClass('places', new places($this->sql));
 

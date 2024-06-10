@@ -1,250 +1,107 @@
 <?php
 if (empty($this)) die;
-require_once('functions/klasa.maps.php');
-require_once('functions/klasa.persons.php');
-require_once('functions/klasa.places.php');
-require_once('functions/klasa.wikidata.libri.php');
-require_once('functions/klasa.wikidata.php');
+require_once('functions/class.maps.php');
+require_once('functions/class.wikidata.libri.php');
+require_once('functions/class.wikidata.php');
+#require_once('functions/class.wikiDataCores.php');
+require_once('functions/class.viafSearcher.php');
 
+$wikiq = $this->routeParam[0];
+$recTypeExpected = $this->routeParam[1] ?? null;
+if (!empty($this->routeParam[2]) && ($this->routeParam[2]=='reload'))
+	$refreshRecord = true;
+	else 
+	$refreshRecord = true;	
 
-$wikiId = $this->routeParam[0];
-$wikiIdInt = substr($wikiId,1);
+$wikiIdInt = substr($wikiq,1);
 $this->clearGET();
 
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('buffer', 	new buffer()); 
 $this->addClass('helper', 	new helper()); 
 $this->addClass('maps', 	new maps()); 
-$this->addClass('solr', 	new solr($this->config));  
-$this->addClass('wiki', 	new wikidata($wikiId)); 
+$this->addClass('solr', 	new solr($this));  
+$this->addClass('wiki', 	new wikidata($this)); 
+$this->addClass('wikiRec', 	new wikidata($this)); 
+$this->addClass('viafSearcher', new viafSearcher($this)); 
+#$this->addClass('wikiDataCores',	new wikiDataCores($this));
 
-$this->buffer->setSQL($this->sql);
-$this->wiki->setUserLang($this->user->lang['userLang']);
+$this->wiki->loadRecord($wikiq, $refreshRecord);
+$recType = $this->wiki->recType();
+$recCore = $recType.'s';
+$coreRecord = $this->solr->getWikiRecord($recCore, $wikiq);
+$this->addClass('coreRecord', new wikiLibri($this->userLang, $coreRecord));
+#echo $this->helper->pre($this->wiki->labels);
+
+$this->setTitle($this->wiki->get('labels').' | '.$this->transEsc($recType));
+
+# echo '<h1>record</h1>'.$this->helper->pre($this->wiki->record);
+# echo '<h1>solrRecord</h1>'.$this->helper->pre($this->wiki->solrRecord);
+$dataQualityStr = $this->render('wiki/tab-dataQuality.php');
 
 
-$photo = $this->buffer->loadWikiMediaUrl($this->wiki->getStrVal('P18'));
-$audio = $this->buffer->loadWikiMediaUrl($this->wiki->getStrVal('P443'));
+$query = [];
+$query['q'] 			= ['field' => 'q',				'value' => '*:*' ];
+$query['facet'] 		= ['field' => 'facet',			'value' => 'true'];
+$query['facet.field'] 	= ['field' => 'facet.field',	'value' => 'with_roles_wiki'];		
+$query['facet.limit']	= ['field' => 'facet.limit',	'value' => 9999 ];
+$query['facet.prefix']	= ['field' => 'facet.prefix', 	'value' => $wikiq.'|' ];
+$this->solr->getQuery('biblio', $query); 
+$results = $this->solr->resultsList();
+$facets = $this->solr->facetsList();		
+# $bibliographicalStatistics  = $this->render('wiki/tab-bibliographicalStatistics .php', ['recCore'=>$recCore, 'wikiq'=>$wikiq]);
+# $comparisonOfRolesInBibliography = $this->render('wiki/tab-comparisonOfRolesInBibliography.php', ['recCore'=>$recCore, 'wikiq'=>$wikiq]);
+		
 
-$this->setTitle($this->wiki->get('labels'));
 
+$tabsToShow = (object)[
+				'map' => true,
+				'bibliographicalStatistics' => true,
+				'comparisonOfRolesInBibliography' => true,
+				'related' => true,
+				'dataQuality' => true,
+				];
+$params = [ 
+			'recType' => $recType,
+			'tabsToShow' => $tabsToShow,
+			'bibliographicalStatistics' => '', //$bibliographicalStatistics, 
+			'comparisonOfRolesInBibliography' => '', //$comparisonOfRolesInBibliography, 
+			'dataQualityStr' => $dataQualityStr
+			];
 
-function personFromStr($str, $field, $count) {
-	$rec = explode('|', $str); 
-	$desc['name'] = $rec[0];
-	$desc['year_born'] = $rec[1];
-	$desc['year_death'] = $rec[2];
-	$desc['viaf_id'] = $rec[3];
-	$desc['wikiq'] = trim($rec[4]);
-	$desc['date'] = trim($rec[5]);
-	$desc['solr_str'] = $str;
-	if (!empty($desc['wikiq'])) {
-		$desc['field'] = "personBoxQ".$desc['wikiq'];
-		} else {
-		$desc['field'] = "personBoxB".hash('crc32b',$desc['name'].$desc['date']);	
-		}
-	$desc[$field] = $count;
-	return (object)$desc;
-	}
-
-$stat = [];
-switch ($this->wiki->recType()) {
+switch ($recType) {
 	case 'person' :
 			$rec_id = $this->wiki->getViafId();
-			$this->addClass('person', 	new wikiLibri($this->user->lang['userLang'], $this->solr->getRecord('persons',$wikiId))); 
-						
-			$corporates = 
-			$heWroteAbout =
-			$theyWroteAbout = [];
-			$statFields = $this->getIniParam('persons','statList','statFields');
-			
-			$activePerson = $this->person->getActivePersonValues();
-			
-			$stats = [];
-			
-			$query['q'] = ['field' => 'q', 'value' => 'author_facet:"'.$activePerson->solr_str.'"'];
-			$query['limit'] = ['field' => 'facet.limit', 'value' => 100];
-			$results = $this->solr->getFacets('biblio', ['subject_person_str_mv'], $query);
-			if (!empty($results['subject_person_str_mv'])) {
-				foreach ($results['subject_person_str_mv'] as $person=>$count) {
-					if ($person<>$activePerson->solr_str) {
-						$AP = personFromStr($person, 'as_topic', $count);
-						$AP->bottomLink = $this->buildUri('search/results/1/r/'.$this->buffer->createFacetsCode($this->sql, ["author_facet:\"{$activePerson->solr_str}\"", "subject_person_str_mv:\"{$AP->solr_str}\""]));
-						$AP->bottomStr = $this->transEsc('Go to bibliographic records');
-						$heWroteAbout[] = $AP;
-						}
-					}
-				}
-			
-			$query['q'] = ['field' => 'q', 'value' => 'subject_person_str_mv:"'.$activePerson->solr_str.'"'];
-			$results = $this->solr->getFacets('biblio', ['author_facet'], $query);
-			if (!empty($results['author_facet'])) {
-				foreach ($results['author_facet'] as $person=>$count) {
-					if ($person<>$activePerson->solr_str) {
-						$AP = personFromStr($person, 'as_author', $count);
-						$AP->bottomLink = $this->buildUri('search/results/1/r/'.$this->buffer->createFacetsCode($this->sql, ["subject_person_str_mv:\"{$activePerson->solr_str}\"", "author_facet:\"{$AP->solr_str}\""]));
-						$AP->bottomStr = $this->transEsc('Go to bibliographic records');
-						$theyWroteAbout[] = $AP;
-						}
-					}
-				}
-			# echo $this->helper->pre($activePerson);
-			
-			$query['q'] = ['field' => 'q', 'value' => 'persons_wiki_str_mv:"'.$wikiIdInt.'"'];
-			$results = $this->solr->getFacets('biblio', ['corporate_wiki'], $query);
-			if (!empty($results['corporate_wiki'])) {
-				foreach ($results['corporate_wiki'] as $corporate=>$count) {
-					$AC = new stdClass;
-					$AC->wiki = 'Q'.$corporate;
-					$AC->wikiq = $corporate;
-					$AC->bottomLink = $this->buildUri('search/results/1/r/'.$this->buffer->createFacetsCode($this->sql, ["persons_wiki_str_mv:\"{$wikiIdInt}\"", "corporate_wiki:\"{$corporate}\""]));
-					$AC->bottomStr = $this->transEsc('Go to bibliographic records');
-					$AC->bottomCount = $count;
-					$corporates[] = $AC;
-					}
-				}
-			
-			
-			
-			$query['q'] = ['field' => 'q', 'value' => 'author_wiki:"'.$wikiIdInt.'"'];
-			$query['limit'] = ['field' => 'facet.limit', 'value' => 6];
-			$stats['author_wiki'] = $this->solr->getFacets('biblio', $statFields, $query);
-			
-			$query['q'] = ['field' => 'q', 'value' => 'coauthor_wiki:"'.$wikiIdInt.'"'];
-			$stats['coauthor_wiki'] = $this->solr->getFacets('biblio', $statFields, $query);
-			
-			$query['q'] = ['field' => 'q', 'value' => 'subject_person_wiki:"'.$wikiIdInt.'"'];
-			$stats['subject_person_wiki'] = $this->solr->getFacets('biblio', $statFields, $query);
-			
-				 
-					
-	
-			$stat = $this->solr->getStats(
-								'biblio',
-								[$wikiIdInt], 
-								['persons_wiki_str_mv'],
-								$this->getIniParam('persons','statList','statFields')
-								);	
-			
 			$renderer = 'wiki/fullcard-person.php';
-			$params = [ 
-					'photo'=>$photo, 
-					'audio'=>$audio, 
-					'stat'=>$stat, 
-					'compareStats'=>$stats, 
-					'activePerson'=>$activePerson, 
-					'heWroteAbout' => $heWroteAbout, 
-					'theyWroteAbout' => $theyWroteAbout,
-					'relatedCorporates' => $corporates
-					];
 			break;
 	
-	case 'institution' :
-
-			$statFields = $this->getIniParam('institutions','statList','statFields');
-			$activeInstitution = $this->wiki->getActivePersonValues();
-			
-			$stats = [];
-			$relatedPersons = [];
-			
-			$query['q'] = ['field' => 'q', 'value' => 'corporate_wiki:"'.$wikiIdInt.'"'];
-			$query['limit'] = ['field' => 'facet.limit', 'value' => 100];
-			$query['sort'] = ['field' => 'facet.sort', 'value' => 'count'];
-			$results = $this->solr->getFacets('biblio', ['persons_str_mv'], $query);
-			if (!empty($results['persons_str_mv'])) {
-				foreach ($results['persons_str_mv'] as $person=>$count) {
-					$AP = personFromStr($person, 'totalSharedRecords', $count);
-					$AP->bottomLink = $this->buildUri('search/results/1/r/'.$this->buffer->createFacetsCode($this->sql, ["corporate_wiki:\"{$wikiIdInt}\"", "persons_str_mv:\"{$AP->solr_str}\""]));
-					$AP->bottomStr = $this->transEsc('Shared bibliographic records');
-					$relatedPersons[] = $AP;
-					}
-				}
-			
-			$fields = ['corporate_author_wiki', 'corporate_subject_wiki', 'corporate_publisher_wiki'];
-			$query['limit'] = ['field' => 'facet.limit', 'value' => 6];
-			foreach ($fields as $field) {
-				$query['q'] = ['field' => 'q', 'value' => $field.':"'.$wikiIdInt.'"'];
-				$stats[$field] = $this->solr->getFacets('biblio', $statFields, $query);
-				}
-			
-			$stat = $this->solr->getStats(
-								'biblio',
-								[$wikiIdInt], 
-								['corporate_wiki'],
-								$this->getIniParam('persons','statList','statFields')
-								);	
-			
-			$renderer = 'wiki/fullcard-institution.php';
-			$params = [ 'photo'=>$photo, 'audio'=>$audio, 'stat'=>$stat, 'compareStats'=>$stats, 'activeInstitution'=>$activeInstitution, 'relatedPersons'=>$relatedPersons ];
+	case 'corporate' :
+			$renderer = 'wiki/fullcard-corporate.php';
 			break;
 			
 	case 'place' : 
-			
-			$t = $this->psql->querySelect("SELECT name FROM places_wiki WHERE wiki='$wikiIdInt' ORDER BY subjecthits DESC;");
-			if (is_array($t)) {
-				foreach ($t as $line) 
-					$biblioNames[] = $line['name'];
-				}
-			if (empty($biblioNames))
-				$biblioNames[] = $this->wiki->get('labels');
-			
-			$stat = $this->solr->getStats(
-							'biblio',
-							[$wikiIdInt], 
-							['geowiki_str_mv'],
-							$this->getIniParam('places','statList','statFields')
-							);
-		
-			$popPersons = $this->psql->querySelect("
-						SELECT viaf_id, name, wikiq, year_born, year_death, place_born, place_death , rec_total, as_author, as_author2, as_topic, solr_str 
-							FROM persons WHERE place_born = '$wikiIdInt' OR place_death = '$wikiIdInt' ORDER BY rec_total DESC LIMIT 9;
-							");	
-			
-			$t = $this->psql->querySelect("SELECT count(*) FROM persons WHERE place_born = '$wikiIdInt' OR place_death = '$wikiIdInt';");	
-			if (is_array($t)) {
-				$popPersons['count'] = current($t);
-				$popPersons['count']['wikiq'] = $wikiIdInt;
-				}
+			require_once('functions/class.places.php');
 			$renderer = 'wiki/fullcard-place.php';
-			$params = [ 'photo'=>$photo, 'audio'=>$audio, 'stat'=>$stat, 'popPersons' => $popPersons ]; 
+			break;
+			
+	case 'magazine' : 
+			$renderer = 'wiki/fullcard-magazine.php';
+			break;
+			
+	case 'event' : 
+			$renderer = 'wiki/fullcard-event.php';
 			break;
 			
 	default :
-			$Tchecked = [];
-			$allNames = $this->wiki->getAllNames();
-			$names = explode(', ', $this->wiki->get('aliases'));
-			$names[] = $this->wiki->get('labels');
-			foreach ($names as $name) {
-				$clearName = $this->solr->clearStr($name);
-				if ($clearName<>'')
-					$Tnames[$clearName] = $clearName;
-				}
-			$Tnames = [];
-			if (!empty($allNames))
-				foreach($allNames as $name) {
-					$clearName = $this->solr->clearStr($name);
-					if ($clearName<>'')
-						$Tnames[$name] = $clearName;
-					}
-			$res = $this->solr->getFullList('topic');
-			if (!empty ($res->results))
-				foreach ($res->results as $word=>$count) {
-					$clearWord = $this->solr->clearStr($word);
-					if (in_array($clearWord, $Tnames) && (floatval($clearWord)==0)) {
-						$Tchecked[$word]=$count;
-						$Twords[$word] = $word;
-						}
-					}
-			if (!empty($Twords))
-				$stat = $this->solr->getStats(
-								'biblio',
-								$Twords, 
-								['allfields'], 
-								$this->getIniParam('persons','statList','statFields')
-								);	
-				else
-				$stat = [];
 			
 			$renderer = 'wiki/fullcard-subject.php';
-			$params = [ 'photo'=>$photo, 'audio'=>$audio, 'stat'=>$stat, 'names'=>$Tchecked, 'allNames'=>$allNames, 'res'=>$res];
+			$params = [ 
+					'recType' => $recType,
+					'tabsToShow' => $tabsToShow,
+					'stat'=>$stat, 'names'=>$Tchecked, 'allNames'=>$allNames, 'res'=>$res, 
+					'bibliographicalStatistics' => $bibliographicalStatistics, 
+					'comparisonOfRolesInBibliography' => $comparisonOfRolesInBibliography, 
+					'dataQualityStr' => $dataQualityStr
+					];
 			break;
 	}
 
@@ -252,7 +109,13 @@ switch ($this->wiki->recType()) {
 echo $this->render('head.php');
 echo $this->render('core/header.php');
 echo "<div class='main'>";
-echo $this->render($renderer, $params); 
+echo '<div class="graybox">';
+echo '<div class="infopage">';
+# echo "<h1>".$recType.'</h1>';
+echo $this->render($renderer, ['recType' => $recType]); 
+echo $this->render('wiki/tabPanels.php', $params); 
+echo "</div>";
+echo "</div>";
 echo "</div>";
 echo $this->render('core/footer.php');
 

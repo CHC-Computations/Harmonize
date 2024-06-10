@@ -1,6 +1,6 @@
 <?php
 if (empty($this)) die;
-require_once ('functions/klasa.forms.php');
+require_once ('functions/class.forms.php');
 $this->addClass('forms', new forms());
 
 

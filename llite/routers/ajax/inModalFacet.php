@@ -1,14 +1,13 @@
 <?php 
 if (empty($this)) die;
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', new helper()); 
-$this->addClass('solr', new solr($this->config)); 
+$this->addClass('solr', new solr($this)); 
 
-$this->buffer->setSql($this->sql);
 #echo "<prE>".print_r($this,1)."</pre>";
 
 
-$facets = $this->getConfig('facets');
+$facets = $this->configJson->biblio->facets->solrIndexes;
 
 
 $currAction=$this->routeParam[0];
@@ -16,8 +15,12 @@ $currFacet=$this->routeParam[1];
 $this->facetsCode = $this->routeParam[count($this->routeParam)-1];
 
 #echo 'facetCode: '.$this->facetsCode;
-$facetName = $facets['facetList'][$currFacet];
+$facetName = $facets->$currFacet->name ?? 'unknown label';
 $queryoptions=[];
+$queryoptions['q.op']=[ 
+			'field' => 'q.op',
+			'value' => 'OR'
+			];
 if (!empty ($this->GET['sort'])) {
 	$queryoptions[]=[ 
 				'field' => 'facet.sort',
@@ -75,7 +78,7 @@ if (!empty ($this->GET['remove'])) {
 
 switch ($currAction) {
 	case 'build' :
-			if (!empty($facets['facetList'][$currFacet])) {
+			if (!empty($facets->$currFacet)) {
 
 				switch ($currFacet) {
 					default: {
@@ -100,7 +103,7 @@ switch ($currAction) {
 				}
 		break;		
 	case 'search' : 			
-			if (!empty($facets['facetList'][$currFacet])) {
+			if (!empty($facets->$currFacet)) {
 				$results = $this->solr->getFacets('biblio', [$currFacet], $queryoptions);
 				if (empty($results[$currFacet])) 
 					echo $this->render('search/inmodal/no-results.php');

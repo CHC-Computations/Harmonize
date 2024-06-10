@@ -1,8 +1,8 @@
 <?php 
 if (empty($this)) die;
 $Trole = [];
-$this->addClass('buffer', 	new marcBuffer()); 
-$this->addClass('solr', 	new solr($this->config)); 
+$this->addClass('buffer', 	new buffer()); 
+$this->addClass('solr', 	new solr($this)); 
 
 $maks = $this->routeParam[0];
 $facet_code = $this->routeParam[1];

@@ -1,0 +1,9 @@
+{
+"page" : 1,
+"maxResults" : 99999,
+"maxLimit" : 100,
+"limit" : 10,
+"sort" : ["relevance", "title_sort asc", "title_sort desc", "author_sort asc", "author_sort desc", "last_indexed asc", "last_indexed desc"],
+"resultSize" : ["small", "extended"],
+"withFacets" : ["author_facet", "author2_facet", "author_corporate", "author_events_str_mv", "centuries_str_mv", "corporate_str_mv", "edition", "events_str_mv", "format_major", "genre_major", "genre_sub", "isbn", "issn", "language", "language_o_str_mv", "linked_resource", "linked_resource_id", "magazines_str_mv", "oclc_num", "publishDate", "publisher", "record_contains", "source_db_str", "source_db_sub_str", "source_file", "source_publication", "subject_ELB_str_mv", "subject_genre_str_mv", "subject_nation_str_mv", "subject_person_str_mv", "subjects_str_mv", "topic", "udccode_str_mv", "with_roles_wiki"]
+}

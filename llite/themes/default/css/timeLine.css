@@ -6,7 +6,7 @@
 	{
 	display:table-cell; 
 	}
-.line-time-year {text-align:right; color:#777; font-size:0.9em;}
+.line-time-year {text-align:right; color:#777; font-size:0.9em; width:150px; max-width:150px;}
 
 .line-time-point {width:30px; background-image: url('../images/extras/timeLine-Point.svg'); background-position:center; background-repeat: no-repeat; background-size: 30%;}
 .line-time-break {width:30px; background-image: url('../images/extras/timeLine-Break.svg'); background-position:center; background-repeat: repeat-y; background-size: 30%;}

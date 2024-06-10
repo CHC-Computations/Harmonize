@@ -1,7 +1,7 @@
 <?php 
  # echo "<pre>".print_r($exportParams,1)."</pre>";
  
- $OC = "$(\"#exportBtn\").html(\" \"); results.ExportStart(\"{$exportParams->fileFormat}\", \"{$this->facetsCode}\", ".json_encode($exportParams).");";
+ $OC = "results.ExportStart(\"{$exportParams->fileFormat}\", \"{$this->facetsCode}\", ".json_encode($exportParams).");";
 
 ?>
 	<div class="row">

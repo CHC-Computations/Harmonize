@@ -20,6 +20,8 @@ $this->JS[] = "user.LogIn();";
 			<?= $this->transEsc('or') ?>
 		</div>
 		<div class="col-sm-4" id="registerBox">
+			<button class="btn btn-default" style="width:100%;">Login with e-science</button><br/><br/>
+			
 			
 			<div id="g_id_onload"
 				data-client_id="155693132718-7atp3qoftr060fofm15166anq140mcl8.apps.googleusercontent.com"

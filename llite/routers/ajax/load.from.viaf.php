@@ -1,9 +1,9 @@
 <?php
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.buffer.php');
+require_once('functions/class.helper.php');
+require_once('functions/class.buffer.php');
 
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('buffer', 	new buffer()); 
 $this->addClass('helper', 	new helper()); 
 
 $id = $this->routeParam[0];

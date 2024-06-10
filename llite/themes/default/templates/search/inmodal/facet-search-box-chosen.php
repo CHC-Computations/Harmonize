@@ -40,7 +40,7 @@ if (!empty($_SESSION['facets_chosen'][$currFacet]))
 			}
 		
 		
-		$key = $this->buffer->createFacetsCode($this->sql, $facet);
+		$key = $this->buffer->createFacetsCode($facet);
 		
 		$ch_array = $_SESSION['facets_chosen'][$currFacet];
 		
@@ -53,7 +53,7 @@ if (!empty($_SESSION['facets_chosen'][$currFacet]))
 		
 		$this->facetsCode = $key;
 		$choosen .='<div class="text-right">';
-		$choosen .='<a href="'.$this->buildUri('search/results').'" class="btn btn-success"><i class="fa fa-check"></i> '.$this->transEsc('Use choosen').'</a>';
+		$choosen .='<a href="'.$this->buildUri('results',['core'=>'biblio', 'facetsCode'=>$key]).'" class="btn btn-success"><i class="fa fa-check"></i> '.$this->transEsc('Use choosen').'</a>';
 		#$choosen .="<button type=submit class='btn btn-success'><i class='fa fa-check'></i> ".$this->transEsc('Use choosen').'</button>';
 		$choosen .='</div>';
 		$choosen .="</form>";

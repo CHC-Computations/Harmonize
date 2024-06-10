@@ -1,8 +1,8 @@
 <?php
 if (empty($this)) die;
-#require_once('../functions/klasa.solr.php');
+#require_once('../functions/class.solr.php');
 
-$this->addClass('solr', new Solr($this->config));
+$this->addClass('solr', new solr($this));
 $limit = 16;
 
 if (!empty($this->GET['q'])) {
@@ -40,7 +40,7 @@ if (!empty($this->GET['q'])) {
 	
 	if (!empty($results['author'])) {
 		foreach ($results['author'] as $word=>$weight)
-			$Tper[] = $word;
+			$Tper[] = ['word' => $word];
 	
 		echo '{"results":'.json_encode($Tper).'}';	
 		} else {

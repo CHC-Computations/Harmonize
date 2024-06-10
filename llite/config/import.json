@@ -1,0 +1,22 @@
+{
+"useBufferedSearch" : {
+	"wikidata" : {
+		"id" : true,
+		"labels" : true
+		},
+	"viaf" : {
+		"id" : true,
+		"labels" : true
+		}
+	},
+"useExternalSearch" : {
+	"wikidata" : {
+		"id" : false,
+		"labels" : false
+		},
+	"viaf" : {
+		"id" : false,
+		"labels" : false
+		}
+	}
+}

@@ -1,11 +1,11 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.persons.2.php');
-require_once('functions/klasa.wikidata.php');
+require_once('functions/class.persons.2.php');
+require_once('functions/class.wikidata.php');
 
 $this->setTitle($this->transEsc('Persons'));
 
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('buffer', 	new buffer()); 
 $this->addClass('helper', 	new helper()); 
 $this->addClass('persons', 	new persons($this->config)); 
 

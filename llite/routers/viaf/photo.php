@@ -1,19 +1,19 @@
 <?php
 if (empty($this)) die;
-require_once('functions/klasa.maps.php');
-require_once('functions/klasa.persons.php');
-require_once('functions/klasa.places.php');
-require_once('functions/klasa.wikidata.php');
+require_once('functions/class.maps.php');
+require_once('functions/class.persons.php');
+require_once('functions/class.places.php');
+require_once('functions/class.wikidata.php');
 
 
 $wikiId = $this->routeParam[0];
 $wikiIdInt = substr($wikiId,1);
 $this->clearGET();
 
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('buffer', 	new buffer()); 
 $this->addClass('helper', 	new helper()); 
 $this->addClass('maps', 	new maps()); 
-$this->addClass('solr', 	new solr($this->config));  
+$this->addClass('solr', 	new solr($this));  
 $this->addClass('wiki', 	new wikidata($wikiId)); 
 
 $this->buffer->setSQL($this->sql);

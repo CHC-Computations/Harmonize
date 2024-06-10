@@ -1,6 +1,6 @@
 <?php 
 if (empty($this)) die;
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('buffer', 	new buffer()); 
 $this->setTitle($this->transEsc('The page You are looking for, does not exists'));
 
 ?>

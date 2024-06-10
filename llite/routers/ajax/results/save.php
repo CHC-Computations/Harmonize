@@ -2,8 +2,8 @@
 if (empty($this)) die;
 
 
-$this->addClass('buffer', 	new marcBuffer()); 
-$this->addClass('solr', 	new solr($this->config)); 
+$this->addClass('buffer', 	new buffer()); 
+$this->addClass('solr', 	new solr($this)); 
 
 #  echo "_COOKIE <pre>".print_R($_COOKIE,1)."</pre>";
 #  echo "_SESSION <pre>".print_R($_SESSION,1)."</pre>";

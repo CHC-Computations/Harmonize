@@ -1,45 +1,28 @@
 <?php 
 
-
-if (!empty($auth)) 
-	$author = '<b>'.$this->transEsc('by').'</b>: '.$this->render('record/author-link-simple.php', ['author'=>$auth]).'<br/>'; 
-	else 
-	$author = '';
-
-if (!empty($in = $this->marc->getIn())>0)
-	$instr = '<b>'.$this->transEsc('In').':</b> '.$in.'<br/>';
-	else 
-	$instr = '';
-									
-$in = $this->marc->getPublished();
-if (count($in)>0)
-	$published = '<b>'.$this->transEsc('Published').':</b> '.implode('<br/>', $in).'<br/>';
-	else 
-	$published = '';
+$author = $instr = $published = '';
+if (!empty($record->persons->mainAuthor)) 
+	$author = '<b>'.$this->transEsc('by').'</b>: '.$this->render('record/author-link.php', ['author'=>current((array)$record->persons->mainAuthor)]).'<br/>'; 
+if (!empty($record->corporates->publisher)>0)
+	$published = '<b>'.$this->transEsc('In').':</b> '. $this->render('record/publisher-link.php', ['publisher'=>current((array)$record->corporates->publisher), 'publicationYear' => current($record->publicationYear) ?? null ]) .'<br/>';
+			
 											
-/*											
-
-// <button OnClick="results.InModal('<?= $result->id ?>', '<?= base64_encode('<pre>'.print_r($result,1).'</pre>') ?>');">full</button>
-
-*/
-
-
 echo $this->helper->panelCollapse(
-						'result_'.$result->id, 
+						'result_'.uniqid(), 
 						$this->buffer->resultCheckBox($result).'
-						<div class="title"><a href="'.$this->basicUri('search/record/'.$result->id.'.html').'">'.$result->title.'</a></div>',
+						<div class="title"><a href="'.$this->basicUri('results/biblio/record/'.$result->id.'.html').'">'.$result->title.'</a></div>',
 						'
 						<div class="result">
 							
 							<div class="result-media">
-								'.$this->render('record/cover.php', ['rec' => $this->marc]).'
+								'.$this->render('record/cover.php', ['result' => $result]).'
 							</div>
 							<div class="result-body">
 								<div class="result-desc">
 									'.$author.'
 									'.$instr.'
 									'.$published.'
-									<span class="label label-primary">'.$this->transEsc($this->marc->getFormat()).'</span><br/>
+									<span class="label label-primary">'.$this->transEsc($record->majorFormat).'</span><br/>
 									
 								</div>
 							</div>
@@ -51,6 +34,7 @@ echo $this->helper->panelCollapse(
 						'',
 						false 
 						);
+
 ?>
 
 

@@ -1,5 +1,6 @@
 <?php 
 $panelId = uniqid();
+$currentCore = 'biblio';
 
 $lines = [];	
 $lp = 0;
@@ -35,21 +36,15 @@ if (is_object($list)) {
 								$facet->translated = 0;
 							
 							if ($this->buffer->isActiveFacet($facet->solr_index, $name)) {
-								$key = $this->buffer->createFacetsCode(
-										$this->sql, 
-										$this->buffer->removeFacet($facet->solr_index, $name)
-										);
-								$slines[] = '<a href="'.$this->buildUri('search/results/1/'.$this->getUserParam('sort').'/'.$key, $this->GET).'" class="facet js-facet-item active" >
+								$key = $this->buffer->createFacetsCode($this->buffer->removeFacet($facet->solr_index, $name));
+								$slines[] = '<a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=>$key]).'" class="facet js-facet-item active" >
 												<span class="text">'.$this->transEsc($tname).'</span>
 												<i class="right-icon glyphicon glyphicon-remove" ></i>
 											</a>';
 							
 								} else {
-								$key = $this->buffer->createFacetsCode(
-										$this->sql, 
-										$this->buffer->addFacet($facet->solr_index, $name)
-										);
-								$slines[] = '<a href="'.$this->buildUri('search/results/1/'.$this->getUserParam('sort').'/'.$key, $this->GET).'" class="facet js-facet-item" >
+								$key = $this->buffer->createFacetsCode($this->buffer->addFacet($facet->solr_index, $name));
+								$slines[] = '<a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=>$key]).'" class="facet js-facet-item" >
 												<span class="text">'.$this->transEsc($tname).'</span>
 												<span class="badge">'.$this->helper->numberFormat($count).'</span>
 											</a>';

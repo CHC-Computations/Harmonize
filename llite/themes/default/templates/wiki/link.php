@@ -4,13 +4,12 @@
 		if (is_Array($value)) {
 			$link = implode('<br/>', $value);
 			foreach ($value as $v) {
-				$rec = new wikidata($v); 
-				$rec->setUserLang($this->user->lang['userLang']);
-				$links[] = '<a href="'.$this->buildURL('wiki/record/'.$v).'">'.$rec->get('labels').'</a>';
-				if (!empty($mapPoint = $rec->getCoordinates('P625'))) {
+				$this->wikiRec->loadRecord($v); 
+				$links[] = '<a href="'.$this->buildURL('wiki/record/'.$v).'">'.$this->wikiRec->get('labels').'</a>';
+				if (!empty($mapPoint = $this->wikiRec->getCoordinates('P625'))) {
 					$point['lon'] = $mapPoint->longitude;
 					$point['lat'] = $mapPoint->latitude;
-					$point['name'] = $rec->get('labels');
+					$point['name'] = $this->wikiRec->get('labels');
 					$point['desc'] = $label;
 					$point['link'] = $this->buildURL('wiki/record/'.$v);
 					$point['marker'] = 'marker';
@@ -21,13 +20,12 @@
 			$link = implode('<br/>', $links);
 			
 			} else {
-			$rec = new wikidata($value); 
-			$rec->setUserLang($this->user->lang['userLang']);
-			$link = '<a href="'.$this->buildURL('wiki/record/'.$value).'">'.$rec->get('labels').'</a>';
-			if (!empty($mapPoint = $rec->getCoordinates('P625'))) {
+			$this->wikiRec->loadRecord($value); 
+			$link = '<a href="'.$this->buildURL('wiki/record/'.$value).'">'.$this->wikiRec->get('labels').'</a>';
+			if (!empty($mapPoint = $this->wikiRec->getCoordinates('P625'))) {
 				$point['lon'] = $mapPoint->longitude;
 				$point['lat'] = $mapPoint->latitude;
-				$point['name'] = $rec->get('labels');
+				$point['name'] = $this->wikiRec->get('labels');
 				$point['desc'] = $label;
 				$point['link'] = $this->buildURL('wiki/record/'.$value);
 				$point['marker'] = 'marker';

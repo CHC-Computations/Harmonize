@@ -1,17 +1,20 @@
 {
 "testMode" : false,
 "www" : {
-	"host" : "http://testlibri.ucl.cas.cz/harmonize/",
-	"ignorePath" : "harmonize/",
+	"host" : "https://yourdomain.org",
+	"ignorePath" : "",
+	"theme" : "default",
 	"logo" : "harmonize_logo.svg",
-	"title" : "Harmonize",
-	"theme" : "default"
+	"title" : "Harmonize page title",
+	"defaultLanguage" : "en"
 	},
 "solr" : {
-	"hostname" : "http://localhost",
+	"host" : "http://localhost",
+	"hostname" : "localhost",
 	"port" : "8983",
 	"reserve" : { 
-		"hostname" :"http://147.231.80.162",
+		"host" :"http://yoursreservehost",
+		"hostname" :"yoursreservehost",
 		"port" : "8983"
 		},
 	"coresPrefix" : "lite.",
@@ -19,17 +22,34 @@
 		"biblio" : "lite.biblio",
 		"persons" : "lite.persons",
 		"places" : "lite.places",
-		"wiki"	: "lite.wikidata"
+		"corporates" : "lite.corporates",
+		"magazines" : "lite.magazines",
+		"events" : "lite.events",
+		"wiki"	: "lite.wikidata",
+		"viaf"	: "lite.viaf",
+		"orphans" : "lite.orphans"
 		}, 
-	"errorWebHook" : "http://giersz.pl/solrDownError.php?core={{currentlink}}"	
+	"errorWebHook" : ""	
 	},
 "multiLanguage" : {
 	"order" : ["en", "cs", "pl", "fi", "es"]
 	},
-"externalHosts" : {
-	"wikidata" : "https://www.wikidata.org/",
-	"wikimedia" : "https://www.wikimedia.org/"
+"routersOrder" : {
+	"results" : [
+		"core", "page", "facetsCode", "sorting", "pagination", "view"
+		]
+	},	
+"homePage" : {
+	"coresNames" : {
+		"biblio" : {"url":"biblio", "ico": "ph-books", "name":"Bibliographic records"},
+		"persons" :{"url":"persons", "ico": "ph-user-list", "name": "Persons"},
+		"places" : {"url":"places", "ico": "ph-map-trifold", "name":"Places"},
+		"corporates" : {"url":"corporates", "ico": "ph-users-three", "name":"Corporates"},
+		"magazines" : {"url":"magazines", "ico": "ph-article-medium", "name":"Magazines"},
+		"events" : {"url":"events", "ico": "ph-calendar", "name":"Events"}
+		}
 	},
+
 "searchEngines" : {
 	"bing" : {
 		"link" : "https://www.bing.com/search?q=",
@@ -55,33 +75,37 @@
 	
 "facets" : {
 	"solrIndexes" : {
+		"relations" : {
+			"name": "relations Schema", 
+			"importFunction" : "getRelations"
+			},
 		"source_db_str" : {
 			"name": "Source Database", 
-			"importField" : "995a",
+			"relPath" : ["sourceDB", "name"],
 			"formatter": null, 
 			"translated" : true 
 			},
 		"source_db_sub_str" : {
 			"name": "Source Database c.d.", 
-			"importField" : "995b",
+			"relPath" : ["sourceDB", "supplemental"],
 			"formatter": null, 
 			"translated" : true 
 			},
 		"format_major" : {
 			"name": "Format", 
-			"importFunction" : "getMajorFormat",
+			"relPath" : "majorFormat",
 			"formatter": null, 
 			"translated" : true 
 			},
 		"genre_major" : {
 			"name": "Major Genre", 
-			"importFunction" : "getGenreM",
+			"relPath" : "genreMajor",
 			"formatter": null, 
 			"translated" : true 
 			},
 		"genre_sub" : {
 			"name": "Form, Genre level2", 
-			"importFunction" : "getGenreS",
+			"relPath" : "genre",
 			"formatter": null, 
 			"translated" : true 
 			},
@@ -103,21 +127,15 @@
 			"formatter": null, 
 			"translated" : false 
 			},
-		"language_h" : {
-			"name": "Language", 
-			"importFunction" : "getLanguageHierarchical",
-			"formatter": null, 
-			"translated" : false 
-			},
 		"language" : {
 			"name": "Publication language", 
-			"importFunction" : "getLanguageP",
+			"relPath" : ["language","publication"],
 			"formatter": null, 
 			"translated" : false 
 			},
 		"language_o_str_mv" : {
 			"name": "Original language", 
-			"importFunction" : "getLanguageO",
+			"relPath" : ["language","original"],
 			"formatter": null, 
 			"translated" : false 
 			},
@@ -151,18 +169,6 @@
 			"formatter": null, 
 			"translated" : false 
 			},
-		"authorviaf_str_mv" : {
-			"name": "Author viaf (technical field)", 
-			"importFunction" : "getAuthorViaf",
-			"formatter": null, 
-			"translated" : false 
-			},
-		"author_wiki" : {
-			"name": "Main Author", 
-			"importFunction" : "getMainAuthorWiki",
-			"formatter": "formatWiki", 
-			"translated" : false 
-			},
 		"author2" : {
 			"name": "Co-author", 
 			"importFunction" : "getOtherAuthors",
@@ -181,25 +187,6 @@
 			"formatter": null, 
 			"translated" : false 
 			},
-		"author2_role" : {
-			"name": "Co-authors roles", 
-			"importFunction" : "getMainOtherAuthorsRoles",
-			"formatter": null, 
-			"translated" : false 
-			},
-		"coauthor_wiki" : {
-			"name": "Co-Author", 
-			"importFunction" : "getCoAuthorWiki",
-			"formatter": "formatWiki", 
-			"translated" : false 
-			},
-		"persons_with_roles" : {
-			"name": "Co-Author", 
-			"importFunction" : "getWithRoles",
-			"importParam" : "person",
-			"formatter": "formatPerson", 
-			"translated" : false 
-			},
 		"author_corporate" : {
 			"name": "Corporate Author", 
 			"importFunction" : "getCorporateAuthor",
@@ -212,95 +199,27 @@
 			"formatter": null, 
 			"translated" : false 
 			},
-		"corporate_wiki" : {
-			"name": "Corporate Author", 
-			"importFunction" : "getCorporateWiki",
-			"importParam" : "any",
-			"formatter": "formatWiki", 
-			"translated" : false 
-			},
-		"corporate_author_wiki" : {
-			"name": "Corporate Author", 
-			"importFunction" : "getCorporateWiki",
-			"importParam" : "as author",
-			"formatter": "formatWiki", 
-			"translated" : false 
-			},
-		"corporate_subject_wiki" : {
-			"name": "Corporate Author", 
-			"importFunction" : "getCorporateWiki",
-			"importParam" : "as subject",
-			"formatter": "formatWiki", 
-			"translated" : false 
-			},
-		"corporate_publisher_wiki" : {
-			"name": "Corporate Author", 
-			"importFunction" : "getCorporateWiki",
-			"importParam" : "as publisher",
-			"formatter": "formatWiki", 
-			"translated" : false 
-			},
-		"corporate_fs_wiki" : {
-			"name": "Corporate Author", 
-			"importFunction" : "getCorporateFullStr",
-			"importParam" : "any",
-			"formatter": "formatCorporate", 
-			"translated" : false 
-			},
-		"corporate_author_fs_wiki" : {
-			"name": "Corporate Author", 
-			"importFunction" : "getCorporateFullStr",
-			"importParam" : "as author",
-			"formatter": "formatCorporate", 
-			"translated" : false 
-			},
-		"corporate_subject_fs_wiki" : {
-			"name": "Corporate Author", 
-			"importFunction" : "getCorporateFullStr",
-			"importParam" : "as subject",
-			"formatter": "formatCorporate", 
-			"translated" : false 
-			},
-		"corporate_publisher_fs_wiki" : {
-			"name": "Corporate Author", 
-			"importFunction" : "getCorporateFullStr",
-			"importParam" : "as publisher",
-			"formatter": "formatCorporate", 
-			"translated" : false 
-			},
-		"corporates_with_roles" : {
-			"name": "Co-Author", 
-			"importFunction" : "getWithRoles",
-			"importParam" : "corporate",
-			"formatter": "formatCorporate", 
-			"translated" : false 
-			},
 		"title" : {
 			"name": "Title", 
-			"importFunction" : "getTitle",
+			"relPath" : "titleShort",
 			"formatter": null, 
 			"translated" : false 
 			},
 		"title_sub" : {
 			"name": "Subtitle", 
-			"importFunction" : "getTitleSub",
+			"relPath" : "titleSub",
 			"formatter": null, 
 			"translated" : false 
 			},
 		"title_short" : {
 			"name": "Title", 
-			"importFunction" : "getTitleShort",
+			"relPath" : "titleShort",
 			"formatter": null, 
 			"translated" : false 
 			},
 		"title_full" : {
 			"name": "Title", 
-			"importFunction" : "getTitleFull",
-			"formatter": null, 
-			"translated" : false 
-			},
-		"title_fullStr" : {
-			"name": "Title", 
+			"relPath" : "title",
 			"formatter": null, 
 			"translated" : false 
 			},
@@ -312,25 +231,26 @@
 			},
 		"title_alt" : {
 			"name": "Title", 
-			"importFunction" : "getTitleAlt",
+			"relPath" : "titleAlt",
 			"formatter": null, 
 			"translated" : false 
 			},
-		
 		"subjects_str_mv" : {
 			"name": "Subject", 
 			"importFunction" : "getSubjects",
+			"relPath" : ["subjects", "strings"],
 			"formatter": null, 
 			"translated" : false 
 			},
 		"topic" : {
 			"name": "Subject", 
-			"importFunction" : "getSubjects",
+			"importFunction" : "getSubjectsRows",
 			"formatter": null, 
 			"translated" : false 
 			},
 		"topic_search_str_mv" : {
 			"name": "Subject", 
+			"relPath" : "subjects",
 			"importFunction" : "getSubjectsFull",
 			"formatter": null, 
 			"translated" : false 
@@ -341,27 +261,17 @@
 			"formatter": "formatPerson", 
 			"translated" : false 
 			},
-		"subjectpersonviaf_str_mv" : {
-			"name": "Subject person viaf (technical field)", 
-			"importFunction" : "getSubjectPersonsViaf",
-			"formatter": null, 
-			"translated" : false 
-			},
-		"subject_person_wiki" : {
-			"name" : "Subject person", 
-			"importFunction" : "getSubjectPersonsWiki",
-			"formatter" : "formatWiki", 
-			"translated" : false 
-			},
 		"subject_genre_str_mv" : {
 			"name" : "Subject literature by genre", 
-			"importFunction" : "getSubjectELBg",
+			"importFunction" : "getSubjectELB",
+			"importParam" : "genre",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"subject_nation_str_mv" : {
 			"name" : "Subject literature by Nationality", 
-			"importFunction" : "getSubjectELBn",
+			"importFunction" : "getSubjectELB",
+			"importParam" : "nations",
 			"formatter" : null, 
 			"translated" : false 
 			},
@@ -371,6 +281,19 @@
 			"formatter" : null, 
 			"translated" : false 
 			},
+		"centuries_str_mv" : {
+			"name" : "Subject centuries", 
+			"relPath" : ["subjects", "centuries"],
+			"formatter" : null, 
+			"translated" : false 
+			},
+		"udccode_str_mv" : {
+			"name" : "Universal Decimal Classification", 
+			"relPath" : ["subjects", "UDC"],
+			"formatter" : null, 
+			"translated" : false 
+			},
+			
 		"author_events_str_mv" : {
 			"name" : "Event as author", 
 			"importFunction" : "getAuthorEvents",
@@ -385,31 +308,25 @@
 			},
 		"publishDate" : {
 			"name" : "Publishing date", 
-			"importFunction" : "getPublishDate",
+			"relPath" : "publicationYear",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"datesort_str_mv" : {
 			"name" : "Publishing date", 
-			"importFunction" : "getPublishDate",
+			"relPath" : "publicationYear",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"publisher" : {
 			"name" : "Publisher", 
-			"importFunction" : "getPublished",
+			"importFunction" : "getPublisher",
 			"formatter" : null, 
-			"translated" : false 
+			"translated" : false
 			},
-		"publication_place_str_mv" : {
+		"magazines_str_mv" : {
 			"name" : "Published in", 
-			"importFunction" : "getIn",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"container_title" : {
-			"name" : "container_title", 
-			"importField" : "773s",
+			"importFunction" : "getMagazines",
 			"formatter" : null, 
 			"translated" : false 
 			},
@@ -421,184 +338,66 @@
 			},
 		"series" : {
 			"name" : "Series", 
-			"importFunction" : "getSeria",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"series_str_mv" : {
-			"name" : "Series", 
-			"importFunction" : "getSeria",
+			"relPath" : "seria",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"edition" : {
 			"name" : "Edition", 
-			"importFunction" : "getEdition",
+			"relPath" : ["edition", "no"],
 			"formatter" : null, 
-			"translated" : false 
-			},
-	
-		"geographic" : {
-			"name" : "Subject place", 
-			"importFunction" : "getRegion",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"geographic_facet" : {
-			"name" : "Subject place", 
-			"importFunction" : "getRegion",
-			"formatter" : "formatPlace", 
-			"translated" : false 
-			},
-		"geographicpublication_str_mv" : {
-			"name" : "Publication place", 
-			"importFunction" : "getPublicationPlaces",
-			"formatter" : "formatPlace", 
-			"translated" : false 
-			},
-		"geoevents_str_mv" : {
-			"name" : "Events place", 
-			"importFunction" : "getEventsPlace",
-			"formatter" : "formatPlace", 
-			"translated" : false 
-			},
-		"geo_wiki" : {
-			"name" : "Place", 
-			"importFunction" : "getGeoWiki",
-			"formatter" : "formatWiki", 
-			"translated" : false 
-			},
-		"places_with_roles" : {
-			"name": "Co-Author", 
-			"importFunction" : "getWithRoles",
-			"importParam" : "place",
-			"formatter": "formatPlace", 
 			"translated" : false 
 			},
 		"responsibility_str_mv" : {
-			"name" : "", 
-			"importFunction" : "getStatmentOfResp",
+			"name" : "Statment of responsibility", 
+			"relPath" : "StatmentOfResp",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"issn" : {
 			"name" : "", 
-			"importFunction" : "getISSN",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"magazines_str_mv" : {
-			"name" : "", 
-			"importFunction" : "getMagazines",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"article_issn_str" : {
-			"name" : "", 
-			"importFunction" : "getArticleISSN",
+			"relPath" : "issn",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"isbn" : {
 			"name" : "", 
-			"importFunction" : "getISBN",
+			"relPath" : "isbn",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"oclc_num" : {
 			"name" : "", 
-			"importFunction" : "getOclcNum",
+			"relPath" : "OCoLC",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"ctrlnum" : {
 			"name" : "", 
-			"importFunction" : "getCtrlNum",
+			"relPath" : "ctrlNum",
 			"formatter" : null, 
 			"translated" : false 
 			},
-		"work_keys_str_mv" : {
-			"name" : "", 
-			"importFunction" : "getWorkKey",
-			"formatter" : null, 
+		
+		"all_wiki" : {
+			"name" : "wiki relations",
+			"function" : "getWiki"
+			},
+		"with_roles_wiki" : {
+			"name" : "wiki relations",
+			"function" : "getWikiWithRoles"
+			},
+		
+		"linked_resource" : {
+			"name" : "Linked Resource", 
+			"relPath" : ["linkedResources","link"],
+			"formatter" : "formatLinkedResource", 
 			"translated" : false 
 			},
-		"article_resource_str_mv" : {
-			"name" : "", 
-			"importField" : "773s",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"article_resource_txt_mv" : {
-			"name" : "", 
-			"importField" : "773t",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"article_resource_related_str_mv" : {
-			"name" : "", 
-			"importField" : "773g",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"centuries_str_mv" : {
-			"name" : "Subject centuries", 
-			"importFunction" : "getCenturies",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"udccode_str_mv" : {
-			"name" : "Universal Decimal Classification", 
-			"importFunction" : "getUDC",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"geo_pub_wiki" : {
-			"name" : "Publication place", 
-			"importFunction" : "getPublicationPlacesWiki",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"geo_sub_wiki" : {
-			"name" : "Subject place", 
-			"importFunction" : "getSubjectPlacesWiki",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"geo_pub_country_wiki" : {
-			"name" : "Publication country", 
-			"importFunction" : "getPublicationCountryWiki",
-			"formatter" : "formatWiki", 
-			"translated" : false 
-			},
-		"persons_str_mv" : {
-			"name" : "Person", 
-			"importFunction" : "getPersons",
-			"formatter" : "formatPerson", 
-			"translated" : false 
-			},
-		"persons_viaf_str_mv" : {
-			"name" : "Person", 
-			"importFunction" : "getPersonsViaf",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"persons_wiki_str_mv" : {
-			"name" : "Person", 
-			"importFunction" : "getPersonsWiki",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"geowikifull_str_mv" : {
-			"name" : "Place", 
-			"importFunction" : "getGeoWikiFull",
-			"formatter" : null, 
-			"translated" : false 
-			},
-		"geowiki_str_mv" : {
-			"name" : "Place", 
-			"importFunction" : "getGeoWiki",
-			"formatter" : "formatWiki", 
+		"linked_resource_id" : {
+			"name" : "Linked Resource", 
+			"relPath" : ["internalResources","id"],
+			"formatter" : "formatLinkedResource", 
 			"translated" : false 
 			},
 		"source_file" : {
@@ -607,9 +406,31 @@
 			"formatter" : null, 
 			"translated" : false 
 			},
-		"spellingShingle" : {
+		"title_ac" : {
 			"name" : "", 
-			"importFunction" : "getSpellingShingle",
+			"importFunction" : "getAutocomplete",
+			"importParam" : "title",
+			"formatter" : null, 
+			"translated" : false 
+			}, 
+		"author_ac" : {
+			"name" : "", 
+			"importFunction" : "getAutocomplete",
+			"importParam" : "author",
+			"formatter" : null, 
+			"translated" : false 
+			}, 
+		"subject_ac" : {
+			"name" : "", 
+			"importFunction" : "getAutocomplete",
+			"importParam" : "subject",
+			"formatter" : null, 
+			"translated" : false 
+			}, 
+		"linkedresource_ac" : {
+			"name" : "", 
+			"importFunction" : "getAutocomplete",
+			"importParam" : "linkedResource",
 			"formatter" : null, 
 			"translated" : false 
 			}
@@ -794,7 +615,10 @@
 			}	
 		}
 	},
+"maps" : {
+	"maxPoints" : 100
+	},
 "export" : {
-	"max" : 500000
+	"max" : 1500000
 	}	
 }

@@ -1,12 +1,12 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-// require_once('functions/klasa.places.php');
-require_once('functions/klasa.maps.php');
+require_once('functions/class.helper.php');
+// require_once('functions/class.places.php');
+require_once('functions/class.maps.php');
 
 $marcRecord = false;
-$this->addClass('solr', new solr($this->config));
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('solr', new solr($this));
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', 	new helper()); 
 $this->addClass('maps', 	new maps()); 
 $this->buffer->setSql($this->sql);

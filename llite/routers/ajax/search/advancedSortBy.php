@@ -1,19 +1,23 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.forms.php');
+require_once('functions/class.helper.php');
+require_once('functions/class.forms.php');
 $this->addClass('helper', new helper()); 
 $this->addClass('forms', new forms()); 
 
+$currentCore = 'biblio';
 
 $this->addJS('$("#sortbyBox").css("opacity","1"); ');
 
 $search = $this->getConfig('search');
 $facets = $this->getConfig('facets');
 
-$sortOptions = $this->getIniParam('search', 'sortnames');
-foreach ($sortOptions as $k=>$v)
-	$sortOptions[$k] = $this->transEsc($v);
+#$sortOptions = $this->getIniParam('search', 'sortnames');
+#$sortOptions = $this->configJson->$currentCore->summaryBarMenu->sorting;
+$sortOptions = [];
+if (!empty($this->configJson->$currentCore->summaryBarMenu->sorting->optionsAvailable))
+	foreach ($this->configJson->$currentCore->summaryBarMenu->sorting->optionsAvailable as $k=>$v)
+		$sortOptions[$k] = $this->transEsc($v->name);
 
 $content = '';
 if (!empty($_SESSION['advSortBy'])) {

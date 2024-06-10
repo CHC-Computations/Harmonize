@@ -4,9 +4,9 @@
 if (empty($this)) die;
 print_r($this->routeParam);
 
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('buffer', 	new buffer()); 
 $this->addClass('helper', 	new helper()); 
-$this->addClass('solr', 	new solr($this->config)); 
+$this->addClass('solr', 	new solr($this)); 
 
 
 if ($this->routeParam[0]=='start') {

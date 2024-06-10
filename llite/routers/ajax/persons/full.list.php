@@ -3,9 +3,9 @@ if (empty($this)) die;
 $format = $this->routeParam[0];
 
 
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', new helper()); 
-$this->addClass('solr', new solr($this->config)); 
+$this->addClass('solr', new solr($this)); 
 
 $this->buffer->setSql($this->sql);
 

@@ -53,6 +53,7 @@ foreach ($facets as $k=>$v) {
 				<td >'.$this->helper->percentBox($v,$maksV,$color).'</td>
 			</tr>';
 		$graphData[$lp] = [
+				'uid' => uniqid(),
 				'label' => $k,
 				'color' => $color,
 				'count' => $v

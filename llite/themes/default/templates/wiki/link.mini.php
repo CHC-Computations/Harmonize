@@ -1,9 +1,8 @@
 <?php 
 	
 	if (!empty($value)) {
-		$rec = new wikidata($value); 
-		$rec->setUserLang($this->user->lang['userLang']);
-		$link = '<a href="'.$this->buildURL('wiki/record/'.$value).'">'.$rec->get('labels').'</a>';
+		$this->wikiRec->loadRecord($value); 
+		$link = '<a href="'.$this->buildURL('wiki/record/'.$value).'">'.$this->wikiRec->get('labels').'</a>';
 	
 		echo $link;
 		}

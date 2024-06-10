@@ -1,10 +1,15 @@
 var loader = '<div class="text-center"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>';
 var u = $("#hf_base_url").val();
 var l = $("#hf_user_language").val();
+var pageGET = $("#hf_get").val();
 const baseLink = u+l;		
 
 
 var page = {
+	url : $("#hf_base_url").val(),
+	lang : $("#hf_user_language").val(),
+	get : $("#hf_get").val(),
+	
 	ScrollDown : function() {
 		var p = $( "#stopka" );
 		var position = p.position();
@@ -53,6 +58,32 @@ var page = {
 					}
 				);
 			},
+	
+	postLT : function(box,slink,pdata) {
+			var u = $("#hf_base_url").val();
+			var l = $("#hf_user_language").val();
+			$("#"+box).css('opacity', '0.4');
+			$.post( 
+				u+l+"/ajax/"+slink, { 'pdata':pdata }, function(result){ 
+					$("#"+box).html(result); 
+					}
+				);
+			},
+	
+	clipboard(field)  {
+		  // Get the text field
+		  var copyText = document.getElementById(field);
+
+		  // Select the text field
+		  copyText.select();
+		  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+		  // Copy the text inside the text field
+		  navigator.clipboard.writeText(copyText.value);
+		  
+		  // Alert the copied text
+		  alert("Copied the text: " + copyText.value);
+		}
 	
 	}
 
@@ -446,13 +477,22 @@ var results = {
 				}});
 			}, 
 		
+		fixedLink : function(t,id) {
+			$("#myModal").modal("show"); 
+			$("#inModalTitle").html(t);
+			$.ajax({url: page.baseLink+"/ajax/results/fixedLink/"+id, success: function(result){
+				  $("#inModalBox").html(result);
+				}});
+			}, 
+		
 		btnPrevNext : function(cp) {
 			var u = $("#hf_base_url").val();
 			var l = $("#hf_user_language").val();
+			var get = $("#hf_results_get").val();
 			hp = u+l;
 			$('#recordAjaxAddsOn').html(this.waiter);
 			
-			$.ajax({url: hp+"/ajax/results/prevNext/"+cp+"/", success: function(result){
+			$.ajax({url: hp+"/ajax/results/prevNext/"+cp+"/"+get, success: function(result){
 				  $("#recordAjaxAddsOn").html(result);
 				}});
 				
@@ -495,7 +535,7 @@ var results = {
 			var u = $("#hf_base_url").val();
 			var l = $("#hf_user_language").val();
 			$.ajax({url: u+l+"/ajax/results/"+m+"/"+a+"/", success: function(result){
-				  $("#ch_"+a).html(result);
+				  $("#ch_"+a.replace(".", "_")).html(result);
 				}});
 			},
 			
@@ -534,6 +574,7 @@ var results = {
 			},
 
 		ExportStart(m,f,fn) {
+			$("#exportBtn").html(results.waiter);
 			var u = $("#hf_base_url").val();
 			var l = $("#hf_user_language").val();
 			var g = $("#hf_get").val();
@@ -553,19 +594,6 @@ var results = {
 			alert (link);
 			$.ajax({url: link, success: function(result){
 				  $("#export_box").html(result);
-				}});
-			},
-		
-		Autocomplete(s) {
-			$("#searchFormAC").html('<div class="text-center"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>');
-			var u = $("#hf_base_url").val();
-			var l = $("#hf_user_language").val();
-			
-			//var s = $("#searchInput").val();
-			var f = $("#searchForm_type").val();
-			
-			$.ajax({url: u+"/functions/ajax/autocomplete.php?in="+f+"&s="+s, success: function(result){
-				  $("#searchFormAC").html(result);
 				}});
 			},
 		
@@ -625,7 +653,62 @@ var results = {
 				);
 			},	
 		
+		collapseLongValues : function() {
+			const collection = document.getElementsByClassName("detailsview-item");
+			for (let i = 0; i < collection.length; i++) {
+				var line = collection[i];
+				}
+			},
+		
+				
+		mapsMenu : {
+			
+				
+			calcDistance : function (p1,p2) {
+				var dx = p2.x-p1.x;
+				var dy = p2.y-p1.y;
+				return Math.sqrt(dx*dx + dy*dy);
+				},
+
+			calcAngle :	function (p1, p2) {
+				return Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
+				}, 
+			
+			drawLine(uid, from, to, color = '#ddd') {
+				$('#mapRopesBlock').append('<div id="rope_'+uid+'" class="rope"></div>');
+				let globalCorect = {
+					x: $('#mapRelationsBlock').offset().top,
+					y: $('#mapRelationsBlock').offset().left
+					}
+				
+				let selectedPin = $('#'+from);
+				let pin = $('#'+to);
+				let selectedPinPos = {
+					x: selectedPin.offset().top - globalCorect.x + (selectedPin.outerHeight()/2),
+					y: selectedPin.offset().left - globalCorect.y + selectedPin.outerWidth()
+					}
+
+				let pinPos = {
+					x: pin.offset().top - globalCorect.x +(selectedPin.outerHeight()/2),
+					y: pin.offset().left - globalCorect.y
+					}
+
+				let distance = this.calcDistance(selectedPinPos, pinPos);
+				let angle = 90-this.calcAngle(selectedPinPos, pinPos);
+
+				$('#rope_'+uid).css({
+					transform: 'rotate('+angle+'deg)',
+					width: distance+'px',
+					background : color,
+					top: selectedPinPos.x,
+					left: selectedPinPos.y
+					});
+
+				}	
+			},
+		
 		maps : {
+			
 			baseLink() {
 				var u = $("#hf_base_url").val();
 				var l = $("#hf_user_language").val();
@@ -636,14 +719,17 @@ var results = {
 			
 			addBiblioRecRelatations(biblioId) {
 				$('#mapRelationsAjaxArea').css('opacity', '0.4');
+			
+				var Form = document.getElementById('mapDrowCheckboxes');         
+				var childs = Form.children;         
+				var checkboxes = '';
+				for(I = 0; I < childs.length; I++) {    
+					var rowId = childs[I].getAttribute('id');
+					checkboxes += $("#"+rowId).is(':checked')+'/';
+					}
 				
-				var a = $("#map_checkbox_1").is(':checked');
-				var b = $("#map_checkbox_2").is(':checked');
-				var c = $("#map_checkbox_3").is(':checked');
-				var d = $("#map_checkbox_4").is(':checked');
-				var e = $("#map_checkbox_5").is(':checked');
 				
-				$.ajax({url: this.baseLink()+"/ajax/wiki/biblio.wikiRelations/"+biblioId+'/'+a+'/'+b+'/'+c+'/'+d+'/'+e, success: function(result){
+				$.ajax({url: this.baseLink()+"/ajax/wiki/biblio.wikiRelations/"+biblioId+'/'+checkboxes, success: function(result){
 					  $("#mapRelationsAjaxArea").html(result);
 					}});
 				},
@@ -690,25 +776,133 @@ var results = {
 					}});
 				},
 			
-			moved(t,s) {
+			start(facetsCode) {
 				var g = $("#hf_get").val();
+				$.ajax({url: this.baseLink()+"/ajax/wiki/map.first.run/"+facetsCode+'/?'+g, success: function(result){
+					  $("#mapPopupSummary").html(result);
+					}});
+				},
+			
+			currentPlace(wikiq) {
+				$.ajax({url: this.baseLink()+"/ajax/wiki/map.currentPlace/"+wikiq+'/', success: function(result){
+					  $("#mapPopupCurrentPlace").html(result);
+					}})
+				},
 				
-				$.post( this.baseLink()+"/ajax/wiki/map.moved/?"+g, {
-							'bN':$("#mapBoundN").val(),
-							'bS':$("#mapBoundS").val(),
-							'bE':$("#mapBoundE").val(),
-							'bW':$("#mapBoundW").val(),
-							'zoomOld':$("#mapStartZoom").val(),
-							'zoom':$("#mapZoom").val(),
-							'total': t,
-							'visible': s
-							},  function(result){
-					  if (result.length>1)
-						$("#mapMovedActions").html(result);
+			currentPlacePost(wikiq, addOns) {
+				$.post( this.baseLink()+"/ajax/wiki/map.currentPlace/"+wikiq+'/', 
+					{add: addOns}, 
+					function(result){
+					  $("#mapPopupCurrentPlace").html(result);
+					  $("#mapPopupCurrentPlace").append(addOns);
 					});
+				},
+			
+			moved(facetsCode) {
+				const minPause = 800;
+				var g = $("#hf_get").val();
+				var totalResults = $("#totalResults").val();
+				var visible = $("#visibleResults").val();
+				$.post( this.baseLink()+"/ajax/wiki/map.moved/"+facetsCode+"?"+g, {
+						'bN':$("#mapBoundN").val(),
+						'bS':$("#mapBoundS").val(),
+						'bE':$("#mapBoundE").val(),
+						'bW':$("#mapBoundW").val(),
+						'zoomOld':$("#mapStartZoom").val(),
+						'zoom':$("#mapZoom").val(),
+						'total': totalResults,
+						'visible': visible
+						},  
+						function(result){
+							if (result.length>1)
+								$("#mapPopupCurrentView").html(result);
+						});
 				}	
 			}
 		}
+
+var search = {
+	
+		autocomplete(e) {
+			const minimalnaPrzerwa = 800; 
+			
+			var acField = "#searchInput-ac";
+			$(acField).html(loader);
+			
+			
+			var core = $("#search_core").val();
+			var i = -1;
+			
+			const inputField = document.getElementById("searchForm_lookfor");
+			let lastKeyPressTime = 0;
+			let timerId;
+			
+			function arrowPressed(e){    
+				// e.keyCode == 40 -down
+				// e.keyCode == 38 -up
+				// console.log(e.keyCode);
+				const maxItems = $("#acItemsList").children().length;
+				if (((e.keyCode == 40)||(e.keyCode==38))&(maxItems>0)) {
+					if (e.keyCode == 40) i++;
+					if (e.keyCode == 38) i--;
+					if (i>= maxItems) i=maxItems-1;
+					if (i<= 0) i=0;
+					$(".ac-item").removeClass("active");
+					const activeElement = $("#acItemsList a:eq("+i+")");
+					activeElement.addClass("active");
+					$("#searchForm_lookfor").val(activeElement.html());
+					}
+				}
+			window.addEventListener('keydown', arrowPressed,false);
+				
+			inputField.addEventListener("input", function() {
+				const teraz = Date.now();
+				
+				if (timerId) {
+					clearTimeout(timerId);
+					}
+
+				timerId = setTimeout(function() {
+					// Wykonaj polecenia po zadanym czasie bez wciśnięcia innych klawiszy
+					// $(acField).html("Searching for: "+teraz+": "+inputField.value);
+					var f = $("#searchForm_type").val();
+					$(acField).addClass("inprogress");
+					$.post(page.baseLink+"/autocomplete/ac.html.list/", {sstring: inputField.value, sfield: f, score: core}, function(result){
+						if (result.length>1)
+							$(acField).html(result);
+						i = -1;
+						});
+						
+					
+					}, minimalnaPrzerwa);
+
+				// Zaktualizuj czas ostatniego wciśnięcia klawisza
+				lastKeyPressTime = teraz;
+				});
+			},
+		
+		start() {
+			var acField = "#searchInput-ac";
+			var u = $("#hf_base_url").val();
+			var l = $("#hf_user_language").val();
+			
+			var f = $("#searchForm_type").val();
+			var core = $("#search_core").val();
+			
+			const inputField = document.getElementById("searchForm_lookfor");
+			
+			$.post(u+l+"/autocomplete/ac.html.list/", {sstring: inputField.value, sfield: f, score: core}, function(result){
+						if (result.length>1)
+							$(acField).html(result);
+						});
+			
+			},
+		
+		clickItem : function(string) {
+			document.getElementById('searchForm_lookfor').value = string;
+			}	
+			
+	}
 
 
 var advancedSearch = {
@@ -796,6 +990,134 @@ var advancedSearch = {
 
 
 
+var stat = {
+		
+		comparsionStart : function(area) {
+			const waitWithAction = 800;
+			var actionFieldStr = "ajax_comparsion_"+area;
+			var inputFieldStr = "comp_input_lookfor_"+area;
+			const inputField = document.getElementById(inputFieldStr);
+			
+			var u = $("#hf_base_url").val();
+			var l = $("#hf_user_language").val();
+
+			var list = $("#listOf_"+area).val();
+			var graphRange = $("#input_range_"+area).val();
+			var lookfor = $("#"+inputFieldStr).val();
+			$.post( u+l+"/ajax/wiki/comparsion/lookfor", { 'solrIndex':area, 'lookfor':lookfor, 'graphRange':graphRange, 'list':list }, function(result){ 
+					if (result.length>1) {
+						$("#"+actionFieldStr).html(result); 
+						} 
+					}
+				);	
+					
+			},
+		
+		comparsion : function(area) {
+			const waitWithAction = 800;
+			var actionFieldStr = "ajax_comparsion_"+area;
+			var inputFieldStr = "comp_input_lookfor_"+area;
+			var rangeFieldStr = "comp_input_range_"+area;
+			const inputField = document.getElementById(inputFieldStr);
+			const rangeField = document.getElementById(rangeFieldStr);
+			
+			var u = $("#hf_base_url").val();
+			var l = $("#hf_user_language").val();
+
+			var list = $("#comp_listOf_"+area).val();
+			var graphMode = $("#comp_graphMode_"+area).val();
+			var graphRange = $("#"+rangeFieldStr).val();
+			
+			let timerId;
+			
+			rangeField.addEventListener("change", function() {
+				var lookfor = $("#"+inputFieldStr).val();
+				var graphRange = $("#"+rangeFieldStr).val();
+				$.post( u+l+"/ajax/wiki/comparsion/lookfor", { 'solrIndex':area, 'lookfor':lookfor, 'graphMode':graphMode, 'graphRange':graphRange, 'list':list }, function(result){ 
+						if (result.length>1) {
+							$("#"+actionFieldStr).html(result); 
+							} 
+						}
+					);
+				});
+			inputField.addEventListener("input", function() {
+				const teraz = Date.now();
+				
+				if (timerId) {
+					clearTimeout(timerId);
+					}
+
+				timerId = setTimeout(function() {
+					var lookfor = $("#"+inputFieldStr).val();
+					var graphRange = $("#"+rangeFieldStr).val();
+					$.post( u+l+"/ajax/wiki/comparsion/lookfor", { 'solrIndex':area, 'lookfor':lookfor, 'graphMode':graphMode, 'graphRange':graphRange, 'list':list }, function(result){ 
+							if (result.length>1) {
+								$("#"+actionFieldStr).html(result); 
+								} 
+							}
+						);	
+					}, waitWithAction);
+
+				lastKeyPressTime = teraz;
+				});
+			},
+		
+		lookfor : function(area) {
+			const waitWithAction = 800;
+			var actionFieldStr = "ajax_stat_"+area;
+			var inputFieldStr = "stat_input_lookfor_"+area;
+			var rangeNumberStr = "stat_graph_number_"+area;
+			var rangeFieldStr = "stat_graph_range_"+area;
+			const inputField = document.getElementById(inputFieldStr);
+			const rangeNumber = document.getElementById(rangeNumberStr);
+			const rangeField = document.getElementById(rangeFieldStr);
+			
+			var u = $("#hf_base_url").val();
+			var l = $("#hf_user_language").val();
+
+			var list = $("#stat_listOf_"+area).val();
+			var graphMode = $("#stat_graphMode_"+area).val();
+			var graphRange = $("#"+rangeFieldStr).val();
+			
+			let timerId;
+			
+			function handleRangeChange() {
+				var lookfor = $("#" + inputFieldStr).val();
+				var graphRange = $("#" + rangeFieldStr).val();
+				$.post(u + l + "/ajax/wiki/stats/lookfor", { 'solrIndex': area, 'lookfor': lookfor, 'graphMode': graphMode, 'graphRange': graphRange, 'list': list }, function (result) {
+					if (result.length > 1) {
+						$("#" + actionFieldStr).html(result);
+					}
+				});
+				}
+
+			rangeField.addEventListener("change", handleRangeChange);
+			rangeNumber.addEventListener("change", handleRangeChange);
+
+				
+			inputField.addEventListener("input", function() {
+				const teraz = Date.now();
+				
+				if (timerId) {
+					clearTimeout(timerId);
+					}
+
+				timerId = setTimeout(function() {
+					var lookfor = $("#"+inputFieldStr).val();
+					var graphRange = $("#"+rangeFieldStr).val();
+					$.post( u+l+"/ajax/wiki/stats/lookfor", { 'solrIndex':area, 'lookfor':lookfor, 'graphMode':graphMode, 'graphRange':graphRange, 'list':list }, function(result){ 
+							if (result.length>1) {
+								$("#"+actionFieldStr).html(result); 
+								} 
+							}
+						);	
+					}, waitWithAction);
+
+				lastKeyPressTime = teraz;
+				});
+			}
+		}
+		
 var importer = {
 		
 		All : function(start,step) {
@@ -824,38 +1146,42 @@ var importer = {
 
 function resizeTopWhiteSpace() {
 	var top = $('header').height();
+	let vid = $('header').width();
 	$('body').css('margin-top', top+'px');
 	$('.cms_box_home').css('background-position-y', top+'px'); 
 	$('.userBox-menu').css('top', top+10+'px');
+	$('#constInfoCloud').html(vid);
+	
+	
 	}
 	
 	
 	
-window.addEventListener("resize", resizeTopWhiteSpace);	
+
 
 $(document).ready(function(){
+	window.addEventListener("resize", resizeTopWhiteSpace);	
 	
+	page.url = $("#hf_base_url").val();
+	page.lang = $("#hf_user_language").val();
+	page.baseLink = page.url+page.lang;
 	
 	resizeTopWhiteSpace();
 	facets.SlideIn();
-	// $('#slideinbtn').toggle("hide");
+	
 	$('[data-toggle="tooltip"]').tooltip(); 
 	
 	$("#searchForm_lookfor").focus(function(){
-		var w = $("#searchInput").innerWidth();
-		
-		$("#searchFormAC").addClass("active");
-		$("#searchFormAC").innerWidth(w);
+		$(".searchInput-ac").addClass("active");
 		$("#searchInput").addClass("active");
 		});
 		
 	$("#searchForm_lookfor").blur(function(){
-		$("#searchFormAC").removeClass("active");
+		$(".searchInput-ac").removeClass("active");
 		$("#searchInput").removeClass("active");
 		});
 		
 	$('#myModal').on('hidden.bs.modal', function () { $("#inModalBox").html('loading ...');	});
-	
 	});
 	
 	

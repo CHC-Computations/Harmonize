@@ -1,37 +1,46 @@
 <?php 
 
-$author = $this->record->getMainAuthor();
-$title = $this->record->getTitle(); 
+$author = current((array)$this->record->get('persons', 'mainAuthor'));
+$elbRecord = json_decode($rec->relations);
+$title = $elbRecord->title; 
+
+$publicationYear = current((array)$this->record->get('publicationYear'));
 
 ?> 
 
 
 
 <h4>APA (7th ed.) Citation</h4>
-<?= $author['last_name']?>, <?= substr($author['first_name'],0,1) ?>. <i><?=$title ?></i>
-
+<?= $this->record->getNamePart('last name', $author->name)?>, <?= substr($this->record->getNamePart('first name', $author->name),0,1) ?>. 
+<?php if (!empty($publicationYear)) echo '('.$publicationYear.').'?> <i><?=$title ?></i>
+<hr>
 
 
 
 <h4>Chicago Style (17th ed.) Citation</h4>
-<?= $author['last_name']?>, <?= $author['first_name'] ?>. <i><?=$title ?></i>
-
+<?= $author->name ?>. <i><?=$title ?></i><?php if (!empty($publicationYear)) echo ', '.$publicationYear.'.'?>
+<hr>
 
 
 <h4>MLA (8th ed.) Citation</h4>
-<?= $author['last_name']?>, <?= $author['first_name'] ?>. <i><?=$title ?></i>
+<?= $author->name ?>. <i><?=$title ?></i><?php if (!empty($publicationYear)) echo ', '.$publicationYear.'.'?>
+<hr>
 
 
 <h4>Česká literární bibliografie</h4>
 
 
 <?php
-	$a = mb_strtoupper($author['last_name'], "UTF-8") .', '. $author['first_name'] .': ';
+	$a = mb_strtoupper($this->record->getNamePart('last name', $author->name), "UTF-8") .', '. $this->record->getNamePart('first name', $author->name) .': ';
 	
-	$In = $this->record->getMarcLine(773, ['t'], '', '');
-	$In .= '. '. $this->record->getMarcLine(773, ['g'], '', '');
+	$magazine = current((array)$this->record->get('magazines', 'sourceMagazine'));
+	$In = '';
+	if (!empty($magazine->title)) $In = $magazine->title;
+	if (!empty($magazine->relatedPart)) $In .= '. '. $magazine->relatedPart;
+	if (!empty($In)) $In .='.';
 		
-	$CLB = "$a<i>$title</i>. $In."; 
+	$CLB = "$a<i>$title</i>. $In"; 
+	if (!empty($publicationYear)) $CLB .=', '.$publicationYear.'.'
 	?>
 
 <p class="text-left"><?=$CLB ?></p>

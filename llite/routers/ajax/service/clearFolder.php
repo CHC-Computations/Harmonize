@@ -1,6 +1,6 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
+require_once('functions/class.helper.php');
 $this->addClass('helper', new helper()); 
 
 $klucz = $this->routeParam[0];

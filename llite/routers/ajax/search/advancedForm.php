@@ -111,17 +111,17 @@ class AdvSearch extends CMS {
 		parent::__construct();
 		$searchOptions = $this->getConfig('search');
 		foreach ($this->getIniParam('search', 'basicSearches') as $k=>$v) {
-			$this->opt[$k] = $this->transEsc( $v );
+			@$this->opt[$k] = $this->transEsc( $v );
 			}
 
-		$this->Gmatches['and'] = $this->transEsc( 'and' );
+		@$this->Gmatches['and'] = $this->transEsc( 'and' );
 		$this->Gmatches['or'] = $this->transEsc( 'or' );
 		
-		$this->matches['and'] = $this->transEsc( 'and' );
+		@$this->matches['and'] = $this->transEsc( 'and' );
 		$this->matches['or'] = $this->transEsc( 'or' );
 		#$this->matches['without'] = $this->transEsc( 'without' );
 		
-		$this->methods['contains'] = $this->transEsc( 'contains' );
+		@$this->methods['contains'] = $this->transEsc( 'contains' );
 		$this->methods['is'] = $this->transEsc( 'is equal to' );
 		$this->methods['isnot'] = $this->transEsc( 'is not' );
 		#$this->methods['isnotcontains'] = $this->transEsc( 'don`t contains' );
@@ -130,7 +130,7 @@ class AdvSearch extends CMS {
 		}
 	
 	function setGroups($gr) {
-		$this->groups = $gr;
+		@$this->groups = $gr;
 		}
 	
 	function fieldFalue($field,$gk,$k='1') {

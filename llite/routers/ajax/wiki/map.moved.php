@@ -1,68 +1,95 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.buffer.php');
-require_once('functions/klasa.wikidata.php');
-require_once('functions/klasa.maps.php');
-$this->addClass('helper', new helper()); 
-$this->addClass('maps',	new maps()); 
-# $this->addClass('buffer',	new marcbuffer()); 
 
 
-$bufferFileName = './files/maps/'.$this->langCode.'-fullMap.js';
+require_once('functions/class.helper.php');
+require_once('functions/class.buffer.php');
+require_once('functions/class.wikidata.php');
+require_once('functions/class.wikidata.libri.php');
+require_once('functions/class.maps.php');
+require_once('functions/class.solr.php');
 
-# echo $this->helper->pre($this->GET);
-# echo $this->helper->pre($this->POST);
-
-if ($this->POST['total'] == $this->POST['visible']) die;
-if (($this->POST['zoomOld']<3)&($this->POST['zoom']<3)) die;
-
-
-// map.removeLayer(marker)
-echo "<script>
-  map.eachLayer( function(layer) {
-    if(layer instanceof L.Marker) {
-	  map.removeLayer(layer)
-      }
-    });
-
-</script>
-";
+$this->addClass('helper', 	new helper()); 
+$this->addClass('maps',		new maps()); 
+$this->addClass('buffer',	new buffer()); 
+$this->addClass('solr',		new solr($this)); 
 
 
 
+if (!empty($this->POST['total']) && !empty($this->POST['visible']) && ($this->POST['total'] == $this->POST['visible'])) die;
+#if (!empty($this->POST['zoomOld']) && ($this->POST['zoomOld']<3)&($this->POST['zoom']<3)) die;
+
+$currentCore = 'places';
+echo "<script> map.eachLayer( function(layer) {if(layer instanceof L.Marker) {map.removeLayer(layer)}});</script>";
+
+$lookfor = $this->postParam('lookfor');
+if (empty($lookFor) && !empty($this->GET['lookfor'])) {
+	$lookfor = $this->GET['lookfor'];
+	$query['q']=[ 
+			'field' => 'q',
+			'value' => $lookfor
+			];
+	} else 
+	$query['q']=[ 
+			'field' => 'q',
+			'value' => '*:*'
+			];
+$query['sort']=[ 
+		'field' => 'sort',
+		'value' => 'biblio_count desc'
+		];
+$query[] = [
+		'field' => 'q.op', 
+		'value' => 'AND'	
+		];
 
 
-$WAR = "lon IS NOT NULL AND lat IS NOT NULL AND a.wikiq IS NOT NULL";
-if (!empty ($this->GET['lookfor'])) {
-	$sstring = $this->urlName2($this->GET['lookfor']);
-	$WAR .= " AND sstring ILIKE '%{$sstring}%'";
-	}
-$WAR.=" AND lat<'{$this->POST['bN']}' AND lat>'{$this->POST['bS']}' AND lon<'{$this->POST['bE']}' AND lon>'{$this->POST['bW']}' ";
-	###########################################################################################################################################
-	##
-	##										FIRST STEP
-	##
-	###########################################################################################################################################
+if (!empty($this->POST['bE'])) {
+	// map moved run
+	$firstRun = false;
+	$lon = $lat = [];
+	$lon[] = $this->POST['bE'];
+	$lon[] = $this->POST['bW'];
+	$lat[] = $this->POST['bS'];
+	$lat[] = $this->POST['bN'];
+	sort($lon);
+	sort($lat);
+	$query[] = [
+				'field' => 'fq', 
+				'value' => 'longitiude:['.implode(' TO ',$lon).']'	
+				];
+	$query[] = [
+				'field' => 'fq', 
+				'value' => 'latitiude:['.implode(' TO ',$lat).']'	
+				];
+	}  
+$query['rows']=[ 
+		'field' => 'rows',
+		'value' => 50
+		];
+
+$times = [];
+$results = $this->solr->getQuery($currentCore, $query); 
+$results = $this->solr->resultsList();
+$facets = $this->solr->facetsList();
+$totalResults = $recSum = $this->solr->totalResults();
+#echo "alerts".$this->helper->pre($this->solr->alert);
+
+
+if ($totalResults>0) {
 	
-$t = $this->psql->querySelect($Q = "SELECT count(*) as recsum, max(subjecthits+pubplacehits+personhits) as recmax FROM places_on_map a WHERE $WAR;");
-#echo "$Q";
-
-
-
-// ?q=*:*&q.op=OR&indent=true&fq=latitiude:[51 TO 53]&fq=longitiude:[15 TO 23]&sort=total_count desc
-
-if (is_array($t)) {
-	$res = current($t);
-	$recSum = $res['recsum'];
-	$recMax = $res['recmax'];
-		
+	$first = current($results);
+	$recMax = $first->biblio_count;
+	$last = end($results);
+	$recMin = $last->biblio_count;
+	
+	echo $this->transEsc('Showing results').': <strong>'.$this->solr->visibleResults().'</strong>';
+	$this->addJS('$("#visibleResults").val("'.$this->solr->visibleResults().'")');
 	###########################################################################################################################################
 	##
 	##										Drawing points 
 	##
 	###########################################################################################################################################
-	$step = 100;
 	
 	$colorTop = '#f3984e';
 	$colorMiddle = '#f0cc41';
@@ -73,73 +100,53 @@ if (is_array($t)) {
 	$PlaceCircleBasic = "color: '#76679B', fillColor: '#5F3D8D', weight: 2, fillOpacity: 0.5";
 	$PlaceCircleHover = "color: 'red', fillColor: 'yellow', weight: 1, fillOpacity: 0.5";
 	$emptyStr = ''; //$this->transEsc('Point on map to see details');
+	
+	$lp = 0;
+	foreach ($results as $place) {
+		$lp++;
+		$pjs = [];
 		
-	$t = $this->psql->querySelect($Q = "SELECT DISTINCT a.*, (subjecthits+pubplacehits+personhits) as totalhits, b.value as wikiname 
-				FROM places_on_map a
-				LEFT JOIN wiki_labels b ON a.wikiq=b.wikiq AND b.lang='{$this->userLang}'
-				WHERE $WAR ORDER BY totalhits DESC LIMIT $step;"); 
-	if (is_array($t)) {
-		$lp = 0;
-		$partCount = count($t);
-		$last = end($t);
-		$recMin = $last['totalhits'];
+		$icon = 'SBottom';
+		if ($lp<10) { $label = 'Bottom'; $icon = 'None'; }
+		if ($lp<6) { $label = 'Middle'; $icon = 'None'; }
+		if ($lp<3) { $label = 'Top'; $icon = 'None'; }
 		
-		$colStep = ($recMax-$recMin)/3;
-		$col1 = $recMax-$colStep;
-		$col2 = $recMin+$colStep;
+		$tlat[] = $place->latitiude;
+		$tlon[] = $place->longitiude;
+		$key = $place->wikiq;
+		$placeWiki = new wikiLibri($this->userLang, $place);
+		$wikiName = $placeWiki->getStr('labels');
+		if (empty($wikiName))
+			$wikiName = $place->wikiq;
 		
-				
-		foreach ($t as $res) {
-			
-			############################################################ adding point to map
-			$lp++;
-			$place = $res;
-			$pjs = [];
-			
-			$icon = 'SBottom';
-			if ($lp<10) { $label = 'Bottom'; $icon = 'None'; }
-			if ($lp<6) { $label = 'Middle'; $icon = 'None'; }
-			if ($lp<3) { $label = 'Top'; $icon = 'None'; }
-			
-			$tlat[] = $place['lat'];
-			$tlon[] = $place['lon'];
-			
-			if (!empty($res['wikiname']))
-				$wikiName = $res['wikiname'];
-				else
-				$wikiName = $res['name'];	
-				#$wikiName = $this->helper->formatWiki($res['wikiq']);
-				
-				
-			$place['link'] = "<h3><a href='{$this->buildUrl('wiki/record/Q'.$res['wikiq'])}'>{$wikiName}</a></h3>";
-			#if (!empty($res['names'])) 	$place['link'] .= $this->transEsc('Other names: ').$res['names'].'<br/><br/>';
-			$place['link'] .= $this->transEsc('Exists as').':<br/>';
-			$place['link'] .= $this->transEsc('Subject place').': '.$res['subjecthits'].'<br/>';
-			$place['link'] .= $this->transEsc('Publication place').': '.$res['pubplacehits'].'<br/>';
-			$place['link'] .= $this->transEsc('Person place').': '.$res['personhits'].'<br/>';
-			$key = $res['wikiq'];
-			
-			$pjs[] = "var smarker_$res[wikiq] = L.marker([$place[lat], $place[lon]], {icon: Circle$icon }); ";
-			$pjs[] = "smarker_$res[wikiq].addTo(map);";
-			if ($lp<10) $pjs[] = "smarker_$res[wikiq].bindTooltip('".$this->helper->badgeFormat($place['totalhits'])."' , {permanent: true, direction: 'center', className: 'label-{$label}' });";
-			$pjs[] = "smarker_$res[wikiq].on({click: function () { $('#poitedDet').html(\"$place[link]\");	}});";
-			$pjs[] = "smarker_$res[wikiq].bindPopup(\"{$place['link']}\")";
-			$js[] = implode("\n", $pjs);
-			}
+		$place->link = "<div id='placeBox_{$key}' class='mapPlaceBox'>";
+		$place->link .= "<h3><a href='{$this->buildUrl('wiki/record/'.$place->wikiq)}'>{$wikiName}</a></h3>";
+		$place->link .= '<p>'.$placeWiki->getStr('descriptions').'</p>';
+		$place->link .= "</div>";
 		
-		$this->addJS(implode("\n", $js));	
-
-		echo $this->helper->numberFormat($lp);
+		$pjs[] = "var smarker_$key = L.marker([$place->latitiude, $place->longitiude], {icon: Circle$icon }); ";
+		$pjs[] = "smarker_$key.addTo(map);";
+		if ($lp<10) $pjs[] = "smarker_$key.bindTooltip('".$this->helper->badgeFormat($place->biblio_count)."' , {permanent: true, direction: 'center', className: 'label-{$label}' });";
+		$pjs[] = "smarker_$key.on({click: function () { results.maps.currentPlace('{$place->wikiq}')}});";
+		$pjs[] = "smarker_$key.bindPopup(\"{$place->link}\")";
+		
+		$js[] = implode("\n", $pjs);
 		}
-		
-		
-		
+	
+	
+	
+	$this->addJS(implode("\n", $js));	
+
 	} else {
-	echo $this->tranEsc('No results');	
+	echo $this->transEsc('No results');	
 	}
-		
 	
 	
+	
+#echo $this->helper->pre($this->GET);
+#echo $this->helper->pre($this->POST);
+#echo $this->helper->pre($this->routeParam);
+#echo '<br/><small>map moved!<br/>'.date(DATE_ATOM).'</small><br/>';
 
-
+$this->addJS('console.log("'.date("Y-m-d H:i:s.U").'");');
 ?>

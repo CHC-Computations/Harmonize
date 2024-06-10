@@ -1,12 +1,6 @@
 <?php 
 $limit = 50;
 
-$translated = false;
-$formatter = null;						
-if (!empty($this->$core->facets->facetsMenu->$currFacet->translated))
-	$translated = $this->$core->facets->facetsMenu->$currFacet->translated;
-if (!empty($this->$core->facets->facetsMenu->$currFacet->formatter))
-	$formatter = $this->$core->facets->facetsMenu->$currFacet->formatter;
 
 $choosen = '';	
 $ch_array = [];
@@ -24,10 +18,7 @@ if (!empty($_SESSION['facets_chosen'][$currFacet]))
 			
 		foreach ($_SESSION['facets_chosen'][$currFacet] as $k=>$v) {
 			
-			$tk = $k;
-			if (!empty($formatter))	$tk = $this->helper->$formatter($k);
-			if ($translated) $tk = $this->transEsc($k);
-			
+			$tk = $this->helper->convertC($core, $currFacet, $k);
 			
 			$lp++;
 			$input_value='~'.$currFacet.':"'.$k.'"';
@@ -39,7 +30,7 @@ if (!empty($_SESSION['facets_chosen'][$currFacet]))
 		
 		if (!empty($facet) && !empty($this->buffer->usedFacetsStr))
 			$facet = array_merge($facet, $this->buffer->usedFacetsStr);
-		$key = $this->buffer->createFacetsCode($this->sql, $facet);
+		$key = $this->buffer->createFacetsCode($facet);
 		
 		$ch_array = $_SESSION['facets_chosen'][$currFacet];
 		
@@ -52,7 +43,7 @@ if (!empty($_SESSION['facets_chosen'][$currFacet]))
 		
 		$this->facetsCode = $key;
 		$choosen .='<div class="text-right">';
-		$choosen .='<a href="'.$this->buildUri($core.'/results').'" class="btn btn-success"><i class="fa fa-check"></i> '.$this->transEsc('Use choosen').'</a>';
+		$choosen .='<a href="'.$this->buildUri('results', ['core'=>$core, 'facetsCode'=>$this->facetsCode]).'" class="btn btn-success"><i class="fa fa-check"></i> '.$this->transEsc('Use choosen').'</a>';
 		#$choosen .="<button type=submit class='btn btn-success'><i class='fa fa-check'></i> ".$this->transEsc('Use choosen').'</button>';
 		$choosen .='</div>';
 		$choosen .="</form>";

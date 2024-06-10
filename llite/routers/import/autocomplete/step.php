@@ -1,5 +1,5 @@
 <?php
-require_once('functions/klasa.helper.php');
+require_once('functions/class.helper.php');
 $this->addClass('helper', new helper());
 
 class acimp {

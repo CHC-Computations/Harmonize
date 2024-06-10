@@ -1,14 +1,17 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
+require_once('functions/class.helper.php');
+require_once('functions/class.wikidata.php');
+
+$currentCore = 'biblio';
 
 #$this->addJS("$('.collapse'+'.sidefl').collapse('hide');");
 
 $this->addClass('helper', new helper()); 
-$this->addClass('solr', new solr($this->settings)); 
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('solr', new solr($this)); 
+$this->addClass('buffer', 	new buffer()); 
+$this->addClass('wiki', 	new wikidata($this));
 
-$facetsOptions = $this->getConfig('facets');
 
 if (!empty($this->routeParam[1])) {
 	$this->facetsCode = $this->routeParam[1];
@@ -25,30 +28,32 @@ if (!empty($this->GET['sj'])) {
 	if (!empty ($lookfor = $this->getParam('GET', 'lookfor')))
 		$query['q'] = $this->solr->lookFor($lookfor, $type = $this->getParam('GET', 'type') );			
 	
-	
+$query['q.op']=[ 
+			'field' => 'q.op',
+			'value' => 'OR'
+			];	
 
 
-#$formattedFacets = $this->getConfigParam('facets', 'formattedFacets');
-#$transletedFacets = $this->getConfigParam('facets', 'facetOptions', 'transletedFacets');
+#echo "buffer->usedFacets<pre>".print_r(@$this->buffer->usedFacets,1).'</pre>';
+#echo "query<pre>".print_r($query,1).'</pre>';
 
-#echo "results<pre>".print_r($this->buffer->usedFacets,1).'</pre>';
-#echo "results<pre>".print_r($query,1).'</pre>';
-$this->addJS("sessionStorage.setItem('justTest', 'just-Test');");	
+
 if (empty($facets)) $facets = [];
 switch ($this->routeParam[0]) {
 	default: echo $this->transEsc('unknow facet'); break;
 	case 'all_facets' : {
 		if (!empty($this->buffer->usedFacets)) 
-			echo $this->render('search/facets-active.php', ['activeFacets' => $this->buffer->usedFacets, 'facets'=>$facetsOptions, ] );
+			echo $this->render('search/facets-active.php', ['activeFacets' => $this->buffer->usedFacets ] );
 		
-		if (!empty($this->settings->facets->facetsMenu)) {
-			$facets = $this->helper->getNeededFacets($this->settings->facets->facetsMenu);	
+		if (!empty($this->configJson->$currentCore->facets->facetsMenu)) {
+			$facets = $this->helper->getNeededFacets($this->configJson->biblio->facets->facetsMenu);	
 			$results = $this->solr->getFacets('biblio', $facets, $query);
 			$fullResults = $results;
 			
-			foreach ($this->settings->facets->facetsMenu as $gr=>$facet) {
+			
+			foreach ($this->configJson->$currentCore->facets->facetsMenu as $gr=>$facet) {
 				
-				$stepSetting = clone $this->settings->facets->defaults;
+				$stepSetting = clone $this->configJson->$currentCore->facets->defaults;
 				if (!empty($facet->template))
 					$stepSetting->template = $facet->template;
 				if (!empty($facet->translated))

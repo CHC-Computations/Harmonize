@@ -1,6 +1,6 @@
 <?php
 if (empty($this)) die;
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('buffer', 	new buffer()); 
 $this->buffer->setSql($this->sql);
 #echo "<pre>".print_R($this->routeParam,1).'</pre>';
 $offset = $this->routeParam[0];

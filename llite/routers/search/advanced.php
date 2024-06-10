@@ -1,9 +1,9 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.forms.php');
-$this->addClass('solr', new solr($this->config));
-$this->addClass('buffer', new marcBuffer()); 
+require_once('functions/class.helper.php');
+require_once('functions/class.forms.php');
+$this->addClass('solr', new solr($this));
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', 	new helper()); 
 
 $this->setTitle($this->transEsc('Advanced search'));

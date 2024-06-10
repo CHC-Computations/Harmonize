@@ -1,12 +1,12 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
+require_once('functions/class.helper.php');
 
 $this->addJS('$("#facetsBox").css("opacity","1"); ');
 
 $this->addClass('helper', new helper()); 
-$this->addClass('solr', new solr($this->config)); 
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('solr', new solr($this)); 
+$this->addClass('buffer', 	new buffer()); 
 
 
 $facets = $this->getConfig('facets');

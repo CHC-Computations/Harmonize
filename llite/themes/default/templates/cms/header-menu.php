@@ -16,7 +16,7 @@ if (!empty($this->params[3]))
 <button class="close" OnClick="coreMenu.Hide()" type="button"><i class="ph-x-bold"></i></button>
 <ul>
 <li class="core-menu-header"><?= $this->transEsc('Search in') ?>:</li>
-<?= $this->render('cms/menu-search-cores.php', ['menu' => $this->getIniParam('search','searchCores'), 'currPage' => $currentSE ]) ?>
+<?= $this->render('cms/menu-search-cores.php', ['menu' => $this->configJson->settings->homePage->coresNames, 'currPage' => $currentSE ]) ?>
 <li class="core-menu-header"><?= $this->transEsc('Menu') ?>:</li>
 <?= $this->render('cms/menu-in-header.php', ['menu' => $this->getMenu(1), 'currPage' => $currentPage ]) ?>
 </ul>

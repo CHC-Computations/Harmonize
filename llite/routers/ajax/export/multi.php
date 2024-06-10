@@ -1,9 +1,9 @@
 <?php 
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.forms.php');
-require_once('functions/klasa.exporter.php');
-require_once('functions/klasa.wikidata.php');
+require_once('functions/class.helper.php');
+require_once('functions/class.forms.php');
+require_once('functions/class.exporter.php');
+require_once('functions/class.wikidata.php');
 
 $recPerStep = 321;
 
@@ -11,8 +11,8 @@ $export = $this->getConfig('export');
 $facets = $this->getConfig('search');
 $facets = $this->getConfig('facets');
 
-$this->addClass('buffer', 	new marcBuffer()); 
-$this->addClass('solr', 	new solr($this->config)); 
+$this->addClass('buffer', 	new buffer()); 
+$this->addClass('solr', 	new solr($this)); 
 $this->addClass('helper', 	new helper()); 
 
 $this->buffer->bufferTime = 86400*360; // we don't want to update external records during export (because it cost time)
@@ -587,6 +587,7 @@ if (!empty ($this->postParam('options'))) {
 										$person->wiki = $t[4];
 										$person->recCount = $count;
 										
+										/*
 										if (!empty($person->wiki)) {
 											$wiki = new wikidata('Q'.$person->wiki);
 											$person->fromWiki = new stdClass;
@@ -596,6 +597,7 @@ if (!empty ($this->postParam('options'))) {
 											$person->fromWiki->placeD = $wiki->getPropId('P20');
 											$person->fromWiki->sstring = $wiki->getSearchString();
 											}
+										*/
 										$person->roles = $this->solr->getRoles('biblio', 'persons_with_roles', $result);
 										$Tjson [] = json_encode($person);
 										}
@@ -912,6 +914,7 @@ if (!empty ($this->postParam('options'))) {
 		echo '<div class="text-center">';
 		echo '<a href="'.$this->HOST.'files/exports/'.$fileName.'.zip" class="btn btn-success">'.$this->transEsc('Download ZIP file').'</a>';
 		echo '</div>';
+		$this->addJS('$("#exportBtn").html(" ");');
 		}
 	
 	} else if (!empty($this->routeParam[0])) {

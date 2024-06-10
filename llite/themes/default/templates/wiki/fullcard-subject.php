@@ -1,7 +1,41 @@
 <?php
 $PRE = '';
 $stats = '';
-
+$Tchecked = []; 
+$allNames = $this->wiki->getAllNames();
+if (!empty($this->wiki->get('aliases')))
+	$names = explode(', ', $this->wiki->get('aliases'));
+$names[] = $this->wiki->get('labels');
+foreach ($names as $name) {
+	$clearName = $this->solr->clearStr($name);
+	if ($clearName<>'')
+		$Tnames[$clearName] = $clearName;
+	}
+$Tnames = [];
+if (!empty($allNames))
+	foreach($allNames as $name) {
+		$clearName = $this->solr->clearStr($name);
+		if ($clearName<>'')
+			$Tnames[$name] = $clearName;
+		}
+$res = $this->solr->getFullList('topic');
+if (!empty ($res->results))
+	foreach ($res->results as $word=>$count) {
+		$clearWord = $this->solr->clearStr($word);
+		if (in_array($clearWord, $Tnames) && (floatval($clearWord)==0)) {
+			$Tchecked[$word]=$count;
+			$Twords[$word] = $word;
+			}
+		}
+if (!empty($Twords))
+	$stat = $this->solr->getStats(
+					'biblio',
+					$Twords, 
+					['allfields'], 
+					$this->getIniParam('persons','statList','statFields')
+					);	
+	else
+	$stat = [];
 			
 $PRE = "<pre>".print_R($stat,1)."</pre>";
 $stats = '';
@@ -11,6 +45,7 @@ $formatters = $this->getIniArray('facets', 'formattedFacets');
 	
 $stats .= '<div class="statBox">';
 $Llp = 0;
+if (!empty($statBoxes))
 foreach ($statBoxes as $facet=>$facetName) {
 	$nstat = [];
 	$lp = 0;
@@ -74,8 +109,8 @@ $stats .="</div>";
 		
 		<div class="record-left-panel">
 			<div class="thumbnail">
-				<?= $this->render('helpers/photo.php', ['photo'=>$photo, 'title'=>$title ]) ?>
-				<?= $this->render('helpers/audio-player.php', ['audio' => $audio ]) ?>
+				<?= $this->render('helpers/wiki.photo.php') ?>
+				<?= $this->render('helpers/wiki.audio.php') ?>
 			</div>
 		</div>
 		<div class="record-main-panel">
@@ -95,12 +130,12 @@ $stats .="</div>";
 			
 			<?php
 			
-			if (count($names)>0) {
-				$max = max($names);
+			if (count($Tchecked)>0) {
+				$max = (int)max($Tchecked);
 				$pic = $max/50;
 				
 				
-				foreach ($names as $name=>$count)
+				foreach ($Tchecked as $name=>$count)
 					$Ttl[] = "['$name', ".(round($count/$pic)+20).']';
 				
 				foreach ($allNames as $name) 
@@ -118,7 +153,7 @@ $stats .="</div>";
 				
 				echo '<div id="canvas" style="height:400px; "></div>';
 				echo "<h4>Topics found in the bibliography</h4>";
-				foreach ($names as $name=>$count)
+				foreach ($Tchecked as $name=>$count)
 					echo "$name <span class=badge>$count</span> ";
 				}
 			

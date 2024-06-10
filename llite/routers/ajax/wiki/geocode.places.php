@@ -1,10 +1,10 @@
 <?php 
 if (empty($this)) die;
 # echo "<pre>".print_R($this->routeParam,1)."</pre>";
-require_once('functions/klasa.wikidata.php');
+require_once('functions/class.wikidata.php');
 
-$this->addClass('solr', new solr($this->config));
-$this->addClass('buffer', 	new marcBuffer()); 
+$this->addClass('solr', new solr($this));
+$this->addClass('buffer', 	new buffer()); 
 
 
 

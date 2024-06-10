@@ -3,8 +3,9 @@ $PRE = '';
 $stats = '';
 $extraTabs = [];
 
-
-	$place = $res = $this->buffer->getPlaceParams($this->wiki->get('labels'), 'extended');
+/* 
+	
+	#$place = $res = $this->buffer->getPlaceParams($this->wiki->get('labels'), 'extended');
 	# $neighborhood = $this->buffer->getNeighborhoodPlaces($res);
 	
 	
@@ -37,14 +38,9 @@ $extraTabs = [];
 		#$mapDraw.= '<button style="border:transparent; background-color: transparent;" OnClick="results.maps.addWikiRelatations(\''.$this->wiki->record->id.'\');">Draw Wiki relations</button>';
 		$mapDraw.= ' <div id="mapRelationsAjaxArea">
 					'.$this->helper->loader2().'
-					<input type="checkbox" checked id="map_checkbox_1" >
-					<input type="checkbox" checked id="map_checkbox_2" >
-					<input type="checkbox" checked id="map_checkbox_3" >
-					<input type="checkbox" checked id="map_checkbox_4" >
-					<input type="checkbox" checked id="map_checkbox_5" >
-		
+					
 					</div>';
-		$this->addJS("results.maps.addPlaceRelatations('".$this->wiki->record->id."')");
+		#$this->addJS("results.maps.addPlaceRelatations('".$this->wiki->record->id."')"); // should I delete this method from libri.js ?
 		
 		$extraTabs['map'] = ['label' => $this->transEsc('Map'), 'content' => $mapDraw];
 		} 
@@ -118,14 +114,12 @@ $extraTabs = [];
 					$tk = $k;
 					if (array_key_exists($facet, $formatters))
 						$tk = str_replace('"', "'", $this->helper->{$formatters[$facet]}($k));
-					/*
 					if (!empty($stepSetting->formatter)) {
 						$formatter = $stepSetting->formatter;
 						$tk = $this->helper->$formatter($k);
 						}
 					if ($stepSetting->translated)
 						$tk = $this->transEsc($k);
-					*/
 					
 					
 					if ($v>0)
@@ -218,7 +212,6 @@ $extraTabs = [];
 	
 	
 	
-	/* 
 	P242 -> value - obraz z lokalizacją !
 	P625 -> value => stdClass Object
 	P1332 -> value => stdClass Object
@@ -228,15 +221,18 @@ $extraTabs = [];
 										)
 	P998[0] -> value :rozdzielane / - ścieżka dostępu - kontytent/kraj/region									
 	P998[1] -> value :rozdzielane / - ścieżka dostępu - world/kontytent/kraj/region									
-	*/
 			
 
-
+	if (!empty($dataQualityStr))
+		$extraTabs['orginLabels'] = [
+				'label' => $this->transEsc('Data quality').'', 
+				'content' => $dataQualityStr
+				];
+	*/
+	
 
 ?>
 
-<div class="graybox">
-  <div class="infopage">
     <div class="infopage-header">
 	   <h1 property="name"><?= $title = $this->wiki->get('labels') ?> <small><?= $this->wiki->get('aliases') ?></small></h1>
 	</div>
@@ -245,8 +241,8 @@ $extraTabs = [];
 		
 		<div class="record-left-panel">
 			<div class="thumbnail">
-				<?= $this->render('helpers/photo.php', ['photo'=>$photo, 'title'=>$title ]) ?>
-				<?= $this->render('helpers/audio-player.php', ['audio' => $audio ]) ?>
+				<?= $this->render('helpers/wiki.photo.php') ?>
+				<?= $this->render('helpers/wiki.audio.php') ?>
 			</div>
 		</div>
 		<div class="record-main-panel">
@@ -272,18 +268,3 @@ $extraTabs = [];
 	</div>
 	
 	
-	
-	
-	<div class="tabs-panel">
-		<?= 
-		$this->helper->tabsCarousel( $extraTabs , 'map');
-		?>
-    </div>
-	
-	<div id="drawPoints">
-
-	</div> 
-  </div>
-  
-  
-</div>

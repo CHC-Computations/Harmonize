@@ -2,28 +2,20 @@
 if (empty($this)) die;
 $lp = $this->GET['lp'];
 
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', new helper()); 
-$this->addClass('solr', new solr($this->config)); 
-
-$this->buffer->setSql($this->sql);
-
+$this->addClass('solr', new solr($this)); 
 
 $currAction = $this->routeParam[0];
 $currFacet = $this->routeParam[1];
 $userLang = $this->routeParam[2];
-$core = $this->routeParam[3];
-$this->facetsCode = $this->routeParam[count($this->routeParam)-2];
+$core = $this->routeParam[4];
+$this->facetsCode = $this->routeParam[6] ?? null;
 $this->buffer->getFacets($this->facetsCode);	
 
-if (($core == '') or ($core == 'biblio') or ($core == 'search')) $core = 'settings';
-	else 
-	$this->loadJsonSettings($core);
+$this->loadJsonSettings($core);
 
-if (!empty($this->$core->facets->facetsMenu->$currFacet->name))
-	$facetName = $this->$core->facets->facetsMenu->$currFacet->name;
-	else 
-	$facetName = '';
+$facetName = $this->configJson->$core->facets->solrIndexes->$currFacet->name ?? $this->configJson->$core->facets->facetsMenu->$currFacet->name ;
 
 	
 if (!empty ($this->GET['add'])) {

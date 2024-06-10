@@ -1,14 +1,15 @@
 <?php 
 if (empty($this)) die;
-$this->addClass('buffer', 	new marcBuffer());
-$this->addClass('solr', new solr($this->config)); 
+$currentCore = 'biblio';
+$this->addClass('buffer', 	new buffer());
+$this->addClass('solr', new solr($this)); 
 
 $this->addJS('$("#querySummary").css("opacity","1"); ');
 
 $search = $this->getConfig('search');
 $facets = $this->getConfig('facets');
 
-$sortNames = $this->getIniParam('search', 'sortnames');
+$sortNames = clone $this->configJson->$currentCore->summaryBarMenu->sorting->optionsAvailable;
 $authorFormat = $this->getIniArray('facets', 'facetOptions','authorFormats');
 
 
@@ -102,7 +103,7 @@ if (!empty($_SESSION['advSearch']['form'])) {
 					$lookfor = '""';
 					else 
 					$lookfor = '"'.$item['lookfor'].'"';
-				$lookForStr.= '<li class="list-group-item">'.$this->transEsc($op).
+				$lookForStr.= '<li class="list-group-item">'.$this->transEsc($op).' '.
 					$this->transEsc($item['type']).' '.
 					$this->transEsc($item['meth']).' '.
 					$lookfor.
@@ -111,7 +112,7 @@ if (!empty($_SESSION['advSearch']['form'])) {
 			$lookForStr.= '</ul>';
 			}
 		
-	$lookForStr.="<pre>".print_r($formsChosen,1)."</prE>";
+	#$lookForStr.="<pre>".print_r($formsChosen,1)."</prE>";
 	
 	$searchKey = md5($searchJson = json_encode($formsChosen));
 	$_SESSION['advSearch']['json'] = $searchJson;
@@ -166,7 +167,7 @@ if (!empty($_SESSION['facetsChosen'])) {
 			}
 	#echo "<pre>".print_R($facetsList,1).'</pre>';
 	if (!empty($facetsList)) {
-		$this->facetsCode = $this->buffer->createFacetsCode($this->sql, $facetsList);
+		$this->facetsCode = $this->buffer->createFacetsCode($facetsList);
 		$query[] = $this->buffer->getFacets($this->facetsCode);	
 		}
 	}	
@@ -187,7 +188,7 @@ if (!empty($_SESSION['advSortBy'])) {
 		#echo "$sortKey<pre>".print_R($sortOptions,1)."</prE>";
 		if ($sortKey>1) 
 			$sortByStr.=$this->transEsc('then').' ';
-		$sortByStr .= $this->transEsc($sortNames[$sortValue]).'<br/>';
+		$sortByStr .= $this->transEsc($sortNames->$sortValue->name).'<br/>';
 		$sortLink[$sortKey]=$sortValue;
 		}
 	$sortByStr .= '</div>';
@@ -223,7 +224,7 @@ echo $sortByStr;
 echo '
 		<div class="text-right">
 			
-			<a href="'.$this->buildUri('search/results',['page'=>'1', 'sort'=>$sort, 'sk'=>$searchKey, 'sj'=>$searchJson]).'" class="btn btn-primary">
+			<a href="'.$this->buildUri('results',[ 'core'=>'biblio', 'page'=>'1', 'sort'=>$sort, 'sk'=>$searchKey, 'sj'=>$searchJson]).'" class="btn btn-primary">
 				<i class="ph-magnifying-glass-bold"></i> '. $this->transEsc("Search") .'
 			</a>
 		</div>

@@ -1,7 +1,7 @@
 <?php 
 if (empty($this)) die;
-$this->addClass('buffer', 	new marcBuffer());
-$this->addClass('solr', new solr($this->config)); 
+$this->addClass('buffer', 	new buffer());
+$this->addClass('solr', new solr($this)); 
 
 
 #echo "routeParam<pre>".print_r($this->routeParam,1)."</pre>";
@@ -22,10 +22,7 @@ if (!empty($this->GET['change'])) {
 	$yearStart = $tmp[1];
 	$yearStop = $tmp[2];
 	$usedFacets[] = $currentFacet.':['.$yearStart.' TO '.$yearStop.']';
-	$this->facetsCode = $this->buffer->createFacetsCode(
-				$this->sql, 
-				$usedFacets
-				);
+	$this->facetsCode = $this->buffer->createFacetsCode( $usedFacets );
 	
 	unset($this->GET['change']);
 	}
@@ -36,18 +33,19 @@ if (!empty($this->GET['change'])) {
 ################################################################################	
 	
 if (empty($this->routeParam[2]))
-	$searchCore = 'search';
+	$searchCore = 'biblio';
 	else 
 	$searchCore = $this->routeParam[2];	
-$redirectLink = $this->buildUri($searchCore.'/results',['page'=>'1']);
+if ($searchCore == 'search')
+	$searchCore = 'biblio';
+$redirectLink = $this->buildUri('results', ['core'=>$searchCore, 'facetsCode'=>$this->facetsCode,'page'=>'1']);
 
 echo '	<div class="text-center" style="padding-bottom:15px; margin-top:-20px; padding-top:-20px;">
 			<button type=button class="btn btn-default disabled" >'.$this->transEsc('Redirecting...').'</button>
 		</div>
 	';
-echo "
-	<script>
-		 window.location.assign('$redirectLink');
-	</script>
-	";
+
+
+#echo "<pre> window.location.assign('$redirectLink');</pre>";
+echo "<script> window.location.assign('$redirectLink');</script>";
 	

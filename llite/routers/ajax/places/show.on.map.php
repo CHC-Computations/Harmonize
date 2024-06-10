@@ -1,9 +1,9 @@
 <?php
 if (empty($this)) die;
-require_once('functions/klasa.helper.php');
-require_once('functions/klasa.places.php');
+require_once('functions/class.helper.php');
+require_once('functions/class.places.php');
 
-$this->addClass('buffer', new marcBuffer()); 
+$this->addClass('buffer', new buffer()); 
 $this->addClass('helper', 	new helper()); 
 $this->addClass('places', 	new places($this->sql)); 
 $this->buffer->setSql($this->sql);

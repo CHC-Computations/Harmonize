@@ -1,0 +1,9 @@
+{
+"host" :  "https://www.wikidata.org/",
+"ids" : {
+	"viaf" : "P214",
+	"issn" : "P236",
+	"czenas" : "P691",
+	"yso" : "P2347"
+	}
+}

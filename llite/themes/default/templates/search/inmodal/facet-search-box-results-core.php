@@ -2,12 +2,6 @@
 $limit = 50;
 #echo $this->helper->pre($this->$core);
 
-$translated = false;
-$formatter = null;						
-if (!empty($this->$core->facets->facetsMenu->$currFacet->translated))
-	$translated = $this->$core->facets->facetsMenu->$currFacet->translated;
-if (!empty($this->$core->facets->facetsMenu->$currFacet->formatter))
-	$formatter = $this->$core->facets->facetsMenu->$currFacet->formatter;
 
 $ch_array = [];
 $lp = 0;
@@ -18,6 +12,7 @@ $lines = [];
 $lp = 0;
 $maks = 6;
 $maksV = max($facets);
+#echo "formatter: $formatter, translated: $translated<br/>";
 
 foreach ($facets as $k=>$v) {
 	$color = $this->helper->getGraphColor($lp);
@@ -32,13 +27,10 @@ foreach ($facets as $k=>$v) {
 		
 	if ($v>0) {	
 	
-		$tk = $k;
-		if (!empty($formatter))	$tk = $this->helper->$formatter($k);
-		if ($translated) $tk = $this->transEsc($k);
-		
+		$tk = $this->helper->convertC($core, $currFacet, $k);
 		$lines[] = //href="'.$this->basicUri('search/results').'?'.$this->searcher->addFacet($facetName, $k).'" 
 			
-			'<tr id="trow_'.$lp.'" OnMouseOver="facets.graphActive('.$lp.');"  OnMouseOut="facets.graphDisActive('.$lp.');" '.$oc.'>
+			'<tr id="trow_'.$lk.'" OnMouseOver="facets.graphActive(\''.$lk.'\');"  OnMouseOut="facets.graphDisActive(\''.$lk.'\');" '.$oc.'>
 				<td style="vertical-align:middle; text-align:center;" >
 					<i id="tcheck_'.$lk.'" '.$sel.'></i> 
 				</td>
@@ -52,6 +44,7 @@ foreach ($facets as $k=>$v) {
 				<td >'.$this->helper->percentBox($v,$maksV,$color).'</td>
 			</tr>';
 		$graphData[$lp] = [
+				'uid' => $lk,
 				'label' => $k,
 				'color' => $color,
 				'count' => $v
