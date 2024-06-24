@@ -42,10 +42,8 @@
        If replication is in use, this should match the replication configuration. -->
   <dataDir>${solr.solr.home:./solr}/authority</dataDir>
 
-  <lib dir="../../vendor/contrib/analysis-extras/lib" regex=".*\.jar" />
-  <lib dir="../../vendor/contrib/analysis-extras/lucene-libs" regex=".*\.jar" />
-  <lib dir="../jars" regex=".*\.jar" />
-  
+  <lib dir="${user.dir}/../contrib/analysis-extras/lucene-libs/" />
+  <lib dir="${user.dir}/../contrib/analysis-extras/lib/" />
   <indexConfig>
   
     <useCompoundFile>false</useCompoundFile>

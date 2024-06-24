@@ -40,11 +40,9 @@
   <!-- Used to specify an alternate directory to hold all index data
        other than the default ./data under the Solr home.
        If replication is in use, this should match the replication configuration. -->
-  <dataDir>${solr.solr.home:./solr}/authority</dataDir>
-
   <lib dir="${user.dir}/../contrib/analysis-extras/lucene-libs/" />
   <lib dir="${user.dir}/../contrib/analysis-extras/lib/" />
-  
+
   <indexConfig>
   
     <useCompoundFile>false</useCompoundFile>

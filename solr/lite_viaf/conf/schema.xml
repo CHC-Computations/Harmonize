@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<schema name="Libri viaf external ids Index" version="1.0">
+  <types>
+    <!-- Define fieldType long as it is needed by the _version_ field required by Solr 4.x -->
+	
+    <fieldType name="long" class="solr.LongPointField" positionIncrementGap="0"/>
+    <fieldtype name="float" class="solr.TrieFloatField" omitNorms="true" positionIncrementGap="0"/>
+	<fieldtype name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+    <fieldtype name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
+    <fieldtype name="date" class="solr.DatePointField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <tokenizer class="solr.ICUTokenizerFactory"/>
+        <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0" splitOnCaseChange="1"/>
+        <filter class="solr.ICUFoldingFilterFactory"/>
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.ICUTokenizerFactory"/>
+        <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="0" catenateNumbers="0" catenateAll="0" splitOnCaseChange="1"/>
+        <filter class="solr.ICUFoldingFilterFactory"/>
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+      </analyzer>
+    </fieldType>
+	<fieldType name="geo" class="solr.SpatialRecursivePrefixTreeFieldType" distErrPct="0.025" maxDistErr="0.000009" distanceUnits="degrees" />
+	<fieldType name="location" class="solr.LatLonPointSpatialField" docValues="true"/>
+	
+
+  </types>
+  <fields>
+    <!-- Required by Solr 4.x -->
+    <field name="_version_" type="long" indexed="true" stored="true" multiValued="false"/>
+    <!-- Core Fields  -->
+    <field name="allfields" type="text" indexed="true" stored="false" multiValued="true"/>
+   
+   <field name="viaf" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="wikiq" type="string" indexed="true" stored="true" multiValued="true"/> 
+    <field name="labels" type="text" indexed="true" stored="true" multiValued="true"/> 
+    <field name="search_labels" type="text" indexed="true" stored="true" multiValued="true"/> 
+    
+    <!-- Tracking fields to keep track of oldest and most recent index times -->
+    <field name="first_indexed" type="date" indexed="true" stored="true" docValues="true"/>
+    <field name="last_indexed" type="date" indexed="true" stored="true" docValues="true"/>
+
+    <!-- Dynamic fields for customization without schema modification -->
+    <dynamicField name="eid_*" type="string" indexed="true" stored="true" multiValued="true" docValues="true"/>
+  </fields>
+
+  <uniqueKey>viaf</uniqueKey>
+
+   <!-- CopyFields for All Fields -->
+ <copyField source="viaf"    			dest="allfields"/>
+ <copyField source="wikiq"    			dest="allfields"/>
+ <copyField source="labels"    			dest="allfields"/>
+ <copyField source="search_labels"		dest="allfields"/>
+  
+</schema>
