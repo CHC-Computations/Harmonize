@@ -12,9 +12,11 @@ require_once('functions/class.helper.php');
 $this->addClass('helper', new helper()); 
 
 echo "<div style=''>";
-echo $this->render('searchBoxes/biblio-searchbox.php');
+#echo $this->render('searchBoxes/homePage-searchbox.php');
+echo $this->render('searchBoxes/oneSearcher.php');
 
 echo "</div>";
+
 
 $query = [];
 $query[] = ['field' => 'q',	'value' => "*:*"];
@@ -53,7 +55,7 @@ foreach ($this->configJson->settings->homePage->coresNames as $core=>$params) {
 	$totalWikiBiblioRec = $this->solr->stats->stats_fields->biblio_count->sum ?? 0;
 	
 	if ($total>0) {
-		echo '<a class="core-menu-block" href="'.$this->baseUrl('results/'.$params->url.'/').'">';
+		echo '<a class="core-menu-block" href="'.$this->baseUrl('results/'.$params->url.'/').'" id="link_'.$core.'">';
 		if ($core=='biblio') {
 			$biblioContains = $this->solr->facetsList()['record_contains'] ?? [];
 			$biblioTotal = $total;
@@ -65,7 +67,10 @@ foreach ($this->configJson->settings->homePage->coresNames as $core=>$params) {
 			if ($sumOfLinks<$biblioRecWithLinks)
 				$sumOfLinks = $biblioRecWithLinks;
 			
-			$corePercent = round(($biblioRecWithLinks/$biblioTotal)*100);
+			if (!empty($biblioTotal))
+				$corePercent = round(($biblioRecWithLinks/$biblioTotal)*100);
+				else
+				$corePercent = 100;
 			$wikiPercent = round(($totalWikiBiblioRec/$sumOfLinks)*100);
 			
 			$wikiInCore = $corePercent*($wikiPercent/100);
@@ -90,22 +95,25 @@ foreach ($this->configJson->settings->homePage->coresNames as $core=>$params) {
 			echo '
 				<div class="core-menu-popup" id="popup-'.$core.'">	
 					<div class="core-menu-popup-content">
-						'.$this->helper->progressThinMulti($graph,100).'
-						<b>'.$corePercent.'%</b> ('.$this->helper->numberFormat($biblioRecWithLinks).') of bibliografic records contains informations about '.$core.'.<br/>
-						This creates '.$this->helper->numberFormat($sumOfLinks).' links between bibliographic records and '.$core.'.</br>
-						<b>'.$wikiPercent.'%</b> ('.$this->helper->numberFormat($totalWikiBiblioRec).') of these links are represented in the '.$core.' collection. <br/>
-						
-						
+						'.$this->helper->progressThinMulti($graph,100)
+						.$this->phrase('summary.menu.cloud.php', [
+							'corePercent'=>$corePercent,
+							'biblioRecWithLinks'=>$biblioRecWithLinks,
+							'core'=>$core,
+							'sumOfLinks'=>$sumOfLinks,
+							'wikiPercent'=>$wikiPercent,
+							'totalWikiBiblioRec'=>$totalWikiBiblioRec] )
+						.'
 					</div>
 				</div>
 				';
 			}
 		
 		echo '
-			<div class="core-menu-item" href="'.$this->baseUrl('results/'.$params->url.'/').'">
+			<div class="core-menu-item">
 			<span class="core-menu-icon"><i style="font-size:1.8em;" class="'.$params->ico.'"></i></span><br/>'.
 			$this->transESC($params->name).'<br/>
-			<span class="core-menu-number count">'.$total.'</span><br/>
+			<span class="core-menu-number count" id="count_'.$core.'">'.$total.'</span><br/>
 			</div>
 			';
 		echo '</a>';	

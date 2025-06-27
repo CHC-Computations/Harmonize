@@ -65,7 +65,7 @@ $statStr = '';
 if (!empty($stat)) {
 	#$facetCode = $this->buffer->createFacetsCode(["persons_wiki_str_mv:\"{$this->wiki->getID()}\""]);
 	
-	$statStr = '<h4>'.$this->transEsc('Summary for all the roles in which the viewed person appears in the bibliography').'.</h4>';
+	$statStr = '<h4>'.$this->transEsc('Summary for all the roles in which the viewed item appears in the bibliography').'.</h4>';
 	$statStr .= '<div class="statBox-extended">';
 	$Llp = 100;
 	foreach ($statBoxes->graphs as $statField) {
@@ -81,7 +81,7 @@ if (!empty($stat)) {
 						$lp++;
 						$index = $lp+$Llp;
 
-						$key = $this->buffer->createFacetsCode(["{$statField->indexField}:\"$k\"", "all_wiki:\"{$this->wiki->getID()}\""]);
+						$key = $this->buffer->createFacetsCode(["{$statField->indexField}:\"$k\"", "all_wiki:\"{$wikiq}\""]);
 						$link =$this->buildUri('results', ['core'=>'biblio', 'facetsCode'=>$key] );
 						
 						$nstat[$index] = [
@@ -135,7 +135,8 @@ if (!empty($stat)) {
 					}
 				break;
 			case 'timeLine' :
-				$statStr .= $this->helper->drawTimeLineGraph($this->transEsc($graphName), $statField->indexField, $stat[$statField->indexField]);
+				if (!empty($stat[$statField->indexField]))
+					$statStr .= $this->helper->drawTimeLineGraph($this->transEsc($graphName), $statField->indexField, $stat[$statField->indexField], 'all_wiki:"'.$wikiq.'"');
 				break;
 			}
 		}

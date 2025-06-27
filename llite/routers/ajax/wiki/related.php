@@ -12,7 +12,7 @@ if (empty($this->POST))
 
 $currentCore = $this->routeParam[1];
 $wikiq = $this->routeParam[0];
-
+$this->addJS('$("#related2this").css("opacity", "1");');
 $this->wiki->loadRecord($wikiq, false);
 $prefix =  $wikiq.'|';
 
@@ -134,19 +134,19 @@ if (!empty($allRoles['with_roles_wiki'])) {
 		'subjectCorporate' => 'Corporates',
 		];
 
-
-	foreach ($facets['with_roles_wiki'] as $resultStr=>$count) {
-		$tmp = explode('|', $resultStr);
-		$group = $tmp[1];
-		$value = $tmp[0];
-		$nGroup = $conversionTable[$group] ?? $group;
-		@$relationGroups[$nGroup]+=$count;
-		
-		if ($value !== $wikiq) {
-			@$recInGroups[$nGroup][$group] += $count;
-			$recInGroupsHasRoles[$nGroup][$value][$group] = $count;
+	if (!empty($facets['with_roles_wiki']) && is_array($facets['with_roles_wiki']))
+		foreach ($facets['with_roles_wiki'] as $resultStr=>$count) {
+			$tmp = explode('|', $resultStr);
+			$group = $tmp[1];
+			$value = $tmp[0];
+			$nGroup = $conversionTable[$group] ?? $group;
+			@$relationGroups[$nGroup]+=$count;
+			
+			if ($value !== $wikiq) {
+				@$recInGroups[$nGroup][$group] += $count;
+				$recInGroupsHasRoles[$nGroup][$value][$group] = $count;
+				}
 			}
-		}
 
 	if (!empty($this->POST['pdata']['group']))
 		$_SESSION['relationGraph']['relatedWith'] = $this->POST['pdata']['group'];
@@ -158,16 +158,17 @@ if (!empty($allRoles['with_roles_wiki'])) {
 	
 	$relatedWithStr = $this->transEsc('Show relations with').':<br/>';	
 	$relatedWithStr.= '<div class="list-group">';	
-	foreach ($relationGroups as $group=>$countInGroup) {
-		
-		$class = ($group == $activePanel) ? 'active' : '';
-		$action = (object)['group' => $group];
-		$relatedWithStr.= '
-			<button class="list-group-item '.$class.'" 
-				onClick=\'page.postLT("related2this", "wiki/related/'.$this->wiki->getID().'/'.$currentCore.'", '.json_encode($action).');\'>
-					'.$this->transEsc($group).' <span class="badge">'.$this->helper->numberFormat($countInGroup).'</span>
-			</button> ';
-		}
+	if (!empty($relationGroups) && is_array($relationGroups))
+		foreach ($relationGroups as $group=>$countInGroup) {
+			
+			$class = ($group == $activePanel) ? 'active' : '';
+			$action = (object)['group' => $group];
+			$relatedWithStr.= '
+				<button class="list-group-item '.$class.'" 
+					onClick=\'page.postLT("related2this", "wiki/related/'.$this->wiki->getID().'/'.$currentCore.'", '.json_encode($action).');\'>
+						'.$this->transEsc($group).' <span class="badge">'.$this->helper->numberFormat($countInGroup).'</span>
+				</button> ';
+			}
 	$relatedWithStr.= '</div>';		
 
 	
@@ -340,9 +341,10 @@ if (!empty($allRoles['with_roles_wiki'])) {
 	echo '<p style="margin:50px;">'.$this->transEsc('There is nothing to show here').'.</p>';
 	}
 
-
 # echo 'post'.$this->helper->pre($_POST);
 # echo 'session'.$this->helper->pre($_SESSION['relationGraph']);
 # echo 'recInGroups'.$this->helper->pre($recInGroups);
-$this->addJS('$("#related2this").css("opacity", "1");');
+
+
 ?>
+<script>$("#related2this").css("opacity", "1");</script>

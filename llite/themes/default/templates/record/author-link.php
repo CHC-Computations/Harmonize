@@ -2,7 +2,7 @@
 #echo "<pre style='background-color:#fff; border:0px;'>".print_r($author,1)."</pre>";
 $uid = uniqid();
 #echo $this->helper->pre($author);
-
+$person = $author;
 if (!empty($author->person)) {
 	
 	
@@ -19,13 +19,17 @@ if (!empty($author->wikiQ)) {
 
 ?>
 <?php 
-if (!empty($author->name)) {
-	$displayName = $this->helper->formatMultiLangStr($author->name);
-	echo '<a href="'. $this->buildUrl('results/biblio/', ['lookfor' =>$displayName, 'type'=> 'Author' ]) .'" title="'. $this->transEsc('look for').': '. $displayName .'">'. $displayName .'</a> ';
+if (!empty($person->name)) {
+	$displayName = $this->helper->formatPerson($person->bestLabel);
+	$onlyName = $this->helper->formatMultiLangStr($person->nameML ?? $person->name);
+	if (!empty($facetField)) {
+		$facetsCode = $this->buffer->createFacetsCode([$facetField.':"'.$person->bestLabel.'"']);
+		echo '<a href="'. $this->buildUrl('results', ['core'=>'biblio', 'facetsCode' =>$facetsCode ]) .'" data-toggle="tooltip" title="'. $this->transEsc('Show results using filter').': '.$this->helper->facetName('biblio', $facetField).' = '. $onlyName .'">'. $displayName .'</a> ';
+		} else {
+		echo '<a href="'. $this->buildUrl('results/biblio/', ['lookfor' =>$onlyName, 'type'=> 'allfields' ]) .'" data-toggle="tooltip" title="'. $this->transEsc('Look for').': '. $onlyName .'">'. $displayName .'</a> ';	
+		}
 	}
 ?>
-<?php if (!empty($author->dates)): ?>
-	<span class="date"><?= $author->dates ?></span>
 <?php 
 if (!empty($author->roles))
 	if (is_Array($author->roles))
@@ -54,4 +58,3 @@ if (!empty($author->roles))
 	</div>
 </div>
 	
-<?php endif; ?>

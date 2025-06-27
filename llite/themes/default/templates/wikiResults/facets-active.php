@@ -4,9 +4,10 @@ $active = '';
 
 foreach ($activeFacets as $groupCode=>$arr) {
 	$translated = false;
-		
 	
-	$active .= '<div style="padding:5px;">'.$this->transEsc( $this->configJson->$currentCore->facets->facetsMenu->$groupCode->name ).':</div>';
+	$name = $this->configJson->$currentCore->facets->facetsMenu->$groupCode->name ?? '';
+	
+	$active .= '<div style="padding:5px;">'.$this->transEsc( $name ).':</div>';
 	$lp=0;
 	foreach ($arr as $k=>$v) {
 		$lp++;
@@ -20,9 +21,9 @@ foreach ($activeFacets as $groupCode=>$arr) {
 				$this->buffer->removeFacet($groupCode, $value)
 				);
 		
-		$active .= '<a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=>$key]).'" class="facet">
+		$active .= '<a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=>$key], true).'" class="facet">
 				<span class="text" style="padding-left:1.5rem;">'.( (($v['operator']=='or')&($lp>1)) ?  $this->transEsc('or').' ' : '' ).$tvalue.'</span>
-				<i class="right-icon fa fa-remove"></i>
+				<i class="right-icon ph ph-x"></i>
 				</a>';
 		}
 	}

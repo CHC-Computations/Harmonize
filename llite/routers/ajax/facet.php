@@ -52,64 +52,72 @@ switch ($this->routeParam[0]) {
 			
 			
 			foreach ($this->configJson->$currentCore->facets->facetsMenu as $gr=>$facet) {
-				
-				$stepSetting = clone $this->configJson->$currentCore->facets->defaults;
-				if (!empty($facet->template))
-					$stepSetting->template = $facet->template;
-				if (!empty($facet->translated))
-					$stepSetting->translated = $facet->translated;
-				if (!empty($facet->formatter))
-					$stepSetting->formatter = $facet->formatter;
-				if (!empty($facet->child))
-					$stepSetting->child = $facet->child;
-				
-				switch ($stepSetting->template) {
-					case 'box' :
-							if (!empty($results[$facet->solr_index]))
-								echo $this->render('search/facet-box.php', [
-										'facet'		 => $facet,
-										'facets'	 => $results[$facet->solr_index],
-										'stepSetting' => $stepSetting
-										] );
-							break;			
-					case 'groupBox' :
-							#echo $this->helper->pre($facet);
-							echo $this->render('search/facet-groupBox.php', [
-										'groupName'  => $facet->name, 
-										'list' 	 	 => $facet->groupList,
-										'stepSetting' => $stepSetting,
-										'fullResults' => $fullResults
-										] );
-							break;			
-					case 'timeGraph' :
-							unset($query['limit']);
-							$results = $this->solr->getCleanedYears('biblio', [$facet->solr_index], $query);
-							if (!empty($results[$facet->solr_index]))
-								echo $this->render('search/facet-years-box.php', [
-										'facet' 	=> $facet->solr_index, 
-										'facetName' => $facet->name, 
-										'facets' => $results[$facet->solr_index],
-										'currFacet' => $facet->solr_index,
-										] );
-							break;	
-					case 'graph' :		
-							$blocks = $this->solr->getFullList2('biblio', $currentFacet, $query);
-							$extra = [];
-							foreach ($blocks->results as $k=>$v) 
-								if (!is_numeric($k)) {
-									$extra[$k]=$v;
-									unset($blocks->results[$k]);
-									}
-							ksort($blocks->results);
-							#echo "<pre>".print_r($blocks,1).'</pre>';	
-							echo $this->render('search/facet-centuries-box.php', [
-										'facet' => $currentFacet, 
-										'facetName' => $facetsOptions['facetList'][$currentFacet], 
-										'facets' => $blocks->results,
-										'extraFacets' => $extra,
-										'currFacet' => $currentFacet,
-										] );
-							break;
+				$showFacet = true;
+				if (!empty($facet->limit)) {
+					if ($this->user->isLoggedIn() && $this->user->hasPower($facet->limit)) 
+						$showFacet = true;
+						else 
+						$showFacet = false;
+					}
+				if ($showFacet) {	
+					$stepSetting = clone $this->configJson->$currentCore->facets->defaults;
+					if (!empty($facet->template))
+						$stepSetting->template = $facet->template;
+					if (!empty($facet->translated))
+						$stepSetting->translated = $facet->translated;
+					if (!empty($facet->formatter))
+						$stepSetting->formatter = $facet->formatter;
+					if (!empty($facet->child))
+						$stepSetting->child = $facet->child;
+					
+					switch ($stepSetting->template) {
+						case 'box' :
+								if (!empty($results[$facet->solr_index]))
+									echo $this->render('search/facet-box.php', [
+											'facet'		 => $facet,
+											'facets'	 => $results[$facet->solr_index],
+											'stepSetting' => $stepSetting
+											] );
+								break;			
+						case 'groupBox' :
+								#echo $this->helper->pre($facet);
+								echo $this->render('search/facet-groupBox.php', [
+											'groupName'  => $facet->name, 
+											'list' 	 	 => $facet->groupList,
+											'stepSetting' => $stepSetting,
+											'fullResults' => $fullResults
+											] );
+								break;			
+						case 'timeGraph' :
+								unset($query['limit']);
+								$results = $this->solr->getCleanedYears('biblio', [$facet->solr_index], $query);
+								if (!empty($results[$facet->solr_index]))
+									echo $this->render('search/facet-years-box.php', [
+											'facet' 	=> $facet->solr_index, 
+											'facetName' => $facet->name, 
+											'facets' => $results[$facet->solr_index],
+											'currFacet' => $facet->solr_index,
+											] );
+								break;	
+						case 'graph' :		
+								$blocks = $this->solr->getFullList2('biblio', $currentFacet, $query);
+								$extra = [];
+								foreach ($blocks->results as $k=>$v) 
+									if (!is_numeric($k)) {
+										$extra[$k]=$v;
+										unset($blocks->results[$k]);
+										}
+								ksort($blocks->results);
+								#echo "<pre>".print_r($blocks,1).'</pre>';	
+								echo $this->render('search/facet-centuries-box.php', [
+											'facet' => $currentFacet, 
+											'facetName' => $facetsOptions['facetList'][$currentFacet], 
+											'facets' => $blocks->results,
+											'extraFacets' => $extra,
+											'currFacet' => $currentFacet,
+											] );
+								break;
+						}
 					}
 				}
 			}
@@ -124,5 +132,18 @@ switch ($this->routeParam[0]) {
 # echo "params<pre>".print_r($this->routeParam,1).'</pre>';
 
 # echo "facets.ini<pre>".print_r($facets,1).'</pre>';
-
+$this->addJS('
+	
+	$("[title]").each(function () {
+        var $this = $(this);
+        var title = $this.attr("title");
+        
+        if (title) {
+            $this.attr("data-toggle", "tooltip") 
+                 .attr("data-original-title", title) 
+                 .removeAttr("title"); 
+			}
+		});
+    $(\'[data-toggle="tooltip"]\').tooltip();
+	');
 ?>

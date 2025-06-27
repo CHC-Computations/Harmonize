@@ -11,7 +11,7 @@
 		</div>
 		';
 	
-	$OC = "facets.timeFacetLink('change', [ '{$currFacet}', $('#year_str_mvfrom').val(), $('#year_str_mvto').val() ], '{$this->getUserParam('sort')}', '{$this->facetsCode}', 'persons')";
+	$OC = "facets.timeFacetLink('change', [ '{$currFacet}', $('#year_str_mvfrom').val(), $('#year_str_mvto').val() ], '{$this->getUserParam('sort')}', '{$this->facetsCode}', '$currentCore')";
 	$bottom = '
 		<div id="recalculateLink">
 			<div class="text-center" style="padding-bottom:15px; margin-top:-20px; padding-top:-20px;">

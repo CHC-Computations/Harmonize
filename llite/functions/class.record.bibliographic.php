@@ -32,9 +32,37 @@ class bibliographicRecord {
 		return $this->solrRecord->id ?? null;
 		}
 	
+	public function getIdStr() {
+		return str_replace('.', '_', $this->getId());
+		}
+	
 	public function getTitle() {
 		return $this->elbRecord->title ?? '[no title]';
 		}
+	
+	public function getLanguage($type = '') {
+		if (!empty($this->elbRecord->language->$type))
+			return current($this->elbRecord->language->$type);
+	
+		#return $this->elbRecord->language ?? [];
+		}
+	
+	public function getPublicationYear() {
+		if (!empty($this->elbRecord->publicationYear))
+			return current($this->elbRecord->publicationYear);
+	
+		#return $this->elbRecord->language ?? [];
+		}
+	
+	public function getPlaces($as) {
+		if (!empty($this->elbRecord->places->$as)) {
+			$res = [];
+			foreach ($this->elbRecord->places->$as as $place)
+				$res[] = $this->cms->helper->createPlaceStr($place);
+			return $res;
+			}
+		}	
+	
 	
 	
 	public function hasSimilar() {
@@ -64,14 +92,24 @@ class bibliographicRecord {
 		return $this->elbRecord->similars ?? [];
 		}
 	
-	function get($block, $group = null) {
-		if (empty($group))
-			return $this->elbRecord->$block ?? null;
-			else 
-			return $this->elbRecord->$block->$group ?? null;	
+	function get() {
+		$keys = func_get_args();
+		$value = (array)$this->elbRecord;
+		foreach ($keys as $key) {
+			if (is_object($value))
+				$value = (array)$value;
+			if (!isset($value[$key])) {
+				return null;
+				}
+			$value = $value[$key];
+			}
+		return $value;
 		}
 		
 
+	function getFirstAsString($params) {
+		return current((array)$this->get($params));
+		}
 
 
 	public function creativeRolesSynonyms($role) {
@@ -101,29 +139,34 @@ class bibliographicRecord {
 			default :
 				$count = 99;
 			}
-		
-		$tmp = explode(',', $name);
-		if (!empty($tmp[$count]))
-			return trim($tmp[$count]);
-		
+		if (!empty($name)) {
+			$tmp = explode(',', $name);
+			if (!empty($tmp[$count]))
+				return trim($tmp[$count]);
+			} else 
+			return '';
 		return $name;
 		}	 
 	
-	public function getRETpic() {
-		
-		if ($this->getTitle() == '[Název textu k dispozici na připojeném lístku]') {
-			$field = 856;
-			if (is_object($this->record->marcFields) && (!empty($this->record->marcFields->$field))) {
-				$desc = current($this->record->marcFields->$field);
-				$ret = $source = $desc->code->u;
-				$ret = str_replace(
-					'http://retrobi.ucl.cas.cz/retrobi/katalog/listek/',
-					'http://retrobi.ucl.cas.cz/retrobi/resources/retrobi/cardimg?listek=',
-					$ret).'&obrazek=1o&sirka=800&orez=false';
-				$outpic = "<div class='thumbnail'><img src='$ret' class='img-responsive'>source: <a href='$source'>$source</a></div>";	
+	public function getRETpic($showLink = true) {
+		#if (($this->getTitle() == '[Název textu k dispozici na připojeném lístku]')or($this->getTitle() == '[Title on the picture (retrobi record)]')) {
+
+		if (substr($this->getId(),0,7) == 'cz.RET-') {
+			$linkedResources = $this->get('linkedResources');
+			foreach ($linkedResources as $result) 
+				if (stristr($result->link, 'retrobi.ucl.cas.cz')) {
+					$ret = str_replace(
+							'http://retrobi.ucl.cas.cz/retrobi/katalog/listek/',
+							'http://retrobi.ucl.cas.cz/retrobi/resources/retrobi/cardimg?listek=',
+							$result->link
+							);
+					$ret.='&obrazek=1o&sirka=800&orez=false';
+					if ($showLink)
+						$outpic = "<div class='thumbnail'><img src='$ret' class='img-responsive'>source: <a href='{$result->link}'>{$result->link}</a></div>";	
+						else
+						$outpic = "<img src='$ret' class='img-responsive' alt='{$result->desc}'>";		
 				return $outpic;
-			
-				} 
+				}
 			}
 		}
 	
@@ -529,78 +572,195 @@ class bibliographicRecord {
 			return implode(', ',$rec);
 		}
 	
-		
 	
 	public function getISSN() {
-		$fields = [
-			'022'=>'a',
-			'440'=>'x',
-			'490'=>'x',
-			'730'=>'x',
-			'773'=>'x', 
-			'776'=>'x',
-			'780'=>'x',
-			'785'=>'x'
-			];
-		
-		foreach ($fields as $field=>$subfield) 
-			if (!empty($res = $this->getMarcFirstStr($field,[$subfield],'','')))
-				return $res;
 		
 		}
 	
 	public function getArticleISSN() {
-		$fields = [
-			'773'=>'x',
-			];
-		foreach ($fields as $field=>$subfield) 
-			if (!empty($res = $this->getMarcFirstStr($field,[$subfield],'','')))
-				return $res;
 		
 		}
 	
 	public function getISBN() {
-		// isbn = 020a:773z
-		$fields = [
-			'020'=>'a',
-			'773'=>'z',
-			];
-		
-		foreach ($fields as $field=>$subfield) 
-			if (!empty($res = $this->getMarcFirstStr($field,[$subfield],'','')))
-				return $res;
-		
 		}
 	
+	public function getFixedLink($id = '') {
+		if (empty($id))
+			$id = $this->getId();
+		return $this->cms->HOST.'id/'.$id;
+		}
+		
+	public function getMetaAlternate() {
+		$return[] = '<link rel="canonical" href="'.$this->cms->selfUrl().'" />';
+		$return[] = '<link rel="alternate" type="application/json" href="'.$this->cms->selfUrl('.html', '.json').'" />';
+		$return[] = '<link rel="alternate" type="application/json" href="'.$this->cms->selfUrl('.html', '.json?elb').'" />';
+		$return[] = '<link rel="alternate" type="application/xml" href="'.$this->cms->selfUrl('.html', '.xml').'" />';
+		$return[] = '<link rel="alternate" type="text/plain" href="'.$this->cms->selfUrl('.html', '.mrk').'" />';
+		return "\n\t\t".implode("\n\t\t", $return)."\n\n";
+		}
+	
+	public function getMetaZotero() {
+		#https://www.zotero.org/support/dev/exposing_metadata
+		
+		
+		$return = [];
+		$return[] = '<meta name="citation_title" content="'.$this->getTitle().'" />';
+		#title citation_title citation_journal_title citation_book_title citation_inbook_title citation_series_title
+				
+		if (!empty($this->get('persons', 'mainAuthor'))) 
+			foreach ($this->get('persons', 'mainAuthor') as $key => $person) {
+				#echo $this->cms->helper->pre($person);
+				$return[] = '<meta name="citation_author" content="'.$person->name.'" />';
+				}
+		if (!empty($this->get('persons', 'coAuthor'))) 
+			foreach ($this->get('persons', 'coAuthor') as $key => $person) {
+				#echo $this->cms->helper->pre($person);
+				$return[] = '<meta name="citation_author" content="'.$person->name.'" />';
+				}
+		if (!empty($this->elbRecord->publicationYear)) {
+			$years = (array)$this->elbRecord->publicationYear;
+			foreach ($years as $year) 
+				$return[] = '<meta name="citation_year" content="'.$year.'" />';
+			}
+		if (($this->get('majorFormat') == 'Journal article') && !empty($this->get('magazines', 'sourceMagazine')))
+			foreach ($this->get('magazines', 'sourceMagazine') as $magazine) {
+				if (!empty($magazine->title)) 
+					$return[] = '<meta name="citation_journal_title" content="'.$magazine->title.'" />';
+				}
+		if (!empty($this->get('language','publication'))) 
+			foreach ($this->get('language','publication') as $language) {
+				$return[] = '<meta name="citation_language" content="'.$language.'" />';
+				}
+		
+		if (!empty($this->get('issn'))) 
+			foreach ($this->get('issn') as $issn) {
+				$return[] = '<meta name="citation_issn" content="'.$issn.'" />';
+				}
+		
+		
+		return "\n\t\t".implode("\n\t\t", $return)."\n\n";
+		}	
+		
+		
+		
 	public function getCoinsOpenURL() {
-		if ($this->get('format')=='Journal article') {
-			$tmp = $this->getMarcFirst(773, ['g']);
-			if (count($tmp)>1) {
-				$spage = array_pop($tmp);
-				} else 
-				$spage = '';
-			$table = array (
+		/*
+		TO DO!
+		
+		11. rft.volume - Tom
+
+			Numer tomu czasopisma.
+			Przykład: rft.volume=42
+
+		12. rft.issue - Numer wydania
+
+			Numer wydania w danym tomie czasopisma.
+			Przykład: rft.issue=3
+
+		13. rft.spage i rft.epage - Strony początkowa i końcowa
+
+			Oznaczają zakres stron artykułu.
+			Przykład: rft.spage=123&rft.epage=130
+
+		14. rft.pages - Zakres stron (alternatywnie)
+
+			Możesz również użyć pola rft.pages dla podania zakresu stron w jednym polu.
+			Przykład: rft.pages=123-130
+		*/
+		
+		
+		$table = array (
 				'url_ver' 		=> 'Z39.88-2004',
 				'ctx_ver' 		=> 'Z39.88-2004',
 				'ctx_enc' 		=> 'info:ofi/enc:UTF-8',
-				'rfr_id' 		=> 'info:sid/vufind.svn.sourceforge.net:generator',
-				'rft.date' 		=> $this->get('publishDate'),
-				'rft_val_fmt' 	=> 'info:ofi/fmt:kev:mtx:journal',
-				'rft.genre' 	=> $this->getMarcFirst(655),
-				'rft.issn' 		=> (string)$this->getISSN(),
-				'rft.isbn' 		=> (string)$this->getISBN(),
-				'rft.volume' 	=> $this->getMarcFirstStr(773, ['v']),
-				'rft.issue' 	=> $this->getMarcFirstStr(773, ['l']),
-				'rft.spage' 	=> $spage,
-				'rft.jtitle' 	=> $this->getMarcFirst(773, ['t']),
-				'rft.atitle' 	=> $this->getTitle(), 
-				'rft.au' 		=> $this->getMarcFirstStr('100', []),
-				'rft.format' 	=> $this->get('format'),
-				'rft.language' 	=> $this->get('language','publication')
+				'rfr_id' 		=> $this->getFixedLink(),
 				);
-			#echo "<pre>".print_r($table,1)."</pre>";
-			return http_build_query($table);
+		if (!empty($this->get('major_genre')))
+			$table['rft.genre']	= implode(',', $this->get('major_genre'));
+		if (!empty($this->get('publishDate')))
+			$table['rft.date']	= implode(',', $this->get('publishDate'));
+		if (!empty($this->get('isbn'))) // books or book chapter
+			$table['rft.isbn']	= implode(',', $this->get('isbn'));
+		if (!empty($this->get('language', 'publication'))) {
+			$lang = (array)$this->get('language', 'publication');
+			$table['rft.language']	= implode(',', $lang);
+			}
+		if (!empty($this->get('places', 'publicationPlace'))) {
+			$place = current((array)$this->get('places', 'publicationPlace'));
+			if (!empty($place->name))
+				$table['rft.place'] = $place->name;
+			if (!empty($place->nameML))
+				$table['rft.place']	= $this->cms->helper->formatMultiLangStr($place->nameML);
+			}
+			
+		if (!empty($this->get('persons', 'mainAuthor'))) {
+			$person = current((array)$this->get('persons', 'mainAuthor'));
+			if (!empty($person->name))
+				$table['rft.au'][0] = $person->name;
+			if (!empty($person->nameML))
+				$table['rft.au'][0] = $this->cms->helper->formatMultiLangStr($person->nameML);
+			if (!empty($person->dates))
+				$table['rft.au'][0] .= ' '.$person->dates; 
+			}
+		if (!empty($this->get('persons', 'coAuthor'))) {
+			$persons = (array)$this->get('persons', 'coAuthor');
+			$i = 0;
+			foreach ($persons as $person) {
+				$i++;
+				if (!empty($person->name))
+					$table['rft.au'][$i] = $person->name;
+				if (!empty($person->nameML))
+					$table['rft.au'][$i] = $this->cms->helper->formatMultiLangStr($person->nameML);
+				if (!empty($person->dates))
+					$table['rft.au'][$i] .= ' '.$person->dates; 
+				}
 			} 
+		
+		if (!empty($this->get('edition', 'no')))
+			$table['rft.edition'] = current((array)$this->get('edition', 'no'));
+		
+		if (!empty($this->get('corporates', 'corporates'))) {
+			$corporates = (array)$this->get('corporates', 'corporates');
+			$i = 0;
+			foreach ($corporates as $coporate) {
+				if (!empty($coporate->name))
+					$table['rft.pub'][$i] = $coporate->name;
+				if (!empty($coporate->nameML))
+					$table['rft.pub'][$i] = $this->cms->helper->formatMultiLangStr($coporate->nameML);
+				$i++;
+				}
+			} 
+		
+		
+		
+		
+		switch ($this->get('majorFormat')) {
+			case ('Journal article')  : {
+				$table['rft_val_fmt'] = 'info:ofi/fmt:kev:mtx:journal';
+				$table['rft.atitle'] = $this->getTitle();
+				if (!empty($this->get('magazines', 'sourceMagazine'))) {
+					$magazines = $this->get('magazines', 'sourceMagazine');
+					$magazine = current((array)$magazines);
+					$table['rft.jtitle'] = $magazine->title;
+					$table['rft.rft.issn'] = $magazine->issn;
+					}
+				} break;
+			case ('Book')  : {
+				$table['rft_val_fmt'] = 'info:ofi/fmt:kev:mtx:book';
+				$table['rft.btitle'] = $this->getTitle();
+				
+				} break;
+			case ('Book chapter')  : {
+				$table['rft_val_fmt'] = 'info:ofi/fmt:kev:mtx:bookitem';
+				$table['rft.atitle'] = $this->getTitle();
+				$table['rft.btitle'] = $this->getTitle();
+				} break;
+			
+			}	
+				
+			
+		return http_build_query($table);
+			 
 		}
 	
 	

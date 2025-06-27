@@ -6,11 +6,8 @@ if (!empty($value)) {
 	$Tval = [];
 	if (is_array($value))
 		foreach ($value as $val) {
-			if ($translated)
-				$valueStr = $this->transEsc($val);
-				else 
-				$valueStr = $val;
-			$Tval[] = '<a href="'.$this->buildUrl('results', ['core'=>'biblio', 'facetsCode'=>$this->buffer->createFacetsCode([$facetField.':"'.$val.'"'])]).'">'.$valueStr.'</a>';
+			$valueStr = $this->helper->convert($facetField, $val);
+			$Tval[] = '<a href="'.$this->buildUrl('results', ['core'=>'biblio', 'facetsCode'=>$this->buffer->createFacetsCode([$facetField.':"'.$val.'"'])]).'" title="'. $this->transEsc('Show results using filter').': '.$label.' = '.$valueStr.'">'.$valueStr.'</a>';
 			}
 	
 	if (count($Tval)>1)

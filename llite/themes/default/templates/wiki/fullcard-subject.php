@@ -105,6 +105,14 @@ $stats .="</div>";
 	   <h1 property="name"><?= $title = $this->wiki->get('labels') ?> <small><?= $this->wiki->get('aliases') ?></small></h1>
 	</div>
 	<div class="person-record">
+		<div id="wikimediaDescription">
+		<?php
+			if (!empty($this->wiki->record->wikipediaDescription))
+				echo $this->wiki->record->wikipediaDescription;
+				else 
+				echo $this->wiki->get('descriptions');
+		?>
+		</div>
 	
 		
 		<div class="record-left-panel">
@@ -116,16 +124,6 @@ $stats .="</div>";
 		<div class="record-main-panel">
 			
 			<p><?= $this->wiki->get('descriptions') ?></p>
-			
-			
-			
-			
-			<div class="text-right">
-			<small>
-				<a href="https://www.wikidata.org/wiki/<?=$this->wiki->getID() ?>" class="text-right"><?= $this->transEsc('Source of information')?> Wikidata</a><br/>
-				<a href="<?=$this->wiki->getSiteLink() ?>" class="text-right"><?= $this->transEsc('More information on')?> Wikipedia</a>
-			</small>
-			</div>
 			
 			
 			<?php

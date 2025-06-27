@@ -1,12 +1,13 @@
 
 <div class="facets-header">
-<span type="button" class="ico-btn" id="slideoutbtn" onclick="facets.SlideOut(); " title="<?= $this->transEsc('Hide facet panel') ?>"><i class="fa fa-angle-left"></i></span>
+<span type="button" class="ico-btn" id="slideoutbtn" onclick="facets.SlideOut(); " title="<?= $this->transEsc('Hide facet panel') ?>"><i class="ph-caret-left"></i></span>
 
-<span type="button" class="ico-btn" id="collapse_all_button" onclick="$('.collapse'+'.sidefl').collapse('hide'); " title="<?= $this->transEsc('Collapse all') ?>"><i class="fa fa-angle-double-up"></i></span>
-<span type="button" class="ico-btn" id="uncollapse_all_button" onclick="$('.collapse'+'.sidefl').collapse('show'); " title="<?= $this->transEsc('Show all') ?>"><i class="fa fa-angle-double-down"></i></span>
+<span type="button" class="ico-btn" id="collapse_all_button" onclick="$('.collapse'+'.sidefl').collapse('hide'); " title="<?= $this->transEsc('Collapse all') ?>"><i class="ph ph-caret-double-up"></i></span>
+<span type="button" class="ico-btn" id="uncollapse_all_button" onclick="$('.collapse'+'.sidefl').collapse('show'); " title="<?= $this->transEsc('Show all') ?>"><i class="ph ph-caret-double-down"></i></span>
 
 <h4><?= $this->transEsc('Narrow Search') ?></h4>
 </div>
+<div id="myListsArea" class="facets-body"></div>
 <div id="loadbox_all_facets" class="facets-body">
 	
 		<div style="filter: blur(5px);">	
@@ -43,6 +44,7 @@
   
 <script>
 	facets.Load('all_facets','<?= $this->facetsCode ?>');
+	results.myList();
 </script>
 
  

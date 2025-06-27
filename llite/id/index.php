@@ -16,7 +16,7 @@ foreach ($langs as $lang) {
 
 
 if (in_array($userLang, $Tlangs))
-	header( "Location: ".$settings->www->host.$userLang.'/search/record/'.$id.'.html' ) ;
+	header( "Location: ".$settings->www->host.$userLang.'/results/biblio/record/'.$id.'.html' ) ;
 	else 
 	header( "Location: ".$settings->www->host.'en/search/record/'.$id.'.html' ) ;
 

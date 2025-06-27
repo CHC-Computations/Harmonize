@@ -1,20 +1,19 @@
 <?php 
 
+if ($this->isMobile())
+	$this->addJS('facets.SlideOut();');
 
 #echo "<pre>".print_R($this,1)."</pre>";
 $current_view = $this->getUserParam($currentCore.':view') ?? 'default-box';
 
-#$this->JS[] = "results.saveList();";
-#echo implode(' ', $this->solr->alert);
+#echo $this->helper->pre($this->solr->alert);
 ?>
 
 <?php if (!empty($results->exception)): ?>
 	<div class="main">
 		<div class="cms_box">
 			<div class="container" id="content" >
-
-				<h2><?= $results->exception ?></h2>
-				<a href="<?= $this->buildUrl() ?>"><?= $this->transEsc('Go back to the first page') ?></a>
+				<?= $results->exception ?>
 			</div>
 		</div>
 	</div>
@@ -26,31 +25,28 @@ $current_view = $this->getUserParam($currentCore.':view') ?? 'default-box';
 	?>
 		<div class='main'>
 			<div class='sidebar'>
+				
 				<?= $this->render('search/facet-sidebar.php', ['currentCore'=>$currentCore]) ?>
 				
 			</div>
 			<div class='mainbody' id='content'>
 				<?= $this->render('search/summary.php', ['currentCore'=>$currentCore]) ?>
 				<div class="results">
+				<?php if (!empty($this->buffer->usedFacets)) 
+					echo $this->render('search/active-facet-description.php', ['activeFacets' => $this->buffer->usedFacets ] );
+				?>
+		
 				<?= $this->render('search/results/bulk-actions.php') ?>
 				
 				  <div class="results-<?= $current_view ?>">
 					<?php 
 					
 					foreach ($results as $result) {
-						
-						# $marcJson = $this->buffer->getJsonRecord($result->id, $result->fullrecord);
-						# $marcJson = $this->convert->mrk2json($result->fullrecord);
-						# $this->addClass('marc', new marc21($marcJson, $result)); 
-						# $this->marc->setBasicUri($this->basicUri());
-						# $this->marc->getCoreFields();
-						# $auth = $this->marc->getMainAuthor();
-						# $auth = $this->marc->getMainAuthorLink();
-						
-						$this->addClass('record', new bibliographicRecord($result, $this->convert->mrk2json($result->fullrecord)));
-						
+						if (!empty($result->fullrecord))
+							$this->addClass('record', new bibliographicRecord($result, $this->convert->mrk2json($result->fullrecord)));
+							else 
+							$this->addClass('record', new bibliographicRecord($result));
 						echo $this->render('search/results/'.$current_view.'.php', ['result'=>$result, 'record'=>json_decode($result->relations)] );
-						
 						$this->buffer->addToBottomSummary(json_decode($result->relations));
 						}
 					?>
@@ -69,7 +65,7 @@ $current_view = $this->getUserParam($currentCore.':view') ?? 'default-box';
 									];
 						$this->addJS('page.post("related_'.$key.'", "results/related/'.$key.'/", '.json_encode($this->buffer->getBottomList($key)).');');
 						}
-					echo '<h4>'.$this->transEsc('Related to the resutations above').'<h4>';
+					echo '<h4>'.$this->transEsc('Related to the above results').'<h4>';
 					echo $this->helper->tabsCarousel( $extraTabs , current(array_keys((array)$listRelated)) );
 					echo '<br/><br/>';
 					
@@ -109,4 +105,5 @@ $current_view = $this->getUserParam($currentCore.':view') ?? 'default-box';
 		
 	<?php endif; ?>
 <?php endif; ?>
-	
+
+

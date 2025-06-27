@@ -1,0 +1,24 @@
+{
+	"settings" : {
+		"_desc" : "The most important group of settings that control the operation of the entire system. ",
+		"testMode" : "true or false. Decides whether PHP error messages will be displayed.",
+		"www" : {
+			"_desc" : "Group of options related with www", 
+			"host" : "Simply the address of your website with harmonize installed", 
+			"ignorePath" : "If harmonize is installed in a folder within your domain e.g. &quot;https://your_domain.org/harmonize_folder&quot; type &quot;/harmonize_folder&quot;.<br/>This parameter is used to correctly interpet addresses of harmonize modules and direct to the correct functions. ",
+			"theme" : "The name of the folder in which the elements responsible for the appearance of your site are stored. &quot;default&quot; is the default value.",
+			"logo" : "The name of the graphic file with logo you want to use.",
+			"title" : "Default title of yours serwis. ",
+			"defaultLanguage" : "default service language"
+			},
+		"solr" : {
+			"_desc" : "Settings related with SOLR search engine", 
+			"host" : "Yours solr host address with protocole code",
+			"hostname" : "Single name (or IP) of yours solr host",
+			"port" : "Port to communicate with solr",
+			"reserve" : "Reserve server settings (parameters in this group have the same meaning as above). You may delete this setting if you don't want to use reserve host.<br/><br/>This path will be used when yours basic solr host is not responding."
+			
+			}
+		}
+	
+}

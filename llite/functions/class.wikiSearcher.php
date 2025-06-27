@@ -33,8 +33,9 @@ class wikiSearcher {
 			$ids = (array)$ids;
 			// in memory buffer?
 			foreach ($ids as $field=>$value) {
-				if (!is_numeric($field) && !empty($this->buffer->ids->$field[$value]))
+				if (!is_numeric($field) && !empty($this->buffer->ids->$field[$value])) {
 					return $this->buffer['eids_'.$field.':'.$value]; // The answer "not found" is a possible and GOOD answer (save time and don't look again! today)
+					}
 				}
 			// in oursolr ?
 			foreach ($this->cms->configJson->wikidata->ids as $field=>$property) {
@@ -58,6 +59,7 @@ class wikiSearcher {
 	function getIdByLabel($type, $lookfor, $conditions = []) {
 		
 		$sstring = $basesstring = $this->cms->helper->clearStr($lookfor);
+		$lastMatchLevel = 0;
 		if (!empty($sstring)) {
 			$Tstrings = explode(' ', $sstring);
 			
@@ -115,7 +117,7 @@ class wikiSearcher {
 				$i = 0;
 				if (!empty($this->getRecFound()) && !empty($this->response->response->docs)) {
 					$toMatch = (object)['name' => $basesstring];
-					$matchLevel = $this->cms->configJson->biblio->import->matchLevel;
+					$minMatchLevel = $this->cms->configJson->import->matchLevel;
 					$resTable = [];
 					
 					foreach ($this->response->response->docs as $doc) {
@@ -124,19 +126,27 @@ class wikiSearcher {
 						$this->cms->wikiData->loadRecord($testedId);
 						
 						$searchArray = array_merge($this->cms->wikiData->getSolrValues('labels_search') ?? [], $this->cms->wikiData->getSolrValues('aliases_search') ?? []);
+						if ($type = 'person')
+							foreach ($searchArray as $k=>$v)
+								$searchArray[$k].= trim(' '.$this->cms->wikiData->getPersonYearsRange());
+						
 						$currentMatchLevel = $this->cms->helper->matchLevelStr($toMatch, $searchArray);
-						if ($currentMatchLevel >= $matchLevel) {
+						if ($currentMatchLevel >= $minMatchLevel) {
 							$resTable[$testedId] = $currentMatchLevel;
-							file_put_contents($this->outPutFolder.'wikiSolrQueries.'.$type.'.success.csv', "$testedId;$type;$lookfor;$queryString;\n", FILE_APPEND);
+							file_put_contents($this->outPutFolder.'wikiSolrQueries.'.$type.'.success.csv', "$testedId;$type;$lookfor;$queryString;$currentMatchLevel;\n", FILE_APPEND);
 							} else {
-							file_put_contents($this->outPutFolder.'wikiSolrQueries.'.$type.'.rejected.csv', "$testedId;$type;$lookfor;$queryString;\n", FILE_APPEND);	
+							$lastMatchLevel	= $currentMatchLevel;
+							file_put_contents($this->outPutFolder.'wikiSolrQueries.'.$type.'.rejected.csv', "$testedId;$type;$lookfor;$queryString;$currentMatchLevel;\n", FILE_APPEND);	
 							}
 						if (!empty($resTable)) {
 							arsort($resTable);
 							$testedId = key($resTable);
 							file_put_contents($this->outPutFolder.'wikiSolrQueries.'.$type.'.chosen.csv', "$testedId;$type;$lookfor;$queryString;\n", FILE_APPEND);
 							$this->buffer[$searchKey] = $testedId;
-							return $testedId;
+							return [
+								'wikiQ' => $testedId,
+								'matchLevel' => round($resTable[$testedId]*100)
+								];
 							}
 						/*
 						if (!empty($conditions['year_born']) && ($conditions['year_born'] == $this->cms->wikiData->getYear('P569'))) {
@@ -153,32 +163,37 @@ class wikiSearcher {
 				
 				}
 			if (isset($this->configJson->import->useExternalSearch->wikidata->label) && $this->configJson->import->useExternalSearch->wikidata->label) {
-				if (in_array($type, ['magazine', 'event', 'place']))
-					if (!empty($res = $this->externalQuery($type, $sstring))) {
-						$this->buffer[$searchKey] = $res;
-						return $this->buffer[$searchKey];
-						}
+				if (in_array($type, ['magazine', 'event', 'place', 'coporate']))
+					return $this->externalQuery($type, $sstring);
 				}
 			}
+		return ['matchLevel' => round($lastMatchLevel*100)];	
 		}
 	
 	function externalQuery($type, $sstring) {
 		$res = json_decode(@file_get_contents($F = $this->cms->configJson->wikidata->host.$this->apiSearchConstStr.'srsearch='.$sstring));
 		$hit = false;
-		
+		$matchLevel = 0;
 		if (!empty($res->batchcomplete) && ($res->query->searchinfo->totalhits>0)) {
 			foreach ($res->query->search as $key=>$result) {
 				$this->cms->wikiData->loadRecord($result->title); 
 				if ($this->cms->wikiData->recType() == $type) {
 					file_put_contents($this->outPutFolder.'wikiAPIQueries.'.$type.'.success.csv', "$type;$sstring;".$this->cms->wikiData->getId()."\n", FILE_APPEND);
 					$this->hasWikiRec = clone $this->cms->wikiData;
-					return $this->cms->wikiData->getId();
+					
+					$matchLevel = $this->cms->helper->matchLevelStr($sstring, $this->cms->wikiData->getLabels());
+					if ($matchLevel >= $this->cms->configJson->import->matchLevel)
+						return [ 
+							'wikiQ' => $this->cms->wikiData->getId(),
+							'matchLevel' => round($matchLevel*100)
+							];
 					} else {
 					file_put_contents($this->outPutFolder.'wikiAPIQueries.'.$type.'.rejected.csv', "$type;$sstring;{$this->cms->wikiData->recType()};{$this->cms->wikiData->getId()}\n", FILE_APPEND);	
 					}
 				}
 			} 
 		file_put_contents($this->outPutFolder.'wikiAPIQueries.'.$type.'.failure.q.csv', "$F;\n", FILE_APPEND);
+		return ['matchLevel' => round($matchLevel*100)];
 		}	
 	
 	

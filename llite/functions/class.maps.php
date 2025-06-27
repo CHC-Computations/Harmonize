@@ -151,6 +151,10 @@ class maps {
 		
 		}
 	
+	public function drawPolygon($points = [], $options = []) {
+		
+		}
+	
 	public function drawEuropeMap($Tp = array()) {
 		$points = '';
 		$lp = 0;
@@ -216,8 +220,8 @@ class maps {
 			
 			
 		if (!empty($longs) && is_array($longs)) {
-			$Latcenter = max($lats)-(max($lats)-min($lats))/2;
-			$Loncenter = max($longs)-(max($longs)-min($longs))/2;
+			$Latcenter = str_replace(',','.', max($lats)-(max($lats)-min($lats))/2);
+			$Loncenter = str_replace(',','.', max($longs)-(max($longs)-min($longs))/2);
 			} else {
 			$Latcenter = 30.0; //53.581;
 			$Loncenter = 23.063;
@@ -235,10 +239,13 @@ class maps {
 			var map = L.map('map').setView([$Latcenter,$Loncenter], 2);
 			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				maxZoom: 16,
+				minZoom: 2,
+				maxBounds: [[-90,-180], [90,180]],
+				maxBoundsViscosity: 1.0,
 				attribution: '© OpenStreetMap'
 				}).addTo(map);
-			$markers
-			 ";
+			map.invalidateSize();	
+			".$markers;
 		$map.= '<script>'.$this->JS.'</script>';	 
 		
 		return $map;

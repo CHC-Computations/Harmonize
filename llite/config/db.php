@@ -1,16 +1,16 @@
 <?php
 
-$mdb = [
-	'host'=>'localhost', 
-	'dbname'=>'your_db_name', 
-	'user'=>'your_user_name', 
-	'password'=>'your_db_password'
-	];
+define('GOOGLE_ID','yours_google_id.apps.googleusercontent.com');
+define('GOOGLE_SECRET','yours_google_secret');
+define('GOOGLE_REDIRECT_URL','yours_redirect_url');
+
+
+
 $psqldb = [
 	'host'=>'localhost', 
-	'dbname'=>'your_db_name', 
-	'user'=>'your_user_name', 
-	'password'=>'your_db_password'
+	'dbname'=>'dbname', 
+	'user'=>'username', 
+	'password'=>'userpassword'
 	];
 
 	

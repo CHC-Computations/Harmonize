@@ -7,6 +7,7 @@ require_once('./functions/class.importer.php');
 require_once('./functions/class.solr.php');
 require_once('./functions/class.wikiSearcher.php');
 require_once('./functions/class.viafSearcher.php');
+require_once('./functions/class.localSearcher.php');
 require_once('./functions/class.wikidata.php');
 require_once('./functions/class.helper.php');
 require_once('./functions/class.buffer.php');
@@ -20,8 +21,10 @@ $imp->addClass('wikiData', new wikidata($imp));
 $imp->addClass('helper', new helper($imp));
 $imp->addClass('wikiSearcher', new wikiSearcher($imp));
 $imp->addClass('viafSearcher', new viafSearcher($imp));
+$imp->addClass('localSearcher', new localSearcher($imp));
 
 $imp->buffer->bufferTime = 86400*530; // saving time. we want to accept even very old wikidata files  
+$imp->workingStep = 3;
 
 #$imp->psql->query("TRUNCATE TABLE facets_queries;");  // jakiś problem tutaj - zadanie zajeło PSQL niezwykle dużo czasu 
 
@@ -46,7 +49,9 @@ foreach ($extToRemove as $ext) {
 			unlink ($file); 
 	}
 		
-		
+# $imp->localSearcher->loadAllMatching();
+if (empty($imp->localSearcher->buffer->bestLabel))
+	$imp->localSearcher->loadAllbestLabels();
 		
 
 
@@ -55,6 +60,15 @@ $lp = 0;
 $lpp = 0;
 $list = glob ($source_path.'/*.mrk');
 echo "files found: \e[94m".count($list)."\e[0m\n\n";
+arsort($list);
+$imp->setFilesToImport($list);
+$imp->loadLanguageMap();
+$checkLicences = $imp->checkLicences();
+if (!empty($checkLicences)) {
+	echo implode("\n", $checkLicences);
+	echo "\n\n";
+	die();
+	}
 
 if (is_array($list))
 	foreach ($list as $file) {
@@ -63,6 +77,7 @@ if (is_array($list))
 		$fileName = str_Replace($source_path.'/', '', $file);
 		echo "\n$lpp. reading: \e[94m$fileName\e[0m                             \n";
 		$imp->setFileName($fileName);
+		$imp->setFileNo($lpp);
 		
 		$results = [];
 		$record = '';
@@ -78,8 +93,8 @@ if (is_array($list))
 					$json = $imp->mrk2json($MRK);
 					$imp->createRelations();
 					
-					# $imp->saveFieldsContent();
-					# $imp->saveAllFields();
+					#$imp->saveFieldsContent();
+					#$imp->saveAllFields();
 					# print_r($imp->record);
 					#die();
 					
@@ -87,7 +102,7 @@ if (is_array($list))
 					if ($isOK == 'error')
 						file_put_contents($errorFile, $MRK, FILE_APPEND);
 						else 
-						echo "\r".$isOK;
+						echo "\r".$isOK.'      ';
 					$MRK = '';
 					}
 				
@@ -103,7 +118,7 @@ if (is_array($list))
 			}
 		}
 		
-				
+file_get_contents($imp->solrUrl.'?commit=true');				
 
 echo "\n___________________________________________________________\n";
 echo number_format($imp->totalRec,0,'','.').' records saved to solr in '.$imp->WorkTime()."                                          \n\n";

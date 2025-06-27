@@ -14,6 +14,17 @@ $this->addClass('solr',		new solr($this));
 $currentCore = 'places';
 
 $query['q'] = $this->solr->lookFor($this->getParam('GET', 'lookfor'), 'allfields' );		
+
+
+if (!empty($this->GET['lookfor'])) {
+	$lookfor = $this->GET['lookfor'];
+	$query['q']= $this->solr->lookFor($lookfor);
+	} else 
+	$query['q']=[ 
+			'field' => 'q',
+			'value' => '*:*'
+			];
+
 $query['sort']=[ 
 		'field' => 'sort',
 		'value' => 'biblio_count desc'
@@ -60,11 +71,10 @@ $results = $this->solr->getQuery($currentCore, $query);
 $results = $this->solr->resultsList();
 $facets = $this->solr->facetsList();
 $totalResults = $recSum = $this->solr->totalResults();
-#echo "alerts".$this->helper->pre($this->solr->alert);
+# echo "alerts".$this->helper->pre($this->solr->alert);
 
 
 if ($totalResults>0) {
-	
 	$first = current($results);
 	$recMax = $first->biblio_count;
 	$last = end($results);
@@ -80,39 +90,44 @@ if ($totalResults>0) {
 		}
 	
 
-	
-	$addStr = http_build_query($this->GET);
-	$lon['min'] = min($tlon);
-	$lat['min'] = min($tlat);
-	$lon['max'] = max($tlon);
-	$lat['max'] = max($tlat);
-	
-	$js[] = "map.fitBounds([[$lat[max],$lon[max]],[$lat[min],$lon[min]]]);";
-	$js[] = "$('#mapStartZoom').val(map.getZoom());";
-	
-	$js[] = "$('#mapBoundN').val(map.getBounds().getNorth());";
-	$js[] = "$('#mapBoundS').val(map.getBounds().getSouth());";
-	$js[] = "$('#mapBoundE').val(map.getBounds().getEast());";
-	$js[] = "$('#mapBoundW').val(map.getBounds().getWest());";
-	$js[] = "$('#mapZoom').val(map.getZoom());";
-	$js[] = "map.on('moveend', function() { 
-			//page.ajax('ajaxBox','wiki/map.moved?$addStr&N='+map.getBounds().getNorth()+'&S='+map.getBounds().getSouth()+'&W='+map.getBounds().getWest()+'&E='+map.getBounds().getEast());
-			$('#mapBoundN').val(map.getBounds().getNorth());
-			$('#mapBoundS').val(map.getBounds().getSouth());
-			$('#mapBoundE').val(map.getBounds().getEast());
-			$('#mapBoundW').val(map.getBounds().getWest());
-			$('#mapZoom').val(map.getZoom());
-			results.maps.moved('{$this->facetsCode}');
-			});";
+	if (!empty($tlon) && !empty($tlat) && is_Array($tlon) && is_array($tlat)) {
+		$addStr = http_build_query($this->GET);
+		$lon['min'] = min($tlon);
+		$lat['min'] = min($tlat);
+		$lon['max'] = max($tlon);
+		$lat['max'] = max($tlat);
+		
+		$js[] = "map.fitBounds([[$lat[max],$lon[max]],[$lat[min],$lon[min]]]);";
+		$js[] = "$('#mapStartZoom').val(map.getZoom());";
+		
+		$js[] = "$('#mapBoundN').val(map.getBounds().getNorth());";
+		$js[] = "$('#mapBoundS').val(map.getBounds().getSouth());";
+		$js[] = "$('#mapBoundE').val(map.getBounds().getEast());";
+		$js[] = "$('#mapBoundW').val(map.getBounds().getWest());";
+		$js[] = "$('#mapZoom').val(map.getZoom());";
+		$js[] = "map.on('moveend', function() { 
+				//page.ajax('ajaxBox','wiki/map.moved?$addStr&N='+map.getBounds().getNorth()+'&S='+map.getBounds().getSouth()+'&W='+map.getBounds().getWest()+'&E='+map.getBounds().getEast());
+				$('#mapBoundN').val(map.getBounds().getNorth());
+				$('#mapBoundS').val(map.getBounds().getSouth());
+				$('#mapBoundE').val(map.getBounds().getEast());
+				$('#mapBoundW').val(map.getBounds().getWest());
+				$('#mapZoom').val(map.getZoom());
+				results.maps.moved('{$this->facetsCode}');		
+				
+				});";
+		}
+	if (!empty($this->GET['lookfor']))
+		$js[] = "results.maps.moved('{$this->facetsCode}');";
 	
 	echo $this->transEsc('Total results').': <strong>'.$this->helper->numberFormat($totalResults).'</strong>';
 	echo '<input type="hidden" name="totalResults" id="totalResults" value="'.$totalResults.'">';
 	echo '<input type="hidden" name="visibleResults" id="visibleResults" value="'.$this->solr->visibleResults().'">';
-	
 	$this->addJS(implode("\n", $js));	
-
+	
+	#echo $this->helper->pre(implode("\n", $js));
+	
 	} else {
-	echo $this->transEsc('No results');	
+	echo $this->transEsc('No results or results without coordinates');	
 	$this->addJS('$("#mapPopupCurrentView").html("");');
 	}
 	

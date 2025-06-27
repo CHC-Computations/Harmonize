@@ -38,7 +38,9 @@ class CMS {
 	public $errors = [];
 	public $warnings = [];
 	public $infos = [];
+	public $success = [];
 	public $JS = [];
+	public $meta = [];
 	
 	// default sub-classes 
 	public $psql;
@@ -103,7 +105,7 @@ class CMS {
 			else 
 			$this->router = 'home';
 		
-		if ($this->router == 'ajax')
+		if (($this->router == 'ajax') or ($this->router == 'autocomplete'))
 			$this->ajaxMode = true;	
 			else 
 			$this->ajaxMode = false;	
@@ -129,9 +131,10 @@ class CMS {
 		$this->defaultLanguage = $this->setting->www->defaultLanguage ?? 'en';
 		
 		
-		if (array_key_exists($this->linkParts[1], $this->lang['available'])) { // not in langList
+		if (!empty($this->linkParts[1]) && array_key_exists($this->linkParts[1], $this->lang['available'])) { // not in langList
 			$this->userLang = $this->lang['userLang'] = $this->linkParts[1];
-			$this->translations = parse_ini_file( $langGlobalDir.$this->userLang.'/'.$this->userLang.'.ini' );
+			include($langGlobalDir.$this->userLang.'.php');
+			#$this->translations = parse_ini_file( $langGlobalDir.$this->userLang.'/'.$this->userLang.'.ini' );
 			# echo "trans: <pre>".print_r($this->translations,1)."</pre>";
 			} else {
 			$this->redirectTo = $this->HOST.$this->userLang.'/';	
@@ -161,12 +164,21 @@ class CMS {
 				}
 			}
 		
-		$_SESSION['lang'] = $this->lang;	
-		$_SESSION['GET'] = $this->GET;	
-		$_SESSION['parentParams'] = $this->params;
-		$_SESSION['parentRouter'] = $this->router;
-				
+		if (!$this->ajaxMode) {
+			$_SESSION['lang'] = $this->lang;	
+			$_SESSION['GET'] = $this->GET;	
+			$_SESSION['parentParams'] = $this->params;
+			$_SESSION['parentRouter'] = $this->router;
+			} else {
+			@$this->ajaxparent = new stdClass;
+			$this->ajaxparent->lang = $_SESSION['lang'];
+			$this->ajaxparent->GET = $_SESSION['GET'];
+			$this->ajaxparent->params = $_SESSION['parentParams'];
+			$this->ajaxparent->router = $_SESSION['parentRouter'];
+			}
 		$this->POST = $_POST;
+		
+		#$this->JS[] = '$(\'[data-toggle="tooltip"]\').tooltip();';
 		}
 	
 	
@@ -297,9 +309,12 @@ class CMS {
 
 	public function getUserParamMeaning($core, $group, $param = null) {
 		$value = $this->getUserParam($core.':'.$group);
-		if (!empty($param))
-			return $this->configJson->$core->summaryBarMenu->$group->optionsAvailable->$value->$param ?? null;
-			else 
+		if (!empty($param)) {
+			$return = $this->configJson->$core->summaryBarMenu->$group->optionsAvailable->$value->$param ?? '';
+			if (!empty($return) && stristr($return, '*'))
+				$return = str_replace('*', $this->userLang, $return);
+			return $return;
+			} else 
 			return $this->configJson->$core->summaryBarMenu->$group->optionsAvailable->$value ?? null;
 		}
 	
@@ -346,6 +361,10 @@ class CMS {
 		$this->JS[] = $script;
 		}
 	
+	public function addMeta($msg) {
+		$this->meta[] = $msg;
+		}
+	
 	public function addError($msg) {
 		$this->errors[] = $msg;
 		}
@@ -358,16 +377,52 @@ class CMS {
 		$this->infos[] = $msg;
 		}
 	
+	public function addSuccess($msg) {
+		$this->success[] = $msg;
+		}
+	
 	
 	public function error($error) {
 		return $this->Alert('danger', $error);
 		}
+	
+	function isMobile() {
+		return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+		}
+	
+	
+	public function phrase($templeName, $vars) {
+		$userFullFileName = './languages/'.$this->userLang.'/phrases/'.$templeName;
+		$defaultFullFileName = './languages/'.$this->defaultLanguage.'/phrases/'.$templeName;
 		
+		if (file_exists($userFullFileName)) 
+			$fullFileName = $userFullFileName;
+			else if (file_exists($defaultFullFileName)) 
+			$fullFileName = $defaultFullFileName;
+			else return 'phrase do not exist! ('.$templeName.')';
+		
+		extract($vars);
+		include ($fullFileName);
+		return $return;
+		}
+	
 	public function transEsc($content, $array = []) {
 		if (!is_string($content)) 
 			return $content;
 		if (!empty($content)) {
-			$content = trim($content);
+			$content = trim(str_replace('#', '', $content));
+			/*
+			if (($this->userLang != 'en') & !preg_match('/^Q\d+.*$/', $content)) {
+				
+				if (stristr($this->SERVER->REQUEST_URI, 'ajax') && !empty($this->ajaxparent->params))
+					$this->SERVER->REQUEST_URI = '/'.implode('/', $this->ajaxparent->params);
+				if (!empty($this->psql))
+					$this->psql->querySelect("INSERT INTO translate (lang, string, context, importance) VALUES
+						({$this->psql->string($this->userLang)}, {$this->psql->string($content)}, {$this->psql->string($this->SERVER->REQUEST_URI)}, 1)
+						ON CONFLICT (lang, string)
+						DO NOTHING;");
+				}
+			*/
 			$translation = $this->translations[$content] ?? $content;
 			if (!empty($array)) {
 				foreach ($array as $key=>$value) {
@@ -376,7 +431,7 @@ class CMS {
 				}
 			
 			return $translation;
-			}
+			} 
 		return $content;
 		}	
 
@@ -428,8 +483,8 @@ class CMS {
 		return $retDate;
 		}	
 	
-	public function buildUri($uri=null,$GET=[]) {
-		return $this->buildUrl($uri,$GET);
+	public function buildUri($uri=null, $GET=[], $addLastGET = true) {
+		return $this->buildUrl($uri,$GET,$addLastGET);
 		}
 		
 	public function clearGET() {
@@ -441,7 +496,8 @@ class CMS {
 		if ($addLastGET) $GET = array_merge($this->GET, $GET);
 		$turi = explode('/',$uri);
 		$uri1 = $turi[0];
-		
+		#print_r($GET);
+		#print_r($this->GET);
 		if (!empty($this->configJson->settings->routersOrder->$uri1) ) {
 			$routers[$uri1] = $uri1;
 			if (empty($GET['core']) && !empty($turi[1])) {
@@ -467,64 +523,7 @@ class CMS {
 		return $this->HOST.$this->userLang.$uri;
 		}
 	
-	/* oldversion - to delete 
-	public function buildUrl($uri = null, $GET = []) {
 		
-		if (!empty($GET['core']) && !empty($this->configJson->settings->homePage->coresNames->{$GET['core']}))
-			$nGET = array_merge($this->GET, $GET);
-			else 
-			$nGET = $GET;	
-		
-		$turi = explode('/',$uri);
-		$uri1 = $turi[0];
-		
-		if (!empty($this->configJson->settings->routersOrder->$uri1) ) {
-			$routers[$uri1] = $uri1;
-			if (empty($GET['core']) && !empty($turi[1])) {
-				$nGET['core'] = $GET['core'] = $turi[1];
-				}
-			$startKey = array_search($uri1, $this->linkParts);
-			
-			foreach ($this->configJson->settings->routersOrder->$uri1 as $field) {
-				
-				if (!empty($nGET[$field])) {
-					$routers[$field] = $nGET[$field];
-					unset($nGET[$field]);
-					} else if (!empty($this->getUserParam($GET['core'].':'.$field)))
-					$routers[$field] = $this->getUserParam($GET['core'].':'.$field);
-					else 
-					$routers[$field] = 0;	
-				}
-			$uri = '/'.implode('/',$routers);	
-			} else {
-			if (substr($uri,0,1)!=='/')
-				$uri='/'.$uri;
-			if ( (!empty($nGET['page']))or(!empty($nGET['sort'])) ) {
-				if (empty($this->facetsCode))
-					$this->facetsCode = 'null';
-				if (empty($nGET['page']))
-					$page = $this->getCurrentPage();
-					else {
-					$page = $nGET['page'];
-					unset($nGET['page']);
-					}
-				if (empty($nGET['sort']))
-					$sort = $this->getCurrentSort();
-					else {
-					$sort = $nGET['sort'];
-					unset($nGET['sort']);
-					}
-				$uri.='/'.$page.'/'.$sort.'/'.$this->facetsCode.'/';
-				}
-			}
-		
-		
-		
-		$uri .='?'.http_build_query($nGET);
-		return $this->HOST.$this->userLang.$uri;
-		}
-	*/	
-	
 	public function selfUrl($str1='', $str2='') {
 		$scheme = $_SERVER['HTTP_X_FORWARDED_SCHEME'] ?? $_SERVER['REQUEST_SCHEME'];
 		$str = $scheme.'://';
@@ -556,6 +555,37 @@ class CMS {
 			return false;
 		}	
 	
+	public function renderLang($templateName, $vars = array()) {
+		extract($vars);
+		$templateParts = explode('.', $templateName);
+		$position = count($templateParts)-1;
+		$templateParts[] = end($templateParts);
+		
+		$fullFileName = $this->themePath.'/templates/'.$templateName;
+		
+		$templateParts[$position] = $this->userLang;
+		$tmpName = $this->themePath.'/templates/'.implode('.', $templateParts);
+		if (file_exists($tmpName)) {
+			$fullFileName = $tmpName;
+			} else {
+			$templateParts[$position] = $this->defaultLanguage;
+			$tmpName = $this->themePath.'/templates/'.implode('.', $templateParts);
+			if (file_exists($tmpName))
+				$fullFileName = $tmpName;
+			}
+		
+		if (file_exists($fullFileName)) {
+			ob_start();
+			include ($fullFileName);
+			$content = ob_get_contents();
+			ob_clean();
+			
+			return $content;
+			} else 
+			return $this->error($this->transEsc('Template not found: ').$fullFileName);
+		}
+	
+	
 	public function render($templeName, $vars=array()) {
 		extract($vars);
 		$fullFileName = $this->themePath.'/templates/'.$templeName;
@@ -568,23 +598,28 @@ class CMS {
 			
 			return $content;
 			} else 
-			return $this->error($this->transEsc('Temple not found: ').$fullFileName);
+			return $this->error($this->transEsc('Template not found: ').$fullFileName);
 		}	
 		
 	public function head() {
 		$this->head = new stdclass;
 		$this->head->JS = '';
 		$this->head->CSS = '';
+		$this->head->meta = '';
 		
 		$js = glob ($this->themePath.'/js/*.js');
 		$css = glob ($this->themePath.'/css/*.css');
+		if ($this->configJson->settings->testMode) 
+			$loadAgain = '?t='.$this->time;
+			else 
+			$loadAgain = '';
 		if (count($js)>0) 
 			foreach ($js as $row) {
-				$this->head->JS.="\n\t\t".'<script src="'.$this->HOST.$row.'?t='.$this->time.'"></script>';
+				$this->head->JS.="\n\t\t".'<script src="'.$this->HOST.$row.$loadAgain.'"></script>';
 			} 
 		if (count($css)>0) 
 			foreach ($css as $row) {
-				$this->head->CSS.="\n\t\t".'<link rel="stylesheet" href="'.$this->HOST.$row.'?t='.$this->time.'">';
+				$this->head->CSS.="\n\t\t".'<link rel="stylesheet" href="'.$this->HOST.$row.$loadAgain.'">';
 			} 
 		
 		return null;
@@ -605,6 +640,7 @@ class CMS {
 					<h1>Service work is in progress</h1>
 					<p>Estimated completion time: <b>'.$work['finishtime'].'</b></p>
 					</div>
+					'.$_SERVER['REMOTE_ADDR'].' <> '.$work['ip'].'
 					</body
 					';
 			
@@ -612,6 +648,8 @@ class CMS {
 				return $pauseScreen;
 			
 			}
+		include('./modules/save.post.data.php');
+			
 		$path='';
 		$routerError='./routers/error404.php';
 		
@@ -672,7 +710,7 @@ class CMS {
 			$results = $this->solr->response->numFound;
 			$rpp = $this->getUserParam($currentCore.':pagination');
 			
-			return floor($results/$rpp);
+			return ceil($results/$rpp);
 			} else 
 			return 1;
 		}

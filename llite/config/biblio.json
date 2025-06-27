@@ -16,10 +16,10 @@
 				"value" : "list",
 				"icon" : "ph-bold ph-rows"
 				},
-			"th-list" : {
-				"name" : "simple list",
-				"value" : "th-list",
-				"icon" : "ph-bold ph-list-dashes"
+			"table" : {
+				"name" : "table list",
+				"value" : "table",
+				"icon" : "ph-bold ph-table"
 				},
 			"th" : {
 				"name" : "titles",
@@ -40,12 +40,38 @@
 			}
 		}
 	},
-
-"import" : {
-	"matchLevel" : "0.3",
-	"_description" : "Results from wikidata below this matching level will be rejected"
+"exports" : {
+	"maxRecords" : 50000,
+	"formats" : {
+		"mrk" : {
+			"title" : "MARC21 text",
+			"description" : "Bibliographic records in MARC21 text format"
+			},
+		"marcxml" : {
+			"title" : "MARCXML",
+			"description" : "Bibliographic records in MARC21 XML format"
+			},
+		"marcjson" : {
+			"title" : "MarcJson",
+			"description" : "Bibliographic records in MARC21 Json format"
+			},
+		"elbjson" : {
+			"title" : "ELB full dump",
+			"description" : "ELB data structure (json) + raw source records (in orginal format) + all related persons, places, corporates, etc records (json)",
+			"getValues" : {
+				"record_format" : "Raw records format"
+				},
+			"getCount" : {
+				"persons_ac" : "Persons",
+				"places_ac" : "Places",
+				"coporates_ac" : "Corporates",
+				"magazines_ac" : "Magazines", 
+				"events_ac" : "Events"
+				}
+			}  
+		}
 	},
-	
+
 "facets" : {
 	"notNow" : {
 		},
@@ -54,6 +80,16 @@
 			"name": "relations Schema", 
 			"importFunction" : "getJsonRelations"
 			},
+		"user_list" : {
+			"name": "User list", 
+			"formatter": "formatUserList"
+			},
+		"licence" : {
+			"name" : "Licence",
+			"importFunction" : "getLicenceOneLine",
+			"formatter" : "formatLicence",
+			"translated" : false 
+			},
 		"source_db_str" : {
 			"name": "Source Database", 
 			"relPath" : ["sourceDB", "name"],
@@ -61,10 +97,10 @@
 			"translated" : true 
 			},
 		"source_db_sub_str" : {
-			"name": "Source Database c.d.", 
+			"name": "Collection", 
 			"relPath" : ["sourceDB", "supplemental"],
-			"formatter": null, 
-			"translated" : true 
+			"formatter": "formatTakeBestML", 
+			"translated" : false 
 			},
 		"format_major" : {
 			"name": "Format", 
@@ -105,12 +141,30 @@
 		"language" : {
 			"name": "Publication language", 
 			"relPath" : ["language","publication"],
-			"formatter": null, 
+			"formatter": "formatTakeBestML", 
 			"translated" : false 
 			},
 		"language_o_str_mv" : {
 			"name": "Original language", 
 			"relPath" : ["language","original"],
+			"formatter": "formatTakeBestML", 
+			"translated" : false 
+			},
+		"ddkey_str" : {
+			"name" : "deduplicate key",
+			"importFunction" : "getDDkey",
+			"formatter": null, 
+			"translated" : false 
+			},
+		"workkey_str_mv" : {
+			"name" : "Work key",
+			"importFunction" : "getWorkKey",
+			"formatter": null, 
+			"translated" : false 
+			},
+		"workkey_str" : {
+			"name" : "Work key",
+			"importFunction" : "",
 			"formatter": null, 
 			"translated" : false 
 			},
@@ -226,6 +280,13 @@
 			"formatter": null, 
 			"translated" : false 
 			},
+		"topic_facet_str_mv" : {
+			"name": "Topic", 
+			"importFunction" : "getSubjects",
+			"relPath" : ["subject", "topic"],
+			"formatter": null, 
+			"translated" : false 
+			},
 		"topic" : {
 			"name": "Subject", 
 			"importFunction" : "getSubjectsRows",
@@ -274,11 +335,25 @@
 			"formatter": "formatPlace", 
 			"translated" : false 
 			},
+		"corporates_ac" : {
+			"name": "Corporate", 
+			"importFunction" : "getCorporate",
+			"importParam" : "all",
+			"formatter": "formatCorporate", 
+			"translated" : false 
+			},
 		"events_ac" : {
 			"name": "Event", 
 			"importFunction" : "getEvents",
 			"importParam" : "all",
 			"formatter": "formatEvent", 
+			"translated" : false 
+			},
+		"magazines_ac" : {
+			"name": "Magazine", 
+			"importFunction" : "getMagazines",
+			"importParam" : "all",
+			"formatter": "formatMagazine", 
 			"translated" : false 
 			},
 		"subject_genre_str_mv" : {
@@ -311,25 +386,43 @@
 			"name" : "Universal Decimal Classification", 
 			"relPath" : ["subject", "UDC"],
 			"formatter" : null, 
-			"translated" : true 
+			"translated" : false 
 			},
 			
 		"author_events_str_mv" : {
 			"name" : "Event as author", 
 			"importFunction" : "getAuthorEvents",
-			"formatter" : null, 
+			"formatter" : "formatEvent", 
 			"translated" : false 
 			},
 		"events_str_mv" : {
 			"name" : "Event as subject", 
 			"importFunction" : "getEvents",
 			"importParam" : "subjectEvent",
-			"formatter" : null, 
+			"formatter" : "formatEvent", 
 			"translated" : false 
 			},
 		"publishDate" : {
 			"name" : "Publishing date", 
 			"relPath" : "publicationYear",
+			"formatter" : null, 
+			"translated" : false 
+			},
+		"publish_country_str" : {
+			"name" : "Publishing country", 
+			"relPath" : ["publicationCountry","code"],
+			"formatter" : null, 
+			"translated" : false 
+			},
+		"title_orgin_str" : {
+			"name" : "Title original", 
+			"relPath" : ["titleOrgin", "title"],
+			"formatter" : null, 
+			"translated" : false 
+			},
+		"title_orgin_where_str_mv" : {
+			"name" : "Title original", 
+			"relPath" : ["titleOrgin", "where"],
 			"formatter" : null, 
 			"translated" : false 
 			},
@@ -348,8 +441,8 @@
 		"magazines_str_mv" : {
 			"name" : "Published in", 
 			"importFunction" : "getMagazines",
-			"importParam" : "all",
-			"formatter" : null, 
+			"importParam" : "sourceMagazine",
+			"formatter" : "formatMagazines", 
 			"translated" : false 
 			},
 		"source_publication" : {
@@ -377,25 +470,25 @@
 			"translated" : false 
 			},
 		"issn" : {
-			"name" : "", 
+			"name" : "ISSN", 
 			"relPath" : "issn",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"isbn" : {
-			"name" : "", 
+			"name" : "ISBN",
 			"relPath" : "isbn",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"oclc_num" : {
-			"name" : "", 
+			"name" : "OCoLC", 
 			"relPath" : "OCoLC",
 			"formatter" : null, 
 			"translated" : false 
 			},
 		"ctrlnum" : {
-			"name" : "", 
+			"name" : "ctrlNum", 
 			"relPath" : "ctrlNum",
 			"formatter" : null, 
 			"translated" : false 
@@ -403,6 +496,7 @@
 		
 		"all_wiki" : {
 			"name" : "Has a wikidata link to",
+			"formatter" : "formatWiki",
 			"importFunction" : "getWiki"
 			},
 		"with_roles_wiki" : {
@@ -434,6 +528,12 @@
 			"formatter" : null, 
 			"translated" : false 
 			},
+		"source_group" : {
+			"name" : "Source group", 
+			"importFunction" : "getSourceGroup",
+			"formatter" : null, 
+			"translated" : false 
+			},
 		"ai_keywords" : {
 			"name" : "Keywords extracted automatically", 
 			"importFunction" : "getExternalValue",
@@ -450,7 +550,7 @@
 			"translated" : false 
 			},
 		"orgin_labels" : {
-			"name" : "Orgin label",
+			"name" : "Original label",
 			"relPath" : "orgin_labels",
 			"formatter" : null,
 			"translated" : false
@@ -498,19 +598,21 @@
 			"solr_index" : "source_db_str",
 			"psql_query" : "",
 			"child" : {
-				"name" : "Source database sub",
+				"name" : "Collection",
 				"solr_index" : "source_db_sub_str",
+				"formatter": "formatTakeBestML", 
+				"translated" : false,
 				"psql_query" : ""
 				}
 			},
 		"format" : {
-			"name" : "Format",
+			"name" : "Major format",
 			"translated" : true,
 			"solr_index" : "format_major",
 			"psql_query" : "",
 			"child" : {
 				"name" : "Source Document",
-				"formatter" : "formatMagazines",
+				"formatter" : "formatMagazines", 
 				"solr_index" : "magazines_str_mv",
 				"psql_query" : ""
 				}
@@ -561,6 +663,12 @@
 			"translated" : false,
 			"template" : "groupBox",
 			"groupList" : {
+				"topic" : {
+					"name" : "Topic",
+					"formatter" : null,
+					"solr_index" : "topic_facet_str_mv", 
+					"psql_query" : ""
+					},
 				"person" : {
 					"name" : "Persons",
 					"formatter" : "formatPerson",
@@ -605,6 +713,7 @@
 						"byNationality" : {
 							"name" : "by Nationality",
 							"solr_index" : "subject_nation_str_mv",
+							"translated" : false, 
 							"psql_query" : ""
 							}			
 						}
@@ -636,11 +745,15 @@
 				"languagePublication" : {
 					"name" : "Publication language",
 					"solr_index" : "language", 
+					"translated" : false, 
+					"formatter": "formatTakeBestML",
 					"psql_query" : ""
 					},
 				"languageOriginal" : {
 					"name" : "Original language",
 					"solr_index" : "language_o_str_mv",
+					"translated" : null, 
+					"formatter": "formatTakeBestML",
 					"psql_query" : ""
 					}
 				}
@@ -663,6 +776,7 @@
 				}
 			},
 		"ai_keywords" : {
+			"limit" : "admin",
 			"name" : "Keywords extracted automatically", 
 			"solr_index" : "ai_keywords",
 			"desc" : "słowa kluczowe wydobyte automatycznie przy użyciu SI (zawartość dostarczona przez CLARIN)", 
@@ -670,9 +784,33 @@
 			"translated" : false 
 			},
 		"record_contains" : {
+			"limit" : "admin",
 			"name" : "Record contains", 
 			"desc" : "a temporary technical facet to help find and test features", 
 			"solr_index" : "record_contains",
+			"formatter" : null, 
+			"translated" : false 
+			},			
+		"issn" : {
+			"limit" : "admin",
+			"name" : "ISSN", 
+			"desc" : "a temporary technical facet to help deduplicate records", 
+			"solr_index" : "issn",
+			"formatter" : null, 
+			"translated" : false 
+			},			
+		"source_file" : {
+			"limit" : "admin",
+			"name" : "Source file", 
+			"solr_index" : "source_file",
+			"formatter" : null, 
+			"translated" : false 
+			},			
+		"title_orgin_where_str_mv" : {
+			"limit" : "admin",
+			"name" : "Where was orginal title", 
+			"desc" : "where was orginal title", 
+			"solr_index" : "title_orgin_where_str_mv",
 			"formatter" : null, 
 			"translated" : false 
 			},			
@@ -710,10 +848,10 @@
 		"mrk" : "MARC21 text",
 		"marcxml" : "MARCXML",
 		"json" : "marcJson",
-		"json?solr" : "ELB Json",
+		"json?elb" : "ELB Json",
 		"rdf" : "RDF",
 		"btx" : "BibTeX",
 		"ris" : "RIS" 
-		}	
-	}
+		}
+	}	
 }

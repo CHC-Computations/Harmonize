@@ -25,7 +25,7 @@ echo '
 if (empty($result->solrRecord->bottomLink))
 	echo '<a class="box-bottom-link" href="'. $this->buildUri('wiki/record/'.$result->solrRecord->wikiq) .'" title="'. $this->transEsc('card of').'...">'. $this->transEsc('More about') .'...</a>';
 	else 
-	echo '<a class="box-bottom-link" href="'. $result->solrRecord->bottomLink .'" title="'. $result->solrRecord->bottomStr .'">'. $result->solrRecord->bottomStr .'</a>';
+	echo '<a class="box-bottom-link" href="'. $result->solrRecord->bottomLink .'" title="'. $result->solrRecord->bottomStr.'">'. $result->solrRecord->bottomStr .'</a>';
 			
 echo '</div>
 	</div>

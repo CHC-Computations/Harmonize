@@ -13,6 +13,14 @@
 		$result->solrRecord->bottomStr = $this->render('helpers/matchLevel.php', ['matchLevel'=>$matchLevel]);
 		$result->solrRecord->bottomTitle = '';
 		}
+		
+		
+	$desc = $result->getStr('descriptions');
+	if (!empty($result->getDateRange()) & !empty($desc)) {
+		$dates = '('.$result->getDateRange().')';
+		$desc = str_replace($dates, '', $desc);
+		}
+	
 ?>
 
 <div class="box-Body">
@@ -25,14 +33,17 @@
 				<?= $result->getStr('labels') ?> 
 				
 			  </a>
+			  <?php if (!empty($result->getDateRange())) echo '<small class="box-date">'.$result->getDateRange().'</small>'; ?>
 			</h4>
+			
 		</div>
-		<p><?= $this->helper->setLength($result->getStr('descriptions'),155) ?></p>
-		<?php if (empty($result->solrRecord->bottomLink)): ?>
+		<p><?= $this->helper->setLength($desc,155) ?></p>
+		
+	</div>
+	<?php if (empty($result->solrRecord->bottomLink)): ?>
 			<a class="box-bottom-link" href="<?= $this->buildUri('wiki/record/'.$result->solrRecord->wikiq); ?>" title="<?= $this->transEsc('card of')?>..."><?= $this->transEsc('More about') ?>...</a>
 		<?php else: ?>	
 			<a class="box-bottom-link-left" href="<?= $result->solrRecord->bottomLink ?>" title="<?= $result->solrRecord->bottomTitle ?>"><?= $result->solrRecord->bottomStr ?></a>
 		<?php endif; ?>	
 		
-	</div>
 </div>

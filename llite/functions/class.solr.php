@@ -9,6 +9,7 @@ class solr {
 	public $alert = []; // side information after solr enquiries 
 	
 	public $responseFile; // full response json file
+	public $fullResponse; // full response json file
 	public $response; // response object
 	public $responseHeader; // (object) header from response file 
 	public $stats; // (object) header from response file 
@@ -54,7 +55,7 @@ class solr {
 
 		}
 		
-		
+	
 	function curlSaveData(string $core, object $data) {
 		$this->curlSaveStatus = false;
 		$solrPath = $this->cms->configJson->settings->solr->host.':'.$this->cms->configJson->settings->solr->port.'/solr/'.$this->cms->configJson->settings->solr->cores->$core.'/update';
@@ -89,7 +90,7 @@ class solr {
 		$core = $this->getOption('coresPrefix').$core;
 		
 		$TQ = [];
-		#echo "querySolr<pre>".print_r($query,1).'</pre>';
+		#echo "querySolr<pre>".print_r($query,1).'</pre>'; 
 		foreach ($query as $k=>$v) {
 			if (!empty($v['field']) && isset($v['value']))
 				$TQ[] = $v['field'] .'='.urlencode($v['value']);
@@ -124,7 +125,12 @@ class solr {
 			case 'subject' : return 'topic_search_str_mv:'.$word;
 			case 'allfields' : 
 			case 'AllFields' : 
-				return $word;
+				$queryTable = explode(' ',$word);
+				$queryString = implode('* AND ', $queryTable).'*';
+				#echo '<pre class="alert-tech">'.$queryString.'</pre>';
+				
+				return $queryString;
+				#return $word;
 				#return 'author:'.$word.'^1 OR title:'.$word.'^0.9 OR topic:'.$word.'^0.6 OR spellingShingle:'.$word.'^0.5'; 
 				
 			default : return strtolower($type).':'.$word;
@@ -193,6 +199,12 @@ class solr {
 	*/
 	
 	function clearStr( $str, $replace = " " ){
+		/* zostawia litery (w tym z diakrytyki, np. á, ć, ň) i cyfry 
+		
+		$output = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $str);
+		$output = trim($output);
+		*/
+		
 		if (!empty($str)) {
 			$oldStr = $str;
 			setlocale(LC_ALL, 'pl_PL.UTF8');
@@ -205,7 +217,7 @@ class solr {
 			}
         }
 		
-	public function lookFor($lookfor, $type) {
+	public function lookFor($lookfor, $type = 'allfields') {
 		// wagi pól przykład: q=(title:mickiewicz)^1 and (spelling:mickiewicz)^0.5
 		if (is_array($lookfor))
 			$lookfor = current($lookfor);
@@ -246,7 +258,7 @@ class solr {
 					$json->response->docs[$k]->title_sub = $this->removeLastSlash($v->title_sub);
 				*/
 				}
-			
+			$this->fullResponse = $json;
 			$this->response = $json->response;
 			$this->responseHeader = $json->responseHeader;
 			$this->stats = $json->stats ?? null;
@@ -365,7 +377,7 @@ class solr {
 	public function getRecord($core, $id) {
 		$query[]=[ 
 				'field' => 'q',
-				'value' => 'id:'.$id
+				'value' => 'id:"'.$id.'"'
 				];
 		$result = $this->querySelect($core, $query);
 		if (!empty($result->response->docs[0]))
@@ -450,7 +462,7 @@ class solr {
 				];
 			$query['limit']=[
 				'field' => 'facet.limit',
-				'value' => $this->cms->configJson->settings->facets->defaults->facetLimit
+				'value' => $this->cms->configJson->$core->facets->defaults->facetLimit
 				];
 		
 			foreach ($facets as $facet) {

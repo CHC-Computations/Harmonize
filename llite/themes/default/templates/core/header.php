@@ -21,6 +21,19 @@ if (!empty($this->GET['lookfor']))
 
 $myListCount = $this->buffer->myListCount();
 
+
+
+if (!empty($this->success)) 
+	echo $this->helper->cloudMessage('success', implode('<hr/>', $this->success));
+/*
+if (!empty($this->infos)) 
+	echo $this->helper->cloudMessage('info', implode('<hr/>', $this->infos));
+*/
+if (!empty($this->warnings)) 
+	echo $this->helper->cloudMessage('warning', implode('<hr/>', $this->warnings));
+if (!empty($this->errors)) 
+	echo $this->helper->cloudMessage('danger', implode('<hr/>', $this->errors));
+
 ?>
 
 	<?= $this->render('core/cookies.php', ['msg' =>$cookies]) ?>
@@ -29,7 +42,7 @@ $myListCount = $this->buffer->myListCount();
 		
 		<div class="header2">
 			<div class="header2-left">
-				<a class="header2-brand" href="<?= $this->basicUri('/') ?>" title="<?= $this->transEsc('Home page') ?>"><img src="<?= $this->HOST ?>/themes/<?= $this->configJson->settings->www->theme ?>/images/<?= $this->configJson->settings->www->logo ?>" alt="logo Libri"><span class="sr-only"><?= $this->transEsc('Literary Bibliography Research Infrastructure') ?></span></a>
+				<a class="header2-brand" href="<?= $this->basicUri('/') ?>" title="<?= $this->transEsc('Home page') ?>" data-toggle="tooltip" data-placement="bottom"><img src="<?= $this->HOST ?>/themes/<?= $this->configJson->settings->www->theme ?>/images/<?= $this->configJson->settings->www->logo ?>" alt="logo Libri"><span class="sr-only"><?= $this->transEsc('Literary Bibliography Research Infrastructure') ?></span></a>
 				<div class="core-menu-items">
 					<?= $this->render('cms/header-menu.php') ?>
 				</div>
@@ -44,22 +57,22 @@ $myListCount = $this->buffer->myListCount();
 			</div>
 			<div class="header2-right">
 							<nav>
-					<?php if (empty($this->user->LoggedIn)): ?>
+					<?php if (!$this->user->isLoggedIn()): ?>
 						<div id="loginOptions" class="userBox">
 							<div class="userBox-toggle">
-								<a OnClick="coreMenu.Show();$('.userBox-menu').hide();" ><i class="ph-list-bold"></i><span class="sr-only">menu</span></a>
-								<a onClick="$('.userBox-menu').toggle();" title="<?= $this->transEsc('User menu')?>" ><i class="ph-user-bold" id="userMenu-icon"></i><span class="sr-only"><?= $this->transEsc('User menu')?></span></a>
+								<a OnClick="coreMenu.Show();$('.userBox-menu').hide();" title="<?= $this->transEsc('ELB menu')?>" data-toggle="tooltip" data-placement="bottom"><i class="ph-list-bold"></i><span class="sr-only">menu</span></a>
+								<a onClick="$('.userBox-menu').toggle();" title="<?= $this->transEsc('User menu')?>" data-toggle="tooltip" data-placement="bottom"><i class="ph-user-bold" id="userMenu-icon"></i><span class="sr-only"><?= $this->transEsc('User menu')?></span></a>
 							</div>
 							<div class="userBox-menu">
 								<div class="userBox-body">
-									<ul class="userBox-options">
+									<!--ul class="userBox-options">
 										<li id="cartSummary">
 											<a id="cartItems" data-lightbox title="<?= $this->transEsc('Go to handy list')?>" href="<?= $this->baseUrl('user/cart')?>" data-toggle="tooltip" data-placement="bottom" >
 												<i class="ph-shopping-cart-bold"></i> <strong id="myListCount"><?= $myListCount ?></strong> 
 												<span ><?= $this->transEsc('on handy list')?></span>
 											</a>
 										</li>
-									</ul>
+									</ul-->
 									<ul class="userBox-options">										
 										<li><a href="<?= $this->baseUrl('user/login')?>"><i class="ph-power-bold"></i> <?= $this->transEsc('Login / register')?></a></li>
 									</ul>
@@ -83,23 +96,23 @@ $myListCount = $this->buffer->myListCount();
 					<?php else: ?>	
 						<div id="loginOptions" class="userBox">
 							<div class="userBox-toggle">
-								<a OnClick="coreMenu.Show();$('.userBox-menu').hide();" ><i class="ph-list-bold"></i><span class="sr-only">menu</span></a>
-								<a onClick="$('.userBox-menu').toggle();" title="<?= $this->transEsc('User menu')?>" ><i class="ph-user-circle-bold" id="userMenu-icon"></i><span class="sr-only"><?= $this->transEsc('User menu')?></span></a>
+								<a OnClick="coreMenu.Show();$('.userBox-menu').hide();" title="<?= $this->transEsc('ELB menu')?>" data-toggle="tooltip" data-placement="bottom"><i class="ph-list-bold"></i><span class="sr-only">menu</span></a>
+								<a onClick="$('.userBox-menu').toggle();" title="<?= $this->transEsc('User menu')?>" data-toggle="tooltip" data-placement="bottom"><i class="ph-user-circle-bold" id="userMenu-icon"></i><span class="sr-only"><?= $this->transEsc('User menu')?></span></a>
 								
 							</div>
 							<div class="userBox-menu">
 								<div class="userBox-header">
-									<h3><?=$this->user->getUserName()?></h3>
+									<h3 class="userData"><img src="<?= $this->user->getPicture() ?>"	title="<?= $this->transEsc('Picture of') ?> <?= $this->user->getUserName() ?>"> <?=$this->user->getUserName()?></h3>
 								</div>
 								<div class="userBox-body">
-									<ul class="userBox-options">
+									<!--ul class="userBox-options">
 										<li id="cartSummary">
 											<a id="cartItems" data-lightbox title="<?= $this->transEsc('Go to handy list')?>" href="<?= $this->baseUrl('user/cart')?>" data-toggle="tooltip" data-placement="bottom" >
 												<i class="ph-shopping-cart-bold"></i> <strong id="myListCount"><?= $myListCount ?></strong> 
 												<span><?= $this->transEsc('on handy list')?></span>
 											</a>
 										</li>
-									</ul>
+									</ul-->
 									<ul class="userBox-options">										
 										<li><a href="<?= $this->baseUrl('user/login')?>"><i class="ph-faders-bold"></i> <?= $this->transEsc('User account')?></a></li>
 										<li><a href="<?= $this->baseUrl('user/logout')?>"><i class="ph-power-bold"></i> <?= $this->transEsc('Logout')?></a></li>

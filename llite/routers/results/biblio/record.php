@@ -5,6 +5,8 @@ require_once('functions/class.helper.php');
 require_once('functions/class.converter.php');
 require_once('functions/class.maps.php');
 require_once('functions/class.wikidata.php');
+require_once('./functions/class.bookcart.php');
+
 
 
 $recordCalled = $fn = end($this->routeParam);
@@ -22,7 +24,7 @@ $this->addClass('helper', 	new helper());
 $this->addClass('maps', 	new maps()); 
 $this->addClass('convert', 	new converter()); 
 $this->addClass('wikiData', new wikiData($this)); 
-
+$this->addClass('bookcart', new bookcart);
 
 $solrRecord = $this->solr->getRecord('biblio', $rec_id);
 
@@ -31,12 +33,15 @@ switch ($format) {
 			$Tmap = [];
 			
 			if (!empty($solrRecord->id)) {
-				
-				$marcJson = $this->convert->mrk2json($solrRecord->fullrecord);
-				$this->addClass('record', new bibliographicRecord($solrRecord, $marcJson));
+				if (!empty($solrRecord->fullrecord) && ($solrRecord->record_format == 'mrk')) {
+					$marcJson = $this->convert->mrk2json($solrRecord->fullrecord);
+					$this->addClass('record', new bibliographicRecord($solrRecord, $marcJson));
+					} else 
+					$this->addClass('record', new bibliographicRecord($solrRecord));
 				
 				$this->setTitle($this->record->getTitle());
-
+				$this->head->meta = $this->record->getMetaZotero();
+				$this->head->meta .= $this->record->getMetaAlternate();
 				
 				
 				echo $this->render('head.php');
@@ -48,15 +53,14 @@ switch ($format) {
 				echo $this->render('core/footer.php');
 				
 				} else {
-					$this->setTitle($this->transEsc("No data"));
-					echo $this->render('head.php');
-					echo $this->render('core/header.php');
-					echo '<div class="main">';
-					
-					echo $this->render('record/no-core.php', ['rec'=>$rec_id, 'Tmap'=>$Tmap]);
-					echo '</div>';
-					echo $this->render('core/footer.php');
-					
+				$this->setTitle($this->transEsc("No data"));
+				echo $this->render('head.php');
+				echo $this->render('core/header.php');
+				echo '<div class="main">';
+				
+				echo $this->render('record/no-core.php', ['rec'=>$rec_id, 'Tmap'=>$Tmap]);
+				echo '</div>';
+				echo $this->render('core/footer.php');
 				}
 			break;
 	case 'mrk' : 
@@ -142,6 +146,8 @@ switch ($format) {
 			$record = $this->solr->getRecord('biblio', $rec_id);
 			if (isset($this->GET['solr'])) {
 				$plik = json_encode($record);
+				} if (isset($this->GET['elb'])) {
+				$plik = $record->relations;	
 				} else {
 				$marcJson = $this->convert->mrk2json($record->fullrecord);	
 				$plik = json_encode($marcJson);

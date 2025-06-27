@@ -23,7 +23,8 @@
 		"optionsAvailable" : {
 			"r" : {"name" : "Relevance", "value" : "biblio_count desc"}, 
 			"dd" : {"name" : "Inception year desc", "value" : "year_start desc"},
-			"a" : {"name" : "Name", "value" : "biblio_labels asc"}
+			"a" : {"name" : "Name ascending", "value" : "*_label_sort asc"},
+			"ad" : {"name" : "Name descending", "value" : "*_label_sort desc"}
 			}
 		},
 

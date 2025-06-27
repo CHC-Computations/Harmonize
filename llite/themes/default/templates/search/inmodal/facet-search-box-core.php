@@ -15,7 +15,7 @@
 </div>
 <div id="ajaxSearchChosen"></div>
 <script>
-	facets.cores.Search();
+	facets.cores.Search('<?= $this->facetsCode ?>');
 	facets.cores.AddRemove('state');
 </script>  
 

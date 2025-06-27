@@ -22,8 +22,8 @@
 		</div>
 		<div class="col-sm-2 text-center" id="exportBtn">
 			
-			<?php if ($exportParams->exportTable->biblio->totalResults > $this->settings->export->max)
-				echo "You have exceeded the one-time export limit.</p><p>(max {$this->helper->badgeFormat($this->settings->export->max)} records)</p>";
+			<?php if ($exportParams->exportTable->biblio->totalResults > $this->configJson->biblio->exports->maxRecords)
+				echo "You have exceeded the one-time export limit.</p><p>(max {$this->helper->badgeFormat($this->configJson->biblio->exports->maxRecords)} records)</p>";
 				else 
 				echo "<button class=\"btn btn-primary\" OnClick='".$OC."'>Start</button>";
 			?>

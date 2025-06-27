@@ -19,7 +19,7 @@ if (is_array($facets)) {
 							$this->buffer->removeFacet($facet->solr_index, $k)
 							);
 				$lines[]=
-					'<a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=> $key]).'" class="facet js-facet-item active" data-title="'.$k.'" data-count="'.$v.'" >
+					'<a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=> $key, 'page'=>1], true).'" class="facet js-facet-item active" data-title="'.$k.'" data-count="'.$v.'" >
 						<span class="text">'.$tk.'</span>
 						<i class="right-icon glyphicon glyphicon-remove" ></i>
 					</a>';
@@ -37,7 +37,7 @@ if (is_array($facets)) {
 				
 				$lines[] = '
 					<div class="facetTop" OnMouseOver="facets.place(\''.$key.'\')" OnMouseOut="facets.out(\''.$key.'\')">
-					  <a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=> $key]).'" id="facetBase'.$key.'" class="facet js-facet-item" data-title="'.$this->transEsc($k).'" data-count="'.$v.'" >
+					  <a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=> $key, 'page'=>1], true).'" id="facetBase'.$key.'" class="facet js-facet-item" data-title="'.$this->transEsc($k).'" data-count="'.$v.'" >
 						<span class="text">'.$tk.'</span>
 						<span class="badge">'.$this->helper->numberFormat($v).'</span>
 						<i class="ph-caret-right-bold" id="caret_'.$key.'" style="color:transparent; margin-right:-7px; margin-top:4px; font-size:0.8em;"></i>

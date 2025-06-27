@@ -1,0 +1,493 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/"
+ xmlns:link="http://purl.org/rss/1.0/modules/link/">
+    <bib:Document rdf:about="https://swiatowaencyklopediapolonistow.pl/gabriela-olchowa/">
+        <z:itemType>blogPost</z:itemType>
+        <dcterms:isPartOf>
+           <z:Blog></z:Blog>
+        </dcterms:isPartOf>
+        <dc:title>GABRIELA OLCHOWA – ŚWIATOWA ENCYKLOPEDIA POLONISTÓW</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://swiatowaencyklopediapolonistow.pl/gabriela-olchowa/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2025-01-31 13:12:20</dcterms:dateSubmitted>
+        <z:language>pl-PL</z:language>
+    </bib:Document>
+    <bib:Article rdf:about="https://czasopisma.uksw.edu.pl/index.php/sc/article/view/14674">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2720-0515"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Baron</foaf:surname>
+                        <foaf:givenName>Roman</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Madecki</foaf:surname>
+                        <foaf:givenName>Roman</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Uniwersytet Karola w Pradze</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Uniwersytet Komeńskiego w Bratysławie</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Uniwersytet Masaryka w Brnie</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>międzywojenna Czechosłowacja</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>slawistyka</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Praga (Brno, Bratysława) – słowiańskie Ateny? Międzywojenne czechosłowackie badania slawistyczne</dc:title>
+        <dcterms:abstract>The establishment of Czechoslovakia marked an important caesura in the development of Czech and Slovak science. During the interwar period, Czechoslovakia, and particularly Prague, became one of the most important centres of Slavic studies in Europe and the world, thus earning the title of “Slavic Athens.” This period saw the development of Charles University in Prague, and in 1919new universities were founded in Brno and Bratislava. Slavic studies were one of the key humanities disciplines at these universities from 1919 to 1939. This was significantly influenced by the activities of the Prague Linguistic Circle. An important place in the achievements of Czechoslovak Slavic studies was also held by Polish studies.</dcterms:abstract>
+        <bib:pages>216-227</bib:pages>
+        <dc:date>2024-11-20</dc:date>
+        <z:language>pl</z:language>
+        <z:shortTitle>Praga (Brno, Bratysława) – słowiańskie Ateny?</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://czasopisma.uksw.edu.pl/index.php/sc/article/view/14674</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-12-06 19:17:13</dcterms:dateSubmitted>
+        <z:libraryCatalog>czasopisma.uksw.edu.pl</z:libraryCatalog>
+        <dc:rights>Prawa autorskie (c) 2024 Saeculum Christianum</dc:rights>
+        <dc:description>Number: 2</dc:description>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2720-0515">
+        <dc:title>Saeculum Christianum</dc:title>
+        <prism:volume>31</prism:volume>
+        <prism:number>2</prism:number>
+        <dc:identifier>DOI 10.21697/sc.2024.31.2.16</dc:identifier>
+        <dc:identifier>ISSN 2720-0515</dc:identifier>
+    </bib:Journal>
+    <bib:Article rdf:about="https://pressto.amu.edu.pl/index.php/bo/article/view/44317">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2956-4425"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Dybalska</foaf:surname>
+                        <foaf:givenName>Renata Rusin</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Czesko-polski kalejdoskop literacki</dc:title>
+        <bib:pages>305-309</bib:pages>
+        <dc:date>2024-09-09</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://pressto.amu.edu.pl/index.php/bo/article/view/44317</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-12-06 14:34:30</dcterms:dateSubmitted>
+        <z:libraryCatalog>pressto.amu.edu.pl</z:libraryCatalog>
+        <dc:rights>Prawa autorskie (c) 2024 Renata Rusin Dybalska</dc:rights>
+        <dc:description>Number: 2</dc:description>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2956-4425">
+        <dc:title>Bohemistyka</dc:title>
+        <prism:volume>24</prism:volume>
+        <prism:number>2</prism:number>
+        <dc:identifier>DOI 10.14746/bo.2024.2.11</dc:identifier>
+        <dc:identifier>ISSN 2956-4425</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_4">
+        <z:itemType>attachment</z:itemType>
+        <dc:title>ps2013_2_07.pdf</dc:title>
+        <dcterms:dateSubmitted>2024-12-06 13:21:52</dcterms:dateSubmitted>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.postscriptum.us.edu.pl/pdf/ps2013_2_07.pdf</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <link:type>application/pdf</link:type>
+    </z:Attachment>
+    <bib:Article rdf:about="https://bibliotekarzpodlaski.pl/index.php/bp/issue/view/38">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Journal></bib:Journal>
+        </dcterms:isPartOf>
+        <dc:title>Vol. 62 No. 1 (2024): BULGARIA AND POLAND: LITERARY AND CULTURAL RESONANCES | Bibliotekarz Podlaski</dc:title>
+        <z:language>en-US</z:language>
+        <z:shortTitle>Vol. 62 No. 1 (2024)</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://bibliotekarzpodlaski.pl/index.php/bp/issue/view/38</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-12-05 19:17:30</dcterms:dateSubmitted>
+        <z:libraryCatalog>bibliotekarzpodlaski.pl</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://bibliotekarzpodlaski.pl/index.php/bp/article/view/936">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2544-8900"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zabielski</foaf:surname>
+                        <foaf:givenName>Łukasz</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Międzynarodowa konferencja naukowa „Języki, kultury, komunikacje”, Uniwersytet Wielkotyrnowski im. św. św. Cyryla i Metodego, 6–7 czerwca 2024 r. Sprawozdanie</dc:title>
+        <bib:pages>391-417</bib:pages>
+        <dc:date>2024-11-15</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://bibliotekarzpodlaski.pl/index.php/bp/article/view/936</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-12-05 19:16:51</dcterms:dateSubmitted>
+        <z:libraryCatalog>bibliotekarzpodlaski.pl</z:libraryCatalog>
+        <dc:rights>Copyright (c) 2024 Łukasz Zabielski</dc:rights>
+        <dc:description>Number: 2</dc:description>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2544-8900">
+        <dc:title>Bibliotekarz Podlaski</dc:title>
+        <prism:volume>63</prism:volume>
+        <prism:number>2</prism:number>
+        <dc:identifier>DOI 10.36770/bp.936</dc:identifier>
+        <dc:identifier>ISSN 2544-8900</dc:identifier>
+    </bib:Journal>
+    <bib:Article rdf:about="https://jezyk-polski.pl/index.php/jp/article/view/746">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2720-1406"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Krawczuk</foaf:surname>
+                        <foaf:givenName>Ałła</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Katedra Filologii Polskiej</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Uniwersytet Lwowski</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>badania naukowe</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>polonistyka</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Rozwój polonistyki na Uniwersytecie Lwowskim</dc:title>
+        <dcterms:abstract>The author presents the main stages in the history of the Polish Studies at the University of Lviv, focusing in her article on the situation — less described in the existing literature — of the development of didactic research after World War II, with particular reference to its current state — within the activity of the Department of Polish Philology. She also points out the changes that occurred at the beginning of the twenty first century in the field of teaching the Polish language and Polish Philology at the University of Lviv in comparison with previous periods.</dcterms:abstract>
+        <bib:pages>150-161</bib:pages>
+        <dc:date>2013-06-30</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://jezyk-polski.pl/index.php/jp/article/view/746</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-11-15 13:24:17</dcterms:dateSubmitted>
+        <z:libraryCatalog>jezyk-polski.pl</z:libraryCatalog>
+        <dc:rights>Prawa autorskie (c) 2023 Język Polski</dc:rights>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2720-1406">
+        <dc:title>Język Polski</dc:title>
+        <dc:identifier>DOI 10.31286/JP.93.3.2</dc:identifier>
+        <dc:identifier>ISSN 2720-1406</dc:identifier>
+    </bib:Journal>
+    <bib:Document rdf:about="https://psp.amu.edu.pl/?type=book&amp;id_asset=1248">
+        <z:itemType>webpage</z:itemType>
+        <dcterms:isPartOf>
+           <z:Website></z:Website>
+        </dcterms:isPartOf>
+        <dc:title>Stulecie poznańskiej polonistyki. Tom 3. Nauka o literaturze (po roku 1945) - red. Seweryna Wysłouch, Barbara Judkowiak, Anna Piotrowicz, Sylwia Karolak - Wydawnictwo PSP</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://psp.amu.edu.pl/?type=book&amp;id_asset=1248</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-18 16:51:44</dcterms:dateSubmitted>
+    </bib:Document>
+    <bib:Document rdf:about="https://psp.amu.edu.pl/?type=book&amp;id_asset=1245">
+        <z:itemType>webpage</z:itemType>
+        <dcterms:isPartOf>
+           <z:Website></z:Website>
+        </dcterms:isPartOf>
+        <dc:title>Stulecie poznańskiej polonistyki. Tom 2. Językoznawstwo (po roku 1945) - red. Anna Piotrowicz, Seweryna Wysłouch, Barbara Judkowiak, Sylwia Karolak - Wydawnictwo PSP</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://psp.amu.edu.pl/?type=book&amp;id_asset=1245</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-18 16:51:14</dcterms:dateSubmitted>
+    </bib:Document>
+    <bib:Document rdf:about="https://psp.amu.edu.pl/?type=book&amp;id_asset=1240">
+        <z:itemType>webpage</z:itemType>
+        <dcterms:isPartOf>
+           <z:Website></z:Website>
+        </dcterms:isPartOf>
+        <dc:title>Stulecie poznańskiej polonistyki. Tom 1. Okres międzywojenny i lata okupacji - red. Barbara Judkowiak, Seweryna Wysłouch, Sylwia Karolak, Anna Piotrowicz - Wydawnictwo PSP</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://psp.amu.edu.pl/?type=book&amp;id_asset=1240</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-18 16:51:02</dcterms:dateSubmitted>
+    </bib:Document>
+    <bib:Article rdf:about="https://www.journals.us.edu.pl/index.php/PPol/issue/view/1031">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Journal></bib:Journal>
+        </dcterms:isPartOf>
+        <dc:title>Tom 3 Nr 1 (2009): Polonistyka i język polski na Ukrainie</dc:title>
+        <z:language>en</z:language>
+        <z:shortTitle>Tom 3 Nr 1 (2009)</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.journals.us.edu.pl/index.php/PPol/issue/view/1031</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-18 16:44:11</dcterms:dateSubmitted>
+        <z:libraryCatalog>www.journals.us.edu.pl</z:libraryCatalog>
+    </bib:Article>
+    <bib:Document rdf:about="https://universitas.com.pl/produkt/3405">
+        <z:itemType>webpage</z:itemType>
+        <dcterms:isPartOf>
+           <z:Website></z:Website>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Universitas</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Polonistyka dziś - kształcenie dla jutra. Tom 1-3, 97883-242-2618-4</dc:title>
+        <dcterms:abstract>Seria EDUKACJA NAUCZYCIELSKA POLONISTY . Tom XX 
+ 
+	  
+ 
+	Trzytomowa książka  Polonistyka dziś - kształcen</dcterms:abstract>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://universitas.com.pl/produkt/3405</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-18 16:43:27</dcterms:dateSubmitted>
+        <z:language>pl</z:language>
+    </bib:Document>
+    <bib:Document rdf:about="http://katalog.ow.uz.zgora.pl/produkt/piecdziesiat-lat-zielonogorskiej-polonistyki-ksiega-jubileuszowa/">
+        <z:itemType>blogPost</z:itemType>
+        <dcterms:isPartOf>
+           <z:Blog></z:Blog>
+        </dcterms:isPartOf>
+        <dc:title>Pięćdziesiąt lat zielonogórskiej polonistyki. Księga jubileuszowa – Oficyna Wydawnicza</dc:title>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>http://katalog.ow.uz.zgora.pl/produkt/piecdziesiat-lat-zielonogorskiej-polonistyki-ksiega-jubileuszowa/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-18 16:41:52</dcterms:dateSubmitted>
+        <z:language>pl-PL</z:language>
+    </bib:Document>
+    <bib:Article rdf:about="https://pressto.amu.edu.pl/index.php/pi/article/view/34252">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2450-6435"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ganowski</foaf:surname>
+                        <foaf:givenName>Yoana</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>Bruksela</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>filologia polska</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>francuskojęzyczne nauczanie za granicą</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>język polski</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>literatura</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>polonistyka</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>studenci zagraniczni</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Studia polonistyczne poza Polską: kompleksowy przykład Brukseli (ULB)</dc:title>
+        <dcterms:abstract>It is often complicated to understand the concept of Polish studies abroad. The author presents Polish Studies in the capital of Europe. In this Article the case of the French-speaking Free University of Brussels (ULB) is discussed. The author introduces Polish Studies as a part of Slavic Studies, then develops the limitations that this issue has on the program of teaching. The writer profiles the heterogeneity of the students: showing their differences resulting from their origins, backgrounds of knowledge, and the presence of multiculturalism. Then, the study program is explained, as well as the means and solutions facilitating the simultaneous teaching of language and literature Among the solutions are propounded new technologies, stays abroad and encounters with native speakers. In conclusion, the author outlines foreign student’s learning process in Brussels and the teaching difficulties that academic teachers may encounter in European faculties. She provides remedies found to overcome these educational issues.</dcterms:abstract>
+        <bib:pages>73-88</bib:pages>
+        <dc:date>2022-06-23</dc:date>
+        <z:language>pl</z:language>
+        <z:shortTitle>Studia polonistyczne poza Polską</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://pressto.amu.edu.pl/index.php/pi/article/view/34252</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-02 20:19:09</dcterms:dateSubmitted>
+        <z:libraryCatalog>pressto.amu.edu.pl</z:libraryCatalog>
+        <dc:rights>Prawa autorskie (c) 2022 Yoana Ganowski</dc:rights>
+        <dc:description>Number: 15</dc:description>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2450-6435">
+        <dc:title>Polonistyka. Innowacje</dc:title>
+        <prism:number>15</prism:number>
+        <dc:identifier>DOI 10.14746/pi.2022.15.7</dc:identifier>
+        <dc:identifier>ISSN 2450-6435</dc:identifier>
+    </bib:Journal>
+    <bib:Article rdf:about="https://pressto.amu.edu.pl/index.php/pi/article/view/42456">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Polonistyka. Innowacje</dc:title>
+                <prism:number>18</prism:number>
+                <dc:identifier>DOI 10.14746/pi.2023.18.15</dc:identifier>
+                <dc:identifier>ISSN 2450-6435</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Tomaszewska</foaf:surname>
+                        <foaf:givenName>Grażyna</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>grodzieńska polonistyka</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>pamięć</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>prof. Swietłana Musijenko</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>przyjaźń</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>współpraca</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Ludzkie i prawdziwie bliskie. Pamięci prof. dr hab. Swietłany Musijenko</dc:title>
+        <dcterms:abstract>The article seeks to portray the uniqueness of the individual and scholarly contributions of Professor Swietłana Musijenko. The scientist, who passed away on August 8, 2023, established the Department of Polish Philology at the Grodno University and later the International Institute of Adam Mickiewicz. She fostered collaborations with numerous academic institutions in Poland, facilitating the exchange of both student youth and researchers captivated by communal and comparative cultural relationships, so significant in regions where linguistic, traditional, and cultural diversity has always been present. Professor Musijenko's extensive activities not only contributed to the advancement of scholarly thought but also served as a significant counterbalance to all tendencies that aimed to delineate communal bonds. Through her biography and scholarly pursuits, she demonstrated the immense value of cooperation transcending divisions.</dcterms:abstract>
+        <bib:pages>189-196</bib:pages>
+        <dc:date>2023-12-29</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://pressto.amu.edu.pl/index.php/pi/article/view/42456</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-02 20:17:12</dcterms:dateSubmitted>
+        <z:libraryCatalog>pressto.amu.edu.pl</z:libraryCatalog>
+        <dc:rights>Prawa autorskie (c) 2023 Grażyna B. Tomaszewska</dc:rights>
+        <dc:description>Number: 18</dc:description>
+    </bib:Article>
+    <bib:Article rdf:about="https://pressto.amu.edu.pl/index.php/pi/article/view/38630">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Polonistyka. Innowacje</dc:title>
+                <prism:number>17</prism:number>
+                <dc:identifier>DOI 10.14746/pi.2023.17.8</dc:identifier>
+                <dc:identifier>ISSN 2450-6435</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Dawlewicz</foaf:surname>
+                        <foaf:givenName>Mirosław</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>Uniwersytet Wileński</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+           <z:AutomaticTag><rdf:value>dydaktyka</rdf:value></z:AutomaticTag>
+        </dc:subject>
+        <dc:subject>
+            <z:AutomaticTag>
+               <rdf:value>filologia polska</rdf:value>
+            </z:AutomaticTag>
+        </dc:subject>
+        <dc:title>Polonistyka na Uniwersytecie Wileńskim – osiągnięcia, zagrożenia i perspektywy</dc:title>
+        <dcterms:abstract>The aim of the article is to present Polish studies at the Vilnius University – its history, present times and prospects for development. One of the basic goals of the Center for Polish Studies of the Vilnius University is, among others, educating specialists in Polish literature, culture and language in educational, cultural and state institutions in Lithuania. Thirty years of functioning of Polish studies at Vilnius University as a separate teaching and research unit within the structure of the Faculty of Philology have shown that it is an important and needed institution. The strengthened field of Polish studies at Vilnius University should exist as a permanent element of the structure of this university and as a necessary bridge in cooperation between Lithuania and Poland.</dcterms:abstract>
+        <bib:pages>83-92</bib:pages>
+        <dc:date>2023-07-07</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://pressto.amu.edu.pl/index.php/pi/article/view/38630</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-02 20:12:01</dcterms:dateSubmitted>
+        <z:libraryCatalog>pressto.amu.edu.pl</z:libraryCatalog>
+        <dc:rights>Prawa autorskie (c) 2023 Mirosław Dawlewicz</dc:rights>
+        <dc:description>Number: 17</dc:description>
+    </bib:Article>
+</rdf:RDF>

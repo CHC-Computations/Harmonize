@@ -7,6 +7,9 @@ class helper {
 	
 	public $lastId;
 	public $facets;
+	public $useFileSizeFormat = false;
+	
+	private $wikiLabels;
 	
 	public function register($key, $value) {
 		$this->$key = $value;
@@ -20,6 +23,14 @@ class helper {
 			";
 		}
 	
+	public function cloudMessage($class,$mesage) {
+		return "
+			<div class='alert alert-cloud alert-$class alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span><span class='sr-only'>Zamknij</span></button>
+			$mesage
+			</div>
+			";
+		}
+	
 	public function alertIco($klasa,$glyphicon,$tresc=null) {
 		return $this->Alert($klasa,"
 						<div class=row>
@@ -29,6 +40,7 @@ class helper {
 							</div>
 						</div>");
 		}
+	
 	
 	public function Modal() {
 		return "<!-- Modal -->
@@ -54,6 +66,38 @@ class helper {
 	public function pre($var) {
 		return '<pre>'.print_r($var,1).'</pre>';
 		}
+		
+	public function preCollapse($name, $var) {
+		$id = 'preCollapse'.$name;
+		$kl='ph-caret-down-bold';
+		$rozwiniety='false';
+		$js="$('#{$id}_body').collapse('hide');";
+		$in='';
+		
+		return "
+			<div id='{$id}_panel' class='panel panel-default'>
+			<div class='panel-body'>
+				<div role='tab'>
+					<button type='button' data-toggle='collapse' data-target='#{$id}_body'><span class=' $kl' id='{$id}_iko'></span></button> $name
+				</div>
+				<div id='{$id}_body' class='collapse'>
+					<pre style='background-color:transparent; border:0;'>".print_r($var,1)."</pre>	
+				</div>
+			</div>
+			</div>
+			<script>
+				// $('#{$id}_body').collapse({ toggle: $rozwiniety });
+				$('#{$id}_body').on('shown.bs.collapse', function () {
+					$('#{$id}_iko').removeClass('ph-caret-down-bold').addClass('ph-caret-up-bold');
+					});
+				$('#{$id}_body').on('hidden.bs.collapse', function () {
+					$('#{$id}_iko').removeClass('ph-caret-up-bold').addClass('ph-caret-down-bold');
+					});
+				
+			</script>
+			";
+		// $('#{$id}_body').collapse('hide');	
+		}	
 	
 	public function ToolTip($symbol,$tresc,$kolor='') {
 		$tresc=str_replace('<br/>',"\n",$tresc);
@@ -65,6 +109,11 @@ class helper {
 		$tresc=str_replace('<br/>',"\n",$tresc);
 		$tresc=strip_tags($tresc);
 		return "<a style='cursor: help; text-align:left;' data-toggle='popover' data-placement='top' title='$naglowek' data-content='$tresc'><span class='glyphicon glyphicon-$symbol $kolor'></span></a>";
+		}
+	
+	
+	public function panelSimple($content, $class='default', $addOns='') { 
+		return '<div class="panel panel-'.$class.'" '.$addOns.'><div class="panel-body">'.$content.'</div></div>';
 		}
 	
 	Public function PanelCollapse($id, $tytul, $tresc, $stopka='', $rozwiniety='true', $klasa='default') {
@@ -168,7 +217,7 @@ class helper {
 				}
 			
 			$str.='(...)';
-			$str = '<span title="'.$wstr.'">'.$str.'</span>';
+			$str = '<span title="'.strip_tags($wstr).'">'.$str.'</span>';
 			return $str;
 			}
 		return '<span>'.$str.'</span>';
@@ -236,7 +285,7 @@ class helper {
 				$link .= '';
 			
 			if (!empty($row['submenu'])) {
-				$idBox = uniqid();
+				$idBox = 'collapse'.uniqid();
 				$submenu = "<div class=\"sublinks collapse\" id=\"$idBox\">";
 				
 				foreach ($row['submenu'] as $row2) {
@@ -258,7 +307,7 @@ class helper {
 				}
 			
 			
-			$res.='<a class="list-group-item '.$class.'" '.$link.'rel="nofollow" title="'.$row['title'].'">'.$ico.$row['title'].'</a>'.$submenu;
+			$res.='<a class="list-group-item '.$class.'" '.$link.'rel="nofollow" >'.$ico.$row['title'].'</a>'.$submenu;
 			}
 		$res .= '</div>';
 		return $res;
@@ -286,16 +335,45 @@ class helper {
 	public function percentBox ($liczba, $maks=100, $color='#eee') {
 		if ($liczba!='') {
 			$proc=ceil(($liczba/$maks)*100);
+			if ($this->useFileSizeFormat)
+				$liczbaStr = $this->fileSize($liczba);
+				else 
+				$liczbaStr = number_format($liczba,0,'','.');
+			
 			return "
 				<div class='procent-box'>
 					<span class=overlaygrow style='width:{$proc}%; background-color: {$color};'></span>
-					<span class=overlay><span class=liczba>".number_format($liczba,0,'','.')."</span></span>
+					<span class=overlay><span class=liczba>".$liczbaStr."</span></span>
 				</div>";
 			} else 
 			return '---';
 		}
 	
 	public function percent($ile, $suma, $klasa='primary') {
+		if ($suma>0) {
+			$procent=round(($ile/$suma)*100,2);
+			if ($procent>100) 
+				$procent=100;
+			$sl=round(($ile/$suma)*100,0);
+			$slopek="
+					<div class='progress'>
+					  <div class='progress-bar progress-bar-$klasa' role='progressbar' aria-valuenow='$ile' aria-valuemin='0' aria-valuemax='$suma' style='width:$sl%'>
+						$procent% 
+					  </div>
+					</div> 
+					";
+			} else 
+			$slopek="
+					<div class='progress'>
+					  <div class='progress-bar progress-bar-$klasa' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='0' style='width:100%'>
+						0 
+					  </div>
+					</div> 
+					";	
+		return $slopek;		
+		}	
+		
+	public function progress($ile, $suma, $klasa='primary') {
 		if ($suma>0) {
 			$procent=round(($ile/$suma)*100,2);
 			if ($procent>100) 
@@ -333,6 +411,7 @@ class helper {
 					";
 			return $slopek;		
 			}
+		return '';
 		}
 	
 	public function progressThinMulti($array) {
@@ -344,18 +423,24 @@ class helper {
 			$sum += $v['count'];
 			}
 		$graph = '<div class="progress-thin-multi">';	
-		foreach ($array as $values) {	
+		foreach ($array as $key=>$values) {	
+			$currsor = '';
+			$title = '';
 			$i = $values['count'];
 			$percent = round(($i/$sum)*100,2);
 			if ($percent > 100) 
 				$percent = 100;
 			$sl = round(($i/$sum)*100,0);
-			if (!empty($value['title']))
-				$title = "title='$value[title]'";
-				else 
-				$title = '';
+
+			if (!empty($values['title'])) 
+				$title = "title='$values[title]'";
+			if (!empty($values['onClick'])) {
+				$title .= "onClick='$values[onClick]'";
+				$currsor = '; currsor:pointer';
+				}
+				
 			$graph .= "
-				<div class='progress-thin-multi-bar' style='background-color:$values[color]; width:$sl%' role='progressbar' aria-valuenow='$i' aria-valuemin='0' aria-valuemax='$sum' $title>
+				<div class='progress-thin-multi-bar' id='progressPart{$key}' style='background-color:$values[color]; width:$sl% $currsor' role='progressbar' aria-valuenow='$i' aria-valuemin='0' aria-valuemax='$sum' $title>
 				</div>
 				";
 			}
@@ -363,6 +448,7 @@ class helper {
 		return $graph;			
 		}
 	
+		
 	public function multiPercent($dane=array(), $max=1) {
 		$bar = '';
 		foreach ($dane as $row) {
@@ -381,22 +467,62 @@ class helper {
 		}
 	
 	public function fileSize($size) {
+		
 		if ($size>1073741824) {
-			$size = number_Format( ($size/1073741824), 1, '.', ' ').' Gb';
+			$size = number_Format( ($size/1073741824), 1, '.', ' ').'GB';
 			return $size;
 			}
 		if ($size>1048576) {
-			$size = number_Format( ($size/1048576), 1, '.', ' ').' Mb';
+			$size = number_Format( ($size/1048576), 1, '.', ' ').'MB';
 			return $size;
 			}
 		if ($size>1024) {
-			$size = number_Format( ($size/1024), 1, '.', ' ').' Kb';
+			$size = number_Format( ($size/1024), 1, '.', ' ').'kB';
 			return $size;
 			}
 		
 		return $size.' b';
 		}
 		
+	function convertToBytes($size) {
+		preg_match('/[a-zA-Z]+/', $size, $matches);
+		$unit = strtoupper($matches[0][0]);
+		$number = floatval($size);
+
+		switch ($unit) {
+			case 'T':
+				return round($number * pow(1024, 4)); // Terabytes to bytes
+			case 'G':
+				return round($number * pow(1024, 3)); // Gigabytes to bytes
+			case 'M':
+				return round($number * pow(1024, 2)); // Megabytes to bytes
+			case 'K':
+				return round($number * 1024);         // Kilobytes to bytes
+			case 'B':
+			default:
+				return $number;                // Bytes
+			}
+		}	
+		
+		
+	function getDiscUsage($folder) {
+		$result = shell_exec("du -h --max-depth=1 $folder 2>&1");
+		$result = explode("\n", $result);
+		$values = [];
+		foreach ($result as $line) 
+			if (!empty($line)) {
+				$data = explode("\t", $line);
+				$subFolder = str_replace($folder, '', $data[1]);
+				if ($subFolder == '') $subFolder = 'total';
+				#echo $this->pre($line);
+				
+				$subValue = $this->convertToBytes($data[0]);
+				$values[$subFolder] = $subValue;
+				}
+		
+		return $values;		
+		}	
+			
 		
 		
 	public function randColor() {
@@ -483,7 +609,7 @@ class helper {
 		$searchFields = ['solrIndexes', 'facetsMenu'];
 		$label = $value;
 		foreach ($searchFields as $field) 
-			if (!empty($this->cms->configJson->$core->facets->$field->$facet->translated) && ($this->cms->configJson->$core->facets->$field->$facet->translated)) {
+			if (!empty($this->cms->configJson->$core->facets->$field->$facet->translated) && ($this->cms->configJson->$core->facets->$field->$facet->translated == 'true')) {
 				$label = $this->cms->transEsc($label);
 				}
 		foreach ($searchFields as $field) 
@@ -626,7 +752,7 @@ class helper {
 			return '
 				<div class="il-panel">
 					<div class="il-panel-header">
-						<span>'.$this->cms->transEsc('max avaible').': <strong>'.$max.'</strong></span>
+						<span>'.$this->cms->transEsc('options avaible').': <strong>'.$max.'</strong></span>
 					</div>
 					<div class="il-panel-graph">'.$this->drawSVGPie($graphData, ['width'=>180, 'height' =>180]).'</div>
 					<div class="il-panel-bottom"><table class="list"><tbody>'.implode('',$lines).'</tbody></table></div>
@@ -662,7 +788,7 @@ class helper {
 			';
 		}
 		 
-	public function drawTimeLineGraph($title, $field='', $arr = array()) {
+	public function drawTimeLineGraph($title, $field='', $arr = array(), $baseConditions='') {
 		$view = 200;
 		if (count($arr)>0) {
 			
@@ -687,7 +813,7 @@ class helper {
 				#echo "$k: $v -> $pr<Br>";
 				$return .="
 					<a class='graph-cloud' title='".$this->cms->transEsc('year').": $k, ".$this->cms->transEsc('publication count').": $v' data-lightbox-ignore OnClick=\"snapSlider.noUiSlider.set([$k,$k])\">
-						<div class='graph-straw' style='height:{$pr}px;' id='year_bar_$k' ></div>
+						<div class='graph-straw' style='height:{$pr}px;' id='year_bar_$graphId$k' ></div>
 					</a>";
 				}
 			$return .= "</div>";
@@ -696,9 +822,16 @@ class helper {
 			$return .="<div style='float:right'>$max_d</div>";
 			$return .="<div style='display:block; width:10px;'>&nbsp;</div>";
 			// daterange[]=year_str_mv&year_str_mvfrom=1544&year_str_mvto=1880
+			$clicktitle = $this->cms->transEsc('Click to apply');
+			$msg = $this->cms->transEsc('Show results for range');
+			$link = $this->cms->buildUrl('results/biblio', []);
 			$return .="
 				<div id='sliderRound$graphId' style='padding:1px;'></div>
-				<div id='range_link' style='padding:10px; '></div>
+				<div id='range_area_$graphId' style='padding:10px; '><button id='range_link_$graphId' OnClick='facets.timeStatLink(\"$graphId\")' type=\"button\" class=\"btn btn-link\"></button></div>
+				<input type='hidden' id='year_str_from_$graphId'/>
+				<input type='hidden' id='year_str_to_$graphId' /> 
+				<input type='hidden' id='range_field_$graphId' value='$field'/>
+				<input type='hidden' id='base_conditions_$graphId' value=\"".base64_encode($baseConditions)."\"/> 
 				<script>
 					var snapSlider = document.getElementById('sliderRound$graphId');
 					noUiSlider.create(snapSlider, {
@@ -714,16 +847,16 @@ class helper {
 					snapSlider.noUiSlider.on('update', function( values, handle ) {
 						var setmin = parseInt(values[0]);
 						var setmax = parseInt(values[1]);
-						var str='<a href=\"?daterange[]=year_str_mv&year_str_mvfrom='+setmin+'&year_str_mvto='+setmax+'\" title=\"Kliknij aby zastosować\" data-lightbox-ignore> Show results for range <b>' + setmin + '</b> - <b>' + setmax + '</b></a>';
-						$('#range_link').html(str);
-						$('#year_str_mvfrom').val(setmin);
-						$('#year_str_mvto').val(setmax);
+						var str=' $msg <b>' + setmin + '</b> - <b>' + setmax + '</b>';
+						$('#range_link_$graphId').html(str);
+						$('#year_str_from_$graphId').val(setmin);
+						$('#year_str_to_$graphId').val(setmax);
 						
 						for (let i = $min_d; i <= $max_d; i++) {
-							$('#year_bar_'+i).css('background-color','lightgray');
+							$('#year_bar_$graphId'+i).css('background-color','lightgray');
 							}
 						for (let i = setmin; i <= setmax; i++) {
-							$('#year_bar_'+i).css('background-color','#5c517b');
+							$('#year_bar_$graphId'+i).css('background-color','#5c517b');
 							}
 						
 					});
@@ -731,12 +864,19 @@ class helper {
 					";
 			$return .="</div>";
 			
-			return '
-				<div class="il-panel">
-					<div class="il-panel-header"><h4>'.$title.'</h4></div>
-					<div class="il-panel-header">'.$return.'</div>
-				</div>
-				'; 
+			if (!empty($title))
+				return '
+					<div class="il-panel">
+						<div class="il-panel-header"><h4>'.$title.'</h4></div>
+						<div class="il-panel-header">'.$return.'</div>
+					</div>
+					'; 
+				else 
+				return '
+					<div class="il-panel">
+						<div class="il-panel-header">'.$return.'</div>
+					</div>
+					'; 					
 			} 
 		}	
 	
@@ -805,6 +945,39 @@ class helper {
 			return $return;	
 			} 
 		}	
+
+
+	function drawJsonMenu ($json, $prefix='') {
+		$content = '<ul class="list-menu">';
+		if (!empty($json) && (is_object($json) or is_array($json))) {
+			foreach ($json as $key=>$values) {
+				if (is_object($values) or is_array($values))
+					$subcontent = $this->drawJsonMenu($values);
+					else {
+					if (is_bool($values))
+						$values = $values ? 'true':'false';
+					$subcontent = ' = '.(string)$values;
+					}
+				$content .= '<li class="list-menu-item">'.$key.$subcontent.'</li>';
+				} 
+			}
+		$content .= '</ul>';
+		
+		
+		return $content;
+		}
+
+	function countEntries($json) {
+		$total = 0;
+		$toCount = (array)$json;
+		foreach ($toCount as $entry) {
+			$total ++;
+			if (is_array($entry) or is_object($entry))
+				$total += $this->countEntries($entry);
+			}
+		return $total;	
+		}
+
 
 	function onlyYear($sd) {
 		if (!empty($sd))
@@ -1017,31 +1190,36 @@ class helper {
 		return $k;
 		}
 	
+	public function facetName($core, $facet) {
+		return $this->cms->configJson->$core->facets->solrIndexes->$facet->name ?? $facet;
+		}
+	
+	public function formatUserList($value) {
+		$tmp = explode('|', $value);
+		$list_id = intval($tmp[1]);
+		$t = $this->cms->psql->querySelect("SELECT * FROM users_lists WHERE id = '$list_id';");
+		if (is_Array($t)) {
+			$tmp = current($t);
+			$listName = $tmp['list_name'];
+			return $listName;
+			} else
+			return $value;
+		}
+	
 	public function formatWiki($wikiq) {
 		$userLang = $this->cms->userLang;
-		if (is_numeric($wikiq)) {
-			if (!empty($this->wikiLabels->$userLang[$wikiq]))
-				return $this->wikiLabels->$userLang[$wikiq];
+		
+		if (!empty($this->wikiLabels->$userLang[$wikiq]))
+			return $this->wikiLabels->$userLang[$wikiq];
 			
-			if (empty($this->wikiLabels))
-				$this->wikiLabels = new stdClass;
+		if (empty($this->wikiLabels))
+			$this->wikiLabels = new stdClass;
 
-			$t = $this->cms->psql->querySelect("SELECT value FROM wiki_labels WHERE wikiq = '$wikiq' AND lang='$userLang';");
-			if (is_array($t)) {
-				$res = current($t)['value'];
-				$this->wikiLabels->$userLang[$wikiq] = $res;
-				return $res;
-				}
+		$this->cms->wiki->loadRecord($wikiq,false);
+		$label = $this->cms->wiki->get('labels',$userLang);
 			
-			require_once('./functions/class.wikidata.php');
-			$wiki = new wikidata('Q'.$wikiq);
-			$wiki->setUserLang($userLang);
-			$label = $wiki->get('labels');
-			$this->cms->psql->query("INSERT INTO wiki_labels (wikiq, lang, value) VALUES ('$wikiq', '$userLang', {$this->cms->psql->isNull($label)});");
-			$this->wikiLabels->$userLang[$wikiq] = $label;
-			return $label;
-			}
-		return 'Q'.$wikiq." ($userLang)";
+		$this->wikiLabels->$userLang[$wikiq] = $label;
+		return $label;
 		}
 		
 	public function formatWikiWithRole($string) {
@@ -1062,13 +1240,13 @@ class helper {
 			
 	
 	public function formatMagazines($value) {
-		// $value = str_replace(['{','}','name='], '', $value);
-		$t = explode('|', $value);
-		
-		return $t[0];
+		return $this->formatMultiLang($value);
 		}
 		
 	public function createMagazineStr($value) {
+		$value = (array)$value;
+		if (!empty($value['bestLabel']))
+			return $value['bestLabel'];
 		$v['title'] = $value['title'] ?? null;
 		$v['issn'] = $value['issn'] ?? null;
 		return implode('|', $v);
@@ -1086,6 +1264,9 @@ class helper {
 		}
 	
 	public function createPlaceStr($value) {
+		$value = (array)$value;
+		if (!empty($value['bestLabel']))
+			return $value['bestLabel'];
 		$v['wikiQ'] = $value['wikiQ'] ?? null;
 		if (!empty($value['nameML']))
 			return $v['wikiQ'].'|'.$value['nameML'];
@@ -1099,20 +1280,8 @@ class helper {
 		0 - wikiq
 		1..n - names
 		*/
-		
-		$res = explode('|',$k);
-		if ($res[0] == 'not found')
-			return $res[1];
-		
-		$languages = $this->cms->configJson->settings->multiLanguage->order;
-		$lp = 0;
-		foreach ($languages as $lang) {
-			$lp++;
-			if (($lang == $this->cms->userLang) && !empty($res[$lp]))
-				return $res[$lp];
-			}
-		
-		return $res[1]; 
+		return explode('|',$k)[0]; // only if bestlabel is taken 
+		return $this->formatMultiLang($k);
 		}	
 		
 	public function formatMultiLangStr($k) {
@@ -1137,6 +1306,20 @@ class helper {
 		return $res[0]; 
 		}
 
+	public function formatTakeBestML($k) { 
+		/*
+		0..n - names
+		*/
+		$res = explode('|', $k);
+		$key = array_search($this->cms->userLang, $this->cms->configJson->settings->multiLanguage->order);
+		if (!empty($res[$key]))
+			return $res[$key];
+		foreach ($res as $val)
+			if (!empty($val))
+				return $val;
+		return $k; 
+		}
+
 		
 	
 	public function formatEvent($k) {
@@ -1146,6 +1329,8 @@ class helper {
 		2 - place
 		3 - edition
 		*/
+		return $this->formatMultiLang($k);
+		
 		
 		$res = explode('|',$k);
 		$name = $date = $place = $id = '';
@@ -1164,6 +1349,9 @@ class helper {
 		}	
 	
 	public function createEventStr($value) {
+		$value = (array)$value;
+		if (!empty($value['bestLabel']))
+			return $value['bestLabel'];
 		return implode('|',[
 				'name'		=> $value['name'] ?? null,
 				'year'		=> $value['year'] ?? null,
@@ -1184,17 +1372,17 @@ class helper {
 		$res = explode('|',$k);
 		$name = $date = $viaf = $wikiq = '';
 		$name = $res[0]; 
-		if (!empty($res[5])) {
-			$date = ' <small class="dataView">'.$res[5].'</small>';
-			}
-		if (!empty($res[3])) {
-			$viaf = $res[2];
+		if (!empty($res[1])) {
+			$date = ' <small class="dataView">'.$res[1].'</small>';
 			}
 		
 		return $name.$date; //.$ID 
 		}
 
 	public function createPersonStr($value) {
+		$value = (array)$value;
+		if (!empty($value['bestLabel']))
+			return $value['bestLabel'];
 		return implode('|',[
 				'name'		=> $value['name'] ?? null,
 				'year_born'	=> $value['year_born'] ?? null,
@@ -1212,15 +1400,15 @@ class helper {
 		1 - wikiq
 		3 - roles 
 		*/
-		$res = explode('|',$k);
-		$name = $date = $viaf = $wikiq = '';
-		$name = $res[0]; 
-		
-		return $name; //.$ID 
+		return explode('|',$k)[0]; // for best label (not if multilanguage variant)
+		return $this->formatMultiLang($k);
 		}
 
 		
 	public function createCorporateStr($value) {
+		$value = (array)$value;
+		if (!empty($value['bestLabel']))
+			return $value['bestLabel'];
 		return implode('|',[
 				'name'		=> $value['name'] ?? null,
 				'wikiQ'		=> $value['wikiQ'] ?? null,
@@ -1295,8 +1483,91 @@ class helper {
 			'sourceMagazine' => [
 					'color'=> '#862adb', 
 					'ico' => 'ph ph-article-medium',
-					'title'=> 'as source magazine'
+					'title' => 'as source magazine'
 					],
+			'birthPlace' => [
+					'color' => '#87d067',
+					'ico' => 'ph ph-article-medium',
+					'title'=> 'birth place'
+					],
+			
+			
+			
+			'deathPlace' => [
+					'color' => '#87d067',
+					'ico' => 'ph ph-user',
+					'title'=> 'death place'
+					],
+			'deathPlace' => [
+					'color' => '#87d067',
+					'ico' => 'ph ph-user',
+					'title'=> 'birth place'
+					],
+			'residencePlace' => [
+					'color' => '#87d067',
+					'ico' => 'ph ph-user',
+					'title'=> 'residence place'
+					],
+			
+			];
+		if (!empty($linksParams[$string])) {
+			$res = (object)$linksParams[$string];
+			$res->title = $this->cms->transEsc($res->title);
+			return $res;
+			}	
+		return (object) [
+				'color' => '#000',
+				'ico' => 'ph ph-seal-warning',
+				'title' => $string
+				];
+		}
+	
+	public function formatBasicRole($string) {
+		$res = new stdclass;
+		$linksParams = [
+			
+			'publicationPlace' => [
+					'color'=> '#0000ff', // blue
+					'ico' => 'ph ph-bold ph-signpost',
+					'title'=> 'publication places'
+					],
+			'subjectPlace' => [
+					'color'=> '#800000', // red
+					'ico' => 'ph ph-map-trifold',
+					'title'=> 'subject places'
+					],
+			
+			'birthPlace' => [
+					'color' => '#87d067',
+					'ico' => 'ph ph-user',
+					'title'=> 'birth place'
+					],
+			'deathPlace' => [
+					'color' => '#87d067',
+					'ico' => 'ph ph-user',
+					'title'=> 'death place'
+					],
+			'birthPlacePR' => [
+					'color' => '#48d1cc',
+					'ico' => 'ph ph-user',
+					'title'=> 'birthplace of newcomers'
+					],
+			'deathPlacePR' => [
+					'color' => '#006400',
+					'ico' => 'ph ph-user',
+					'title'=> 'place of death of &quot;emigrants&quot;'
+					],
+			'residencePlace' => [
+					'color' => '#87d067',
+					'ico' => 'ph ph-user',
+					'title'=> 'residence places'
+					],
+			'residencePlace' => [
+					'color' => '#87d067',
+					'ico' => 'ph ph-user',
+					'title'=> 'residence places'
+					],
+			
 			];
 		if (!empty($linksParams[$string])) {
 			$res = (object)$linksParams[$string];
@@ -1404,9 +1675,23 @@ class helper {
 		if (!empty($str) && is_string($str)) {
 			$oldStr = $str;
 			setlocale(LC_ALL, 'pl_PL.UTF8'); // any european non-en local works fine
-			$str = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+			$str = @iconv('UTF-8', 'ASCII//TRANSLIT', $str);
 			$charsArr = array( '^', "'", '"', '`', '~');
 			$str = str_replace( '-', ' ', $str );
+			$str = str_replace( $charsArr, '', $str );
+			$return = trim(preg_replace('# +#',' ',preg_replace('/[^a-zA-Z0-9\s]/','',strtolower($str))));
+			
+			return str_replace(' ', $replace, $return);
+			}
+        }
+		
+	function clearLatin( $str, $replace = " " ){
+		if (!empty($str) && is_string($str)) {
+			$oldStr = $str;
+			setlocale(LC_ALL, 'pl_PL.UTF8'); // any european non-en local works fine
+			$str = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+			$charsArr = array( '^', "'", '"', '`', '~');
+			$str = str_replace( ['-', '|'], ' ', $str );
 			$str = str_replace( $charsArr, '', $str );
 			$return = trim(preg_replace('# +#',' ',preg_replace('/[^a-zA-Z0-9\s]/','',strtolower($str))));
 			
@@ -1476,7 +1761,33 @@ class helper {
 		}
 
 
-
+	function getLicence($conditions=[]):array {
+		$licenceTable = [];
+		$addConditons = [];
+		$addConditonsStr = '';
+		
+		if (!empty($conditions)) {
+			foreach ($conditions as $key=>$value) {
+				if (is_numeric($key))
+					$addConditons = $value;
+					else 
+					$addConditons = $key.'='.$this->cms->psql->string($value);
+				}
+			$addConditonsStr = 'WHERE '.implode(' AND ', $addConditons);
+			}
+				
+		
+		$t = $this->cms->psql->querySelect("SELECT * FROM licence_source_db a JOIN licences b ON a.licence_code = b.id $addConditonsStr;");
+		if (is_array($t)) 
+			foreach ($t as $row) {
+				$licenceTable[$row['source_db']] = (object) [
+						'code' => $row['licence_code'],
+						'description' => $row['description'],
+						'link' => $row['link']
+						];
+				}
+		return $licenceTable;
+		}
 
 	
 	}

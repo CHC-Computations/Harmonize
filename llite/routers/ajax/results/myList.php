@@ -21,12 +21,12 @@ $myListCount = count($_SESSION['results']['mylist']);
 	
 #echo "$id";
 
-
+$checkID = str_replace('.','_', $id);
 
 $jscript =  "
 	$('#myListCount').html('{$myListCount}'); 
-	$('#ch_{$id}').removeClass('$reClass');
-	$('#ch_{$id}').addClass('$myClass');
+	$('#ch_{$checkID}').removeClass('$reClass');
+	$('#ch_{$checkID}').addClass('$myClass');
 	$JS 
 	
 	var color = $('#userMenu-icon').css('color');

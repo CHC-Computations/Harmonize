@@ -15,9 +15,11 @@ $this->addClass('buffer',	new buffer());
 $this->addClass('solr',		new solr($this)); 
 
 
+#echo $this->helper->pre($this->POST);
+#echo $this->helper->pre($this->GET);
 
-if (!empty($this->POST['total']) && !empty($this->POST['visible']) && ($this->POST['total'] == $this->POST['visible'])) die;
-#if (!empty($this->POST['zoomOld']) && ($this->POST['zoomOld']<3)&($this->POST['zoom']<3)) die;
+# if (!empty($this->POST['total']) && !empty($this->POST['visible']) && ($this->POST['total'] == $this->POST['visible'])) die; // to ma sens tylko jeśli first.run rysuje punkty!
+# if (!empty($this->POST['zoomOld']) && ($this->POST['zoomOld']<3)&($this->POST['zoom']<3)) die;
 
 $currentCore = 'places';
 echo "<script> map.eachLayer( function(layer) {if(layer instanceof L.Marker) {map.removeLayer(layer)}});</script>";
@@ -25,10 +27,7 @@ echo "<script> map.eachLayer( function(layer) {if(layer instanceof L.Marker) {ma
 $lookfor = $this->postParam('lookfor');
 if (empty($lookFor) && !empty($this->GET['lookfor'])) {
 	$lookfor = $this->GET['lookfor'];
-	$query['q']=[ 
-			'field' => 'q',
-			'value' => $lookfor
-			];
+	$query['q']= $this->solr->lookFor($lookfor);
 	} else 
 	$query['q']=[ 
 			'field' => 'q',
@@ -40,9 +39,8 @@ $query['sort']=[
 		];
 $query[] = [
 		'field' => 'q.op', 
-		'value' => 'AND'	
+		'value' => 'OR'	
 		];
-
 
 if (!empty($this->POST['bE'])) {
 	// map moved run
@@ -69,12 +67,11 @@ $query['rows']=[
 		];
 
 $times = [];
+
 $results = $this->solr->getQuery($currentCore, $query); 
 $results = $this->solr->resultsList();
 $facets = $this->solr->facetsList();
 $totalResults = $recSum = $this->solr->totalResults();
-#echo "alerts".$this->helper->pre($this->solr->alert);
-
 
 if ($totalResults>0) {
 	

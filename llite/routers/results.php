@@ -47,10 +47,14 @@ if (!empty($this->configJson->$currentCore)) {
 	$lookfor = $this->postParam('lookfor');
 	if (empty($lookFor) && !empty($this->GET['lookfor'])) {
 		$lookfor = $this->GET['lookfor'];
+		$queryTable = explode(' ',$this->helper->clearLatin($lookfor));
+		$queryString = implode('* AND ', $queryTable).'*';
 		$query['q']=[ 
 				'field' => 'q',
-				'value' => $lookfor
+				'value' => $queryString
 				];
+		
+		$query['q'] = $this->solr->lookFor($this->helper->clearLatin($lookfor));
 		} else 
 		$query['q']=[ 
 				'field' => 'q',
@@ -119,14 +123,16 @@ if (!empty($this->configJson->$currentCore)) {
 	$results = $this->solr->resultsList();
 	$facets = $this->solr->facetsList();
 	#echo "results".$this->helper->pre($results);
-	#echo "alerts".$this->helper->pre($this->solr->alert);
+	
 	$totalResults = $this->solr->totalResults();
 	
 	echo $this->render('head.php');
 	echo $this->render('core/header.php');
 	echo $this->render('wikiResults/home.php', ['currentCore'=>$currentCore, 'facets'=>$facets, 'results'=>$results, 'totalResults'=>$totalResults] );
-	#echo $this->helper->pre($_SESSION);
-	#echo $this->helper->pre($results);
+	# echo $this->helper->pre($_SESSION);
+	# echo $this->helper->pre($results);
+	# echo "alerts".$this->helper->pre($this->solr->alert);
+	echo $this->render('helpers/report.error.php'); 
 	echo $this->render('core/footer.php');
 	
 	

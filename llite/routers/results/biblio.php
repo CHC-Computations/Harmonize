@@ -5,12 +5,14 @@ require_once('functions/class.helper.php');
 require_once('functions/class.forms.php');
 require_once('functions/class.converter.php');
 require_once('functions/class.record.bibliographic.php');
+require_once('functions/class.bookcart.php');
 
 $this->addClass('buffer', 	new buffer($this)); 
 $this->addClass('solr', 	new solr($this)); 
 $this->addClass('helper', 	new helper($this)); 
 $this->addClass('forms', 	new forms($this)); 
 $this->addClass('convert', 	new converter($this));
+$this->addClass('bookcart',	new bookcart());
 
 $currentCore = 'biblio';
 $maxPage = $this->configJson->$currentCore->summaryBarMenu->pagination->maxPagesAlowed ?? 100;
@@ -27,7 +29,7 @@ if ($this->getCurrentPage()	< $maxPage) {
 				else if (empty($this->getUserParam($currentCore.':'.$block))) 
 				$this->saveUserParam($currentCore.':'.$block, $this->configJson->$currentCore->summaryBarMenu->$block->default);
 
-
+	$sort = $this->getUserParamMeaning($currentCore, 'sorting', 'value');
 
 	if (!empty($this->GET['swl'])) { // start with letter ...
 		$sl = strtolower(substr($this->GET['swl'],0,1));
@@ -59,20 +61,22 @@ if ($this->getCurrentPage()	< $maxPage) {
 		} else 
 		$query['q'] = $this->solr->lookFor($lookfor, $type );		
 	
-	/*
+	
 	if (!empty($this->getUserParamMeaning($currentCore, 'sorting', 'value'))) {
-		$query['sort']=[ 
-			'field' => 'sort',
-			'value' => $this->getUserParamMeaning($currentCore, 'sorting', 'value')
-			];
+		if ($this->getUserParamMeaning($currentCore, 'sorting', 'value') !== 'relevance')
+			$query['sort']=[ 
+				'field' => 'sort',
+				'value' => $this->getUserParamMeaning($currentCore, 'sorting', 'value')
+				];
 		} else {
 		$sortCode = $this->configJson->$currentCore->summaryBarMenu->$block->default;
+		if (is_string($this->configJson->$currentCore->summaryBarMenu->$block->optionsAvailable->$sortCode))
 		$query['sort']=[ 
 			'field' => 'sort',
 			'value' => $this->configJson->$currentCore->summaryBarMenu->$block->optionsAvailable->$sortCode
 			];
 		}
-	*/
+	
 	$query['facet']=[ 
 				'field' => 'facet',
 				'value' => 'true'
@@ -88,11 +92,11 @@ if ($this->getCurrentPage()	< $maxPage) {
 		$query['start']=[ 
 			'field' => 'start',
 			'value' => $this->getCurrentPage()*$this->getUserParam($currentCore.':pagination') - $this->getUserParam($currentCore.':pagination')
-			];		
+		 	];		
 	
 	$query['q.op']=[ 
 			'field' => 'q.op',
-			'value' => 'OR'
+			'value' => 'AND'
 			];
 	
 	/*		
@@ -115,14 +119,13 @@ if ($this->getCurrentPage()	< $maxPage) {
 		} else 
 		$this->facetsCode = 'null';	
 	
-	# $this->solr->cleanQuery('biblio'); 
+	# echo $this->helper->pre($query);
 	$results = $this->solr->getQuery('biblio',$query); 
-	$this->setTitle("Libri ".$this->transEsc('results'));
+	$this->setTitle("ELB | ".$this->transEsc('Results'));
 
 	$this->saveUserParam($currentCore.':query', json_encode($query));
 	$this->saveUserParam($currentCore.':GET', json_encode($this->GET));
 	
-
 	$results = $this->solr->resultsList();
 	
 	if (!empty($lookfor))
@@ -130,13 +133,21 @@ if ($this->getCurrentPage()	< $maxPage) {
 
 	} else {
 	$results = new stdClass;
-	$results->exception = $this->transEsc('For reasons of server performance, we can now only present the first 100 pages of results').'. '.$this->transEsc('Try using filters or search').'. ';
+	$results->exception = '<h2>'.$this->transEsc('For reasons of server performance, we can now only present the first 100 pages of results').'. '.$this->transEsc('Try using filters or search').'.</h2>';
+	$results->exception .= '<a href="'. $this->buildUrl('results/biblio', ['facetsCode'=>$this->facetsCode, 'page'=>1]) .'">'. $this->transEsc('Go back to the first page') .'</a>';
 	}
 
-# echo "<pre>".print_r($_SESSION,1)."</pre>";
+if (!empty($this->buffer->usedFacets['user_list']) & ($this->solr->totalResults()==0)){
+	$results = new stdClass;
+	$results->exception = $this->helper->alertIco('warning', 'ph ph-clock-clockwise', $this->transEsc('The data in ELB has been re-indexed. Restoration of collection is in progress.'.'<div id="restoreCollectionAjaxBox">'.$this->helper->loader2().'</div>')); 
+	$this->addJS("page.post('restoreCollectionAjaxBox', 'user/lists/restore.collection', ".json_encode($this->buffer->usedFacets['user_list']).")");
+	}	
+
+$this->head->meta = implode("\n", $this->meta);
 ?> 
 
 <?= $this->render('head.php') ?>
 <?= $this->render('core/header.php') ?>
 <?= $this->render('search/home.php', ['results'=>$results, 'currentCore'=>$currentCore] ) ?> 
+<?= $this->render('helpers/report.error.php') ?> 
 <?= $this->render('core/footer.php') ?>

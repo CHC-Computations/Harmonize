@@ -1,0 +1,3608 @@
+[
+    {
+        "iso639_2": "khn",
+        "item": "Q33726",
+        "itemLabel": "Khandeshi"
+    },
+    {
+        "iso639_2": "mag",
+        "item": "Q33728",
+        "itemLabel": "Magahi"
+    },
+    {
+        "iso639_2": "arn",
+        "item": "Q33730",
+        "itemLabel": "Mapudungun"
+    },
+    {
+        "iso639_2": "mns",
+        "item": "Q33759",
+        "itemLabel": "Mansi"
+    },
+    {
+        "iso639_2": "pau",
+        "item": "Q33776",
+        "itemLabel": "Palauan"
+    },
+    {
+        "iso639_2": "sts",
+        "item": "Q33777",
+        "itemLabel": "Shumashti"
+    },
+    {
+        "iso639_2": "srm",
+        "item": "Q33779",
+        "itemLabel": "Saramaccan"
+    },
+    {
+        "item": "Q33781",
+        "itemLabel": "Marquesan"
+    },
+    {
+        "iso639_2": "xog",
+        "item": "Q33784",
+        "itemLabel": "Soga"
+    },
+    {
+        "iso639_2": "sid",
+        "item": "Q33786",
+        "itemLabel": "Sidamo"
+    },
+    {
+        "iso639_1": "ne",
+        "iso639_2": "nep",
+        "item": "Q33823",
+        "itemLabel": "Nepali"
+    },
+    {
+        "item": "Q33826",
+        "itemLabel": "Mura"
+    },
+    {
+        "iso639_2": "pap",
+        "item": "Q33856",
+        "itemLabel": "Papiamento"
+    },
+    {
+        "iso639_2": "nog",
+        "item": "Q33871",
+        "itemLabel": "Nogai"
+    },
+    {
+        "iso639_2": "srh",
+        "item": "Q33873",
+        "itemLabel": "Sarikoli"
+    },
+    {
+        "iso639_1": "oj",
+        "iso639_2": "oji",
+        "item": "Q33875",
+        "itemLabel": "Ojibwe"
+    },
+    {
+        "iso639_2": "pag",
+        "item": "Q33879",
+        "itemLabel": "Pangasinan"
+    },
+    {
+        "iso639_2": "vmw",
+        "item": "Q33882",
+        "itemLabel": "Makhuwa"
+    },
+    {
+        "iso639_2": "gwt",
+        "item": "Q33894",
+        "itemLabel": "Gawar-Bati"
+    },
+    {
+        "iso639_2": "skr",
+        "item": "Q33902",
+        "itemLabel": "Saraiki"
+    },
+    {
+        "iso639_2": "nll",
+        "item": "Q33904",
+        "itemLabel": "Nihali"
+    },
+    {
+        "iso639_2": "gdb",
+        "item": "Q33906",
+        "itemLabel": "Ollari"
+    },
+    {
+        "iso639_2": "mjt",
+        "item": "Q33907",
+        "itemLabel": "Sauria Paharia"
+    },
+    {
+        "iso639_2": "uki",
+        "item": "Q33919",
+        "itemLabel": "Kui"
+    },
+    {
+        "iso639_2": "slr",
+        "item": "Q33963",
+        "itemLabel": "Salar"
+    },
+    {
+        "iso639_2": "sat",
+        "item": "Q33965",
+        "itemLabel": "Santali"
+    },
+    {
+        "iso639_1": "os",
+        "iso639_2": "oss",
+        "item": "Q33968",
+        "itemLabel": "Ossetian"
+    },
+    {
+        "iso639_2": "scn",
+        "item": "Q33973",
+        "itemLabel": "Sicilian"
+    },
+    {
+        "iso639_1": "sd",
+        "iso639_2": "snd",
+        "item": "Q33997",
+        "itemLabel": "Sindhi"
+    },
+    {
+        "iso639_1": "su",
+        "iso639_2": "sun",
+        "item": "Q34002",
+        "itemLabel": "Sundanese"
+    },
+    {
+        "iso639_1": "sn",
+        "iso639_2": "sna",
+        "item": "Q34004",
+        "itemLabel": "Shona"
+    },
+    {
+        "iso639_2": "ddo",
+        "item": "Q34033",
+        "itemLabel": "Tsez"
+    },
+    {
+        "iso639_2": "tcx",
+        "item": "Q34042",
+        "itemLabel": "Toda"
+    },
+    {
+        "iso639_2": "sgh",
+        "item": "Q34053",
+        "itemLabel": "Shughni"
+    },
+    {
+        "iso639_1": "tl",
+        "iso639_2": "tgl",
+        "item": "Q34057",
+        "itemLabel": "Tagalog"
+    },
+    {
+        "iso639_2": "swb",
+        "item": "Q34075",
+        "itemLabel": "Maore"
+    },
+    {
+        "iso639_2": "trm",
+        "item": "Q34081",
+        "itemLabel": "Tregami"
+    },
+    {
+        "iso639_1": "to",
+        "iso639_2": "ton",
+        "item": "Q34094",
+        "itemLabel": "Tongan"
+    },
+    {
+        "iso639_2": "nmg",
+        "item": "Q34098",
+        "itemLabel": "Kwasio"
+    },
+    {
+        "iso639_2": "kpv",
+        "item": "Q34114",
+        "itemLabel": "Komi-Zyryan"
+    },
+    {
+        "iso639_2": "tyv",
+        "item": "Q34119",
+        "itemLabel": "Tuvan"
+    },
+    {
+        "iso639_2": "tum",
+        "item": "Q34138",
+        "itemLabel": "Tumbuka"
+    },
+    {
+        "iso639_2": "tsg",
+        "item": "Q34142",
+        "itemLabel": "Tausug"
+    },
+    {
+        "iso639_2": "shi",
+        "item": "Q34152",
+        "itemLabel": "Tachelhit"
+    },
+    {
+        "iso639_2": "wbk",
+        "item": "Q34196",
+        "itemLabel": "Waigali"
+    },
+    {
+        "iso639_2": "ryu",
+        "item": "Q34233",
+        "itemLabel": "Okinawan"
+    },
+    {
+        "iso639_2": "kok",
+        "item": "Q34239",
+        "itemLabel": "Konkani"
+    },
+    {
+        "iso639_2": "yoi",
+        "item": "Q34243",
+        "itemLabel": "Yonaguni"
+    },
+    {
+        "iso639_2": "yai",
+        "item": "Q34247",
+        "itemLabel": "Yaghnobi"
+    },
+    {
+        "iso639_2": "tcy",
+        "item": "Q34251",
+        "itemLabel": "Tulu"
+    },
+    {
+        "iso639_1": "wo",
+        "iso639_2": "wol",
+        "item": "Q34257",
+        "itemLabel": "Wolof"
+    },
+    {
+        "iso639_1": "bo",
+        "iso639_2": "bod",
+        "item": "Q34271",
+        "itemLabel": "Tibetan"
+    },
+    {
+        "iso639_2": "sah",
+        "item": "Q34299",
+        "itemLabel": "Yakut"
+    },
+    {
+        "iso639_1": "yo",
+        "iso639_2": "yor",
+        "item": "Q34311",
+        "itemLabel": "Yoruba"
+    },
+    {
+        "iso639_1": "st",
+        "iso639_2": "sot",
+        "item": "Q34340",
+        "itemLabel": "Sesotho"
+    },
+    {
+        "iso639_2": "bkc",
+        "item": "Q34905",
+        "itemLabel": "Baka"
+    },
+    {
+        "iso639_2": "aqc",
+        "item": "Q34915",
+        "itemLabel": "Archi"
+    },
+    {
+        "iso639_2": "ach",
+        "item": "Q34926",
+        "itemLabel": "Acholi"
+    },
+    {
+        "iso639_2": "zne",
+        "item": "Q35015",
+        "itemLabel": "Zande"
+    },
+    {
+        "iso639_2": "dga",
+        "item": "Q35159",
+        "itemLabel": "Dagaare"
+    },
+    {
+        "iso639_2": "brc",
+        "item": "Q35215",
+        "itemLabel": "Berbice Creole Dutch"
+    },
+    {
+        "iso639_2": "sia",
+        "item": "Q35241",
+        "itemLabel": "Akkala Sami"
+    },
+    {
+        "iso639_2": "bra",
+        "item": "Q35243",
+        "itemLabel": "Braj Bhasha"
+    },
+    {
+        "iso639_2": "bax",
+        "item": "Q35280",
+        "itemLabel": "Bamum"
+    },
+    {
+        "iso639_2": "cia",
+        "item": "Q35284",
+        "itemLabel": "Cia-Cia"
+    },
+    {
+        "iso639_2": "sip",
+        "item": "Q35285",
+        "itemLabel": "Sikkimese"
+    },
+    {
+        "iso639_2": "kmz",
+        "item": "Q35373",
+        "itemLabel": "Khorasani Turkic"
+    },
+    {
+        "item": "Q35390",
+        "itemLabel": "Asturleonese"
+    },
+    {
+        "iso639_2": "rmt",
+        "item": "Q35394",
+        "itemLabel": "Domari"
+    },
+    {
+        "iso639_2": "ewo",
+        "item": "Q35459",
+        "itemLabel": "Ewondo"
+    },
+    {
+        "iso639_2": "dbl",
+        "item": "Q35465",
+        "itemLabel": "Dyirbal"
+    },
+    {
+        "iso639_2": "gol",
+        "item": "Q35482",
+        "itemLabel": "Gola"
+    },
+    {
+        "iso639_2": "fat",
+        "item": "Q35570",
+        "itemLabel": "Fante"
+    },
+    {
+        "iso639_2": "hay",
+        "item": "Q35756",
+        "itemLabel": "Haya"
+    },
+    {
+        "iso639_2": "mzs",
+        "item": "Q35785",
+        "itemLabel": "Macanese"
+    },
+    {
+        "iso639_2": "lns",
+        "item": "Q35788",
+        "itemLabel": "Nso"
+    },
+    {
+        "iso639_2": "lup",
+        "item": "Q35793",
+        "itemLabel": "Lumbu"
+    },
+    {
+        "iso639_2": "lbj",
+        "item": "Q35833",
+        "itemLabel": "Ladakhi"
+    },
+    {
+        "iso639_2": "kab",
+        "item": "Q35853",
+        "itemLabel": "Kabyle"
+    },
+    {
+        "iso639_2": "trp",
+        "item": "Q35947",
+        "itemLabel": "Kokborok"
+    },
+    {
+        "iso639_2": "hil",
+        "item": "Q35978",
+        "itemLabel": "Hiligaynon"
+    },
+    {
+        "iso639_2": "lep",
+        "item": "Q35990",
+        "itemLabel": "Lepcha"
+    },
+    {
+        "iso639_2": "mua",
+        "item": "Q36032",
+        "itemLabel": "Moundang"
+    },
+    {
+        "iso639_2": "mdw",
+        "item": "Q36035",
+        "itemLabel": "Mboshi"
+    },
+    {
+        "iso639_2": "mai",
+        "item": "Q36109",
+        "itemLabel": "Maithili"
+    },
+    {
+        "iso639_1": "kv",
+        "iso639_2": "kom",
+        "item": "Q36126",
+        "itemLabel": "Komi"
+    },
+    {
+        "iso639_2": "grt",
+        "item": "Q36137",
+        "itemLabel": "Garo"
+    },
+    {
+        "iso639_2": "zum",
+        "item": "Q36158",
+        "itemLabel": "Kumzari"
+    },
+    {
+        "iso639_2": "kmr",
+        "item": "Q36163",
+        "itemLabel": "Kurmanji"
+    },
+    {
+        "iso639_2": "xle",
+        "item": "Q36203",
+        "itemLabel": "Lemnian"
+    },
+    {
+        "iso639_2": "lbe",
+        "item": "Q36206",
+        "itemLabel": "Lak"
+    },
+    {
+        "iso639_2": "kum",
+        "item": "Q36209",
+        "itemLabel": "Kumyk"
+    },
+    {
+        "iso639_2": "ltg",
+        "item": "Q36212",
+        "itemLabel": "Latgalian"
+    },
+    {
+        "iso639_2": "mad",
+        "item": "Q36213",
+        "itemLabel": "Madurese"
+    },
+    {
+        "iso639_1": "ln",
+        "iso639_2": "lin",
+        "item": "Q36217",
+        "itemLabel": "Lingala"
+    },
+    {
+        "iso639_1": "ml",
+        "iso639_2": "mal",
+        "item": "Q36236",
+        "itemLabel": "Malayalam"
+    },
+    {
+        "iso639_1": "mh",
+        "iso639_2": "mah",
+        "item": "Q36280",
+        "itemLabel": "Marshallese"
+    },
+    {
+        "iso639_2": "nnh",
+        "item": "Q36286",
+        "itemLabel": "Ngiemboon"
+    },
+    {
+        "iso639_2": "yas",
+        "item": "Q36358",
+        "itemLabel": "Gunu"
+    },
+    {
+        "iso639_2": "kcn",
+        "item": "Q36388",
+        "itemLabel": "Nubi"
+    },
+    {
+        "iso639_1": "mi",
+        "iso639_2": "mri",
+        "item": "Q36451",
+        "itemLabel": "Māori"
+    },
+    {
+        "iso639_2": "yrk",
+        "item": "Q36452",
+        "itemLabel": "Nenets"
+    },
+    {
+        "iso639_2": "mtm",
+        "item": "Q36453",
+        "itemLabel": "Mator"
+    },
+    {
+        "iso639_2": "cdo",
+        "item": "Q36455",
+        "itemLabel": "Eastern Min"
+    },
+    {
+        "item": "Q36489",
+        "itemLabel": "Ovambo"
+    },
+    {
+        "iso639_2": "quc",
+        "item": "Q36494",
+        "itemLabel": "K’iche’"
+    },
+    {
+        "iso639_2": "nan",
+        "item": "Q36495",
+        "itemLabel": "Southern Min"
+    },
+    {
+        "iso639_2": "agx",
+        "item": "Q36498",
+        "itemLabel": "Aghul"
+    },
+    {
+        "iso639_2": "gya",
+        "item": "Q36594",
+        "itemLabel": "Northwest Gbaya"
+    },
+    {
+        "iso639_2": "ann",
+        "item": "Q36614",
+        "itemLabel": "Obolo"
+    },
+    {
+        "iso639_2": "tvu",
+        "item": "Q36632",
+        "itemLabel": "Nen"
+    },
+    {
+        "item": "Q36670",
+        "itemLabel": "Pashayi"
+    },
+    {
+        "iso639_2": "xrr",
+        "item": "Q36689",
+        "itemLabel": "Raetic"
+    },
+    {
+        "iso639_2": "nrn",
+        "item": "Q36708",
+        "itemLabel": "Norn"
+    },
+    {
+        "iso639_2": "txo",
+        "item": "Q36709",
+        "itemLabel": "Toto"
+    },
+    {
+        "iso639_2": "nup",
+        "item": "Q36720",
+        "itemLabel": "Nupe"
+    },
+    {
+        "iso639_2": "rar",
+        "item": "Q36745",
+        "itemLabel": "Cook Islands Maori"
+    },
+    {
+        "iso639_2": "rtm",
+        "item": "Q36754",
+        "itemLabel": "Rotuman"
+    },
+    {
+        "iso639_2": "rut",
+        "item": "Q36757",
+        "itemLabel": "Rutulian"
+    },
+    {
+        "iso639_2": "tzh",
+        "item": "Q36808",
+        "itemLabel": "Tzeltal"
+    },
+    {
+        "iso639_2": "tsj",
+        "item": "Q36840",
+        "itemLabel": "Tshangla"
+    },
+    {
+        "iso639_1": "tw",
+        "iso639_2": "twi",
+        "item": "Q36850",
+        "itemLabel": "Twi"
+    },
+    {
+        "iso639_2": "tkr",
+        "item": "Q36853",
+        "itemLabel": "Tsakhur"
+    },
+    {
+        "iso639_2": "vut",
+        "item": "Q36897",
+        "itemLabel": "Vute"
+    },
+    {
+        "iso639_2": "uga",
+        "item": "Q36928",
+        "itemLabel": "Ugaritic"
+    },
+    {
+        "iso639_2": "vai",
+        "item": "Q36939",
+        "itemLabel": "Vai"
+    },
+    {
+        "iso639_2": "umb",
+        "item": "Q36983",
+        "itemLabel": "Umbundu"
+    },
+    {
+        "iso639_2": "bpy",
+        "item": "Q37059",
+        "itemLabel": "Bishnupriya Manipuri"
+    },
+    {
+        "item": "Q37560",
+        "itemLabel": "Vulgar Latin"
+    },
+    {
+        "iso639_2": "ang",
+        "item": "Q42365",
+        "itemLabel": "Old English"
+    },
+    {
+        "item": "Q44679",
+        "itemLabel": "Australian English"
+    },
+    {
+        "iso639_2": "kge",
+        "item": "Q49224",
+        "itemLabel": "Komering"
+    },
+    {
+        "iso639_2": "dru",
+        "item": "Q49232",
+        "itemLabel": "Rukai"
+    },
+    {
+        "iso639_2": "acm",
+        "item": "Q56232",
+        "itemLabel": "Mesopotamian Arabic"
+    },
+    {
+        "iso639_2": "ker",
+        "item": "Q56251",
+        "itemLabel": "Kera"
+    },
+    {
+        "iso639_2": "sje",
+        "item": "Q56314",
+        "itemLabel": "Pite Sami"
+    },
+    {
+        "iso639_2": "dus",
+        "item": "Q56315",
+        "itemLabel": "Dumi"
+    },
+    {
+        "iso639_2": "koi",
+        "item": "Q56318",
+        "itemLabel": "Permyak"
+    },
+    {
+        "iso639_2": "aml",
+        "item": "Q56321",
+        "itemLabel": "War"
+    },
+    {
+        "iso639_2": "smj",
+        "item": "Q56322",
+        "itemLabel": "Lule Sami"
+    },
+    {
+        "iso639_2": "sxg",
+        "item": "Q56337",
+        "itemLabel": "Shixing"
+    },
+    {
+        "iso639_2": "nki",
+        "item": "Q56374",
+        "itemLabel": "Khoirao"
+    },
+    {
+        "iso639_2": "afb",
+        "item": "Q56385",
+        "itemLabel": "Gulf Arabic"
+    },
+    {
+        "iso639_2": "ttq",
+        "item": "Q56390",
+        "itemLabel": "Tahoua"
+    },
+    {
+        "iso639_2": "suv",
+        "item": "Q56408",
+        "itemLabel": "Puroik"
+    },
+    {
+        "iso639_2": "sju",
+        "item": "Q56415",
+        "itemLabel": "Ume Sami"
+    },
+    {
+        "iso639_2": "acy",
+        "item": "Q56416",
+        "itemLabel": "Cypriot Arabic"
+    },
+    {
+        "iso639_2": "adi",
+        "item": "Q56440",
+        "itemLabel": "Adi"
+    },
+    {
+        "iso639_2": "bhj",
+        "item": "Q56442",
+        "itemLabel": "Bahing"
+    },
+    {
+        "iso639_1": "ha",
+        "iso639_2": "hau",
+        "item": "Q56475",
+        "itemLabel": "Hausa"
+    },
+    {
+        "iso639_2": "lif",
+        "item": "Q56477",
+        "itemLabel": "Limbu"
+    },
+    {
+        "iso639_2": "lis",
+        "item": "Q56480",
+        "itemLabel": "Lisu"
+    },
+    {
+        "iso639_2": "shn",
+        "item": "Q56482",
+        "itemLabel": "Shan"
+    },
+    {
+        "iso639_2": "jdt",
+        "item": "Q56495",
+        "itemLabel": "Judeo-Tat"
+    },
+    {
+        "iso639_2": "shu",
+        "item": "Q56497",
+        "itemLabel": "Shuwa"
+    },
+    {
+        "iso639_2": "arq",
+        "item": "Q56499",
+        "itemLabel": "Algerian Arabic"
+    },
+    {
+        "iso639_2": "bnn",
+        "item": "Q56505",
+        "itemLabel": "Bunun"
+    },
+    {
+        "iso639_2": "adx",
+        "item": "Q56509",
+        "itemLabel": "Amdo Tibetan"
+    },
+    {
+        "iso639_2": "ata",
+        "item": "Q56511",
+        "itemLabel": "Pele-Ata"
+    },
+    {
+        "iso639_2": "gwn",
+        "item": "Q56521",
+        "itemLabel": "Gwandara"
+    },
+    {
+        "iso639_2": "bob",
+        "item": "Q56526",
+        "itemLabel": "Aweer"
+    },
+    {
+        "iso639_2": "kky",
+        "item": "Q56543",
+        "itemLabel": "Guugu Yimithirr"
+    },
+    {
+        "iso639_2": "alc",
+        "item": "Q56544",
+        "itemLabel": "Kawésqar"
+    },
+    {
+        "iso639_2": "tdh",
+        "item": "Q56553",
+        "itemLabel": "Thulung"
+    },
+    {
+        "iso639_2": "adf",
+        "item": "Q56565",
+        "itemLabel": "Dhofari Arabic"
+    },
+    {
+        "iso639_2": "apd",
+        "item": "Q56573",
+        "itemLabel": "Sudanese Arabic"
+    },
+    {
+        "iso639_2": "abv",
+        "item": "Q56576",
+        "itemLabel": "Bahrani Arabic"
+    },
+    {
+        "iso639_2": "ayn",
+        "item": "Q56578",
+        "itemLabel": "Sanʽani Arabic"
+    },
+    {
+        "iso639_2": "acq",
+        "item": "Q56579",
+        "itemLabel": "Taʽizzi-Adeni Arabic"
+    },
+    {
+        "iso639_2": "acn",
+        "item": "Q56582",
+        "itemLabel": "Achang"
+    },
+    {
+        "iso639_2": "atj",
+        "item": "Q56590",
+        "itemLabel": "Atikamekw"
+    },
+    {
+        "iso639_2": "apc",
+        "item": "Q56593",
+        "itemLabel": "Levantine Arabic"
+    },
+    {
+        "iso639_2": "drs",
+        "item": "Q56622",
+        "itemLabel": "Gedeo"
+    },
+    {
+        "iso639_2": "kxc",
+        "item": "Q56624",
+        "itemLabel": "Konso"
+    },
+    {
+        "iso639_2": "acx",
+        "item": "Q56630",
+        "itemLabel": "Omani Arabic"
+    },
+    {
+        "iso639_2": "bsa",
+        "item": "Q56648",
+        "itemLabel": "Abinomn"
+    },
+    {
+        "iso639_2": "mhi",
+        "item": "Q56670",
+        "itemLabel": "Ma'di"
+    },
+    {
+        "iso639_2": "thv",
+        "item": "Q56703",
+        "itemLabel": "Tamahaq"
+    },
+    {
+        "iso639_2": "tub",
+        "item": "Q56704",
+        "itemLabel": "Tübatulabal"
+    },
+    {
+        "iso639_2": "iow",
+        "item": "Q56737",
+        "itemLabel": "Iowa-Oto"
+    },
+    {
+        "iso639_2": "pci",
+        "item": "Q56753",
+        "itemLabel": "Duruwa"
+    },
+    {
+        "iso639_2": "peg",
+        "item": "Q56758",
+        "itemLabel": "Pengo"
+    },
+    {
+        "item": "Q56782",
+        "itemLabel": "Angevin"
+    },
+    {
+        "iso639_2": "njz",
+        "item": "Q56870",
+        "itemLabel": "Nishi"
+    },
+    {
+        "iso639_2": "arv",
+        "item": "Q56883",
+        "itemLabel": "Arbore"
+    },
+    {
+        "iso639_2": "xal",
+        "item": "Q56959",
+        "itemLabel": "Oirat"
+    },
+    {
+        "iso639_1": "pa",
+        "iso639_2": "pan",
+        "item": "Q58635",
+        "itemLabel": "Punjabi"
+    },
+    {
+        "iso639_1": "ps",
+        "iso639_2": "pus",
+        "item": "Q58680",
+        "itemLabel": "Pashto"
+    },
+    {
+        "iso639_2": "vls",
+        "item": "Q100103",
+        "itemLabel": "West Flemish"
+    },
+    {
+        "item": "Q129431",
+        "itemLabel": "Prekmurian"
+    },
+    {
+        "iso639_2": "prs",
+        "item": "Q178440",
+        "itemLabel": "Dari"
+    },
+    {
+        "iso639_2": "dum",
+        "item": "Q178806",
+        "itemLabel": "Middle Dutch"
+    },
+    {
+        "iso639_2": "bsk",
+        "item": "Q216286",
+        "itemLabel": "Burushaski"
+    },
+    {
+        "iso639_2": "tsd",
+        "item": "Q220607",
+        "itemLabel": "Tsakonian"
+    },
+    {
+        "iso639_2": "ovd",
+        "item": "Q254950",
+        "itemLabel": "Elfdalian"
+    },
+    {
+        "iso639_2": "hrx",
+        "item": "Q304049",
+        "itemLabel": "Hunsrik"
+    },
+    {
+        "item": "Q382273",
+        "itemLabel": "Hindko"
+    },
+    {
+        "iso639_2": "odt",
+        "item": "Q443089",
+        "itemLabel": "Old Dutch"
+    },
+    {
+        "iso639_2": "rml",
+        "item": "Q513736",
+        "itemLabel": "Baltic Romani"
+    },
+    {
+        "iso639_2": "yag",
+        "item": "Q531826",
+        "itemLabel": "Yaghan"
+    },
+    {
+        "iso639_2": "ace",
+        "item": "Q27683",
+        "itemLabel": "Acehnese"
+    },
+    {
+        "iso639_2": "ady",
+        "item": "Q27776",
+        "itemLabel": "Adyghe"
+    },
+    {
+        "iso639_2": "tli",
+        "item": "Q27792",
+        "itemLabel": "Tlingit"
+    },
+    {
+        "iso639_1": "aa",
+        "iso639_2": "aar",
+        "item": "Q27811",
+        "itemLabel": "Afar"
+    },
+    {
+        "iso639_2": "aiq",
+        "item": "Q27898",
+        "itemLabel": "Aimaq"
+    },
+    {
+        "iso639_2": "aib",
+        "item": "Q27927",
+        "itemLabel": "Äynu"
+    },
+    {
+        "iso639_2": "ain",
+        "item": "Q27969",
+        "itemLabel": "Ainu"
+    },
+    {
+        "iso639_2": "ems",
+        "item": "Q27992",
+        "itemLabel": "Alutiiq"
+    },
+    {
+        "iso639_2": "ysr",
+        "item": "Q28156",
+        "itemLabel": "Sirenik"
+    },
+    {
+        "iso639_2": "alr",
+        "item": "Q28213",
+        "itemLabel": "Alyutor"
+    },
+    {
+        "iso639_1": "am",
+        "iso639_2": "amh",
+        "item": "Q28244",
+        "itemLabel": "Amharic"
+    },
+    {
+        "iso639_2": "apq",
+        "item": "Q28466",
+        "itemLabel": "Pujjukar"
+    },
+    {
+        "iso639_2": "ask",
+        "item": "Q29379",
+        "itemLabel": "Ashkun"
+    },
+    {
+        "iso639_1": "as",
+        "iso639_2": "asm",
+        "item": "Q29401",
+        "itemLabel": "Assamese"
+    },
+    {
+        "iso639_2": "ast",
+        "item": "Q29507",
+        "itemLabel": "Asturian"
+    },
+    {
+        "iso639_1": "av",
+        "iso639_2": "ava",
+        "item": "Q29561",
+        "itemLabel": "Avar"
+    },
+    {
+        "iso639_2": "arz",
+        "item": "Q29919",
+        "itemLabel": "Egyptian Arabic"
+    },
+    {
+        "iso639_1": "iu",
+        "iso639_2": "iku",
+        "item": "Q29921",
+        "itemLabel": "Inuktitut"
+    },
+    {
+        "iso639_2": "myv",
+        "item": "Q29952",
+        "itemLabel": "Erzya"
+    },
+    {
+        "iso639_2": "eve",
+        "item": "Q29960",
+        "itemLabel": "Even"
+    },
+    {
+        "iso639_1": "ee",
+        "iso639_2": "ewe",
+        "item": "Q30005",
+        "itemLabel": "Ewe"
+    },
+    {
+        "iso639_2": "lez",
+        "item": "Q31746",
+        "itemLabel": "Lezgian"
+    },
+    {
+        "item": "Q32145",
+        "itemLabel": "Ripuarian"
+    },
+    {
+        "iso639_2": "dag",
+        "item": "Q32238",
+        "itemLabel": "Dagbani"
+    },
+    {
+        "iso639_2": "dml",
+        "item": "Q32288",
+        "itemLabel": "Dameli"
+    },
+    {
+        "iso639_2": "dar",
+        "item": "Q32332",
+        "itemLabel": "Dargwa"
+    },
+    {
+        "iso639_1": "dv",
+        "iso639_2": "div",
+        "item": "Q32656",
+        "itemLabel": "Divehi"
+    },
+    {
+        "iso639_2": "prn",
+        "item": "Q32689",
+        "itemLabel": "Wasi-wari"
+    },
+    {
+        "iso639_1": "ve",
+        "iso639_2": "ven",
+        "item": "Q32704",
+        "itemLabel": "Venda"
+    },
+    {
+        "iso639_2": "dgo",
+        "item": "Q32730",
+        "itemLabel": "Dogri"
+    },
+    {
+        "iso639_2": "vep",
+        "item": "Q32747",
+        "itemLabel": "Veps"
+    },
+    {
+        "iso639_2": "dmk",
+        "item": "Q32900",
+        "itemLabel": "Dawoodi"
+    },
+    {
+        "item": "Q32904",
+        "itemLabel": "!Kung"
+    },
+    {
+        "iso639_2": "ccp",
+        "item": "Q32952",
+        "itemLabel": "Chakma"
+    },
+    {
+        "iso639_2": "peh",
+        "item": "Q32983",
+        "itemLabel": "Bonan"
+    },
+    {
+        "iso639_2": "ctn",
+        "item": "Q32994",
+        "itemLabel": "Chintang"
+    },
+    {
+        "iso639_2": "bbc",
+        "item": "Q33017",
+        "itemLabel": "Toba Batak"
+    },
+    {
+        "iso639_2": "bsg",
+        "item": "Q33030",
+        "itemLabel": "Bashkardi"
+    },
+    {
+        "iso639_2": "bal",
+        "item": "Q33049",
+        "itemLabel": "Balochi"
+    },
+    {
+        "iso639_2": "bla",
+        "item": "Q33060",
+        "itemLabel": "Blackfoot"
+    },
+    {
+        "iso639_2": "ban",
+        "item": "Q33070",
+        "itemLabel": "Balinese"
+    },
+    {
+        "item": "Q33077",
+        "itemLabel": "Comorian"
+    },
+    {
+        "iso639_2": "bft",
+        "item": "Q33086",
+        "itemLabel": "Balti"
+    },
+    {
+        "iso639_1": "co",
+        "iso639_2": "cos",
+        "item": "Q33111",
+        "itemLabel": "Corsican"
+    },
+    {
+        "iso639_2": "bjn",
+        "item": "Q33151",
+        "itemLabel": "Banjar"
+    },
+    {
+        "iso639_2": "hne",
+        "item": "Q33158",
+        "itemLabel": "Chhattisgarhi"
+    },
+    {
+        "iso639_2": "ckt",
+        "item": "Q33170",
+        "itemLabel": "Chukchi"
+    },
+    {
+        "iso639_2": "brh",
+        "item": "Q33202",
+        "itemLabel": "Brahui"
+    },
+    {
+        "iso639_2": "brx",
+        "item": "Q33223",
+        "itemLabel": "Bodo"
+    },
+    {
+        "iso639_2": "hoj",
+        "item": "Q33227",
+        "itemLabel": "Hadauti"
+    },
+    {
+        "iso639_2": "bhb",
+        "item": "Q33229",
+        "itemLabel": "Bhili"
+    },
+    {
+        "iso639_2": "bho",
+        "item": "Q33268",
+        "itemLabel": "Bhojpuri"
+    },
+    {
+        "iso639_1": "ny",
+        "iso639_2": "nya",
+        "item": "Q33273",
+        "itemLabel": "Chewa"
+    },
+    {
+        "iso639_2": "gin",
+        "item": "Q33283",
+        "itemLabel": "Hinuq"
+    },
+    {
+        "iso639_2": "hai",
+        "item": "Q33303",
+        "itemLabel": "Haida"
+    },
+    {
+        "iso639_1": "hz",
+        "iso639_2": "her",
+        "item": "Q33315",
+        "itemLabel": "Herero"
+    },
+    {
+        "iso639_1": "cv",
+        "iso639_2": "chv",
+        "item": "Q33348",
+        "itemLabel": "Chuvash"
+    },
+    {
+        "iso639_1": "ce",
+        "iso639_2": "che",
+        "item": "Q33350",
+        "itemLabel": "Chechen"
+    },
+    {
+        "iso639_2": "crh",
+        "item": "Q33357",
+        "itemLabel": "Crimean Tatar"
+    },
+    {
+        "iso639_2": "iru",
+        "item": "Q33363",
+        "itemLabel": "Irula"
+    },
+    {
+        "iso639_1": "lg",
+        "iso639_2": "lug",
+        "item": "Q33368",
+        "itemLabel": "Luganda"
+    },
+    {
+        "iso639_2": "hak",
+        "item": "Q33375",
+        "itemLabel": "Hakka Chinese"
+    },
+    {
+        "iso639_2": "chr",
+        "item": "Q33388",
+        "itemLabel": "Cherokee"
+    },
+    {
+        "iso639_1": "cr",
+        "iso639_2": "cre",
+        "item": "Q33390",
+        "itemLabel": "Cree"
+    },
+    {
+        "iso639_2": "haz",
+        "item": "Q33398",
+        "itemLabel": "Hazaragi"
+    },
+    {
+        "iso639_2": "mvy",
+        "item": "Q33399",
+        "itemLabel": "Indus Kohistani"
+    },
+    {
+        "iso639_2": "bgc",
+        "item": "Q33410",
+        "itemLabel": "Haryanvi"
+    },
+    {
+        "iso639_2": "mup",
+        "item": "Q33413",
+        "itemLabel": "Malvi"
+    },
+    {
+        "iso639_2": "kls",
+        "item": "Q33416",
+        "itemLabel": "Kalasha"
+    },
+    {
+        "iso639_2": "tts",
+        "item": "Q33417",
+        "itemLabel": "Isan"
+    },
+    {
+        "iso639_1": "ff",
+        "iso639_2": "ful",
+        "item": "Q33454",
+        "itemLabel": "Fula"
+    },
+    {
+        "iso639_2": "klj",
+        "item": "Q33455",
+        "itemLabel": "Khalaj"
+    },
+    {
+        "iso639_2": "gbm",
+        "item": "Q33459",
+        "itemLabel": "Garhwali"
+    },
+    {
+        "iso639_2": "smn",
+        "item": "Q33462",
+        "itemLabel": "Inari Sami"
+    },
+    {
+        "iso639_2": "lmn",
+        "item": "Q33474",
+        "itemLabel": "Lambadi"
+    },
+    {
+        "iso639_2": "gan",
+        "item": "Q33475",
+        "itemLabel": "Gan Chinese"
+    },
+    {
+        "iso639_2": "kfe",
+        "item": "Q33483",
+        "itemLabel": "Kota"
+    },
+    {
+        "iso639_1": "ht",
+        "iso639_2": "hat",
+        "item": "Q33491",
+        "itemLabel": "Haitian Creole"
+    },
+    {
+        "iso639_2": "inh",
+        "item": "Q33509",
+        "itemLabel": "Ingush"
+    },
+    {
+        "iso639_2": "kbd",
+        "item": "Q33522",
+        "itemLabel": "Kabardian"
+    },
+    {
+        "iso639_2": "kfy",
+        "item": "Q33529",
+        "itemLabel": "Kumaoni"
+    },
+    {
+        "iso639_2": "kfa",
+        "item": "Q33531",
+        "itemLabel": "Kodava"
+    },
+    {
+        "iso639_2": "lkt",
+        "item": "Q33537",
+        "itemLabel": "Lakota"
+    },
+    {
+        "iso639_1": "jv",
+        "iso639_2": "jav",
+        "item": "Q33549",
+        "itemLabel": "Javanese"
+    },
+    {
+        "iso639_1": "ks",
+        "iso639_2": "kas",
+        "item": "Q33552",
+        "itemLabel": "Kashmiri"
+    },
+    {
+        "iso639_2": "izh",
+        "item": "Q33559",
+        "itemLabel": "Ingrian"
+    },
+    {
+        "iso639_1": "rw",
+        "iso639_2": "kin",
+        "item": "Q33573",
+        "itemLabel": "Kinyarwanda"
+    },
+    {
+        "iso639_2": "kjh",
+        "item": "Q33575",
+        "itemLabel": "Khakas"
+    },
+    {
+        "iso639_1": "rn",
+        "iso639_2": "run",
+        "item": "Q33583",
+        "itemLabel": "Kirundi"
+    },
+    {
+        "iso639_2": "kha",
+        "item": "Q33584",
+        "itemLabel": "Khasi"
+    },
+    {
+        "iso639_1": "ki",
+        "iso639_2": "kik",
+        "item": "Q33587",
+        "itemLabel": "Gikuyu"
+    },
+    {
+        "iso639_2": "oac",
+        "item": "Q33650",
+        "itemLabel": "Oroch"
+    },
+    {
+        "iso639_2": "sjd",
+        "item": "Q33656",
+        "itemLabel": "Kildin Sami"
+    },
+    {
+        "iso639_1": "kn",
+        "iso639_2": "kan",
+        "item": "Q33673",
+        "itemLabel": "Kannada"
+    },
+    {
+        "iso639_2": "mnk",
+        "item": "Q33678",
+        "itemLabel": "Mandinka"
+    },
+    {
+        "iso639_2": "csb",
+        "item": "Q33690",
+        "itemLabel": "Kashubian"
+    },
+    {
+        "iso639_2": "liv",
+        "item": "Q33698",
+        "itemLabel": "Livonian"
+    },
+    {
+        "iso639_1": "kg",
+        "iso639_2": "kon",
+        "item": "Q33702",
+        "itemLabel": "Kongo"
+    },
+    {
+        "iso639_2": "kfq",
+        "item": "Q33715",
+        "itemLabel": "Korku"
+    },
+    {
+        "iso639_2": "kdr",
+        "item": "Q33725",
+        "itemLabel": "Karaim"
+    },
+    {
+        "iso639_1": "fr",
+        "iso639_2": "fra",
+        "item": "Q150",
+        "itemLabel": "French"
+    },
+    {
+        "iso639_1": "tr",
+        "iso639_2": "tur",
+        "item": "Q256",
+        "itemLabel": "Turkish"
+    },
+    {
+        "iso639_1": "is",
+        "iso639_2": "isl",
+        "item": "Q294",
+        "itemLabel": "Icelandic"
+    },
+    {
+        "iso639_1": "it",
+        "iso639_2": "ita",
+        "item": "Q652",
+        "itemLabel": "Italian"
+    },
+    {
+        "iso639_1": "pl",
+        "iso639_2": "pol",
+        "item": "Q809",
+        "itemLabel": "Polish"
+    },
+    {
+        "iso639_1": "es",
+        "iso639_2": "spa",
+        "item": "Q1321",
+        "itemLabel": "Spanish"
+    },
+    {
+        "iso639_1": "fi",
+        "iso639_2": "fin",
+        "item": "Q1412",
+        "itemLabel": "Finnish"
+    },
+    {
+        "iso639_1": "mr",
+        "iso639_2": "mar",
+        "item": "Q1571",
+        "itemLabel": "Marathi"
+    },
+    {
+        "iso639_1": "en",
+        "iso639_2": "eng",
+        "item": "Q1860",
+        "itemLabel": "English"
+    },
+    {
+        "iso639_1": "ay",
+        "iso639_2": "aym",
+        "item": "Q4627",
+        "itemLabel": "Aymara"
+    },
+    {
+        "iso639_1": "ab",
+        "iso639_2": "abk",
+        "item": "Q5111",
+        "itemLabel": "Abkhaz"
+    },
+    {
+        "iso639_1": "gu",
+        "iso639_2": "guj",
+        "item": "Q5137",
+        "itemLabel": "Gujarati"
+    },
+    {
+        "iso639_2": "alu",
+        "item": "Q5160",
+        "itemLabel": "'Are'are"
+    },
+    {
+        "iso639_1": "qu",
+        "iso639_2": "que",
+        "item": "Q5218",
+        "itemLabel": "Quechua"
+    },
+    {
+        "iso639_1": "ja",
+        "iso639_2": "jpn",
+        "item": "Q5287",
+        "itemLabel": "Japanese"
+    },
+    {
+        "iso639_1": "ta",
+        "iso639_2": "tam",
+        "item": "Q5885",
+        "itemLabel": "Tamil"
+    },
+    {
+        "iso639_1": "nl",
+        "iso639_2": "nld",
+        "item": "Q7411",
+        "itemLabel": "Dutch"
+    },
+    {
+        "iso639_2": "aiw",
+        "item": "Q7495",
+        "itemLabel": "Aari"
+    },
+    {
+        "iso639_1": "ru",
+        "iso639_2": "rus",
+        "item": "Q7737",
+        "itemLabel": "Russian"
+    },
+    {
+        "iso639_1": "sw",
+        "iso639_2": "swa",
+        "item": "Q7838",
+        "itemLabel": "Swahili"
+    },
+    {
+        "iso639_1": "ro",
+        "iso639_2": "ron",
+        "item": "Q7913",
+        "itemLabel": "Romanian"
+    },
+    {
+        "iso639_1": "mg",
+        "iso639_2": "mlg",
+        "item": "Q7930",
+        "itemLabel": "Malagasy"
+    },
+    {
+        "item": "Q7976",
+        "itemLabel": "American English"
+    },
+    {
+        "iso639_1": "te",
+        "iso639_2": "tel",
+        "item": "Q8097",
+        "itemLabel": "Telugu"
+    },
+    {
+        "iso639_1": "ka",
+        "iso639_2": "kat",
+        "item": "Q8108",
+        "itemLabel": "Georgian"
+    },
+    {
+        "iso639_1": "sq",
+        "iso639_2": "sqi",
+        "item": "Q8748",
+        "itemLabel": "Albanian"
+    },
+    {
+        "iso639_1": "eu",
+        "iso639_2": "eus",
+        "item": "Q8752",
+        "itemLabel": "Basque"
+    },
+    {
+        "iso639_1": "an",
+        "iso639_2": "arg",
+        "item": "Q8765",
+        "itemLabel": "Aragonese"
+    },
+    {
+        "iso639_2": "akl",
+        "item": "Q8773",
+        "itemLabel": "Aklanon"
+    },
+    {
+        "iso639_1": "hy",
+        "iso639_2": "hye",
+        "item": "Q8785",
+        "itemLabel": "Armenian"
+    },
+    {
+        "iso639_1": "uk",
+        "iso639_2": "ukr",
+        "item": "Q8798",
+        "itemLabel": "Ukrainian"
+    },
+    {
+        "iso639_1": "da",
+        "iso639_2": "dan",
+        "item": "Q9035",
+        "itemLabel": "Danish"
+    },
+    {
+        "iso639_1": "cs",
+        "iso639_2": "ces",
+        "item": "Q9056",
+        "itemLabel": "Czech"
+    },
+    {
+        "iso639_1": "sl",
+        "iso639_2": "slv",
+        "item": "Q9063",
+        "itemLabel": "Slovene"
+    },
+    {
+        "iso639_1": "hu",
+        "iso639_2": "hun",
+        "item": "Q9067",
+        "itemLabel": "Hungarian"
+    },
+    {
+        "iso639_1": "et",
+        "iso639_2": "est",
+        "item": "Q9072",
+        "itemLabel": "Estonian"
+    },
+    {
+        "item": "Q9129",
+        "itemLabel": "Greek"
+    },
+    {
+        "iso639_1": "ga",
+        "iso639_2": "gle",
+        "item": "Q9142",
+        "itemLabel": "Irish"
+    },
+    {
+        "iso639_1": "mt",
+        "iso639_2": "mlt",
+        "item": "Q9166",
+        "itemLabel": "Maltese"
+    },
+    {
+        "iso639_1": "fa",
+        "iso639_2": "fas",
+        "item": "Q9168",
+        "itemLabel": "Persian"
+    },
+    {
+        "iso639_1": "ko",
+        "iso639_2": "kor",
+        "item": "Q9176",
+        "itemLabel": "Korean"
+    },
+    {
+        "item": "Q9186",
+        "itemLabel": "Cantonese"
+    },
+    {
+        "iso639_1": "vi",
+        "iso639_2": "vie",
+        "item": "Q9199",
+        "itemLabel": "Vietnamese"
+    },
+    {
+        "iso639_1": "th",
+        "iso639_2": "tha",
+        "item": "Q9217",
+        "itemLabel": "Thai"
+    },
+    {
+        "iso639_1": "my",
+        "iso639_2": "mya",
+        "item": "Q9228",
+        "itemLabel": "Burmese"
+    },
+    {
+        "iso639_1": "ms",
+        "iso639_2": "msa",
+        "item": "Q9237",
+        "itemLabel": "Malay"
+    },
+    {
+        "iso639_1": "mn",
+        "iso639_2": "mon",
+        "item": "Q9246",
+        "itemLabel": "Mongolian"
+    },
+    {
+        "iso639_1": "kk",
+        "iso639_2": "kaz",
+        "item": "Q9252",
+        "itemLabel": "Kazakh"
+    },
+    {
+        "iso639_1": "ky",
+        "iso639_2": "kir",
+        "item": "Q9255",
+        "itemLabel": "Kyrgyz"
+    },
+    {
+        "iso639_1": "tg",
+        "iso639_2": "tgk",
+        "item": "Q9260",
+        "itemLabel": "Tajik"
+    },
+    {
+        "iso639_1": "uz",
+        "iso639_2": "uzb",
+        "item": "Q9264",
+        "itemLabel": "Uzbek"
+    },
+    {
+        "iso639_1": "tk",
+        "iso639_2": "tuk",
+        "item": "Q9267",
+        "itemLabel": "Turkmen"
+    },
+    {
+        "iso639_1": "he",
+        "iso639_2": "heb",
+        "item": "Q9288",
+        "itemLabel": "Hebrew"
+    },
+    {
+        "iso639_1": "az",
+        "iso639_2": "aze",
+        "item": "Q9292",
+        "itemLabel": "Azerbaijani"
+    },
+    {
+        "iso639_1": "sh",
+        "iso639_2": "hbs",
+        "item": "Q9301",
+        "itemLabel": "Serbo-Croatian"
+    },
+    {
+        "iso639_1": "cy",
+        "iso639_2": "cym",
+        "item": "Q9309",
+        "itemLabel": "Welsh"
+    },
+    {
+        "iso639_1": "gd",
+        "iso639_2": "gla",
+        "item": "Q9314",
+        "itemLabel": "Scottish Gaelic"
+    },
+    {
+        "iso639_1": "bn",
+        "iso639_2": "ben",
+        "item": "Q9610",
+        "itemLabel": "Bangla"
+    },
+    {
+        "iso639_2": "zun",
+        "item": "Q10188",
+        "itemLabel": "Zuni"
+    },
+    {
+        "item": "Q11051",
+        "itemLabel": "Hindustani"
+    },
+    {
+        "iso639_1": "br",
+        "iso639_2": "bre",
+        "item": "Q12107",
+        "itemLabel": "Breton"
+    },
+    {
+        "iso639_2": "qxq",
+        "item": "Q13192",
+        "itemLabel": "Qashqai"
+    },
+    {
+        "iso639_2": "rom",
+        "item": "Q13201",
+        "itemLabel": "Romani"
+    },
+    {
+        "iso639_2": "nyn",
+        "item": "Q13207",
+        "itemLabel": "Runyankole"
+    },
+    {
+        "iso639_1": "za",
+        "iso639_2": "zha",
+        "item": "Q13216",
+        "itemLabel": "Zhuang"
+    },
+    {
+        "iso639_1": "xh",
+        "iso639_2": "xho",
+        "item": "Q13218",
+        "itemLabel": "Xhosa"
+    },
+    {
+        "iso639_2": "hsn",
+        "item": "Q13220",
+        "itemLabel": "Xiang Chinese"
+    },
+    {
+        "iso639_2": "ude",
+        "item": "Q13235",
+        "itemLabel": "Udege"
+    },
+    {
+        "iso639_2": "udm",
+        "item": "Q13238",
+        "itemLabel": "Udmurt"
+    },
+    {
+        "iso639_2": "hsb",
+        "item": "Q13248",
+        "itemLabel": "Upper Sorbian"
+    },
+    {
+        "iso639_2": "ute",
+        "item": "Q13260",
+        "itemLabel": "Colorado River Numic"
+    },
+    {
+        "iso639_1": "ug",
+        "iso639_2": "uig",
+        "item": "Q13263",
+        "itemLabel": "Uyghur"
+    },
+    {
+        "iso639_1": "si",
+        "iso639_2": "sin",
+        "item": "Q13267",
+        "itemLabel": "Sinhala"
+    },
+    {
+        "iso639_2": "sms",
+        "item": "Q13271",
+        "itemLabel": "Skolt Sami"
+    },
+    {
+        "iso639_1": "so",
+        "iso639_2": "som",
+        "item": "Q13275",
+        "itemLabel": "Somali"
+    },
+    {
+        "iso639_2": "srb",
+        "item": "Q13284",
+        "itemLabel": "Sora"
+    },
+    {
+        "iso639_2": "dsb",
+        "item": "Q13286",
+        "itemLabel": "Lower Sorbian"
+    },
+    {
+        "iso639_2": "saz",
+        "item": "Q13292",
+        "itemLabel": "Sourashtra"
+    },
+    {
+        "iso639_2": "sma",
+        "item": "Q13293",
+        "itemLabel": "Southern Sami"
+    },
+    {
+        "iso639_1": "nv",
+        "iso639_2": "nav",
+        "item": "Q13310",
+        "itemLabel": "Navajo"
+    },
+    {
+        "iso639_2": "min",
+        "item": "Q13324",
+        "itemLabel": "Minangkabau"
+    },
+    {
+        "iso639_2": "mwl",
+        "item": "Q13330",
+        "itemLabel": "Mirandese"
+    },
+    {
+        "iso639_2": "mdf",
+        "item": "Q13343",
+        "itemLabel": "Moksha"
+    },
+    {
+        "iso639_2": "ruq",
+        "item": "Q13358",
+        "itemLabel": "Megleno-Romanian"
+    },
+    {
+        "iso639_2": "xmf",
+        "item": "Q13359",
+        "itemLabel": "Mingrelian"
+    },
+    {
+        "iso639_1": "ba",
+        "iso639_2": "bak",
+        "item": "Q13389",
+        "itemLabel": "Bashkir"
+    },
+    {
+        "iso639_1": "oc",
+        "iso639_2": "oci",
+        "item": "Q14185",
+        "itemLabel": "Occitan"
+    },
+    {
+        "iso639_1": "af",
+        "iso639_2": "afr",
+        "item": "Q14196",
+        "itemLabel": "Afrikaans"
+    },
+    {
+        "iso639_2": "sco",
+        "item": "Q14549",
+        "itemLabel": "Scots"
+    },
+    {
+        "item": "Q15065",
+        "itemLabel": "Malaysian Malay / Malaysian"
+    },
+    {
+        "iso639_2": "esu",
+        "item": "Q21117",
+        "itemLabel": "Central Alaskan Yup'ik"
+    },
+    {
+        "iso639_1": "tt",
+        "iso639_2": "tat",
+        "item": "Q25285",
+        "itemLabel": "Tatar"
+    },
+    {
+        "iso639_1": "kw",
+        "iso639_2": "cor",
+        "item": "Q25289",
+        "itemLabel": "Cornish"
+    },
+    {
+        "iso639_1": "kl",
+        "iso639_2": "kal",
+        "item": "Q25355",
+        "itemLabel": "Greenlandic"
+    },
+    {
+        "iso639_2": "nds",
+        "item": "Q25433",
+        "itemLabel": "Low German"
+    },
+    {
+        "iso639_2": "rue",
+        "item": "Q26245",
+        "itemLabel": "Rusyn"
+    },
+    {
+        "iso639_1": "fy",
+        "iso639_2": "fry",
+        "item": "Q27175",
+        "itemLabel": "West Frisian"
+    },
+    {
+        "iso639_1": "ik",
+        "iso639_2": "ipk",
+        "item": "Q27183",
+        "itemLabel": "Iñupiaq"
+    },
+    {
+        "iso639_2": "ale",
+        "item": "Q27210",
+        "itemLabel": "Aleut"
+    },
+    {
+        "iso639_2": "abq",
+        "item": "Q27567",
+        "itemLabel": "Abaza"
+    },
+    {
+        "iso639_2": "nod",
+        "item": "Q565110",
+        "itemLabel": "Northern Thai"
+    },
+    {
+        "iso639_2": "prx",
+        "item": "Q567905",
+        "itemLabel": "Purik"
+    },
+    {
+        "iso639_2": "czn",
+        "item": "Q603106",
+        "itemLabel": "Zenzontepec Chatino"
+    },
+    {
+        "iso639_2": "knw",
+        "item": "Q616533",
+        "itemLabel": "Ekoka !Kung"
+    },
+    {
+        "iso639_2": "dhd",
+        "item": "Q633359",
+        "itemLabel": "Dhundari"
+    },
+    {
+        "iso639_2": "pwn",
+        "item": "Q715755",
+        "itemLabel": "Paiwan"
+    },
+    {
+        "iso639_2": "tao",
+        "item": "Q715760",
+        "itemLabel": "Yami"
+    },
+    {
+        "iso639_2": "xsy",
+        "item": "Q716695",
+        "itemLabel": "Saisiyat"
+    },
+    {
+        "iso639_2": "szy",
+        "item": "Q718269",
+        "itemLabel": "Sakizaya"
+    },
+    {
+        "iso639_2": "sck",
+        "item": "Q765922",
+        "itemLabel": "Nagpuri"
+    },
+    {
+        "iso639_2": "lvk",
+        "item": "Q770547",
+        "itemLabel": "Lavukaleve"
+    },
+    {
+        "iso639_2": "zau",
+        "item": "Q771203",
+        "itemLabel": "Zangskari"
+    },
+    {
+        "item": "Q846157",
+        "itemLabel": "Shirvani Arabic"
+    },
+    {
+        "item": "Q850493",
+        "itemLabel": "Siculish"
+    },
+    {
+        "iso639_2": "guc",
+        "item": "Q891085",
+        "itemLabel": "Wayuu"
+    },
+    {
+        "iso639_2": "khw",
+        "item": "Q938216",
+        "itemLabel": "Khowar"
+    },
+    {
+        "iso639_2": "ito",
+        "item": "Q950585",
+        "itemLabel": "Itonama"
+    },
+    {
+        "iso639_2": "aro",
+        "item": "Q958414",
+        "itemLabel": "Araona"
+    },
+    {
+        "iso639_2": "wuh",
+        "item": "Q1012917",
+        "itemLabel": "Wutun"
+    },
+    {
+        "iso639_2": "uzs",
+        "item": "Q1066787",
+        "itemLabel": "Southern Uzbek"
+    },
+    {
+        "iso639_2": "paq",
+        "item": "Q1135134",
+        "itemLabel": "Parya"
+    },
+    {
+        "iso639_2": "lzz",
+        "item": "Q1160372",
+        "itemLabel": "Laz"
+    },
+    {
+        "iso639_2": "xdk",
+        "item": "Q1166814",
+        "itemLabel": "Dharug"
+    },
+    {
+        "iso639_2": "lou",
+        "item": "Q1185127",
+        "itemLabel": "Louisiana Creole"
+    },
+    {
+        "iso639_2": "ktz",
+        "item": "Q1192295",
+        "itemLabel": "Juǀʼhoansi"
+    },
+    {
+        "iso639_2": "xvi",
+        "item": "Q1193495",
+        "itemLabel": "Kamviri"
+    },
+    {
+        "item": "Q1217976",
+        "itemLabel": "Nigerian Arabic"
+    },
+    {
+        "iso639_2": "rmn",
+        "item": "Q1256701",
+        "itemLabel": "Balkan Romani"
+    },
+    {
+        "iso639_2": "pga",
+        "item": "Q1262143",
+        "itemLabel": "Juba Arabic"
+    },
+    {
+        "iso639_2": "kyh",
+        "item": "Q1288440",
+        "itemLabel": "Karuk"
+    },
+    {
+        "item": "Q1295107",
+        "itemLabel": "Forest Nenets"
+    },
+    {
+        "iso639_2": "scl",
+        "item": "Q1353320",
+        "itemLabel": "Shina"
+    },
+    {
+        "iso639_2": "orh",
+        "item": "Q1367309",
+        "itemLabel": "Oroqen"
+    },
+    {
+        "iso639_2": "sac",
+        "item": "Q1440172",
+        "itemLabel": "Sac-Fox-Kickapoo"
+    },
+    {
+        "iso639_2": "men",
+        "item": "Q1478672",
+        "itemLabel": "Mende"
+    },
+    {
+        "iso639_2": "agr",
+        "item": "Q1526530",
+        "itemLabel": "Aguaruna"
+    },
+    {
+        "item": "Q1564258",
+        "itemLabel": "Tundra Nenets"
+    },
+    {
+        "iso639_2": "wbp",
+        "item": "Q1639998",
+        "itemLabel": "Warlpiri"
+    },
+    {
+        "iso639_2": "gwc",
+        "item": "Q1675961",
+        "itemLabel": "Gawri"
+    },
+    {
+        "item": "Q1686766",
+        "itemLabel": "Yemeni Arabic"
+    },
+    {
+        "item": "Q1687911",
+        "itemLabel": "Jersey Dutch"
+    },
+    {
+        "iso639_2": "nsk",
+        "item": "Q1704302",
+        "itemLabel": "Naskapi"
+    },
+    {
+        "iso639_2": "thp",
+        "item": "Q1755054",
+        "itemLabel": "Thompson"
+    },
+    {
+        "iso639_2": "wrm",
+        "item": "Q1764544",
+        "itemLabel": "Warumungu"
+    },
+    {
+        "item": "Q1767941",
+        "itemLabel": "Arrernte"
+    },
+    {
+        "iso639_2": "gon",
+        "item": "Q1775361",
+        "itemLabel": "Gondi"
+    },
+    {
+        "item": "Q1785111",
+        "itemLabel": "Mohawk Dutch"
+    },
+    {
+        "iso639_2": "dcr",
+        "item": "Q1815830",
+        "itemLabel": "Negerhollands"
+    },
+    {
+        "iso639_2": "hns",
+        "item": "Q1843468",
+        "itemLabel": "Caribbean Hindustani"
+    },
+    {
+        "iso639_2": "win",
+        "item": "Q1957108",
+        "itemLabel": "Winnebago"
+    },
+    {
+        "iso639_2": "tvx",
+        "item": "Q1975271",
+        "itemLabel": "Taivoan"
+    },
+    {
+        "iso639_2": "syl",
+        "item": "Q2044560",
+        "itemLabel": "Sylheti"
+    },
+    {
+        "iso639_2": "wim",
+        "item": "Q2092246",
+        "itemLabel": "Wik-Mungkan"
+    },
+    {
+        "iso639_2": "rmw",
+        "item": "Q2097387",
+        "itemLabel": "Welsh-Romani"
+    },
+    {
+        "iso639_2": "adt",
+        "item": "Q2225391",
+        "itemLabel": "Adnyamathanha"
+    },
+    {
+        "iso639_2": "xnr",
+        "item": "Q2331560",
+        "itemLabel": "Kangri"
+    },
+    {
+        "iso639_2": "bfy",
+        "item": "Q2356364",
+        "itemLabel": "Bagheli"
+    },
+    {
+        "iso639_2": "abj",
+        "item": "Q2356391",
+        "itemLabel": "Aka-Bea"
+    },
+    {
+        "iso639_2": "bgx",
+        "item": "Q2360396",
+        "itemLabel": "Balkan Gagauz"
+    },
+    {
+        "iso639_2": "kfk",
+        "item": "Q2383208",
+        "itemLabel": "Kinnauri"
+    },
+    {
+        "iso639_2": "gvr",
+        "item": "Q2392342",
+        "itemLabel": "Gurung"
+    },
+    {
+        "iso639_2": "bgq",
+        "item": "Q2426319",
+        "itemLabel": "Bagri"
+    },
+    {
+        "iso639_2": "phl",
+        "item": "Q2449549",
+        "itemLabel": "Palula"
+    },
+    {
+        "iso639_2": "rmi",
+        "item": "Q2495696",
+        "itemLabel": "Lomavren"
+    },
+    {
+        "iso639_2": "tyz",
+        "item": "Q2511476",
+        "itemLabel": "Tày"
+    },
+    {
+        "iso639_2": "skw",
+        "item": "Q2522153",
+        "itemLabel": "Skepi Creole Dutch"
+    },
+    {
+        "iso639_2": "mwp",
+        "item": "Q2591262",
+        "itemLabel": "Kalau Lagau Ya"
+    },
+    {
+        "iso639_2": "bsh",
+        "item": "Q2605045",
+        "itemLabel": "Kamkata-viri"
+    },
+    {
+        "iso639_2": "tll",
+        "item": "Q2613465",
+        "itemLabel": "Tetela"
+    },
+    {
+        "iso639_2": "xhe",
+        "item": "Q2614111",
+        "itemLabel": "Khetrani"
+    },
+    {
+        "iso639_2": "prc",
+        "item": "Q2640637",
+        "itemLabel": "Parachi"
+    },
+    {
+        "iso639_2": "trw",
+        "item": "Q2665246",
+        "itemLabel": "Torwali"
+    },
+    {
+        "iso639_2": "mcm",
+        "item": "Q2669169",
+        "itemLabel": "Kristang"
+    },
+    {
+        "iso639_2": "rmy",
+        "item": "Q2669199",
+        "itemLabel": "Vlax Romani"
+    },
+    {
+        "iso639_2": "con",
+        "item": "Q2669254",
+        "itemLabel": "Cofán"
+    },
+    {
+        "iso639_2": "aci",
+        "item": "Q2670418",
+        "itemLabel": "Aka-Cari"
+    },
+    {
+        "iso639_2": "jvd",
+        "item": "Q2719893",
+        "itemLabel": "Javindo"
+    },
+    {
+        "iso639_2": "bjj",
+        "item": "Q2726867",
+        "itemLabel": "Kannauji"
+    },
+    {
+        "iso639_2": "txg",
+        "item": "Q2727930",
+        "itemLabel": "Tangut"
+    },
+    {
+        "iso639_2": "kqz",
+        "item": "Q2756709",
+        "itemLabel": "Korana"
+    },
+    {
+        "iso639_2": "bdr",
+        "item": "Q2880037",
+        "itemLabel": "West Coast Bajau"
+    },
+    {
+        "iso639_2": "oma",
+        "item": "Q2917968",
+        "itemLabel": "Omaha–Ponca"
+    },
+    {
+        "iso639_2": "akj",
+        "item": "Q2919121",
+        "itemLabel": "Aka-Jeru"
+    },
+    {
+        "item": "Q2922261",
+        "itemLabel": "Bourbonnais"
+    },
+    {
+        "iso639_2": "bkk",
+        "item": "Q2925988",
+        "itemLabel": "Brokskat"
+    },
+    {
+        "iso639_2": "mtr",
+        "item": "Q2992857",
+        "itemLabel": "Mewari"
+    },
+    {
+        "iso639_2": "dbj",
+        "item": "Q3041552",
+        "itemLabel": "Ida'an"
+    },
+    {
+        "iso639_2": "hke",
+        "item": "Q3065432",
+        "itemLabel": "Hunde"
+    },
+    {
+        "item": "Q3110592",
+        "itemLabel": "written Chinese language"
+    },
+    {
+        "iso639_2": "guw",
+        "item": "Q3111668",
+        "itemLabel": "Gun"
+    },
+    {
+        "iso639_2": "sza",
+        "item": "Q3111827",
+        "itemLabel": "Semelai"
+    },
+    {
+        "iso639_2": "zdj",
+        "item": "Q3114653",
+        "itemLabel": "Ngazidja Comorian"
+    },
+    {
+        "iso639_2": "mww",
+        "item": "Q3138829",
+        "itemLabel": "Hmong Daw"
+    },
+    {
+        "iso639_2": "kxd",
+        "item": "Q3182878",
+        "itemLabel": "Brunei Malay"
+    },
+    {
+        "iso639_2": "pqm",
+        "item": "Q3183144",
+        "itemLabel": "Malecite-Passamaquoddy"
+    },
+    {
+        "iso639_2": "kvr",
+        "item": "Q3195442",
+        "itemLabel": "Kerinci"
+    },
+    {
+        "iso639_2": "kxv",
+        "item": "Q3200721",
+        "itemLabel": "Kuvi"
+    },
+    {
+        "item": "Q3217514",
+        "itemLabel": "Rwanda-Rundi"
+    },
+    {
+        "iso639_2": "rhg",
+        "item": "Q3241177",
+        "itemLabel": "Rohingya"
+    },
+    {
+        "iso639_2": "rkt",
+        "item": "Q3241618",
+        "itemLabel": "Rangpuri"
+    },
+    {
+        "iso639_2": "gju",
+        "item": "Q3241731",
+        "itemLabel": "Gujari"
+    },
+    {
+        "iso639_2": "aeq",
+        "item": "Q3246741",
+        "itemLabel": "Aer"
+    },
+    {
+        "iso639_2": "clh",
+        "item": "Q3250629",
+        "itemLabel": "Chilisso"
+    },
+    {
+        "iso639_2": "nam",
+        "item": "Q3298041",
+        "itemLabel": "Ngan’gityemerri"
+    },
+    {
+        "iso639_2": "vmb",
+        "item": "Q3303475",
+        "itemLabel": "Mbabaram"
+    },
+    {
+        "iso639_2": "hmn",
+        "item": "Q3307894",
+        "itemLabel": "Hmong"
+    },
+    {
+        "iso639_2": "ssi",
+        "item": "Q3309366",
+        "itemLabel": "Sansi"
+    },
+    {
+        "iso639_2": "aly",
+        "item": "Q3327389",
+        "itemLabel": "Alyawarr"
+    },
+    {
+        "iso639_2": "unr",
+        "item": "Q3327828",
+        "itemLabel": "Mundari"
+    },
+    {
+        "iso639_2": "haj",
+        "item": "Q3350576",
+        "itemLabel": "Hajong"
+    },
+    {
+        "iso639_2": "dig",
+        "item": "Q3362072",
+        "itemLabel": "Digo"
+    },
+    {
+        "iso639_2": "tpv",
+        "item": "Q3397371",
+        "itemLabel": "Tanapag"
+    },
+    {
+        "iso639_2": "ack",
+        "item": "Q3433680",
+        "itemLabel": "Aka-Kora"
+    },
+    {
+        "iso639_2": "aky",
+        "item": "Q3436784",
+        "itemLabel": "Aka-Kol"
+    },
+    {
+        "iso639_2": "akx",
+        "item": "Q3436816",
+        "itemLabel": "Aka-Kede"
+    },
+    {
+        "iso639_2": "acl",
+        "item": "Q3436825",
+        "itemLabel": "Akar-Bale"
+    },
+    {
+        "iso639_2": "okj",
+        "item": "Q3436832",
+        "itemLabel": "Oko-Juwoi"
+    },
+    {
+        "iso639_2": "kai",
+        "item": "Q3438770",
+        "itemLabel": "Karai-karai"
+    },
+    {
+        "iso639_2": "nli",
+        "item": "Q3444203",
+        "itemLabel": "Nangalami"
+    },
+    {
+        "iso639_2": "bya",
+        "item": "Q3450443",
+        "itemLabel": "Ibatag"
+    },
+    {
+        "iso639_2": "sdg",
+        "item": "Q3474654",
+        "itemLabel": "Savi"
+    },
+    {
+        "iso639_2": "nsm",
+        "item": "Q3478238",
+        "itemLabel": "Sumi"
+    },
+    {
+        "iso639_2": "kot",
+        "item": "Q3502264",
+        "itemLabel": "Lagwan"
+    },
+    {
+        "iso639_2": "bbz",
+        "item": "Q3504186",
+        "itemLabel": "Babalia Creole Arabic"
+    },
+    {
+        "iso639_2": "psy",
+        "item": "Q3504233",
+        "itemLabel": "Piscataway"
+    },
+    {
+        "iso639_2": "aaf",
+        "item": "Q3507928",
+        "itemLabel": "Aranadan"
+    },
+    {
+        "iso639_2": "abg",
+        "item": "Q3507954",
+        "itemLabel": "Abaga"
+    },
+    {
+        "iso639_2": "adg",
+        "item": "Q3508123",
+        "itemLabel": "Andegerebinha"
+    },
+    {
+        "iso639_2": "ayh",
+        "item": "Q3510366",
+        "itemLabel": "Hadhrami Arabic"
+    },
+    {
+        "iso639_2": "azj",
+        "item": "Q3515311",
+        "itemLabel": "North Azerbaijani"
+    },
+    {
+        "item": "Q3537122",
+        "itemLabel": "Sri Lankan Portuguese Creole"
+    },
+    {
+        "iso639_2": "xkz",
+        "item": "Q3695193",
+        "itemLabel": "Kurtöp"
+    },
+    {
+        "iso639_2": "hlb",
+        "item": "Q3695692",
+        "itemLabel": "Halbi"
+    },
+    {
+        "iso639_2": "gwf",
+        "item": "Q3812403",
+        "itemLabel": "Gowro"
+    },
+    {
+        "iso639_2": "tra",
+        "item": "Q3812406",
+        "itemLabel": "Tirahi"
+    },
+    {
+        "iso639_2": "btv",
+        "item": "Q3812564",
+        "itemLabel": "Bateri"
+    },
+    {
+        "iso639_2": "xka",
+        "item": "Q3877551",
+        "itemLabel": "Kalkoti"
+    },
+    {
+        "iso639_2": "wsv",
+        "item": "Q3877569",
+        "itemLabel": "Wotapuri-Katarqalai"
+    },
+    {
+        "iso639_2": "mhr",
+        "item": "Q3906614",
+        "itemLabel": "Meadow Mari"
+    },
+    {
+        "iso639_2": "kcg",
+        "item": "Q3912765",
+        "itemLabel": "Tyap"
+    },
+    {
+        "iso639_2": "wrl",
+        "item": "Q3913823",
+        "itemLabel": "Warlmanpa"
+    },
+    {
+        "iso639_2": "plj",
+        "item": "Q3914383",
+        "itemLabel": "Polci"
+    },
+    {
+        "iso639_2": "say",
+        "item": "Q3914431",
+        "itemLabel": "Saya"
+    },
+    {
+        "iso639_2": "fuf",
+        "item": "Q3915357",
+        "itemLabel": "Pular"
+    },
+    {
+        "iso639_2": "swv",
+        "item": "Q3915429",
+        "itemLabel": "Shekhawati"
+    },
+    {
+        "iso639_2": "khr",
+        "item": "Q3915562",
+        "itemLabel": "Kharia"
+    },
+    {
+        "iso639_2": "ike",
+        "item": "Q4126517",
+        "itemLabel": "Eastern Canadian Inuktitut"
+    },
+    {
+        "iso639_2": "sgb",
+        "item": "Q4356243",
+        "itemLabel": "Mag-antsi"
+    },
+    {
+        "item": "Q4419262",
+        "itemLabel": "Sillan"
+    },
+    {
+        "item": "Q4426878",
+        "itemLabel": "Soyot"
+    },
+    {
+        "iso639_2": "lrl",
+        "item": "Q4699526",
+        "itemLabel": "Achomi"
+    },
+    {
+        "iso639_2": "bge",
+        "item": "Q4873579",
+        "itemLabel": "Bauria"
+    },
+    {
+        "iso639_2": "brw",
+        "item": "Q4883496",
+        "itemLabel": "Bellari"
+    },
+    {
+        "iso639_2": "bhd",
+        "item": "Q4900565",
+        "itemLabel": "Bhadrawahi"
+    },
+    {
+        "iso639_2": "bha",
+        "item": "Q4901287",
+        "itemLabel": "Bhariati"
+    },
+    {
+        "iso639_2": "bht",
+        "item": "Q4901452",
+        "itemLabel": "Bhateali"
+    },
+    {
+        "item": "Q4913707",
+        "itemLabel": "Bimbashi Arabic"
+    },
+    {
+        "iso639_2": "bnb",
+        "item": "Q4943150",
+        "itemLabel": "Bookan"
+    },
+    {
+        "iso639_2": "rmc",
+        "item": "Q5045611",
+        "itemLabel": "Carpathian Romani"
+    },
+    {
+        "item": "Q5055514",
+        "itemLabel": "Cazcan"
+    },
+    {
+        "item": "Q5060224",
+        "itemLabel": "Central !Kung"
+    },
+    {
+        "item": "Q5072718",
+        "itemLabel": "Chaná"
+    },
+    {
+        "iso639_2": "buc",
+        "item": "Q5150795",
+        "itemLabel": "Bushi"
+    },
+    {
+        "iso639_2": "tnq",
+        "item": "Q5232952",
+        "itemLabel": "Taíno"
+    },
+    {
+        "iso639_2": "kvo",
+        "item": "Q5286559",
+        "itemLabel": "Dobel"
+    },
+    {
+        "iso639_2": "dtp",
+        "item": "Q5317225",
+        "itemLabel": "Kadazandusun"
+    },
+    {
+        "item": "Q5326738",
+        "itemLabel": "Early Scots"
+    },
+    {
+        "iso639_2": "gbw",
+        "item": "Q5515391",
+        "itemLabel": "Gubbi Gubbi"
+    },
+    {
+        "iso639_2": "gnq",
+        "item": "Q5520523",
+        "itemLabel": "Gana’"
+    },
+    {
+        "iso639_2": "gii",
+        "item": "Q5564288",
+        "itemLabel": "Girirra"
+    },
+    {
+        "iso639_2": "doi",
+        "item": "Q5583349",
+        "itemLabel": "Dogri-Kangri-Bhateali"
+    },
+    {
+        "item": "Q5589999",
+        "itemLabel": "Gowar"
+    },
+    {
+        "iso639_2": "ggg",
+        "item": "Q5620032",
+        "itemLabel": "Gurgula"
+    },
+    {
+        "item": "Q5637049",
+        "itemLabel": "Hachijō dialects"
+    },
+    {
+        "iso639_2": "isu",
+        "item": "Q6089423",
+        "itemLabel": "Isu"
+    },
+    {
+        "iso639_2": "djd",
+        "item": "Q6147825",
+        "itemLabel": "Jaminjung"
+    },
+    {
+        "iso639_2": "jnd",
+        "item": "Q6150941",
+        "itemLabel": "Jandavra"
+    },
+    {
+        "iso639_2": "jns",
+        "item": "Q6164857",
+        "itemLabel": "Jaunsari"
+    },
+    {
+        "iso639_2": "kve",
+        "item": "Q6350003",
+        "itemLabel": "Kalabakan"
+    },
+    {
+        "iso639_2": "gbb",
+        "item": "Q6380709",
+        "itemLabel": "Kaytetye"
+    },
+    {
+        "iso639_2": "kxi",
+        "item": "Q6389308",
+        "itemLabel": "Keningau Murut"
+    },
+    {
+        "iso639_2": "ksy",
+        "item": "Q6400661",
+        "itemLabel": "Kharia Thar"
+    },
+    {
+        "item": "Q6403085",
+        "itemLabel": "Khuri"
+    },
+    {
+        "iso639_2": "cdz",
+        "item": "Q6425038",
+        "itemLabel": "Koda"
+    },
+    {
+        "iso639_2": "kfx",
+        "item": "Q6443148",
+        "itemLabel": "Kullui"
+    },
+    {
+        "iso639_2": "shd",
+        "item": "Q6444265",
+        "itemLabel": "Kundal Shahi"
+    },
+    {
+        "iso639_2": "kyw",
+        "item": "Q6446173",
+        "itemLabel": "Kudmali"
+    },
+    {
+        "iso639_2": "nak",
+        "item": "Q6528669",
+        "itemLabel": "Nakanai"
+    },
+    {
+        "iso639_2": "axl",
+        "item": "Q6693295",
+        "itemLabel": "Lower Arrernte"
+    },
+    {
+        "iso639_2": "bfz",
+        "item": "Q6733460",
+        "itemLabel": "Mahasu Pahari"
+    },
+    {
+        "item": "Q6744930",
+        "itemLabel": "Maltralian"
+    },
+    {
+        "iso639_2": "mjl",
+        "item": "Q6747931",
+        "itemLabel": "Mandeali"
+    },
+    {
+        "item": "Q6786047",
+        "itemLabel": "Matanawi"
+    },
+    {
+        "iso639_2": "mgv",
+        "item": "Q6786446",
+        "itemLabel": "Matengo"
+    },
+    {
+        "item": "Q6850761",
+        "itemLabel": "Milang"
+    },
+    {
+        "item": "Q7040750",
+        "itemLabel": "Romî"
+    },
+    {
+        "iso639_2": "nys",
+        "item": "Q7049771",
+        "itemLabel": "Noongar"
+    },
+    {
+        "iso639_2": "odk",
+        "item": "Q7077191",
+        "itemLabel": "Od"
+    },
+    {
+        "iso639_2": "kqv",
+        "item": "Q7082487",
+        "itemLabel": "Okolod"
+    },
+    {
+        "iso639_2": "phv",
+        "item": "Q7124567",
+        "itemLabel": "Pahlavni"
+    },
+    {
+        "item": "Q117212055",
+        "itemLabel": "Laghmani"
+    },
+    {
+        "item": "Q117212080",
+        "itemLabel": "Gulbahari"
+    },
+    {
+        "item": "Q117212095",
+        "itemLabel": "Shutuli"
+    },
+    {
+        "item": "Q117273410",
+        "itemLabel": "Old Kerinci"
+    },
+    {
+        "item": "Q120487727",
+        "itemLabel": "Jōmon"
+    },
+    {
+        "item": "Q122147087",
+        "itemLabel": "Uzbini"
+    },
+    {
+        "item": "Q122150440",
+        "itemLabel": "Kurangali"
+    },
+    {
+        "item": "Q122150744",
+        "itemLabel": "Chilasi"
+    },
+    {
+        "item": "Q122150853",
+        "itemLabel": "Darra-i Nuri"
+    },
+    {
+        "item": "Q123415814",
+        "itemLabel": "Ili Salar"
+    },
+    {
+        "item": "Q123418610",
+        "itemLabel": "Sanskritisation"
+    },
+    {
+        "iso639_2": "ttt",
+        "item": "Q123964178",
+        "itemLabel": "Muslim Tat"
+    },
+    {
+        "item": "Q124462346",
+        "itemLabel": "Kiw’oso"
+    },
+    {
+        "item": "Q126402610",
+        "itemLabel": "Old Franconian"
+    },
+    {
+        "item": "Q129175402",
+        "itemLabel": "Tona"
+    },
+    {
+        "item": "Q129341007",
+        "itemLabel": "Birihnbal"
+    },
+    {
+        "item": "Q129357225",
+        "itemLabel": "Wegali"
+    },
+    {
+        "item": "Q130425020",
+        "itemLabel": "Old Bengali"
+    },
+    {
+        "item": "Q131427136",
+        "itemLabel": "Bagirmi Arabic"
+    },
+    {
+        "item": "Q131438764",
+        "itemLabel": "Eastern/Central Arrernte"
+    },
+    {
+        "iso639_2": "plz",
+        "item": "Q7128795",
+        "itemLabel": "Paluan"
+    },
+    {
+        "iso639_2": "nph",
+        "item": "Q7187109",
+        "itemLabel": "Phom"
+    },
+    {
+        "iso639_2": "qxp",
+        "item": "Q7260479",
+        "itemLabel": "Puno Quechua"
+    },
+    {
+        "item": "Q7268120",
+        "itemLabel": "Qormi dialect"
+    },
+    {
+        "iso639_2": "rah",
+        "item": "Q7278686",
+        "itemLabel": "Rabha"
+    },
+    {
+        "item": "Q7288630",
+        "itemLabel": "Rama Cay Creole"
+    },
+    {
+        "iso639_2": "bsy",
+        "item": "Q7395820",
+        "itemLabel": "Sabah Bisaya"
+    },
+    {
+        "iso639_2": "slg",
+        "item": "Q7448844",
+        "itemLabel": "Selungai Murut"
+    },
+    {
+        "iso639_2": "sbr",
+        "item": "Q7449148",
+        "itemLabel": "Sembakung"
+    },
+    {
+        "iso639_2": "sle",
+        "item": "Q7500203",
+        "itemLabel": "Sholaga"
+    },
+    {
+        "item": "Q7508824",
+        "itemLabel": "Sidi"
+    },
+    {
+        "iso639_2": "srx",
+        "item": "Q7530505",
+        "itemLabel": "Sirmauri"
+    },
+    {
+        "iso639_2": "hca",
+        "item": "Q7599417",
+        "itemLabel": "Andaman Creole Hindi"
+    },
+    {
+        "iso639_2": "sjp",
+        "item": "Q7645351",
+        "itemLabel": "Surjapuri"
+    },
+    {
+        "iso639_2": "tih",
+        "item": "Q7807680",
+        "itemLabel": "Timugon"
+    },
+    {
+        "iso639_2": "mzh",
+        "item": "Q7998197",
+        "itemLabel": "Wichí Lhamtés Güisnay"
+    },
+    {
+        "iso639_2": "yat",
+        "item": "Q8048020",
+        "itemLabel": "Yambeta"
+    },
+    {
+        "item": "Q8083168",
+        "itemLabel": "Żejtun dialect"
+    },
+    {
+        "iso639_2": "bfr",
+        "item": "Q8829558",
+        "itemLabel": "Bazigar"
+    },
+    {
+        "iso639_2": "amx",
+        "item": "Q10412317",
+        "itemLabel": "Anmatyerre"
+    },
+    {
+        "item": "Q10576334",
+        "itemLabel": "Manchu-Tungus"
+    },
+    {
+        "iso639_2": "wkw",
+        "item": "Q10719110",
+        "itemLabel": "Wakka Wakka"
+    },
+    {
+        "iso639_2": "aer",
+        "item": "Q10728232",
+        "itemLabel": "Eastern Arrernte"
+    },
+    {
+        "iso639_2": "kbu",
+        "item": "Q10966761",
+        "itemLabel": "Kabutra"
+    },
+    {
+        "item": "Q11089833",
+        "itemLabel": "Pumi"
+    },
+    {
+        "item": "Q11732069",
+        "itemLabel": "Balundu"
+    },
+    {
+        "item": "Q11870333",
+        "itemLabel": "Q11870333"
+    },
+    {
+        "item": "Q11883902",
+        "itemLabel": "Q11883902"
+    },
+    {
+        "item": "Q11904266",
+        "itemLabel": "Agamja"
+    },
+    {
+        "item": "Q12028082",
+        "itemLabel": "Karagozlu"
+    },
+    {
+        "iso639_2": "cdj",
+        "item": "Q12629039",
+        "itemLabel": "Churahi"
+    },
+    {
+        "iso639_2": "are",
+        "item": "Q12645549",
+        "itemLabel": "Western Arrarnta"
+    },
+    {
+        "iso639_2": "cna",
+        "item": "Q12952322",
+        "itemLabel": "Changthang"
+    },
+    {
+        "iso639_2": "gau",
+        "item": "Q12952433",
+        "itemLabel": "Kondekor"
+    },
+    {
+        "iso639_2": "xua",
+        "item": "Q12952679",
+        "itemLabel": "Alu Kurumba"
+    },
+    {
+        "iso639_2": "jmc",
+        "item": "Q12952751",
+        "itemLabel": "Machame"
+    },
+    {
+        "iso639_2": "cdh",
+        "item": "Q12953424",
+        "itemLabel": "Chambeali"
+    },
+    {
+        "iso639_2": "huj",
+        "item": "Q12953554",
+        "itemLabel": "Northern Guiyang Hmong"
+    },
+    {
+        "iso639_2": "mjx",
+        "item": "Q12953686",
+        "itemLabel": "Mahali"
+    },
+    {
+        "iso639_2": "plk",
+        "item": "Q12953882",
+        "itemLabel": "Kohistani Shina"
+    },
+    {
+        "item": "Q13059308",
+        "itemLabel": "Q13059308"
+    },
+    {
+        "item": "Q13406670",
+        "itemLabel": "Khortha"
+    },
+    {
+        "iso639_2": "coo",
+        "item": "Q13583746",
+        "itemLabel": "Comox"
+    },
+    {
+        "iso639_2": "pgg",
+        "item": "Q13600429",
+        "itemLabel": "Pangwali"
+    },
+    {
+        "iso639_2": "njn",
+        "item": "Q14194500",
+        "itemLabel": "Liangmai Naga"
+    },
+    {
+        "item": "Q15665351",
+        "itemLabel": "Kalaallisut"
+    },
+    {
+        "item": "Q15665389",
+        "itemLabel": "Tunumiisut"
+    },
+    {
+        "iso639_2": "psh",
+        "item": "Q16112270",
+        "itemLabel": "Southwest Pashai"
+    },
+    {
+        "iso639_2": "axe",
+        "item": "Q16112737",
+        "itemLabel": "Ayerrerenge"
+    },
+    {
+        "item": "Q16114529",
+        "itemLabel": "Q16114529"
+    },
+    {
+        "iso639_2": "xjb",
+        "item": "Q16334334",
+        "itemLabel": "Yugambeh"
+    },
+    {
+        "item": "Q16648462",
+        "itemLabel": "Kinyabwisha"
+    },
+    {
+        "iso639_2": "ikt",
+        "item": "Q16653174",
+        "itemLabel": "Western Canadian Inuktitut"
+    },
+    {
+        "item": "Q16827787",
+        "itemLabel": "Amarizana"
+    },
+    {
+        "item": "Q16888615",
+        "itemLabel": "Nawayathi"
+    },
+    {
+        "item": "Q16918610",
+        "itemLabel": "Waitaká"
+    },
+    {
+        "item": "Q16919340",
+        "itemLabel": "Zemiaki"
+    },
+    {
+        "item": "Q16930672",
+        "itemLabel": "Papuan Pidgin English"
+    },
+    {
+        "iso639_2": "yxg",
+        "item": "Q16979305",
+        "itemLabel": "Turrubal"
+    },
+    {
+        "iso639_2": "gbk",
+        "item": "Q17455500",
+        "itemLabel": "Gaddi"
+    },
+    {
+        "iso639_2": "dty",
+        "item": "Q18415595",
+        "itemLabel": "Doteli"
+    },
+    {
+        "iso639_2": "xww",
+        "item": "Q18472819",
+        "itemLabel": "Wemba Wemba"
+    },
+    {
+        "iso639_2": "txx",
+        "item": "Q18643518",
+        "itemLabel": "Tatana"
+    },
+    {
+        "item": "Q19742573",
+        "itemLabel": "Q19742573"
+    },
+    {
+        "iso639_2": "lrc",
+        "item": "Q19933293",
+        "itemLabel": "Northern Luri"
+    },
+    {
+        "iso639_2": "tsi",
+        "item": "Q20085721",
+        "itemLabel": "Tsimshian"
+    },
+    {
+        "iso639_2": "nqn",
+        "item": "Q20816352",
+        "itemLabel": "Nen"
+    },
+    {
+        "iso639_2": "tdb",
+        "item": "Q21946879",
+        "itemLabel": "Panchpargania"
+    },
+    {
+        "iso639_2": "ntd",
+        "item": "Q24938325",
+        "itemLabel": "Sesayap Tidung"
+    },
+    {
+        "item": "Q24952008",
+        "itemLabel": "Kholosi"
+    },
+    {
+        "iso639_2": "enh",
+        "item": "Q25559411",
+        "itemLabel": "Tundra Enets"
+    },
+    {
+        "iso639_2": "bke",
+        "item": "Q25559516",
+        "itemLabel": "Bengkulu"
+    },
+    {
+        "iso639_2": "esk",
+        "item": "Q25559714",
+        "itemLabel": "Seward Peninsula Inupiaq"
+    },
+    {
+        "item": "Q26763599",
+        "itemLabel": "Ponca"
+    },
+    {
+        "item": "Q26763622",
+        "itemLabel": "Omaha"
+    },
+    {
+        "iso639_2": "esi",
+        "item": "Q30312338",
+        "itemLabel": "North Alaskan Inupiaq"
+    },
+    {
+        "item": "Q30334907",
+        "itemLabel": "Padri"
+    },
+    {
+        "iso639_2": "xby",
+        "item": "Q31752631",
+        "itemLabel": "Butchulla"
+    },
+    {
+        "item": "Q47091826",
+        "itemLabel": "Ahaggar Tuareg"
+    },
+    {
+        "iso639_2": "nlm",
+        "item": "Q47522426",
+        "itemLabel": "Mankiyali"
+    },
+    {
+        "iso639_2": "cxh",
+        "item": "Q50934243",
+        "itemLabel": "Chaari"
+    },
+    {
+        "iso639_2": "zbu",
+        "item": "Q52152004",
+        "itemLabel": "Zaranda"
+    },
+    {
+        "item": "Q53024383",
+        "itemLabel": "Farvi"
+    },
+    {
+        "item": "Q56292731",
+        "itemLabel": "Kishtwari"
+    },
+    {
+        "item": "Q56356571",
+        "itemLabel": "New Persian"
+    },
+    {
+        "iso639_2": "ptq",
+        "item": "Q60785085",
+        "itemLabel": "Pattapu"
+    },
+    {
+        "iso639_2": "itd",
+        "item": "Q63214959",
+        "itemLabel": "Southern Tidung"
+    },
+    {
+        "item": "Q65121755",
+        "itemLabel": "Pertame"
+    },
+    {
+        "item": "Q85799728",
+        "itemLabel": "Sarazi"
+    },
+    {
+        "item": "Q86730632",
+        "itemLabel": "Bala"
+    },
+    {
+        "item": "Q97165320",
+        "itemLabel": "Old Lombard"
+    },
+    {
+        "iso639_2": "ocm",
+        "item": "Q105197086",
+        "itemLabel": "Old Cham"
+    },
+    {
+        "iso639_2": "hkh",
+        "item": "Q105198619",
+        "itemLabel": "Pogali"
+    },
+    {
+        "item": "Q105555318",
+        "itemLabel": "Rambani"
+    },
+    {
+        "item": "Q106249400",
+        "itemLabel": "Mbuun"
+    },
+    {
+        "item": "Q107610173",
+        "itemLabel": "Fogaha"
+    },
+    {
+        "item": "Q111460416",
+        "itemLabel": "Shershabadia language"
+    },
+    {
+        "item": "Q113456590",
+        "itemLabel": "American Norwegian"
+    },
+    {
+        "item": "Q117188620",
+        "itemLabel": "Songlin"
+    },
+    {
+        "item": "Q117211630",
+        "itemLabel": "Laurowani"
+    }
+]

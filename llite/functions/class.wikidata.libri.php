@@ -32,13 +32,20 @@ class wikiLibri {
 			$object = json_decode($res);
 			
 			if (!empty($object->{$this->userLang}))
-				return "<span title='user:{$this->userLang}'>".$object->{$this->userLang}.'</span>';
+				return "<span lang='{$this->userLang}'>".$object->{$this->userLang}.'</span>';
 			if (!empty($object->{$this->defLang}))
-				return "<span title='def:{$this->defLang}'>".$object->{$this->defLang}.'</span>';
+				return "<span lang='{$this->defLang}'>".$object->{$this->defLang}.'</span>';
 			
 			$arr = (array)$object;
 			return current($arr);
 			}
+		}
+	
+	function getDateRange() {
+		$return [] = $this->solrRecord->birth_year ?? '';
+		$return [] = $this->solrRecord->death_year ?? '';
+		if (!empty($this->solrRecord->death_year) or !empty($this->solrRecord->birth_year))
+			return implode('-', $return); 
 		}
 	
 	function getSolrValues($field) {

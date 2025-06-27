@@ -16,6 +16,12 @@ $wikiq = $this->routeParam[0];
 $this->wiki->loadRecord($wikiq, false);
 $prefix =  $wikiq.'|';
 
+/*
+if (!isset($this->GET)) {
+	echo '<br/><br/>'.$this->helper->alert('warning', '<div class="text-center">'.$this->transEsc('The session expired due to inactivity. Reload the page to rebuild the session data.').'<br/><br/><button type="button" onClick="location.reload();" class="btn btn-success"><i class="ph ph-repeat"></i> '.$this->transEsc('reload').'</button></div>');
+	die();
+	}
+*/
 
 	######################################################################################################################################################################################################################################
 	##
@@ -47,9 +53,11 @@ if (!empty($allRoles['with_roles_wiki'])) {
 	foreach ($allRoles['with_roles_wiki'] as $role=>$count) {
 		$roleStr = str_replace($prefix, '', $role);
 		
-		if (!empty($this->POST['pdata']['field']) && ($this->POST['pdata']['field'] == $role))
-			$_SESSION['mapRelationGraph']['role'][$role] = !$_SESSION['mapRelationGraph']['role'][$role];
-		if ($_SESSION['mapRelationGraph']['role'][$role]) {
+		if (!empty($this->POST['pdata']['field']) && ($this->POST['pdata']['field'] == $role)) {
+			
+			$_SESSION['mapRelationGraph']['role'][$role] = !$_SESSION['mapRelationGraph']['role'][$role] ?? true;
+			}
+		if (!empty($_SESSION['mapRelationGraph']['role'][$role]) && $_SESSION['mapRelationGraph']['role'][$role]) {
 			$class = '';
 			$useForSearch[] = $role;
 			$baseConditions[] = '~with_roles_wiki:"'.$role.'"';
@@ -63,7 +71,7 @@ if (!empty($allRoles['with_roles_wiki'])) {
 		$objectRolesStr.='
 			<button 
 				class="list-group-item '.$class.'" 
-				id="button'.$roleStr.'"
+				id="button_'.$roleStr.'"
 				type="button" 
 				onClick=\'page.postLT("mapRelationsAjaxArea", "wiki/related.on.map/'.$this->wiki->getID().'/'.$currentCore.'", '.json_encode($action).');\' 
 				title="'.$this->transEsc('Click to disable').'"> 
@@ -138,19 +146,19 @@ if (!empty($allRoles['with_roles_wiki'])) {
 		'subjectCorporate' => 'Corporates',
 		];
 
-
-	foreach ($facets['with_roles_wiki'] as $resultStr=>$count) {
-		$tmp = explode('|', $resultStr);
-		$group = $tmp[1];
-		$value = $tmp[0];
-		$nGroup = $conversionTable[$group] ?? $group;
-		@$relationGroups[$nGroup]+=$count;
-		
-		if ($value !== $wikiq) {
-			@$recInGroups[$nGroup][$group] += $count;
-			$recInGroupsHasRoles[$nGroup][$value][$group] = $count;
+	if (!empty($facets['with_roles_wiki'] ))
+		foreach ($facets['with_roles_wiki'] as $resultStr=>$count) {
+			$tmp = explode('|', $resultStr);
+			$group = $tmp[1];
+			$value = $tmp[0];
+			$nGroup = $conversionTable[$group] ?? $group;
+			@$relationGroups[$nGroup]+=$count;
+			
+			if ($value !== $wikiq) {
+				@$recInGroups[$nGroup][$group] += $count;
+				$recInGroupsHasRoles[$nGroup][$value][$group] = $count;
+				}
 			}
-		}
 
 	if (empty($_SESSION['mapRelationGraph']['relatedWith']))
 		foreach ($relationGroups as $group=>$countInGroup) 
@@ -161,23 +169,25 @@ if (!empty($allRoles['with_roles_wiki'])) {
 		$_SESSION['mapRelationGraph']['relatedWith'][$group] = !$_SESSION['mapRelationGraph']['relatedWith'][$group];
 		}
 
-	
-	$relatedWithStr = $this->transEsc('Show relations with').':<br/>';	
-	$relatedWithStr.= '<div class="list-group">';	
-	foreach ($relationGroups as $group=>$countInGroup) {
+	if (!empty($relationGroups)) {
+		$relatedWithStr = $this->transEsc('Show relations with').':<br/>';	
+		$relatedWithStr.= '<div class="list-group">';	
 		
-		$class = ($_SESSION['mapRelationGraph']['relatedWith'][$group]) ? '' : 'line-through';
-		$action = (object)['group' => $group];
-		$relatedWithStr.= '
-			<button class="list-group-item '.$class.'" 
-				id="button'.$group.'"
-				onClick=\'page.postLT("mapRelationsAjaxArea", "wiki/related.on.map/'.$this->wiki->getID().'/'.$currentCore.'", '.json_encode($action).');\'>
-					<span class="map-related-legend '.strtolower($group).'">&nbsp;</span>
-					'.$this->transEsc($group).' <span class="badge">'.$this->helper->numberFormat($countInGroup).'</span>
-			</button> ';
-		}
-	$relatedWithStr.= '</div>';		
-
+			foreach ($relationGroups as $group=>$countInGroup) {
+				
+				$class = ($_SESSION['mapRelationGraph']['relatedWith'][$group]) ? '' : 'line-through';
+				$action = (object)['group' => $group];
+				$relatedWithStr.= '
+					<button class="list-group-item '.$class.'" 
+						id="button'.$group.'"
+						onClick=\'page.postLT("mapRelationsAjaxArea", "wiki/related.on.map/'.$this->wiki->getID().'/'.$currentCore.'", '.json_encode($action).');\'>
+							<span class="map-related-legend '.strtolower($group).'">&nbsp;</span>
+							'.$this->transEsc($group).' <span class="badge">'.$this->helper->numberFormat($countInGroup).'</span>
+					</button> ';
+				}
+		$relatedWithStr.= '</div>';		
+		} else 
+		$relatedWithStr = '';
 
 	######################################################################################################################################################################################################################################
 	##
@@ -215,7 +225,7 @@ if (!empty($allRoles['with_roles_wiki'])) {
 		if (!empty($linesToDraw)) {
 			foreach ($linesToDraw as $from=>$toArr) 
 				foreach ($toArr as $to=>$count) 
-					$this->addJS("results.mapsMenu.drawLine('".uniqid()."','button{$from}', 'button{$to}');");
+					$this->addJS("results.mapsMenu.drawLine('".uniqid()."','button_{$from}', 'button{$to}');");
 			}	
 		}
 	
@@ -303,7 +313,7 @@ if (!empty($allRoles['with_roles_wiki'])) {
 	# echo $this->helper->pre($useForDisplay);
 	
 	## rejecting objects that should not be visible
-	if (!empty($recInGroupsToShow)) {
+	if (!empty($recInGroupsToShow) && !empty($useForDisplay)) {
 		foreach ($recInGroupsToShow as $currentGroup => $currentGroupValues) {
 			foreach ($currentGroupValues as $toCheckWikiq => $inRoles) {
 				foreach ($inRoles as $roleKey=>$roleCount) 
@@ -386,9 +396,11 @@ if (!empty($allRoles['with_roles_wiki'])) {
 							} 
 							break;
 						default : {
-							if (!empty($resultObj->getStr('location'))) {
+							if (!empty($resultObj->getStr('location')) && (!empty($currentGroupValues[$resultObj->solrRecord->wikiq]))) {
+								
 								$placeWikiQ = strstr($resultObj->getStr('location'), '|', true);
 								$pointsOnMap[$placeWikiQ][$result->wikiq]['pointRelations'][$currentGroup.'_location'] = $currentGroup.'_location';
+								
 								$pointsOnMap[$placeWikiQ][$result->wikiq]['biblioRelations'] = $currentGroupValues[$resultObj->solrRecord->wikiq];
 								$pointsOnMap[$placeWikiQ][$result->wikiq]['label'] = $resultObj->getStr('labels');
 						
@@ -422,7 +434,6 @@ if (!empty($allRoles['with_roles_wiki'])) {
 				if ($i>=20) break;
 				}
 			$pointsList = array_keys($pointsOnMap);
-			
 			$query = [];
 			$query['q'] = [
 					'field' 	=> 'q',
@@ -506,7 +517,7 @@ if (!empty($allRoles['with_roles_wiki'])) {
 							$pngLink = $this->HOST.'_tools/png/'.implode('-',$svgLinkParts).'-pie.png';	
 							$pngId = hash('crc32b', $pngLink);
 							
-							# echo '<img src="'.$pngLink.'" alt="PieChart'.implode('-',$pointRoleSums).'" title="PieChart'.implode('-',$pointRoleSums).'" style="width:36px; margin:10px;"><br/>';
+							#  echo '<img src="'.$pngLink.'" alt="PieChart'.implode('-',$pointRoleSums).'" title="PieChart'.implode('-',$pointRoleSums).'" style="width:36px; margin:10px;"><br/>';
 							
 							uksort($listStr, function($a, $b) use ($listOrder) {return $listOrder[$b] - $listOrder[$a];	});
 							$i = 0; 
@@ -573,9 +584,14 @@ if (!empty($allRoles['with_roles_wiki'])) {
 			echo '<div id = "mapPopupCurrentPlace" class="hidden"></div>';	
 			
 			$this->addJS(implode("\n", $js));
+			/*
+			if ($this->user->isLoggedIn() && $this->user->hasPower('admin')) {
+				echo '<textarea style="width:100%; height:150px; margin:30px;">'.implode("\n", $js).'</textarea>';
+				}
+			*/
 			}
 		
-
+			
 		} 
 	} else {
 	echo '<p style="margin:50px;">'.$this->transEsc('There is nothing to show here').'.</p>';
@@ -591,3 +607,4 @@ $this->addJS('$("#mapRelationsAjaxArea").css("opacity", "1");');
 
 
 ?>
+<script>$("#mapRelationsAjaxArea").css("opacity", "1");</script>

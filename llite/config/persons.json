@@ -1,10 +1,54 @@
 {
+"title" : "Persons", 
+"summaryBarMenu" : {
+	"view" : {
+		"default" : "showcase",
+		"title" : "View",
+		"optionsAvailable" : {
+			"showcase" : {
+				"name" : "Showcases",
+				"value" : "showcase",
+				"icon" : "ph-bold ph-rows"
+				},
+			"simplelist" : {
+				"name" : "Simple list",
+				"value" : "simplelist",
+				"icon" : "ph-bold ph-list-dashes"
+				},
+			"default-box" : {
+				"name" :"Titles",
+				"value" : "default-box",
+				"icon" : "ph-bold ph-squares-four"
+				}
+			}
+		},
+	"sorting" : {
+		"default" : "rt",
+		"title" : "Sorting",
+		"optionsAvailable" : {
+			"rt" : {"name" : "Relevance (total)", "value" : "biblio_count desc"}, 
+			"ra" : {"name" : "Relevance as author", "value" : "mainAuthor_count desc"}, 
+			"rc" : {"name" : "Relevance as coAuthor", "value" : "coAuthor_count desc"}, 
+			"rs" : {"name" : "Relevance as subject person", "value" : "subjectPerson_count desc"}, 
+			"a" : {"name" : "Name", "value" : "biblio_labels asc"},
+			"bd" : {"name" : "Birth date", "value" : "birth_date asc"},
+			"bdd" : {"name" : "Birth date desc", "value" : "birth_date desc"}
+			}
+		},
+	"pagination" : {
+		"default" : "20",
+		"title" : "Results per page",
+		"optionsAvailable" : ["20","50","100"],
+		"maxPagesAllowed" : "100"
+		}
+	},
+
 "facets" : {
 	"solrIndexes" : {
 		"birth_date" : {
 			"name": "Date of birth", 
 			"formatter": null, 
-			"translated" : true 
+			"translated" : false
 			},
 		"spellingShingle" : {
 			"name" : "", 
@@ -25,8 +69,14 @@
 			"name" : "Birth place",
 			"translated" : false,
 			"solr_index" : "birth_place",
-			"formatter" : "formatMultiLangStr"
+			"formatter" : "formatMultiLang"
 			},	
+		"gender" : {
+			"name" : "Gender",
+			"translated" : false,
+			"solr_index" : "gender",
+			"formatter" : "formatMultiLang"
+			},
 		"birth_year" : {
 			"name" : "Year of Birth",
 			"translated" : false,
@@ -37,58 +87,68 @@
 			"name" : "Related place",
 			"translated" : false,
 			"solr_index" : "related_place",
-			"formatter" : "formatMultiLangStr"
+			"formatter" : "formatMultiLang"
 			},	
 		"related_place" : {
 			"name" : "Related place",
 			"translated" : false,
 			"solr_index" : "related_place",
-			"formatter" : "formatMultiLangStr"
+			"formatter" : "formatMultiLang"
 			},	
 		"occupation" : {
 			"name" : "Occupation",
 			"translated" : false,
 			"solr_index" : "occupation",
-			"formatter" : "formatMultiLangStr"
+			"formatter" : "formatMultiLang"
 			},	
 		"genres" : {
 			"name" : "Genres",
 			"translated" : false,
 			"solr_index" : "genres",
-			"formatter" : "formatMultiLangStr"
-			},	
-		"gender" : {
-			"name" : "Gender",
-			"translated" : false,
-			"solr_index" : "gender",
-			"formatter" : "formatMultiLangStr"
+			"formatter" : "formatMultiLang"
 			}
 		}
 	}, 
-"sorting" : {
-	"na" : {
-		"name" : "Name",
-		"solrField" : "biblio_labels asc"
-		},
-	"bd" : {
-		"name" : "Date of birth",
-		"solrField" : "birth_date asc"
-		},
-	"tc" : {
-		"name" : "number of occurrences",
-		"solrField" : "biblio_count desc"
-		},
-	"ac" : {
-		"name" : "number of occurrences as main author",
-		"solrField" : "author_count desc"
-		},
-	"cc" : {
-		"name" : "number of occurrences as co-author",
-		"solrField" : "author2_count desc"
-		},
-	"sc" : {
-		"name" : "number of occurrences as subject",
-		"solrField" : "topic_count desc"
+"statBoxes" : { 
+	"maxResultsOnGraphs" : "5", 
+	"graphs" : {
+		"source_db_str" : {
+				"title" : "Source Database",
+				"indexField" : "source_db_str",
+				"graphMode" : "pieGraph"
+			},
+		"format_major" : {  
+				"indexField" : "format_major",
+				"graphMode" : "pieGraph" 
+				},
+		"author_corporate" : {  
+				"indexField" : "author_corporate",
+				"graphMode" : "pieGraph" 
+				},
+		"genre_major" : {  
+				"indexField" : "genre_major",
+				"graphMode" : "pieGraph" 
+				},
+		"magazines_str_mv" : {  
+				"indexField" : "magazines_str_mv",
+				"graphMode" : "pieGraph" 
+				},
+		"language" : {  
+				"indexField" : "language",
+				"graphMode" : "pieGraph" 
+				},
+		"topic_facet_str_mv" : {  
+				"indexField" : "topic_facet_str_mv",
+				"graphMode" : "pieGraph" 
+				},
+		"publishDate" : {
+				"indexField" : "publishDate",
+				"maxResultsOnGraphs" : "all",
+				"graphMode" : "timeLine"
+				}
 		}
-	}
+	},
+"related" : {
+	
+	}	
 }

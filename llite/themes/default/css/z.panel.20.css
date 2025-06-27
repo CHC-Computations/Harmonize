@@ -1,0 +1,132 @@
+
+.nic {}
+
+/*
+dropdown-menu > li > a {padding: 3px 8px 3px 14px;}
+.dropdown-menu .label {float:right}
+*/
+.dropdown-menu.elb-dropdown > li > a {display:table; width:100%; padding:0 10px;}
+.dropdown-menu.elb-dropdown > li > a span {display:table-cell; padding:8px;}
+.dropdown-menu.elb-dropdown > li > a span:nth-child(2) {text-align: right;}
+
+
+
+
+.elb-graph {display:table; margin:4px; border:solid 1px #eee; position:relative;}
+.elb-graph a {display:table-cell !important; max-width:8px; vertical-align: bottom; padding:0 !important; overflow:hidden; }
+.elb-graph .elb-graph-bar {background-color:#ddd}
+.elb-graph .elb-graph-label {display:none !important;}
+.elb-graph a:hover .elb-graph-bar {background-color:#555; margin:0 !important;}
+
+
+.list-menu-item.active {font-weight:bold; }
+
+
+.table-lists {width:100%;}
+.table-lists thead tr {background-color:#eee; 
+	background-image: linear-gradient(to bottom, #ffffff 0%, #e0e0e0 100%); 
+	}
+
+.table-lists thead tr td:hover{background-color:#ddd;}
+.table-lists thead tr td.active {background-color:#ddd;}
+.table-lists thead i {float:right}
+
+.table-lists tbody tr:hover{background-color:#efefef;}
+
+.table-lists .right {text-align: right;}
+.table-lists .center {text-align: center;}
+.table-lists .left {text-align: left;}
+
+.table-lists .technical {font-size:0.85em; color:#444;}
+.table-lists .useful {font-size:0.9em; color:#222;}
+.table-lists .major {}
+.table-lists .bold {font-weight:bold;}
+
+.table-lists .actions {padding:0;}
+.table-lists .actions button {display:none;}
+.table-lists tr:hover .actions button {display:inline-block;}
+
+.table-list-btn {border:0; background:transparent; color:#777; padding:6px; padding-right:0; }
+.table-list-btn:hover {color:#000;}
+
+
+
+.table-containter {max-height: 70vh !important; overflow-y: auto; border:solid 1px #ddd;}
+.table-inContainter {border-collapse:collapse; width:100% }
+.table-containter thead {position:sticky; top:0; z-index: 1; }
+ 
+
+
+.navbar-default {
+	background-image: linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
+	background-repeat: repeat-x;
+	box-shadow:none;
+	}
+	
+	
+	
+.scrollAble {position:relative; outline:dotted 4px red; }
+
+.scrollAble table {
+    color: #333;
+    background: white;
+    border: 1px solid #888;
+    font-size: 12pt;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 3px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.scrollAble table th,
+.scrollAble table td {
+    padding: 1rem;
+    border: 1px solid #888;
+    text-align: left;
+    white-space: nowrap;
+    color: #777;
+}
+
+.scrollAble table th {
+    background-color: #888;
+    color: #fff;
+}	
+.scrollAble table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.panel-userlist {border-color:#009900; margin-bottom:4px;}
+.panel-userlist > .panel-heading {
+  color:#fff;  
+  background-image: -webkit-linear-gradient(top, #008000 0%, #009900 100%);
+  background-image: -o-linear-gradient(top, #008000 0%, #009900 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#008000), to(#009900));
+  background-image: linear-gradient(to bottom, #008000 0%, #009900 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#008000', endColorstr='#009900', GradientType=0);
+  background-repeat: repeat-x;
+}
+
+
+
+
+.userAccount .sidebar .panel {margin-left:-17px; margin-right:-15px; margin-top:-4px;}
+
+
+/* Chart bar */
+.chartBar {display: table; width:100%; table-layout:fixed;border-collapse: collapse;}
+.chartBar td {border: 1px solid #ddd; }
+.chartBarArea {vertical-align:bottom; text-align:center; display:table-cell; cursor:pointer; padding:3px;}
+.chartBarItem {display:block; width:100%; background-color:#653d91; border-radius:5px 5px 0 0; padding:3px;}
+.chartBarHorizontalItem {display:block; width:100%; background-color:#653d91; border-radius:0 5px 5px 0; padding:3px;}
+.chartBarLegend {vertical-align:bottom; text-align:center; display:table-cell; cursor:pointer; padding:3px; border-top:0; border-bottom:0;}
+.strongRight {border-left-color:#555 !important;}
+
+.chartBar tr:first-child td { border-top: 0;}
+.chartBar tr td:first-child { border-left: 0;}
+.chartBar tr:last-child td { border-bottom: 0;}
+.chartBar tr td:last-child { border-right: 0;}

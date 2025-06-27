@@ -6,8 +6,8 @@ $fixedLink = $this->HOST.'id/'.$id;
 ?>
 
 <div class="row">
-  <div class="col-sm-4">
-	<img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?=$fixedLink?>&choe=UTF-8"  title="<?= $this->transEsc('Fixed link to this record') ?>" />
+  <div class="col-sm-4 text-center">
+	<img src="https://quickchart.io/qr?size=400&text=<?=$fixedLink?>&choe=UTF-8"  title="<?= $this->transEsc('Fixed link to this record') ?>" style="width:100%; padding:20px;"/>
   </div>
   <div class="col-sm-8 ">
 	<br/><br/>

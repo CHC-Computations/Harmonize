@@ -17,9 +17,10 @@ if (is_Array($ids)) {
 			$reClass = "ph-square-bold";
 			$_SESSION['results']['mylist'][$id] = $id;
 			}
+		$checkId = str_replace('.', '_', $id);	
 		$JS[] = "
-		$('#ch_{$id}').removeClass('$reClass');
-		$('#ch_{$id}').addClass('$myClass');
+		$('#ch_{$checkId}').removeClass('$reClass');
+		$('#ch_{$checkId}').addClass('$myClass');
 		";
 			
 		}

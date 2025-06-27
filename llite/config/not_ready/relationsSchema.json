@@ -1,0 +1,16 @@
+"data" : {
+	"persons" : {
+		"{{name}}" : {
+			... structure
+			}
+		}
+	"places" :
+	"corporates" :
+	"events" :
+	"magazines" :
+	"concepts"
+	},
+"roles" : 
+	"persons"->"role"->"names",
+	"places"->role->names
+	

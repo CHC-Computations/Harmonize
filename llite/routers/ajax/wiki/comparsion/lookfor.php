@@ -29,7 +29,7 @@ if (!empty($input->list)) {
 			foreach ($statList as $k=>$v) {
 				$clearK = $this->helper->clearStr($k);
 				$convertedClearK = $this->helper->clearStr($this->helper->convert($input->indexField,$k));
-				if (empty($input->clearlookfor) or (stristr($convertedClearK, $input->clearlookfor) or stristr($clearK, $input->clearlookfor))) {
+				if (empty($input->clearlookfor) or (!empty($convertedClearK) && !empty($clearK) && (stristr($convertedClearK, $input->clearlookfor) or stristr($clearK, $input->clearlookfor)))) {
 				
 					$lp++;
 					$index = $lp+$Llp;

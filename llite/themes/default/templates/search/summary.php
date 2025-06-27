@@ -8,7 +8,7 @@ if (!empty($this->configJson->$currentCore->summaryBarMenu)) {
 		$currentB[$block] = $this->getUserParam($currentCore.':'.$block) ?? '';
 		$data = $values->optionsAvailable;
 		foreach ($data as $k=>$v) {
-			if (is_object($v)) {
+			if (!is_numeric($k)) {
 				$rp[2] = $k;
 				if (!empty($v->icon))
 					$icon = '<i class="'.$v->icon.'" alt="'.$v->name.'"></i> ';
@@ -16,13 +16,13 @@ if (!empty($this->configJson->$currentCore->summaryBarMenu)) {
 					$icon = '';
 				$menu[$block][$k] = [
 					'key' => $k,
-					'href' => $this->buildUri('results/'.$currentCore.'/', [$block => $k]), //$v->value
+					'href' => $this->buildUri('results/'.$currentCore.'/', array_merge($this->GET, ['facetsCode'=>$this->facetsCode, $block => $k])), //$v->value
 					'name' => $icon.$this->transEsc($v->name)
 					];
 				} else {
 				$menu[$block][$k] = [
 					'key' => $v,
-					'href' => $this->buildUri('results/'.$currentCore.'/', [$block => $v]),
+					'href' => $this->buildUri('results/'.$currentCore.'/', array_merge($this->GET, ['facetsCode'=>$this->facetsCode, $block => $v])),
 					'name' => $this->transEsc($v)
 					];	
 				}

@@ -17,13 +17,16 @@ if (!empty($person->wikiQ) && ($person->wikiQ !== 'not found')) {
 ?>
 <?php 
 if (!empty($person->name)) {
-	$displayName = $this->helper->formatMultiLangStr($person->name);
-	echo '<a href="'. $this->buildUrl('results/biblio/', ['lookfor' =>$displayName, 'type'=> 'Author' ]) .'" title="'. $this->transEsc('look for').': '. $displayName .'">'. $displayName .'</a> ';
+	$displayName = $this->helper->formatPerson($person->bestLabel);
+	$onlyName = $this->helper->formatMultiLangStr($person->nameML);
+	if (!empty($facetField)) {
+		$facetsCode = $this->buffer->createFacetsCode([$facetField.':"'.$person->bestLabel.'"']);
+		echo '<a href="'. $this->buildUrl('results', ['core'=>'biblio', 'facetsCode' =>$facetsCode ]) .'" data-toggle="tooltip" title="'. $this->transEsc('Show results using filter').': '.$this->helper->facetName('biblio', $facetField).' = '. $onlyName .'">'. $displayName .'</a> ';
+		} else {
+		echo '<a href="'. $this->buildUrl('results/biblio/', ['lookfor' =>$onlyName, 'type'=> 'allfields' ]) .'" data-toggle="tooltip" title="'. $this->transEsc('Look for').': '. $onlyName .'">'. $displayName .'</a> ';	
+		}
 	}
 ?>
-<?php if (!empty($person->dates)): ?>
-	<span class="date"><?= $person->dates ?></span>
-<?php endif; ?>
 <?php 
 if (!empty($person->roles))
 	if (is_Array($person->roles) or is_object($person->roles))

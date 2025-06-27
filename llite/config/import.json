@@ -1,4 +1,8 @@
 {
+"dataFolder" : "./import/data/",
+"extentionsFolder" : "./import/dataJson/",
+"licenceFolder" : "./import/licence/",
+"matchLevel" : "0.5",
 "useBufferedSearch" : {
 	"wikidata" : {
 		"id" : true,
@@ -11,12 +15,75 @@
 	},
 "useExternalSearch" : {
 	"wikidata" : {
-		"id" : false,
-		"labels" : false
+		"id" : true,
+		"labels" : true
 		},
 	"viaf" : {
-		"id" : false,
-		"labels" : false
+		"id" : true,
+		"labels" : true
+		}
+	},
+"source_db" : {
+	"pl" : {
+		"name" :"Polska Bibliografia Literacka", 
+		"collections" : {
+			"PBL 1989-2003: książki i czasopisma" : "PBL 1989-2003",
+			"PBL 2004-2012: książki" : "PBL 2004-2024",
+			"PBL 2004-2020: czasopisma" : "PBL 2004-2024",
+			"PBL 2004-2023: czasopisma" : "PBL 2004-2024",
+			"PBL 2013-2020: książki" : "PBL 2004-2024",
+			"PBL 2013-2020: rozdziały książek" : "PBL 2004-2024",
+			"PBL 2013-2023: książki" : "PBL 2004-2024",
+			"PBL 2013-2023: rozdziały książek" : "PBL 2004-2024"
+			}
+		},
+	"es" : {
+		"name" : "Biblioteca Nacional de España"
+		}, 
+	"cz" : {
+		"name" : "Česká Literární Bibliografie", 
+		"collections" : {
+			"SMZ" : "Literary Samizdat Bibliography|Bibliografie českého literárního samizdatu|",                                                              
+			"INT" : "Literary Web Bibliography|Bibliografie českého literárního internetu",
+			"CLE" : "Literary Exile Bibliography|Bibliografie českého literárního exilu (1948–1989)",
+			"CLE1" : "Literary Exile Bibliography|Bibliografie českého literárního exilu (1948–1989)",
+			"CLE2" : "Literary Exile Bibliography|Bibliografie českého literárního exilu (1948–1989)",
+			"RET" : "Retrospective Bibliography (up to 1945)|Retrospektivní bibliografie české literatury 1770–1945",
+			"RETROBI" : "Retrospective Bibliography (up to 1945)|Retrospektivní bibliografie české literatury 1770–1945",
+			"B45" : "Current Bibliography (after 1945)|Současná bibliografie (od roku 1945)",
+			"B70" : "Current Bibliography (after 1945)|Současná bibliografie (od roku 1945)",
+			"B80" : "Current Bibliography (after 1945)|Současná bibliografie (od roku 1945)",
+			"B97" : "Current Bibliography (after 1945)|Současná bibliografie (od roku 1945)",
+			"B12" : "Current Bibliography (after 1945)|Současná bibliografie (od roku 1945)",
+			"CATALOG" : "ICL Catalogue|Katalog UCL",
+			"ECS" : "Database of Processed Journals|Databáze excerpovaných časopisů",
+			"ECR" : "Database of Processed Journals|Databáze excerpovaných časopisů",
+			"CLO" : "Czech Literary Authorities Database|České literární osobnosti",
+			"PWC" : "Polonica in Czech Samizdat|Polonika v českém samizdatu",
+			"XEDICE" : "Book Series Database|Databáze knižních edic",
+			"TRL" : "Czech Literature in Translation|Česká literatura v překladu",
+			"ALKARO" : "Almanacs, Calendars, Yearbooks 1801-1945|Almanachy, kalendáře, ročenky 1801-1945",
+			"MBK" : "Database of Foreign Bohemica|Databáze zahraničních bohemik",
+			"MBK-AU-SAL" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-AU-VIE" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-BE-ULB" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-CI-ZAG" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-FR-SOR" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-GW-ERF" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-GW-HUM" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-GW-REG" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-IT-PAD" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-PL-OPO" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-PL-PAN" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-PL-UJ" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-PL-US" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-PL-UW" : "Bohemistic Consortium|Bohemistické konsorcium",
+			"MBK-XO-SAV" : "Bohemistic Consortium|Bohemistické konsorcium"
+			}
+		},
+	"fi" : {
+		"name" : "Kansalliskirjasto" 
 		}
 	}
+	
 }

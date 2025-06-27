@@ -1,5 +1,5 @@
 <?php 
-
+$this->addJS('$(\'[data-toggle="tooltip"]\').tooltip();');
 $libriLink = '';
 
 if (!empty($AP->as)) {
@@ -7,7 +7,8 @@ if (!empty($AP->as)) {
 	foreach ($AP->as as $key => $count) {
 		$libriLink .= '
 			<li>
-				<a href="'. $this->buildUri('results', ['core'=>'biblio', 'facetsCode'=> $this->buffer->createFacetsCode(["with_roles_wiki:\"Q{$AP->wikiq}|$key\""])] ) .'" title="'.$this->helper->numberFormat($count).' '.$this->transEsc($this->helper->formatMajorRole($key)->title).'" data-toggle="tooltip" data-placement="bottom">
+				<a href="'. $this->buildUri('results', ['core'=>'biblio', 'facetsCode'=> $this->buffer->createFacetsCode(["with_roles_wiki:\"Q{$AP->wikiq}|$key\""])], false ) .'" 
+					title="'.$this->helper->numberFormat($count).' '.$this->transEsc($this->helper->formatMajorRole($key)->title).'" data-toggle="tooltip" data-placement="bottom">
 				<i class="'.$this->helper->formatMajorRole($key)->ico.'"></i> <span>'.$this->helper->badgeFormat($count).'</span>
 				</a>
 			</li>
@@ -35,7 +36,6 @@ if (!empty($AP->viaf_id))
 		<ul class="action-toolbar">
 			<?= $libriLink ?>
 			<?= $wikiLink ?>
-			<li><a href="https://www.google.com/search?q=<?=urlencode($AP->name)?>" target="_blank" title="Google" data-toggle="tooltip" data-placement="bottom"><i class="ph-google-logo-bold"></i></a></li>
-			<?= $viafLink ?> 
+			<li><a href="https://www.google.com/search?q=<?=urlencode(strip_tags($AP->name))?>" target="_blank" title="Google" data-toggle="tooltip" data-placement="bottom"><i class="ph-google-logo-bold"></i></a></li>
 		</ul>
 	</div>

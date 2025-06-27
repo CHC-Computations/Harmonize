@@ -62,7 +62,7 @@ if (is_Array($results)) {
 					$formatter = $stepSetting->formatter;
 					$tname = $this->helper->$formatter($name);
 					}
-				if ($stepSetting->translated)
+				if ($stepSetting->translated == 'true')
 					$tname = $this->transEsc($tname);
 				
 				if ($this->buffer->isActiveFacet($facet->solr_index, $name)) {
@@ -70,7 +70,7 @@ if (is_Array($results)) {
 							$this->buffer->removeFacet($facet->solr_index, $name)
 							);
 					$lines[] = '<a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=>$key]).'" class="facet js-facet-item active" >
-									<span class="text">'.$this->transEsc($tname).'</span>
+									<span class="text">'.$tname.'</span>
 									<i class="right-icon glyphicon glyphicon-remove" ></i>
 								</a>';
 				
@@ -79,7 +79,7 @@ if (is_Array($results)) {
 							$this->buffer->addFacet($facet->solr_index, $name)
 							);
 					$lines[] = '<a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=>$key]).'" class="facet js-facet-item" >
-									<span class="text">'.$this->transEsc($tname).'</span>
+									<span class="text">'.$tname.'</span>
 									<span class="badge">'.$this->helper->numberFormat($count).'</span>
 								</a>';
 				

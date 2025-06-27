@@ -1,0 +1,881 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/"
+ xmlns:link="http://purl.org/rss/1.0/modules/link/"
+ xmlns:vcard="http://nwalsh.com/rdf/vCard#">
+    <bib:Article rdf:about="#item_3673">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0867-2148"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Galant</foaf:surname>
+                        <foaf:givenName>Arleta</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Literatura z niepełnosprawnościami. Zarys możliwych lektur</dc:title>
+        <dc:date>2019</dc:date>
+        <z:language>pol</z:language>
+        <bib:pages>41-46</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0867-2148">
+        <prism:volume>4 (203)</prism:volume>
+        <dc:title>Czas Kultury</dc:title>
+        <dc:identifier>ISSN 0867-2148</dc:identifier>
+    </bib:Journal>
+    <bib:Article rdf:about="#item_3674">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>4 (203)</prism:volume>
+                <dc:title>Czas Kultury</dc:title>
+                <dc:identifier>ISSN 0867-2148</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Krukowska</foaf:surname>
+                        <foaf:givenName>Aleksandra</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Dłonie. (Niepełno)sprawność Stanisława Wokulskiego jako figura wyobraźni Izabeli Łęckiej</dc:title>
+        <dc:date>2019</dc:date>
+        <z:language>pol</z:language>
+        <bib:pages>33-39</bib:pages>
+    </bib:Article>
+    <bib:Article rdf:about="https://studiadecultura.uken.krakow.pl/article/view/4624/4340">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2083-7275"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Pamuła</foaf:surname>
+                        <foaf:givenName>Natalia</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Szarota</foaf:surname>
+                        <foaf:givenName>Magdalena</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Usiekniewicz</foaf:surname>
+                        <foaf:givenName>Marta</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_3943"/>
+        <dc:subject>teoria</dc:subject>
+        <dc:title>„Nic o nas bez nas”</dc:title>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://studiadecultura.uken.krakow.pl/article/view/4624/4340</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-01</dcterms:dateSubmitted>
+        <bib:pages>4–12</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2083-7275">
+        <prism:volume>10(1)</prism:volume>
+        <dc:title>Annales Universitatis Paedagogicae Cracoviensis. Studia de Cultura</dc:title>
+        <dc:identifier>DOI 10.24917/20837275.10.1.1</dc:identifier>
+        <dc:identifier>ISSN 2083-7275</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_3943">
+        <z:itemType>attachment</z:itemType>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://studiadecultura.uken.krakow.pl/article/view/4624/4340</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <z:linkMode>3</z:linkMode>
+    </z:Attachment>
+    <bib:Book rdf:about="#item_3676">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>Odyskiwanie Obecności</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Warszawa</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Fundacja Teatr21</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Siebers</foaf:surname>
+                        <foaf:givenName>Tobin</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Estetyka niepełnosprawności</dc:title>
+        <dc:date>2023</dc:date>
+        <z:language>pol</z:language>
+        <z:numPages>208</z:numPages>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-83-948621-2-1">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>Odyskiwanie Obecności</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Warszawa</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Fundacja Teatr 21</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Garland-Thomson</foaf:surname>
+                        <foaf:givenName>Rosemarie</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <z:translators>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Pamuła</foaf:surname>
+                        <foaf:givenName>Natalia</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </z:translators>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Godlewska-Byliniak</foaf:surname>
+                        <foaf:givenName>Ewelina</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>teoria</dc:subject>
+        <dc:subject>literatura obca</dc:subject>
+        <dc:title>Niezwykłe ciała. Przedstawienia niepełnosprawności fizycznej w amerykańskiej kulturze i literaturze</dc:title>
+        <dcterms:abstract>Zawiera rozdziały poświęcone kreacji postaci niepełnosprawnych w amerykańskich tekstach literackich (analiza konwencji literackich w utworach: “Chata wuja Toma” H.B. Stowe, “Life in the Iron Mills” R.H. Davis, “The SIlent Partner” E. S. Phelps, “Zami” A. Lorde, “The Street” A. Petry, powieści Toni Morrison - spora część utworów nieprzetłumaczona na j. polski)</dcterms:abstract>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 978-83-948621-2-1</dc:identifier>
+        <z:numPages>246 s.</z:numPages>
+    </bib:Book>
+    <bib:Article rdf:about="https://studiadecultura.uken.krakow.pl/article/view/4639/4355">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>10(1)</prism:volume>
+                <dc:title>Annales Universitatis Paedagogicae Cracoviensis. Studia de Cultura</dc:title>
+                <dc:identifier>DOI 10.24917/20837275.10.1.14</dc:identifier>
+                <dc:identifier>ISSN 2083-7275</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Kotwasińska</foaf:surname>
+                        <foaf:givenName>Agnieszka</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_3938"/>
+        <link:link rdf:resource="#item_3941"/>
+        <dc:subject>literatura obca</dc:subject>
+        <dc:subject>komiks</dc:subject>
+        <dc:title>Chris Foss, Jonathan W. Gray, Zach Whalen (red.),Disability in Comic Books and Graphic Narratives, przedmowa: Rosemarie Garland-Thomson, Palgrave Macmillan 2016 [REC]</dc:title>
+        <dcterms:abstract>Recenzja pracy naukowej.</dcterms:abstract>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://studiadecultura.uken.krakow.pl/article/view/4639/4355</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-01</dcterms:dateSubmitted>
+        <bib:pages>178–183</bib:pages>
+    </bib:Article>
+   <bib:Memo rdf:about="#item_3938"><rdf:value></rdf:value></bib:Memo>
+    <z:Attachment rdf:about="#item_3941">
+        <z:itemType>attachment</z:itemType>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://studiadecultura.uken.krakow.pl/article/view/4639/4355</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <z:linkMode>3</z:linkMode>
+    </z:Attachment>
+    <bib:Article rdf:about="https://studiadecultura.uken.krakow.pl/article/view/4636/4352">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>10(1)</prism:volume>
+                <dc:title>Annales Universitatis Paedagogicae Cracoviensis. Studia de Cultura</dc:title>
+                <dc:identifier>DOI 10.24917/20837275.10.1.11</dc:identifier>
+                <prism:number>137–147</prism:number>
+                <dc:identifier>ISSN 2083-7275</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Fidowicz</foaf:surname>
+                        <foaf:givenName>Alicja</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_3942"/>
+        <dc:subject>literatura obca</dc:subject>
+        <dc:title>(Anty)bohaterowie? Niepełnosprawność w wybranych utworach powojennej prozy serbskiej</dc:title>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://studiadecultura.uken.krakow.pl/article/view/4636/4352</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-01</dcterms:dateSubmitted>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_3942">
+        <z:itemType>attachment</z:itemType>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://studiadecultura.uken.krakow.pl/article/view/4636/4352</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <z:linkMode>3</z:linkMode>
+    </z:Attachment>
+    <bib:Article rdf:about="https://rcin.org.pl/ibl/dlibra/publication/240100/edition/204249/content">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0000-0001-5833-0334"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Muca</foaf:surname>
+                        <foaf:givenName>Klaudia</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_3939"/>
+        <dc:subject>teoria</dc:subject>
+        <dc:title>Doświadczenie i różnica. Status przedmiotu badań i tożsamość badaczy w studiach o niepełnosprawności</dc:title>
+        <dc:date>2020</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/ibl/dlibra/publication/240100/edition/204249/content</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-01</dcterms:dateSubmitted>
+        <bib:pages>13–29</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0000-0001-5833-0334">
+        <prism:volume>2</prism:volume>
+        <dc:title>Teksty Drugie</dc:title>
+        <dc:identifier>DOI 10.18318/td.2020.2.2</dc:identifier>
+        <dc:identifier>ISSN 0000-0001-5833-0334</dc:identifier>
+    </bib:Journal>
+    <z:Attachment rdf:about="#item_3939">
+        <z:itemType>attachment</z:itemType>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/ibl/dlibra/publication/240100/edition/204249/content</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <z:linkMode>3</z:linkMode>
+    </z:Attachment>
+    <bib:Article rdf:about="https://studiadecultura.uken.krakow.pl/article/view/4627/4344">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <prism:volume>10(1)</prism:volume>
+                <dc:title>Annales Universitatis Paedagogicae Cracoviensis. Studia de Cultura</dc:title>
+                <dc:identifier>DOI 10.24917/20837275.10.1.3</dc:identifier>
+                <dc:identifier>ISSN 2083-7275</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Reimann</foaf:surname>
+                        <foaf:givenName>Maria</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <link:link rdf:resource="#item_3944"/>
+        <dc:subject>teoria</dc:subject>
+        <dc:subject>autoetnografia</dc:subject>
+        <dc:title>Opowiadanie niepełnosprawności. Esej autoetnograficzny</dc:title>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://studiadecultura.uken.krakow.pl/article/view/4627/4344</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-10-01</dcterms:dateSubmitted>
+        <bib:pages>30–37</bib:pages>
+    </bib:Article>
+    <z:Attachment rdf:about="#item_3944">
+        <z:itemType>attachment</z:itemType>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://studiadecultura.uken.krakow.pl/article/view/4627/4344</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <z:linkMode>3</z:linkMode>
+    </z:Attachment>
+    <bib:Article rdf:about="#item_4156">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1233-8680"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Kołodziejczyk</foaf:surname>
+                        <foaf:givenName>Dorota</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>literatura obca</dc:subject>
+        <dc:subject>autyzm</dc:subject>
+        <dc:subject>powieść postkolonialna</dc:subject>
+        <dc:title>Poza metaforą – autyzm jako impas hermeneutyczny w powieści postkolonialnej</dc:title>
+        <dc:date>2017</dc:date>
+        <z:language>pl</z:language>
+        <bib:pages>141–167</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1233-8680">
+        <prism:volume>30 (50)</prism:volume>
+        <dc:title>Poznańskie studia polonistyczne. Seria literacka</dc:title>
+        <dc:identifier>DOI 10.14746/pspsl.2017.30.7</dc:identifier>
+        <dc:identifier>ISSN 1233-8680</dc:identifier>
+    </bib:Journal>
+    <bib:Article rdf:about="https://ejournals.eu/czasopismo/przeglad-kulturoznawczy/artykul/nowe-studia-o-niepelnosprawnosci-w-humanistyce-o-ksiazkach-rosemarie-garland-thomson-pisza-tlumaczki-katarzyna-ojrzynska-i-natalia-pamula">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1895-975X"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ojrzyńska</foaf:surname>
+                        <foaf:givenName>Katarzyna</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Pamuła</foaf:surname>
+                        <foaf:givenName>Natalia</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>Nowe studia o niepełnosprawności w humanistyce. O książkach Rosemarie Garland-Thomson piszą tłumaczki: Katarzyna Ojrzyńska i Natalia Pamuła</dc:title>
+        <dc:date>2019</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://ejournals.eu/czasopismo/przeglad-kulturoznawczy/artykul/nowe-studia-o-niepelnosprawnosci-w-humanistyce-o-ksiazkach-rosemarie-garland-thomson-pisza-tlumaczki-katarzyna-ojrzynska-i-natalia-pamula</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <bib:pages>373-382</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1895-975X">
+        <prism:volume>3 (41)</prism:volume>
+        <dc:title>Przegląd Kulturoznawczy</dc:title>
+        <dc:identifier>ISSN 1895-975X</dc:identifier>
+    </bib:Journal>
+    <bib:Article rdf:about="https://czasopisma.ltn.lodz.pl/Prace-Polonistyczne/article/view/1069">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0079-4791"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ojrzyńska</foaf:surname>
+                        <foaf:givenName>Katarzyna</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>autoetnografia</dc:subject>
+        <dc:title>Finding the galaxy of disability. Maria Reimann's life writing</dc:title>
+        <dc:date>2020</dc:date>
+        <z:language>ang</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://czasopisma.ltn.lodz.pl/Prace-Polonistyczne/article/view/1069</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <bib:pages>211–228</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0079-4791">
+        <prism:volume>75</prism:volume>
+        <dc:title>Prace Polonistyczne</dc:title>
+        <dc:identifier>DOI https://doi.org/10.26485/PP/2020/75/9</dc:identifier>
+        <dc:identifier>ISSN 0079-4791</dc:identifier>
+    </bib:Journal>
+    <bib:BookSection rdf:about="urn:isbn:978-90-04-47143-6%20(mi%C4%99kka%20ok%C5%82adka),%20978-90-04-40598-1%20(twarda%20ok%C5%82adka),%20978-90-04-42467-8%20(wersja%20pdf)">
+        <z:itemType>bookSection</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Book>
+                <dcterms:isPartOf>
+                    <bib:Series>
+                        <dc:title>International Comparative Social Studies</dc:title>
+                    </bib:Series>
+                </dcterms:isPartOf>
+                <prism:volume>47</prism:volume>
+                <dc:identifier>ISBN 978-90-04-47143-6 (miękka okładka), 978-90-04-40598-1 (twarda okładka), 978-90-04-42467-8 (wersja pdf)</dc:identifier>
+                <dc:title>Disability and Dissensus: Strategies of Disability Representation and Inclusion in Contemporary Culture</dc:title>
+            </bib:Book>
+        </dcterms:isPartOf>
+        <dc:publisher>
+           <foaf:Organization><foaf:name>Brill</foaf:name></foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Garland-Thomson</foaf:surname>
+                        <foaf:givenName>Rosemarie</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ojrzyńska</foaf:surname>
+                        <foaf:givenName>Katarzyna</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Ojrzyńska</foaf:surname>
+                        <foaf:givenName>Katarzyna</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Wieczorek</foaf:surname>
+                        <foaf:givenName>Maciej</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>humanistyka</dc:subject>
+        <dc:subject>krytyczne studia o niepełnosprawności</dc:subject>
+        <dc:title>Critical Disability Studies in the Humanities</dc:title>
+        <dc:date>2020</dc:date>
+        <z:language>ang</z:language>
+        <bib:pages>17–34</bib:pages>
+    </bib:BookSection>
+    <bib:Book rdf:about="urn:isbn:978-83-7414-531-2">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Warszawa</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>W.A.B.</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Sobolewska</foaf:surname>
+                        <foaf:givenName>Anna</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>rodzice dzieci z zespołem Downa</dc:subject>
+        <dc:subject>zespół Downa</dc:subject>
+        <dc:title>Cela - odpowiedź na zespół Downa</dc:title>
+        <dc:date>2002</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>ISBN 978-83-7414-531-2</dc:identifier>
+        <z:numPages>250</z:numPages>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-83-8049-914-0">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Wołowiec</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Wydawnictwo Czarne</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Reimann</foaf:surname>
+                        <foaf:givenName>Maria</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>autoetnografia</dc:subject>
+        <dc:subject>kobiety niepełnosprawne</dc:subject>
+        <dc:subject>osoby niewidome i niedowidzące</dc:subject>
+        <dc:subject>zespół Turnera</dc:subject>
+        <dc:title>Nie przywitam się z państwem na ulicy. Szkic o doświadczaniu niepełnosprawności</dc:title>
+        <dc:date>2019</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>ISBN 978-83-8049-914-0</dc:identifier>
+        <z:numPages>168</z:numPages>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-83-233-4899-3">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Kraków</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Wydawnictwo Uniwersytetu Jagiellońskiego</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Fidowicz</foaf:surname>
+                        <foaf:givenName>Alicja</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>literatura dla dzieci i młodzieży</dc:subject>
+        <dc:subject>niepełnosprawni bohaterowie literaccy</dc:subject>
+        <dc:title>Niepełnosprawność w polskiej literaturze XX i XXI wieku dla dzieci i młodzieży</dc:title>
+        <dc:date>2020</dc:date>
+        <dc:identifier>ISBN 978-83-233-4899-3</dc:identifier>
+        <z:numPages>334</z:numPages>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-83-240-7018-3">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Kraków</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Znak Literanova</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Morska</foaf:surname>
+                        <foaf:givenName>Izabela</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>choroba</dc:subject>
+        <dc:subject>diagnoza</dc:subject>
+        <dc:subject>polska służba zdrowia</dc:subject>
+        <dc:title>Znikanie</dc:title>
+        <dc:date>2019</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>ISBN 978-83-240-7018-3</dc:identifier>
+        <z:numPages>520</z:numPages>
+    </bib:Book>
+    <bib:Article rdf:about="#item_4201">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1899-4261"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Topolski</foaf:surname>
+                        <foaf:givenName>Maciej</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>afazja</dc:subject>
+        <dc:title>Vel. O afazji Sławomira Mrożka</dc:title>
+        <dc:date>2017</dc:date>
+        <z:language>pl</z:language>
+        <bib:pages>60-64</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1899-4261">
+        <prism:volume>1</prism:volume>
+        <dc:title>Fragile</dc:title>
+        <dc:identifier>ISSN 1899-4261</dc:identifier>
+    </bib:Journal>
+    <bib:BookSection rdf:about="urn:isbn:83-7972-100-4">
+        <z:itemType>bookSection</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Book>
+                <dc:identifier>ISBN 83-7972-100-4</dc:identifier>
+                <dc:title>Kobieta, literatura, medycyna</dc:title>
+            </bib:Book>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Szczecin</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Wydawnictwo Naukowe Uniwersytetu Szczecińskiego</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Muca</foaf:surname>
+                        <foaf:givenName>Klaudia</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Galant</foaf:surname>
+                        <foaf:givenName>Arleta</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Zawiszewska</foaf:surname>
+                        <foaf:givenName>Agata</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Muca</foaf:surname>
+                        <foaf:givenName>Klaudia</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>afazja</dc:subject>
+        <dc:subject>udar</dc:subject>
+        <dc:title>Neurolożka na Marsie. Afazja, historia mózgu i podmiot po „neurologicznej katastrofie”</dc:title>
+        <dc:date>2016</dc:date>
+        <z:language>pl</z:language>
+        <bib:pages>393–411</bib:pages>
+    </bib:BookSection>
+    <bib:Article rdf:about="#item_4203">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0867-0633"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Muca</foaf:surname>
+                        <foaf:givenName>Klaudia</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>afazja</dc:subject>
+        <dc:subject>udar</dc:subject>
+        <dc:title>Literowanie luk codzienności. Konteksty narracji o afazji</dc:title>
+        <dc:date>2016</dc:date>
+        <z:language>pl</z:language>
+        <bib:pages>427-440</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0867-0633">
+        <prism:volume>5</prism:volume>
+        <dc:title>Teksty Drugie</dc:title>
+        <dc:identifier>DOI 10.18318/td.2016.5.27</dc:identifier>
+        <dc:identifier>ISSN 0867-0633</dc:identifier>
+    </bib:Journal>
+    <bib:Book rdf:about="urn:isbn:978-83-7908-162-2">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Gdańsk</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Fundacja Terytoria Książki</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Muca</foaf:surname>
+                        <foaf:givenName>Klaudia</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>afazja</dc:subject>
+        <dc:subject>udar</dc:subject>
+        <dc:title>Poiesis doświadczenia, poiesis tożsamości. Narracje o afazji</dc:title>
+        <dc:date>2019</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>ISBN 978-83-7908-162-2</dc:identifier>
+        <z:numPages>220</z:numPages>
+    </bib:Book>
+    <bib:Article rdf:about="https://pressto.amu.edu.pl/index.php/pspsj/article/view/21754">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:1233-8672"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Okupnik</foaf:surname>
+                        <foaf:givenName>Małgorzata</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>afazja</dc:subject>
+        <dc:subject>udar</dc:subject>
+        <dc:subject>patografia</dc:subject>
+        <dc:title>Utrata języka. Próba empatycznej lektury patografii osób po udarach mózgu</dc:title>
+        <dc:date>2019</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://pressto.amu.edu.pl/index.php/pspsj/article/view/21754</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <bib:pages>139–152</bib:pages>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:1233-8672">
+        <dc:title>Poznańskie Studia Polonistyczne. Seria Językoznawcza</dc:title>
+        <dc:identifier>DOI https://doi.org/10.14746/pspsj.2019.26.2.10</dc:identifier>
+        <dc:identifier>ISSN 1233-8672</dc:identifier>
+    </bib:Journal>
+    <bib:BookSection rdf:about="urn:isbn:978-83-8220-475-9">
+        <z:itemType>bookSection</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Book>
+                <dc:identifier>ISBN 978-83-8220-475-9</dc:identifier>
+                <dc:title>Zrozumieć niepełnosprawność. Problemy, badania, refleksje</dc:title>
+            </bib:Book>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Łódź</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Wydawnictwo Uniwersytetu Łódzkiego</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Pufund</foaf:surname>
+                        <foaf:givenName>Dorota</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Pufund</foaf:surname>
+                        <foaf:givenName>Dorota</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Całek</foaf:surname>
+                        <foaf:givenName>Grzegorz</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Niedbalski</foaf:surname>
+                        <foaf:givenName>Jakub</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Racław</foaf:surname>
+                        <foaf:givenName>Mariola</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Żuchowska-Skiba</foaf:surname>
+                        <foaf:givenName>Dorota</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>blogi</dc:subject>
+        <dc:subject>autyzm</dc:subject>
+        <dc:title>(Z)rozumieć autyzm. Doświadczanie autyzmu przez blogujących self-adwokatów</dc:title>
+        <dc:date>2021</dc:date>
+        <z:language>pl</z:language>
+        <bib:pages>15-28</bib:pages>
+    </bib:BookSection>
+    <z:Collection rdf:about="#collection_12">
+        <dc:title>Autobiografie OzN/non-fiction</dc:title>
+        <dcterms:hasPart rdf:resource="urn:isbn:978-83-7414-531-2"/>
+        <dcterms:hasPart rdf:resource="urn:isbn:978-83-8049-914-0"/>
+        <dcterms:hasPart rdf:resource="urn:isbn:978-83-240-7018-3"/>
+    </z:Collection>
+    <z:Collection rdf:about="#collection_11">
+       <dc:title>Teksty literackie/fiction</dc:title>
+    </z:Collection>
+</rdf:RDF>

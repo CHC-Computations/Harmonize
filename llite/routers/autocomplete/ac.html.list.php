@@ -17,10 +17,14 @@ $lines = [];
 if (!empty($sstring) && ($sstring<>'')) {
 	switch ($core) {
 		case 'biblio' :
-			if (!empty($sfield))
-				$facet->solr_index = $sfield.'_ac';
-				else 
+			if (!empty($sfield)) {
+				if ($sfield == 'author')
+					$facet->solr_index = 'author';
+					else 
+					$facet->solr_index = $sfield.'_ac';
+				} else 
 				$facet->solr_index = 'biblio_labels';
+			
 			
 			$query['limit'] = ['field' => 'facet.limit', 'value' => 8 ];
 			
@@ -42,7 +46,10 @@ if (!empty($sstring) && ($sstring<>'')) {
 					foreach ($results[$facet->solr_index] as $name=>$count) {
 						if ($count>0) {
 							$tname = $name;
-							$lines[] = '<a OnClick="document.getElementById(\'searchForm_lookfor\').value=\''.$tname.'\'; $(\'#searchForm\').submit();" class="ac-item" >'.$this->transEsc($tname).'</a>';
+							if ($sfield == 'author') {
+								$tname = explode('|',$name)[0];
+								}
+							$lines[] = '<a OnClick="document.getElementById(\'searchForm_lookfor\').value=\''.$tname.'\'; $(\'#searchForm\').submit();" class="ac-item" >'.$tname.'</a>';
 										
 							}
 						}
@@ -56,19 +63,23 @@ if (!empty($sstring) && ($sstring<>'')) {
 				}
 			break;
 		default: 	
-			// q=mickiewicz&q.op=OR&indent=true&fl=labels&sort=total_count desc
+			
+			$queryTable = explode(' ',$sstring);
+			$queryString = implode('* AND ', $queryTable).'*';
+			
+			
 			$facet->solr_index = 'biblio_labels';
 			
 			$query[] = 		[ 'field' => 'q.op',	'value' => 'OR' ];
 			$query[] = 		[ 'field' => 'indent',	'value' => 'true' ];
 			$query[] = 		[ 'field' => 'rows',	'value' => 8 ];
-			$query['q'] = 	[ 'field' => 'q',		'value' => $sstring ];
-			$query['fl'] = 	[ 'field' => 'fl', 		'value' => 'labels' ];
-			$query['so'] =	[ 'field' => 'sort', 	'value' => 'total_count desc' ];
+			$query['q'] = 	[ 'field' => 'q',		'value' => $queryString ];
+			$query['fl'] = 	[ 'field' => 'fl', 		'value' => 'labels,biblio_count' ];
+			$query['so'] =	[ 'field' => 'sort', 	'value' => 'biblio_count desc' ];
 			
 			$resfile = $this->solr->querySelect($core, $query); 
 			
-			#echo $this->helper->pre($resfile);
+			# echo $this->helper->pre($resfile);
 			
 			if (!empty($resfile->response->docs) && is_array($resfile->response->docs)) {
 				$lines = [];
@@ -84,7 +95,7 @@ if (!empty($sstring) && ($sstring<>'')) {
 						$tname = current((array)$res);
 						
 					if (!empty($tname)) {
-						$lines[] = '<a OnClick="document.getElementById(\'searchForm_lookfor\').value=\''.$tname.'\'; $(\'#searchForm\').submit();" class="ac-item" >'.$this->transEsc($tname).'</a>';
+						$lines[] = '<a OnClick="document.getElementById(\'searchForm_lookfor\').value=\''.$tname.'\'; $(\'#searchForm\').submit();" class="ac-item" >'.$tname.'</a>';
 						}
 					}
 					
@@ -93,6 +104,7 @@ if (!empty($sstring) && ($sstring<>'')) {
 					} else {
 					echo '<span class="ac-header-big">'.$this->transEsc('No hint').'</span>';
 					}
+				#echo $this->helper->pre($query);	
 				}
 			break;
 		}
@@ -103,7 +115,7 @@ if (!empty($sstring) && ($sstring<>'')) {
 		foreach ($t as $row) {
 			
 			$tname = $row['string'];
-			$lines[] = '<a OnClick="document.getElementById(\'searchForm_lookfor\').value=\''.$tname.'\'; $(\'#searchForm\').submit();" class="ac-item" >'.$this->transEsc($tname).'</a>'; //<i class="ph-bold ph-clock-counter-clockwise"></i> 
+			$lines[] = '<a OnClick="document.getElementById(\'searchForm_lookfor\').value=\''.$tname.'\'; $(\'#searchForm\').submit();" class="ac-item" >'.$tname.'</a>'; //<i class="ph-bold ph-clock-counter-clockwise"></i> 
 			}
 		}
 	if (count($lines)>=1) {

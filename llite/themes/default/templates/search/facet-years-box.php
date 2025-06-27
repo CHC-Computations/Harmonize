@@ -5,8 +5,8 @@
 	$top = '
 		<div class="text-center">
 			<div class="form-horizontal yearBox">
-				<label>'.$this->transEsc('from').':<input type="number" class="form-control" step="1" name="year_str_mvfrom" id="year_str_mvfrom" OnChange="snapSlider.noUiSlider.set([$(\'#year_str_mvfrom\').val(), $(\'#year_str_mvto\').val()])"></input></label>
-				<label>'.$this->transEsc('to').':<input type="number" class="form-control"  step="1" name="year_str_mvto" id="year_str_mvto" OnChange="snapSlider.noUiSlider.set([$(\'#year_str_mvfrom\').val(), $(\'#year_str_mvto\').val()])"></input></label>
+				<label>'.$this->transEsc('from').':<input type="number" style="width:50%" class="form-control" step="1" name="year_str_mvfrom" id="year_str_mvfrom" OnChange="snapSlider.noUiSlider.set([$(\'#year_str_mvfrom\').val(), $(\'#year_str_mvto\').val()])"></input></label>
+				<label>'.$this->transEsc('to').':<input type="number" style="width:50%" class="form-control"  step="1" name="year_str_mvto" id="year_str_mvto" OnChange="snapSlider.noUiSlider.set([$(\'#year_str_mvfrom\').val(), $(\'#year_str_mvto\').val()])"></input></label>
 			</div>
 		</div>
 		';

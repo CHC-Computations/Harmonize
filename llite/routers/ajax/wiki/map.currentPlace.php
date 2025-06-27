@@ -19,6 +19,5 @@ $result = new wikiLibri($this->user->lang['userLang'], $record);
 
 echo $this->render('wikiResults/resultBoxes/map-box.php', ['result' => $result]);
 
-echo '????';
-print_r($_POST);
+
 ?>

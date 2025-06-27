@@ -1,3 +1,15 @@
+<?php 
+if (empty($this)) die;
+$this->addClass('buffer', 	new buffer($this)); 
+echo $this->render('head.php'); 
+echo $this->render('core/header.php'); 
+
+?>
+<div id="content">
+	<div id="neo4jd3" style="height:65vh; min-height:65vh">
+	</div>
+</div>
+
         <!-- Scripts -->
         <script type="text/javascript">
             function init() {
@@ -36,27 +48,27 @@
                         'User': 'user',
                         'zoomFit': 'arrows-alt'},
                     images: {
-                        'Address': 'img/twemoji/1f3e0.svg',
-                        'Api': 'img/twemoji/1f527.svg',
-                        'BirthDate': 'img/twemoji/1f382.svg',
-                        'Cookie': 'img/twemoji/1f36a.svg',
-                        'CreditCard': 'img/twemoji/1f4b3.svg',
-                        'Device': 'img/twemoji/1f4bb.svg',
-                        'Email': 'img/twemoji/2709.svg',
-                        'Git': 'img/twemoji/1f5c3.svg',
-                        'Github': 'img/twemoji/1f5c4.svg',
-                        'icons': 'img/twemoji/1f38f.svg',
-                        'Ip': 'img/twemoji/1f4cd.svg',
-                        'Issues': 'img/twemoji/1f4a9.svg',
-                        'Language': 'img/twemoji/1f1f1-1f1f7.svg',
-                        'Options': 'img/twemoji/2699.svg',
-                        'Password': 'img/twemoji/1f511.svg',
-                        'Phone': 'img/twemoji/1f4de.svg',
-                        'Project': 'img/twemoji/2198.svg',
-                        'Project|name|neo4jd3': 'img/twemoji/2196.svg',
-                        'SecurityChallengeAnswer': 'img/twemoji/1f4ac.svg',
-                        'User': 'img/twemoji/1f600.svg',
-                        'zoomFit': 'img/twemoji/2194.svg'
+                        'Address': 'https://eisman.github.io/neo4jd3/img/twemoji/1f3e0.svg',
+                        'Api': 'https://eisman.github.io/neo4jd3/img/twemoji/1f527.svg',
+                        'BirthDate': 'https://eisman.github.io/neo4jd3/img/twemoji/1f382.svg',
+                        'Cookie': 'https://eisman.github.io/neo4jd3/img/twemoji/1f36a.svg',
+                        'CreditCard': 'https://eisman.github.io/neo4jd3/img/twemoji/1f4b3.svg',
+                        'Device': 'https://eisman.github.io/neo4jd3/img/twemoji/1f4bb.svg',
+                        'Email': 'https://eisman.github.io/neo4jd3/img/twemoji/2709.svg',
+                        'Git': 'https://eisman.github.io/neo4jd3/img/twemoji/1f5c3.svg',
+                        'Github': 'https://eisman.github.io/neo4jd3/img/twemoji/1f5c4.svg',
+                        'icons': 'https://eisman.github.io/neo4jd3/img/twemoji/1f38f.svg',
+                        'Ip': 'https://eisman.github.io/neo4jd3/img/twemoji/1f4cd.svg',
+                        'Issues': 'https://eisman.github.io/neo4jd3/img/twemoji/1f4a9.svg',
+                        'Language': 'https://eisman.github.io/neo4jd3/img/twemoji/1f1f1-1f1f7.svg',
+                        'Options': 'https://eisman.github.io/neo4jd3/img/twemoji/2699.svg',
+                        'Password': 'https://eisman.github.io/neo4jd3/img/twemoji/1f511.svg',
+                        'Phone': 'https://eisman.github.io/neo4jd3/img/twemoji/1f4de.svg',
+                        'Project': 'https://eisman.github.io/neo4jd3/img/twemoji/2198.svg',
+                        'Project|name|neo4jd3': 'https://eisman.github.io/neo4jd3/img/twemoji/2196.svg',
+                        'SecurityChallengeAnswer': 'https://eisman.github.io/neo4jd3/img/twemoji/1f4ac.svg',
+                        'User': 'https://eisman.github.io/neo4jd3/img/twemoji/1f600.svg',
+                        'zoomFit': 'https://eisman.github.io/neo4jd3/img/twemoji/2194.svg'
 						},
                     minCollision: 60,
                     neo4jDataUrl: 'https://eisman.github.io/neo4jd3/json/neo4jData.json',
@@ -83,3 +95,5 @@
 
             window.onload = init;
         </script>
+
+<?=$this->render('core/footer.php');?>

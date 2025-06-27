@@ -4,7 +4,7 @@ $this->addClass('buffer', 	new buffer($this));
 $this->addClass('solr', 	new solr($this)); 
 
 # echo "routeParam".$this->helper->pre($this->routeParam);
-
+$is_current = false;
 $currentRecId = $this->routeParam[0];
 if (!empty($this->getUserParam('biblio:GET')))
 	$this->GET = json_decode($this->getUserParam('biblio:GET'), true);
@@ -14,9 +14,17 @@ if ($currentPage == 0) $currentPage = 1;
 $maxPage = $this->configJson->$currentCore->summaryBarMenu->pagination->maxPagesAlowed ?? 100;
 $limit = $this->GET['pagination'] ?? 10;
 
-# echo "GET".$this->helper->pre($this->GET);
 
 if ($currentPage < $maxPage) {
+	
+	
+	if (!empty($this->getUserParamMeaning($currentCore, 'sorting', 'value'))) {
+		if ($this->getUserParamMeaning($currentCore, 'sorting', 'value') !== 'relevance')
+			$query['sort']=[ 
+				'field' => 'sort',
+				'value' => $this->getUserParamMeaning($currentCore, 'sorting', 'value')
+				];
+		} 
 	
 	if (!empty($this->GET['swl'])) { // start with letter ...
 		$sl = strtolower(substr($this->GET['swl'],0,1));
@@ -32,8 +40,8 @@ if ($currentPage < $maxPage) {
 					];
 		}
 
-	if (!empty($this->routeParam[3])) {
-		$this->facetsCode = $this->routeParam[3];	
+	if (!empty($this->GET['facetsCode'])) {
+		$this->facetsCode = $this->GET['facetsCode'];
 		$query[] = $this->buffer->getFacets($this->facetsCode);	
 		} else 
 		$this->facetsCode = 'null';		
@@ -77,7 +85,6 @@ if ($currentPage < $maxPage) {
 			'value' => 'id, title, title_short'
 			];
 	
-
 	$results = $this->solr->getQuery('biblio',$query); 
 	$results = $this->solr->resultsList();
 	$first = $lp = $this->solr->firstResultNo();
@@ -118,59 +125,36 @@ if ($currentPage < $maxPage) {
 			}
 	$pozList.= "</div>";
 
-	/*
-	if (($curr_lp == $first) && ($currentPage>1)) { 
-		$query['rows']=[ 
-			'field' => 'rows',
-			'value' => 1
-			];
-		$query['start']=[ 
-			'field' => 'start',
-			'value' => $currentPage*$limit-$limit-1
-			];		
-		
-		$results = $this->solr->getQuery('biblio',$query); 
-		$results = $this->solr->resultsList();
-		$row = current($results);
-		$prev = $row->id;
-		$prev_title = $row->title;
-		$_SESSION['cp'][$row->id] = ($currentPage-1);
-		}
-
 	
-	
-	$lr = $this->solr->lastResultNo();
-	if (($curr_lp == $lr) && ($lp<$this->solr->totalResults())) { 
-		
-		$query['rows']=[ 
-			'field' => 'rows',
-			'value' => 1
-			];
-		$query['start']=[ 
-			'field' => 'start',
-			'value' => $currentPage*$limit
-			];		
-		# echo "<pre>".print_R($query,1)."</pre>";
-		
-		$results = $this->solr->getQuery('biblio',$query); 
-		$results = $this->solr->resultsList();
-		$row = current($results);
-		$next = $row->id;
-		$next_title = $row->title;
-		
-		}
-	*/
 		
 	$currentResultsPage = $this->buildUri('results',[
 					'core' => $currentCore,
 					'page'=>$currentPage,
-					'sort'=> $this->GET['sorting'] ?? 'r',
+					'facetsCode' => $this->GET['facetsCode'] ?? 'r',
+					'sorting'=> $this->GET['sorting'] ?? 'r',
 					'lookfor' => $lookfor,
 					'type' => $type
 					]);
 	}
 
-	?>
+$idParts = explode('.',$currentRecId);
+$t = $this->psql->querySelect("SELECT * FROM elb_publication a 
+	JOIN elb_publication_error b ON a.id = b.id_publication
+	JOIN elb_errors e ON b.id_error = e.id
+	WHERE  a.id_source_db = '{$idParts[0]}' AND a.raw_id = '{$idParts[1]}'");
+if (is_array($t)) {
+	echo '<div class="container" style="padding-top:8px; font-size:0.9em;">';
+	echo '<p style="cursor:pointer;" data-toggle="collapse" data-target="#issueRaport"><i class="ph-bold ph-warning"></i> '.$this->transEsc('Some problems were reported for this record').'. <small>* This is an experiment. This part will not be visible in the official version until it is completed and tested.</small></p><div id="issueRaport" class="collapse"><ul>';
+	foreach ($t as $row) 
+		echo '<li>'.$row['msg'].'</li>';
+	echo '</ul>
+		</div>
+	</div>';	
+	#echo $this->helper->pre($t);
+	}
+
+
+?>
 
 	<?php if (!empty($this->solr->totalResults())): ?>
 		<div class="btn-breadcrumbs">

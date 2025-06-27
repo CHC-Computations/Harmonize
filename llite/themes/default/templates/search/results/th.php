@@ -1,7 +1,10 @@
+<?php $box_id = str_replace('.','_', $result->id); ?>
 
 
 <div class="result" id="result_<?=$result->id?>" >
-	<?= $this->buffer->resultCheckBox($result) ?>
+	<div class="result-number" id="check_<?=$box_id?>"><?= $this->bookcart->resultCheckBox($result) ?></div>
+	<?= $this->bookcart->resultStickyNote($result->id) ?>
+	
 	<div class='result-media'>
 		<?= $this->render('record/cover.php', ['result' => $result]) ?>
 	</div>
@@ -9,7 +12,7 @@
 		<h4 class="title"><a href="<?= $this->basicUri('results/biblio/record/'.$result->id.'.html') ?>"><?= $this->helper->setLength($result->title,60) ?></a></h4>
 		<div class="result-desc">
 			<?php if (!empty($record->persons->mainAuthor)) 
-				echo '<b>'.$this->transEsc('by').'</b>: '.$this->render('record/author-link.php', ['author'=>current((array)$record->persons->mainAuthor)]).'<br/>'; 
+				echo $this->render('record/author-link.php', ['author'=>current((array)$record->persons->mainAuthor)]).'<br/>'; 
 			?>
 			<?php if (!empty($record->corporates->publisher)>0): ?>
 				<b><?= $this->transEsc('In')?>:</b> <?= $this->render('record/publisher-link.php', ['publisher'=>current((array)$record->corporates->publisher), 'publicationYear' => current($record->publicationYear) ?? null ]) ?><br/>

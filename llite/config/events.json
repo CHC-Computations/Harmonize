@@ -15,11 +15,6 @@
 				"value" : "simplelist",
 				"icon" : "ph-bold ph-list-dashes"
 				},
-			"simplelist1" : {
-				"name" : "Simple list 1",
-				"value" : "simplelist1",
-				"icon" : "ph-bold ph-list-dashes"
-				},
 			"showcase" : {
 				"name" : "Showcases",
 				"value" : "showcase",
@@ -34,7 +29,7 @@
 			"r" : {"name" : "Relevance", "value" : "biblio_count desc"}, 
 			"r" : {"name" : "Relevance as author", "value" : "mainAuthor_count desc"}, 
 			"dd" : {"name" : "Inception year desc", "value" : "year_start desc"},
-			"a" : {"name" : "Name", "value" : "biblio_labels asc"}
+			"a" : {"name" : "Name", "value" : "*_label_sort asc"}
 			}
 		},
 
@@ -150,8 +145,8 @@
 				"indexField" : "language",
 				"graphMode" : "pieGraph" 
 				},
-		"topic" : {  
-				"indexField" : "topic",
+		"subjects_str_mv" : {  
+				"indexField" : "subjects_str_mv",
 				"graphMode" : "pieGraph" 
 				},
 		"publishDate" : {

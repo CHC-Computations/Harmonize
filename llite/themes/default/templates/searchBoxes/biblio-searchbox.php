@@ -11,7 +11,7 @@ if (!empty($this->GET['lookfor']))
 
 $searchForm = '
 	<nav class="searchbox hidden-print" >
-		<form id="searchForm" class="searchForm" method="get" action="'.$this->selfUrl().'" name="searchForm" autocomplete="off">
+		<form id="searchForm" class="searchForm" method="get" action="'.$this->buildUri('/results/biblio/').'" name="searchForm" autocomplete="off">
 			<div class="searchInput" id="searchInput">
 				<div>'.$this->forms->select('type', $opt , ['id'=>'searchForm'], 'OnChange="search.start();"').'</div>
 				<div class="searchInputMain">

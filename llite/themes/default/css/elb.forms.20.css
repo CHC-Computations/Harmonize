@@ -1,0 +1,30 @@
+.elb-forms {
+  display:block;
+  postition:relative;
+}
+
+
+.elb-forms label {padding: 9px;}
+.elb-forms input {width:100%; padding:8px; border: solid 1px #d1d1d1; margin:2px; background-color: #fff;}
+.elb-forms input:focus {border: solid 1px #ccc; outline: 0;}
+
+.elb-forms-radio-row {display:table; }
+.elb-forms-radio-row label.radio {display:table-cell; padding: 9px;}
+.elb-forms label.radio input{width:auto !important;}
+
+.elb-forms select {padding:8px; border: solid 1px #d1d1d1; margin:2px; background-color: #fff;}
+.elb-forms select:focus {border: solid 1px #ccc; outline: 0;}
+
+.elb-forms textarea {width:100%; height: auto; padding:8px; border:solid 1px #d1d1d1; }
+.elb-forms textarea:focus {border-color:#ccc; outline: 0; }
+
+.elb-forms .btn-checker {padding:8px; color:#333; font-size:1em; margin:0; border:solid 1px #d1d1d1; background-color:#ddd; border-radius:0; margin-bottom:2px;}
+.elb-forms .btn-checker:hover {background-color:#ccc; box-shadow: 0 14px 26px -12px rgba(153,153,153,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(153,153,153,.2);}
+
+.elb-forms .elb-form-icon-select {border:solid 1px transparent; padding:10px; font-size:1.3em; margin:2px;margin-right:4px; background:transparent; color:#777;}
+.elb-forms .elb-form-icon-select:hover {background-color:#ddd; color:#000;}
+.elb-forms .elb-form-icon-select.active {border:solid 1px #ddd; color:#000;}
+
+
+
+.saveIframe {border:solid 1px transparent; width:100%; height:2.5em;}

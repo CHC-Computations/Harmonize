@@ -12,12 +12,18 @@ $Llp = 0;
 	</div>
 	<div class="person-record">
 	
-		<?= $this->render('wikiResults/resultBoxes/linkPanel.php', ['AP' => $this->coreRecord->linkPanel()] ) ?>
-		<p><?= $this->wiki->get('descriptions') ?></p>
+		<div id="wikimediaDescription">
+		<?php
+			if (!empty($this->wiki->record->wikipediaDescription))
+				echo $this->wiki->record->wikipediaDescription;
+				else 
+				echo $this->wiki->get('descriptions');
+		?>
+		</div>
 		
 		<div class="record-left-panel">
 			<div class="thumbnail">
-				<?= $this->render('helpers/wikiphoto.php') ?>
+				<?= $this->render('helpers/wiki.photo.php') ?>
 				<?= $this->render('helpers/wiki.signature.php') ?>
 				<?= $this->render('helpers/wiki.audio.php') ?>
 			</div>
@@ -41,16 +47,7 @@ $Llp = 0;
 				
 				
 			</ul>
-			<div class="text-right">
-			<small>
-				<a href="https://www.wikidata.org/wiki/<?=$this->wiki->getID() ?>" class="text-right"><?= $this->transEsc('Source of information')?> Wikidata</a><br/>
-				<a href="<?=$this->wiki->getSiteLink() ?>" class="text-right"><?= $this->transEsc('More information on')?> Wikipedia</a><br/>
-				<a href="https://www.entitree.com/en/affiliation/<?=$this->wiki->getID() ?>" class="text-right" target="_blank"><?= $this->transEsc('Explore with')?> EntiTree</a>
-			</small>
-			</div>
-			
 		</div>
-		
 	</div>
 	
 	<?php 
@@ -66,16 +63,6 @@ $Llp = 0;
 
 			</div>';
 
-	
-	
-
-	$extraTabs['map'] = ['label' => $this->transEsc('Map'), 'content' => $mapDraw];
-	# $extraTabs['bstats'] = ['label' => $this->transEsc('Bibliographical statistics'), 'content' => $stats];
-	# $extraTabs['cStats'] = ['label' => $this->transEsc('Comparison of roles in bibliography'), 'content' => $compareStatsStr];
-	# $extraTabs['rPersons'] = ['label' => $this->transEsc('Related persons').' <span class="badge">'.$this->helper->numberFormat(count($relatedPersons)).'</span>', 'content' => $relatedPersonsStr];
-	
-	echo $this->helper->tabsCarousel( $extraTabs , 'map');
-		
 	?>
 	<div id="drawPoints">
 
@@ -83,4 +70,3 @@ $Llp = 0;
 	
   </div>
 
-coreRecord<?= $this->helper->pre($this->coreRecord) ?>

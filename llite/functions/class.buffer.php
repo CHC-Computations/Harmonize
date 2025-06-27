@@ -60,11 +60,10 @@ class buffer{
 			else 
 			$key = $this->shortHash($str);
 		
-		$res = $this->cms->psql->querySelect("SELECT * FROM facets_queries WHERE code='$key';");
-		
-		if (!is_array($res)) {
-			$this->cms->psql->query("INSERT INTO facets_queries (code, query) VALUES ('$key', '$str');");
-			}
+		$t = $this->cms->psql->querySelect("INSERT INTO facets_queries (code, query) VALUES ('$key', '$str')
+					ON CONFLICT (code)
+					DO UPDATE SET time = now()
+					RETURNING code;");
 		return $key;	
 		}
 	
@@ -182,9 +181,15 @@ class buffer{
 			}
 		}
 	
+	public function onlyLettersAndNumbers($input) {
+		$output = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $input);
+		$output = trim($output);
+		return $output;
+		}
 	
 	public function saveSearch($core, $string) {
 		if (!empty($core) && (!empty($string))) {
+			$string = $this->onlyLettersAndNumbers($string);
 			$code = $this->shortHash($string);
 			$t = $this->cms->psql->querySelect("SELECT counter FROM searchstrings WHERE core={$this->cms->psql->isNull($core)} AND code={$this->cms->psql->isNull($code)}");
 			if (is_array($t)) {
@@ -231,27 +236,7 @@ class buffer{
 			else 
 			return null;
 		}
-	
-	public function resultCheckBox($result) {
-		if (empty($_SESSION['results']) or !is_Array($_SESSION['results']))
-			$_SESSION['results']['mylist'] = [];
 		
-		if (is_array($this->isOnMyLists($result->id))) {
-			$myClass = "ph-check-square-bold";
-			} else {
-			$myClass = "ph-square-bold";
-				
-			}
-		return "
-				<div class=\"result-number\" onClick=\"results.myList('{$result->id}');\">
-					<label>
-						<i class=\"{$myClass}\" id=\"ch_{$result->id}\"></i>
-						<span>{$result->lp}</span>
-					</label>
-				</div>
-				";	
-		}
-	
 	
 	function partOf($t) {
 		foreach ($t as $row) {
@@ -463,6 +448,40 @@ class buffer{
 				}
 			}
 		}
+	
+	function loadWikiOggUrl($fileName) {
+		if (!empty($fileName)) {
+			$file = @file_get_contents("https://en.wikipedia.org/w/api.php?action=query&format=json&iiurlwidth=360&prop=imageinfo&iilimit=5&iiprop=timestamp|size|url&titles=File:".urlencode($fileName));
+			$json = json_decode($file);
+			if (!empty($json->query->pages->{'-1'}->imageinfo[0]->thumburl)) {
+				$url = $json->query->pages->{'-1'}->imageinfo[0]->url;
+				$width = $json->query->pages->{'-1'}->imageinfo[0]->size;
+				$height = 0;
+				
+				return $url;
+				}
+			
+			
+			
+			
+			# $fileName = $wiki->getStrVal($claim);
+			$t = $this->cms->psql->querySelect("SELECT url,width,height FROM wiki_media_urls WHERE file_name={$this->cms->psql->isNull($fileName)}; ");
+			if (is_array($t))
+				return current($t)['url'];
+				else {
+				$file = @file_get_contents("https://en.wikipedia.org/w/api.php?action=query&format=json&iiurlwidth=360&prop=imageinfo&iilimit=5&iiprop=timestamp|size|url&titles=File:".urlencode($fileName));
+				$json = json_decode($file);
+				if (!empty($json->query->pages->{'-1'}->imageinfo[0]->thumburl)) {
+					$url = $json->query->pages->{'-1'}->imageinfo[0]->url;
+					$width = $json->query->pages->{'-1'}->imageinfo[0]->size;
+					$height = 0;
+					
+					$this->cms->psql->query("INSERT INTO wiki_media_urls (file_name, url, width, height, time) VALUES ({$this->cms->psql->isNull($fileName)}, {$this->cms->psql->isNull($url)}, {$this->cms->psql->isNull($width)}, {$this->cms->psql->isNull($height)}, now())");
+					return $url;
+					}
+				}
+			}
+		}
 
 	function convertPicturePath($picture, $size = 'medium') {
 		
@@ -637,6 +656,12 @@ class buffer{
 			return $this->bottomLists->$listName;
 			else 
 			return [];
+		}
+	
+	public function getAllBottomLists() {
+		if (!empty($this->bottomLists))
+			return $this->bottomLists;
+		return [];
 		}
 	
 	

@@ -1,0 +1,339 @@
+"LDR" : {
+	"fullField" : {
+		"major_genre" : {
+			"name" : "Format",
+			"function" : "getMajorFormat",	
+			"position" : 7,
+			"length" : 1,
+			"meaning" : {
+				"a" : "Book chapter",
+				"b" : "Journal article",
+				"m" : "Book",
+				"*" : "Other"
+				}
+			}
+		}
+	},
+"008" : {
+	"fullField" : {
+			"name" : "language/publication",
+			"function" : "getLangauageP",
+			"position" : 35,
+			"length" : 3,
+			"meaning" : "properties/language.ini"
+		}
+	},
+"020" : {
+	"a" : "isbn"
+	},	
+"022" : {
+	"a" : "issn"
+	},	
+"035" : {
+	"a" : "oclc_num"
+	if exist "(OCoLC)" remove "(OCoLC)" : "a" = value 
+	},	
+	
+"040" : {
+	b : language/record
+	},
+"041" : {
+	a : language/publication
+	h : language/original
+	},	
+"080" : {
+	"a" : "Universal Decimal Classification",
+	"function" : "getUDC",
+
+	}	
+	
+"100" : { 
+	mainAuthor 
+	a : name
+	d : date
+	1 : viaf / or otherId
+	2 : ???
+	4 : roleCode
+	7 : otherId
+	e : roleStr
+	},
+"110" : {
+	corporate (author), 
+	
+	a: name, 
+	b: part of institution
+	e: roleStr, (str/array)
+	4: rolecode, => look at "pbl" = "publisher" !
+	7: other ID
+	
+	
+	if ( substr(c,0,1) == '[' )
+		c : name (in [] breaks)
+		a : roleStr
+		
+		
+	uwaga! record: 001894251 
+		zdaje się, ze to event. zapytaj czy to reguła, czy wyjątek 
+		jedyny taki record w całej bazie.
+		
+		>> It's a rule! 
+	},
+	
+"111" : {
+	"name" : "event",
+	"subfields" : {
+		"a" : "name",
+		"b" : "type of event",
+		"d" : "year", 
+		"c" : "place", 
+		"n" : "edition" 
+		}
+	"role" : "author",	
+	"notice!" : "All values has to by cleared. See $this->ClearName($value);"	
+	"notice!" : "field 711 and 611 - this same method, other role"	
+	
+	"name" : "addformat: Conference Proceeding" 
+	},	
+
+"245" : {
+	"name": "title",
+	
+	"subfields" : {
+		"a" : "title", look at: ret [Název textu k dispozici na připojeném lístku]
+		"b" : "subtitle", 
+		"c" : "StatmentOfResp"
+		}
+		
+	look at rec: b1000002867468 is there any rule for such title? |a [Incipit:] Kręgosłup ; |b [Incipit:] Ortopedia ; [Incipit:] Garb skrzydło uwite ; [Incipit:] Przydymiony rentgen ; [Incipit:] Gdyby bezkrwawo wyłuskać ; [Incipit:] Nie wiem jak / |c Tytania Skrzydło. 	
+	},
+"250" : {
+	"name" : "Edition",
+	????
+	"notice!" : "Field without any unification. currently result almost useless" 
+	},
+
+"260" : {
+	publicationYear, corporate (publisher), publication Place. 
+	
+	"subfields" : {
+		"a" : "place name", 
+		"b" : "publisher name", 
+		"c" : "year of publication", 
+		}
+	
+	a : publication/place 
+			uwaga! 
+			sometimes with ' :' on the end of str),
+			sometimes in [] breaks eg. "[Poznań] :"
+			look at rec: b1000001076398 (may be few of authors)
+			look at rec: b0000005568596 (two places one name. does [] mean something?)
+			
+			probably only in PL records
+	b : name,  
+			if exists 
+				corporate with role 'publisher', 
+	c : publication/year    
+			uwaga! rec: b0000005122838  => 6-7 II 2016. (to nie jedyny taki)
+			sometimes date => 12 II 2016 
+			sometimes with => copyright 2021. (or similar)
+			[2021].  use: preg_replace()
+			
+			
+	},
+"264" : {
+	Przegdaj zapytaj! tylko 4 rekordy coś mają
+	look at 260 (same methods)
+	},	
+
+"380" : {
+	"subfields" : {
+		"i,a" : {
+			"index" : "genre_major",
+			"name": "Major Genre", 
+			"function" : "getGenreM",
+			"rules" : "if (i == 'Major genre') return a",
+			"options" : {
+				"l" : "language"
+				}
+			},
+		"a" : {
+			"index" : "?? np. Książki"
+			}
+		}
+	},	
+"381" : {
+	"subfields" : {
+		"i,a" : {
+			"index" : "genre_major",
+			"name": "Major Genre", 
+			"function" : "getGenreM",
+			"rules" : "if (i == 'Major genre') return a",
+			}
+		}
+	},	
+"440" : {
+	"x" : "issn"
+	}	
+"490" : {
+	"name" : "Series", ??
+	"subfields" : {
+		"a" : ??
+		"v" : ??
+		"x" : "issn"
+		}
+	},
+	
+"600" : {
+	"subject person", 
+	
+	// look at mainAuthor "100"
+	a : name
+	d : dates
+	1 : viaf / or otherId
+	2 : ???
+	7 : otherId
+	
+	// make anlytics for cases of person A vs. B 
+	},
+	
+"601-699" : {
+	"subjects"
+	},	
+	
+"610" : {
+	corporate
+	
+	a : name, 
+			sometimes place in last () breaks on the end of str.  but in () can be also something else: role, role+place, 
+			
+	b : name_supplement, lower level corporate name		
+	z : place / region, 
+	x : roleStr ??? / domain ? 
+	y : era (eg. 14-15 w.)
+	7 : otherID
+	
+	
+	nietypowe rec: b0000003548523 
+	},
+"611" : {
+	// same as 111
+	
+	"name" : "event as subject",
+	"subfields" : {
+		"a" : "name",
+		"d" : "year", 
+		"c" : "place", 
+		"n" : "edition" 
+		}
+	"role" : "subject event",	
+	},	
+
+"630" : mogą zwierać działa. dokładana analiza potrzebna 
+
+"648" : {
+	"name" : "centuries_str_mv",
+	"function" : "getCenturies"
+	// field added by Darek&Niko
+	}	
+
+"650" : {
+	field always added by Darek&Niko
+	"2" : if ("2" == "ELB-g") return "a" as "name" : "Subject literature by genre"
+	"2" : if ("2" == "ELB-g") return "a" as "name" : "Subject literature by Nationality"
+	},
+	
+"651" : {
+	"name" : "subject place", 
+	"subfields" : {
+		"a" : "name"
+		}
+	}	
+	
+"700" : {
+	co-authors 
+	look at mainAuthor
+	
+	tutaj także moga występować dzieła, sprawdź dokładnie to pole. 
+	},
+	
+"710": {
+	corporate 
+	
+	
+	a : name 
+			sometimes in () higher level corporate name 
+			sometimes in () place
+	b : lower level corporate name		
+	1 : viaf 
+	4 : roleCode
+	
+	
+	probably only PL records 
+	}
+
+"711" : {
+	"name" : "event as co-author",
+	"subfields" : {
+		"a" : "name",
+		"d" : "year", 
+		"c" : "place", 
+		"n" : "edition" 
+		}
+	"role" : "co-author",	
+	"notice!" : "All values has to by cleared. See $this->ClearName($value);"	
+	"notice!" : "field 711 and 611 - this same method, other role"	
+	
+	},	
+"730" : {
+	"x" : "issn"
+	}	
+
+"773" : {
+	"name" : "Magazine", 
+	"subfields" : {
+		"x" : "ISSN", 
+		"z" : "ISBN", 
+		"s" : "container title" 
+		"t" : ???? title if "s" not exists
+		"g" : "article_resource_related"
+		}
+	}
+"776" : {
+	"x" : "issn"
+	}
+"780" : {
+	"x" : "issn"
+	}
+"785" : {
+	"x" : "issn"
+	},
+"856" : {
+	"name" : "linkedResource",
+	"subfields": {
+		"u" : "link",
+		"y" : "name - biblioStr"
+		}
+	}	
+"950" ???
+
+"956" : {
+	"subFields" : {
+		"a" : {
+			"index" : "source_db_str",
+			"name" : "Source Database", 
+			"source db"
+			}
+		
+	},
+"995" : {
+	"subFields" : {
+		"a" : {
+			"index" : "source_db_str",
+			"name" : "Source Database", 
+			"source db"
+			},
+		"b" : {
+			"source db detail"
+			}
+		}
+	}

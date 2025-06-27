@@ -40,7 +40,7 @@ if (is_array($facets)) {
 				
 				$lines[] = '
 					<div class="facetTop" OnMouseOver="facets.place(\''.$key.'\')" OnMouseOut="facets.out(\''.$key.'\')">
-					  <a href="'.$this->buildUri('results', array_merge($this->GET, ['core'=>'biblio', 'facetsCode'=>$key])).'" id="facetBase'.$key.'" class="facet js-facet-item" data-title="'.$this->transEsc($k).'" data-count="'.$v.'" >
+					  <a href="'.$this->buildUri('results', array_merge($this->GET, ['core'=>'biblio', 'facetsCode'=>$key])).'" id="facetBase'.$key.'" class="facet js-facet-item" data-title="'.$tk.'" data-count="'.$v.'" >
 						<span class="text">'.$tk.'</span>
 						<span class="badge">'.$this->helper->numberFormat($v).'</span>
 						<i class="ph-caret-right-bold" id="caret_'.$key.'" style="color:transparent; margin-right:-7px; margin-top:4px; font-size:0.8em;"></i>
@@ -49,7 +49,7 @@ if (is_array($facets)) {
 					</div>';
 				}
 			}
-		if ($lp>=$maks) {
+		if ($lp>$maks) {
 			$lines[] = '<a OnClick="facets.cores.InModal(\''.$this->transEsc($facet->name).'\',\''.$facet->solr_index.'\')" class="facet last-facet-item"><span class="text">'.$this->transEsc('See all').'...</span></a>';
 			break;
 			}

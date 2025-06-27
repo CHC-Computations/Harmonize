@@ -1,27 +1,28 @@
 <?php 
 if (empty($this)) die;
 require_once('functions/class.helper.php');
+require_once('functions/class.buffer.php');
 require_once('functions/class.converter.php');
-$x = count($this->routeParam)-1;
+require_once('functions/class.record.bibliographic.php');
+require_once('functions/class.bookcart.php');
 
-$tmp = explode('.', $this->routeParam[$x]);
+
+$x = count($this->routeParam)-1;
+$currentCore = 'biblio';
 
 $this->addClass('solr', new solr($this));
-$this->addClass('buffer', new buffer()); 
-$this->addClass('helper', 	new helper()); 
 $this->addClass('convert', 	new converter()); 
+$this->addClass('bookcart',	new bookcart());
+$this->addClass('buffer',	new buffer());
 
-$rec_id = current($tmp);
-$format = end($tmp);
 
-$rec_id=str_replace('.html', '', $this->routeParam[$x]);
-$record = $this->solr->getRecord('biblio', $rec_id);
-if (!empty($record->id)) {
-	#$marcJson = $this->buffer->getJsonRecord($record->id, $record->fullrecord);
-	$marcJson = $this->convert->mrk2json($record->fullrecord);
-	$this->addClass('record', new marc21($marcJson));
-		
-	echo $this->render('record/mini/preView.php', ['result'=>$record, 'marcJson' => $marcJson]);
+$current_view = $this->getUserParam($currentCore.':view') ?? 'list';
+$recFile = $this->routeParam[0];
+$recId = str_replace('.html', '', $recFile);
+
+$result = $this->solr->getRecord($currentCore, $recId);
+if (!empty($result->id)) {
 	
-	} else 
-	echo "error!";
+	$this->addClass('record', new bibliographicRecord($result, $this->convert->mrk2json($result->fullrecord)));
+	echo $this->render('search/results/'.$current_view.'.php', ['result'=>$result, 'record'=>json_decode($result->relations)] );
+	} 

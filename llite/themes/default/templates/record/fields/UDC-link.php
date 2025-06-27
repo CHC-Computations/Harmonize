@@ -1,6 +1,8 @@
 <?php 
-$facetField = 'form_genre';
+echo $this->helper->pre($value);
+	
 if (!empty($value)) {
+	$this->helper->pre($value);
 	$value = (array)$value;
 	if (is_array($value))
 		foreach ($value as $udc => $subTable) 

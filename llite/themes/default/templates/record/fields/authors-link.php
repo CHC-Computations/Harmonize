@@ -11,7 +11,7 @@ if (!empty($value)) {
 		}
 	foreach ($value as $uid => $author) {
 		if ($list) echo '<li>';
-		echo $this->render('record/fields/persons-link.php', ['persons' => $author]);
+		echo $this->render('record/fields/persons-link.php', ['persons' => $author, 'facetField'=>$facetField ?? '' ]);
 		if ($list) echo '</li>';
 		}
 	if ($list) echo '</ol>';	

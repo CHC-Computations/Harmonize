@@ -1,0 +1,44 @@
+{
+"udc_0" : {
+	"pl" : "Dział Ogólny. Nauka I Wiedza. Dokumentacja. Informatyka. Bibliologia. Organizacje. Publikacje",
+	"cs" : "General. Science And Knowledge. Documentation. Information technology. bibliology. Organizations. Publications",
+	"en" : "General. Science And Knowledge. Documentation. Information technology. bibliology. Organizations. Publications"
+	}
+"udc_1" : {
+	"pl" : "Filozofia. Psychologia",
+	"cs" : "Philosophy. psychology",
+	"en" : "Philosophy. psychology"
+"udc_2" : {
+	"pl" : "Religia. Teologia",
+	"cs" : "Religion. Theology",
+	"en" : "Religion. Theology"
+"udc_3" : {
+	"pl" : "Nauki Społeczne",
+	"cs" : "Social Sciences",
+	"en" : "Social Sciences"
+"udc_51" : {
+	"pl" : "Matematyka",
+	"cs" : "Mathematics",
+	"en" : "Mathematics"
+"udc_5x" : {
+	"pl" : "Nauki Przyrodnicze",
+	"cs" : "The natural sciences",
+	"en" : "The natural sciences"
+"udc_6" : {
+	"pl" : "Nauki Stosowane. Medycyna. Nauki Techniczne",
+	"cs" : "Applied Sciences. Medicine. Technical studies",
+	"en" : "Applied Sciences. Medicine. Technical studies"
+"udc_7" : {
+	"pl" : "Sztuka. Rekreacja. Rozrywki. Sport",
+	"cs" : "Art. Recreation. Entertainment. Sport",
+	"en" : "Art. Recreation. Entertainment. Sport"
+"udc_8" : {
+	"pl" : "Język. Językoznawstwo. Nauka O Literaturze. Literatura Piękna",
+	"cs" : "Language. Linguistics. The Science of Literature. Belles-lettres",
+	"en" : "Language. Linguistics. The Science of Literature. Belles-lettres"
+"udc_9" : {
+	"pl" : "Geografia. Biografie. Historia",
+	"cs" : "Geography. Biographies. History",
+	"en" : "Geography. Biographies. History"
+	}
+}

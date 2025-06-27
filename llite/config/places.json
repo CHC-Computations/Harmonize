@@ -118,8 +118,8 @@
 				"indexField" : "language",
 				"graphMode" : "pieGraph" 
 				},
-		"topic" : {  
-				"indexField" : "topic",
+		"subjects_str_mv" : {  
+				"indexField" : "subjects_str_mv",
 				"graphMode" : "pieGraph" 
 				},
 		"publishDate" : {

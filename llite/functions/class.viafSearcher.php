@@ -55,7 +55,7 @@ class viafSearcher {
 				$this->response = $queryResponse->getResponse();
 				if (!empty($this->getRecFound()) && ($this->getRecFound() == 1)) {
 					$response = $this->getFirstId();
-					file_put_contents($this->cms->outPutFolder.'viafQueries.ids.csv', "$typeOfId;$id;$search;".print_r($response,1)."\n", FILE_APPEND);
+					#file_put_contents($this->cms->outPutFolder.'viafQueries.ids.csv', "$typeOfId;$id;$search;".print_r($response,1)."\n", FILE_APPEND);
 					
 					$this->buffer->$id = $response;
 					return $response;
@@ -63,12 +63,13 @@ class viafSearcher {
 				// search in viaf API 
 				}
 			}
-		file_put_contents($this->cms->outPutFolder.'viafQueries.ids.failed.csv', "$id;$typeOfId;\n", FILE_APPEND);
+		#file_put_contents($this->cms->outPutFolder.'viafQueries.ids.failed.csv', "$id;$typeOfId;\n", FILE_APPEND);
 					
 		return false;
 		}
 	
 	function getIdByLabel($label, $type = '') {
+		$matchLevel = 0;
 		if (!empty($label)) {
 			$sstring = $this->cms->helper->clearStr($label);
 			$skey = str_replace(' ', '_', $sstring);
@@ -92,15 +93,26 @@ class viafSearcher {
 					$response = $this->getFirstId();
 					file_put_contents($this->cms->outPutFolder.'viafQueries.labels.csv', "$type;$label;$searchQuery;".print_r($response,1)."\n", FILE_APPEND);
 					
-					$this->buffer->$skey = $response;
-					return $response;
+					$labels = $this->getLabels($response['viaf']);
+					$compareTable = [];
+					foreach ($labels as $row) {
+						$compareTable[] = $row->label;	
+						}
+					$matchLevel = $this->cms->helper->matchLevelStr((object)['name'=>$sstring], $compareTable);
+					if ($matchLevel >= $this->cms->configJson->import->matchLevel) {
+						$response['matchLevel'] = round($matchLevel*100);
+						$this->buffer->$skey = $response;
+						return $response;
+						}
 					}
 				// search in viaf API 
 				}
 			}
 		file_put_contents($this->cms->outPutFolder.'viafQueries.labels.failed.csv', "$label;$type;\n", FILE_APPEND);
 					
-		return false;
+		return [
+			'matchLevel' => round($matchLevel*100)
+			];
 		}
 		
 

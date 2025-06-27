@@ -70,13 +70,22 @@ class wikidata {
 					$this->localRecord = 'external';
 					if ($this->restore) $this->localRecord = 'double';
 					$jsonContent = json_decode(@file_get_contents($ehost = $this->cms->configJson->wikidata->host."wiki/Special:EntityData/$wikiq.json"));
+					
+					$fileName = './files/logi/wiki/'.date("Y-m-d").'.import.txt';
+					if (!file_exists($fileName))
+						$doChMod = true;
+						else 
+						$doChMod = false;
+					file_put_contents($fileName, $wikiq."\n", FILE_APPEND);
+					if ($doChMod)
+						chmod('./files/logi/wiki/'.date("Y-m-d").'.import.txt', 0775);
 					if (!empty($jsonContent) && is_object($jsonContent)) {
 						
 						$this->saveRecord($jsonContent);
 						}
 					
 					} else {
-					$this->error = "not wikidata entity given";
+					@$this->error = "not wikidata entity given";
 					return false;
 					}
 				}
@@ -137,13 +146,29 @@ class wikidata {
 			if (!empty($ids))
 				$data->eids_any = (object) ["set" => $this->removeArrayKeys($ids)]; 
 
-			#file_put_contents('import/outputfiles/wiki/wikiTry.'.$wiki->getID().'.json', $postdata);
-			$this->cms->solr->curlSaveData('wiki', $data);
+			if (!empty($data)) {
+				/*
+				$postdata = json_encode($data);
+				$fileName = 'import/outputfiles/wiki/wikiTry.'.$this->getID().'.json';
+				$fileName = 'import/outputfiles/wiki/wikiTry.lastQuery.json'; 
+				file_put_contents($fileName, $postdata); 
+				chmod($fileName, 0775);
+				*/
+				$this->cms->solr->curlSaveData('wiki', $data);
+				
+				}
 			
 			}
 		}
 	
-		
+	function getIfExist($source, $lang = '') {
+		if ($lang == '')
+			$lang = $this->cms->userLang;
+		if (!empty($this->record->$source->$lang)) {
+			return $this->getValue($this->record->$source->$lang);
+			}
+		return null;
+		}
 
 	
 	function get($source, $lang = '') {
@@ -158,9 +183,11 @@ class wikidata {
 			return $this->getValue($this->record->$source->{$this->cms->defaultLanguage});
 			}
 		if (!empty($this->record->$source)) {
-			if (!empty($langCode = current((array)$this->record->$source)['language']))
-				$this->returnLang = $langCode;
-			return $this->getValue(current((array)$this->record->$source));
+			$tmpRec = current((array)$this->record->$source);
+					  
+			if (!empty($tmpRec->language))
+				$this->returnLang = $tmpRec->language;
+			return $this->getValue($tmpRec);
 			}
 		}
 	
@@ -320,6 +347,25 @@ class wikidata {
 			'P31:Q13424400' => 'otherPlace', // instance of: trumpet interchange 
 			'P31:Q3146899' => 'otherPlace', // instance of: diocese of the Catholic Church
 			
+			'P31:Q5153359' => 'place', // municipality of the Czech Republic
+			'P31:Q8452914' => 'place', // district town
+			'P31:Q257978' => 'place', // statutory city in Czechia
+			
+			'P31:Q98929991' => 'place',  // instance of: place
+			'P31:Q2221906' => 'place',  // instance of: geographic location
+			'P31:Q7930989' => 'place',  // instance of: city or town
+			'P31:Q515' => 'place',  // instance of: city
+			'P31:Q1549591' => 'place',  // instance of: big city
+			'P31:Q6256' => 'place',  // instance of: country
+			'P31:Q123705' => 'place',  // instance of: neighborhood 
+			'P31:Q3257686' => 'place',  // instance of: locality  
+			
+			'P31:Q3624078' => 'place',  // instance of: sovereign state
+			'P31:Q35657' => 'place',  // instance of: U.S. state
+			'P31:Q150093' => 'place',  // instance of: voivodeship of Poland
+			'P31:Q56061' => 'place',  // instance of: administrative territorial entity
+			'P31:Q3024240' => 'place',  // instance of: historical country
+			
 			'P31:Q43229' => 'corporate', // instance of: organization
 			'P31:Q79913' => 'corporate', // instance of: non-governmental organization
 			'P31:Q163740' => 'corporate', // instance of: nonprofit organization
@@ -368,24 +414,11 @@ class wikidata {
 			'P2517:*' => 'event',  // category for recipients of this award
 			'P2257:*' => 'event',  // frequecy
 			
-			
-			'P31:Q98929991' => 'place',  // instance of: place
-			'P31:Q2221906' => 'place',  // instance of: geographic location
-			'P31:Q7930989' => 'place',  // instance of: city or town
-			'P31:Q515' => 'place',  // instance of: city
-			'P31:Q1549591' => 'place',  // instance of: big city
-			'P31:Q6256' => 'place',  // instance of: country
-			'P31:Q123705' => 'place',  // instance of: neighborhood 
-			'P31:Q3257686' => 'place',  // instance of: locality  
-			
-			'P31:Q3624078' => 'place',  // instance of: sovereign state
-			'P31:Q150093' => 'place',  // instance of: voivodeship of Poland
-			'P31:Q56061' => 'place',  // instance of: administrative territorial entity
-			'P31:Q3024240' => 'place',  // instance of: historical country
+
 			
 			'P31:Q47461344' => 'biblio',  // instance of: written work
 			
-			'P625:*' => 'maybePlace',  // coordinates (must be on the end, not olny places has coordinates)
+			'P625:*' => 'place',  // coordinates (must be on the end, not olny places has coordinates)
 			];
 		
 		
@@ -415,6 +448,19 @@ class wikidata {
 			return $this->record->claims->$claim[0]->mainsnak->datavalue->value;
 			}
 		return null;
+		}	
+	
+	function getTextVals($claim) {
+		$return = [];
+		if (!empty($this->record->claims->$claim)) {
+			foreach ($this->record->claims->$claim as $claim) {
+				if (!empty($claim->mainsnak->datavalue->value)) {
+						$return[] = $claim->mainsnak->datavalue->value;
+					}
+				}
+			}	
+			
+		return $return;
 		}	
 	
 	function getViafId() {
@@ -449,6 +495,12 @@ class wikidata {
 			return $retDate;
 			}
 		return null;
+		}	
+		
+	function getPersonYearsRange($separator = ' ') {
+		$born = $this->getYear('P569');
+		$die = $this->getYear('P570');
+		return trim ($born.$separator.$die);
 		}	
 	
 	function getYear($claim) {
@@ -609,9 +661,12 @@ class wikidata {
 		$res->name = $this->get('labels');
 		$res->langcode = $this->cms->userLang;
 		
-		if (!empty($this->record->claims->P1448)) {
+		$claim = 'P1448';
+		$claim = 'P1705';
+		
+		if (!empty($this->record->claims->$claim)) {
 			
-			foreach ($this->record->claims->P1448 as $histPlace) {
+			foreach ($this->record->claims->$claim as $histPlace) {
 				$res = new stdclass;
 				
 				$data_od = '-9999-00-00T00:00:00Z';
@@ -681,6 +736,25 @@ class wikidata {
 		if (!empty($this->record->sitelinks->$lang->url))
 			return $this->record->sitelinks->$lang->url;
 		return null;
+		}
+	
+	function getWikimediaAPILink() {
+		$lang = $this->cms->userLang.'wiki';
+		if (!empty($this->record->sitelinks->$lang->url)) {
+			$return = $this->record->sitelinks->$lang->url;
+			} else {
+			$lang = $this->cms->defaultLanguage.'wiki';
+			if (!empty($this->record->sitelinks->$lang->url))
+				$return = $this->record->sitelinks->$lang->url;
+			}
+		
+		# 'https://pl.wikipedia.org/wiki/Adam_Mickiewicz';
+		# should go to
+		# 'https://pl.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=&explaintext=&format=json&titles=Adam_Mickiewicz';
+		if (!empty($return)) {
+			$APILink = str_replace('/wiki/', '/w/api.php?action=query&prop=extracts&exintro=&explaintext=&format=json&titles=', $return);
+			return $APILink;
+			}
 		}
 	
 	function isPlace() {

@@ -1,3 +1,7 @@
+<?php 
+if ($this->isMobile())
+	$this->addJS('facets.SlideOut();');
+?>
 <div class='main'>
 	<div class='sidebar'>
 		<?= $this->render('wikiResults/facets-sidebar.php', ['facets'=>$facets, 'currentCore'=>$currentCore]) ?>

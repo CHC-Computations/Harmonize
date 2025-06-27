@@ -7,7 +7,7 @@ if (!empty($value)) {
 	
 	foreach ($Tsubjects as $subjectGroup) {
 		$lineLinks = [];
-		$facetsValues = [];
+		$facetValues = [];
 		foreach ($subjectGroup as $subject) {
 			$facetValues[] = $facetField.':"'.$subject.'"';
 			$facetsCode = $this->buffer->createFacetsCode($facetValues);

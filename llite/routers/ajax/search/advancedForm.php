@@ -6,6 +6,7 @@ $this->addJS("advancedSearch.summary();");
 
 $advS = new AdvSearch;
 
+#$advS->addClass('psql', new postgresql($psqldb));
 // moving from session to current
 if (!empty($_SESSION['advSearch']['form']))
 	$groups = $_SESSION['advSearch']['form'];

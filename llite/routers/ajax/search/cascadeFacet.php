@@ -26,6 +26,7 @@ if (!empty($facet->child))
 
 switch ($stepSetting->template) {
 	case 'box' : 
+			
 			$query[] = $uf = $this->buffer->getFacets( $this->facetsCode);	
 			if (!empty($this->GET['sj'])) {
 				$query['q'] = [ 'field' => 'q',	'value' => $this->solr->advandedSearch($this->GET['sj'])];
@@ -54,15 +55,16 @@ switch ($stepSetting->template) {
 								$formatter = $stepSetting->formatter;
 								$tname = $this->helper->$formatter($name);
 								}
-							if ($stepSetting->translated)
+							if ($stepSetting->translated == 'true')
 								$tname = $this->transEsc($tname);
 							
+							#$tname .=' ('.$stepSetting->translated.')';
 							if ($this->buffer->isActiveFacet($facet->solr_index, $name)) {
 								$key = $this->buffer->createFacetsCode(
 										$this->buffer->removeFacet($facet->solr_index, $name)
 										);
 								$lines[] = '<a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=>$key]).'" class="facet js-facet-item active" >
-												<span class="text">'.$this->transEsc($tname).'</span>
+												<span class="text">'.$tname.'</span>
 												<i class="right-icon glyphicon glyphicon-remove" ></i>
 											</a>';
 							
@@ -71,7 +73,7 @@ switch ($stepSetting->template) {
 										$this->buffer->addFacet($facet->solr_index, $name)
 										);
 								$lines[] = '<a href="'.$this->buildUri('results', ['core'=>$currentCore, 'facetsCode'=>$key]).'" class="facet js-facet-item" >
-												<span class="text">'.$this->transEsc($tname).'</span>
+												<span class="text">'.$tname.'</span>
 												<span class="badge">'.$this->helper->numberFormat($count).'</span>
 											</a>';
 								}

@@ -1,0 +1,3332 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:vcard="http://nwalsh.com/rdf/vCard#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/">
+    <bib:Book rdf:about="urn:isbn:10.%201856494306">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>London and New York</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Zed Books</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Richard Kerridge</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Neil Sammells</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>Writing the Environment: Ecocritcism and Literature</dc:title>
+        <dc:date>1998</dc:date>
+        <z:numPages>256</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 10. 1856494306</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273897/edition/237666">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:08670633"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Anna Barcz</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Monika Gromala</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Paulina Wacławik</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Wisła akwakrytyczna: głębokie mapowanie źródeł literackich w perspektywie nowej historiografii powodzi (1934)</dc:title>
+        <bib:pages>12-31</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:language>pol</z:language>
+        <z:shortTitle>Wisła akwakrytyczna</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273897/edition/237666</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:45:42</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:08670633">
+        <dc:title>Teksty Drugie</dc:title>
+        <prism:volume>4</prism:volume>
+        <dcterms:alternative>TD</dcterms:alternative>
+        <dc:identifier>DOI 10.18318/td.2022.4.2</dc:identifier>
+        <dc:identifier>ISSN 08670633</dc:identifier>
+    </bib:Journal>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273910/edition/237653">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>4</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2022.4.15</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Marta Olesik</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Barbara Barysz</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Wilk w instytucjonalnej skórze: przemoc, język i struktury polityczne</dc:title>
+        <bib:pages>212-233</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:language>pol</z:language>
+        <z:shortTitle>Wilk w instytucjonalnej skórze</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273910/edition/237653</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:10:48</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-0-8166-5045-3%20978-0-8166-5046-0">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Series>
+               <dc:title>Posthumanities</dc:title><dc:identifier>3</dc:identifier>
+            </bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Minneapolis</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>University of Minnesota Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Donna J. Haraway</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Human-animal relationships</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>When Species Meet</dc:title>
+        <dc:date>2008</dc:date>
+        <z:numPages>423</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-8166-5045-3 978-0-8166-5046-0</dc:identifier>
+        <z:libraryCatalog>Library of Congress ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>QL85 .H37 2008</rdf:value></dcterms:LCC>
+        </dc:subject>
+        <dc:description>OCLC: ocn156975211</dc:description>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-0-8166-6614-0%20978-0-8166-6615-7">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Series>
+                <dc:title>Posthumanities series</dc:title>
+                <dc:identifier>v. 8</dc:identifier>
+            </bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Minneapolis</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>University of Minnesota Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Cary Wolfe</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Aesthetics</dc:subject>
+        <dc:subject>Deconstruction</dc:subject>
+        <dc:subject>Humanism</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>What is Posthumanism?</dc:title>
+        <dc:date>2010</dc:date>
+        <z:numPages>357</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-8166-6614-0 978-0-8166-6615-7</dc:identifier>
+        <z:libraryCatalog>Library of Congress ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>B821 .W65 2010</rdf:value></dcterms:LCC>
+        </dc:subject>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:83-7395-016-8.">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Opole</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Uniwersytet Opolski</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Piotr Kowalski</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Wędrować, pielgrzymować, być turystą. Podróż w dyskursach kultury</dc:title>
+        <dc:date>2003</dc:date>
+        <z:numPages>360</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 83-7395-016-8.</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86921">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.9</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Dobrosława Korczyńska-Partyka</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Urbonatura - hybrydyczna przestrzeń miasta. Na przykładzie twórczości Mirona Białoszewskiego</dc:title>
+        <bib:pages>138-155</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86921</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:58:59</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86924">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.12</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Joanna Bednarek</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>&quot;Upojenie jako triumfalne wtargnięcie w nas rośliny&quot;: obietnice i niebezpieczeństwa roślinnej seksualności</dc:title>
+        <bib:pages>186-205</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <z:shortTitle>&quot;Upojenie jako triumfalne wtargnięcie w nas rośliny&quot;</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86924</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:47:59</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-0-19-513351-6%20978-0-19-513350-9">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>New York</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Oxford University Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Leo Marx</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Civilization</dc:subject>
+        <dc:subject>Nature</dc:subject>
+        <dc:subject>Social aspects</dc:subject>
+        <dc:subject>Technology</dc:subject>
+        <dc:subject>United States</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>The Machine in the Garden: Technology and the Pastoral Ideal in America</dc:title>
+        <dc:date>2000</dc:date>
+        <z:numPages>414</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-19-513351-6 978-0-19-513350-9</dc:identifier>
+        <z:shortTitle>The Machine in the Garden</z:shortTitle>
+        <z:libraryCatalog>Library of Congress ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>E169.1 .M35 2000</rdf:value></dcterms:LCC>
+        </dc:subject>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-1-4051-2475-1%20978-1-4051-2476-8">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>Blackwell manifestos</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Malden, MA</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Blackwell Pub</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Lawrence Buell</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>American literature</dc:subject>
+        <dc:subject>Criticism</dc:subject>
+        <dc:subject>Ecology in literature</dc:subject>
+        <dc:subject>English literature</dc:subject>
+        <dc:subject>English-speaking countries</dc:subject>
+        <dc:subject>Environmental policy in literature</dc:subject>
+        <dc:subject>Environmental protection in literature</dc:subject>
+        <dc:subject>History and criticism Theory, etc</dc:subject>
+        <dc:subject>Landscapes in literature</dc:subject>
+        <dc:subject>Nature conservation in literature</dc:subject>
+        <dc:subject>Nature in literature</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>The Future of Environmental Criticism: Environmental Crisis and Literary Imagination</dc:title>
+        <dc:date>2005</dc:date>
+        <z:numPages>195</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-1-4051-2475-1 978-1-4051-2476-8</dc:identifier>
+        <z:shortTitle>The Future of Environmental Criticism</z:shortTitle>
+        <z:libraryCatalog>Library of Congress ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>PS169.E25 B837 2005</rdf:value></dcterms:LCC>
+        </dc:subject>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-0-674-06422-5%20978-0-674-05673-2">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Cambridge (Mass.) London</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Harvard University Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Timothy Morton</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>The Ecological Thought</dc:title>
+        <dcterms:abstract>Annotation ; In this passionate, lucid, and surprising book, Timothy Morton argues that all forms of life are connected in a vast, entangling mesh. This interconnectedness penetrates all dimensions of life. No being, construct, or object can exist independently from the ecological entanglement, Morton contends, nor does Nature exist as an entity separate from the uglier or more synthetic elements of life. Realizing this interconnectedness is what Morton calls the ecological thought. In three concise chapters, Morton investigates the profound philosophical, political, and aesthetic implications of the fact that all life forms are interconnected. As a work of environmental philosophy and theory, The Ecological Thought explores an emerging awareness of ecological reality in an age of global warming. Using Darwin and contemporary discoveries in life sciences as root texts, Morton describes a mesh of deeply interconnected life formsintimate, strange, and lacking fixed identity.A prequel to his Ecology without Nature: Rethinking Environmental Aesthetics (Harvard, 2007), The Ecological Thought is an engaged and accessible work that will challenge the thinking of readers in disciplines ranging from critical theory to Romanticism to cultural geography</dcterms:abstract>
+        <dc:date>2010</dc:date>
+        <z:numPages>163</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-674-06422-5 978-0-674-05673-2</dc:identifier>
+        <z:libraryCatalog>BnF ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:0-8203-%201780-2">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Athens, Georgia</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>University of Georgia Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Cheryll Glotfelty</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Harold Fromm</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>The Ecocriticism Reader</dc:title>
+        <dc:date>1996</dc:date>
+        <z:numPages>415</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 0-8203- 1780-2</dc:identifier>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-0226732862">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Chicago</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>The University of Chicago Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Dipesh Chakrabarty</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>The Climate of History in a Planetary Age</dc:title>
+        <dc:date>2021</dc:date>
+        <z:numPages>292</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0226732862</dc:identifier>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-1-107-02992-7">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>New York, NY</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Cambridge University Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Louise Westling</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>The Cambridge Companion to Literature and the Environment</dc:title>
+        <dcterms:abstract>&quot;This authoritative collection of rigorous but accessible essays investigates the exciting new interdisciplinary field of environmental literary criticism&quot;-- Provided by publisher</dcterms:abstract>
+        <dc:date>2014</dc:date>
+        <z:numPages>286</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-1-107-02992-7</dc:identifier>
+        <z:libraryCatalog>Open WorldCat</z:libraryCatalog>
+        <dc:description>OCLC: 855977490</dc:description>
+    </bib:Book>
+    <bib:BookSection rdf:about="urn:isbn:978-3-540-26588-7">
+        <z:itemType>bookSection</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Book>
+                <dc:title>Earth System Science in the Anthropocene</dc:title>
+                <dc:identifier>ISBN 978-3-540-26588-7</dc:identifier>
+            </bib:Book>
+        </dcterms:isPartOf>
+        <dc:publisher>
+           <foaf:Organization><foaf:name>Springer</foaf:name></foaf:Organization>
+        </dc:publisher>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Eckart Ehlers</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Thomas Krafft</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Paul Crutzen</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>The Anthropocene</dc:title>
+        <dc:date>2016</dc:date>
+        <bib:pages>13-18</bib:pages>
+        <z:language>eng</z:language>
+    </bib:BookSection>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86929">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.17</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Anna Wandzel</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Sztuka roślin</dc:title>
+        <bib:pages>272-283</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86929</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:20:53</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:83-08-00486-5">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Kraków</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Wydawnictwo Literackie</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Helena Zaworska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Sztuka podróżowania. Poetyckie mity podróży w twórczości Jarosława Iwaszkiewicza, Juliana Przybosia i Tadeusza Różewicza</dc:title>
+        <dc:date>1980</dc:date>
+        <z:numPages>274</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 83-08-00486-5</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/239302/edition/204080">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>1</prism:volume>
+                <dcterms:alternative>td</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2020.1.1</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jakub Momro</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Spotkania na krańcach życia</dc:title>
+        <bib:pages>7-25</bib:pages>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/239302/edition/204080</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:06:58</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273909/edition/237654">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>4</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2022.4.14</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Marian Bielecki</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Śmierć psa albo Heideggera i Gombrowicza dyskursy o ludziach i zwierzętach</dc:title>
+        <bib:pages>193-211</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273909/edition/237654</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:49:33</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86919">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.7</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Justyna Schollenberger</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Rośliny w pędzie. Darwina myślenie o granicy roślina-zwierzę</dc:title>
+        <bib:pages>102-119</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86919</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:12:06</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-83-9227-818-4">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Wrocław</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Agencja Wydawnicza A LINEA</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Ewa Kolbuszewska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Romantyczne przeżywanie przyrody. Znaczenia, wartości, style zachowań</dc:title>
+        <dc:date>2007</dc:date>
+        <z:numPages>316</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 978-83-9227-818-4</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86920">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.8</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Gabriela Jarzębowska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Retoryka deratyzacji w PRL: od czystki etnicznej i politycznej do czystki gatunkowej</dc:title>
+        <bib:pages>120-137</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <z:shortTitle>Retoryka deratyzacji w PRL</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86920</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:54:46</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-83-716-4920-2">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Katowice</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Wydawnictwo Śląsk</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Anna Barcz</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Realizm ekologiczny. Od ekokrytyki do zookrytyki w literaturze polskiej</dc:title>
+        <dc:date>2016</dc:date>
+        <z:numPages>366</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 978-83-716-4920-2</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86922">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.10</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Justyna Tabaszewska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Realizm ekologiczny vs. polska literatura</dc:title>
+        <bib:pages>156-165</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86922</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:17:01</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/239308/edition/204100">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>1</prism:volume>
+                <dcterms:alternative>td</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2020.1.7</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Aleksandra Brylska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Radioaktywne kwiaty wiśni. Relacje Japończyków ze skażonymi obszarami wokół elektrowni Fukushima Daiichi</dc:title>
+        <bib:pages>134-151</bib:pages>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/239308/edition/204100</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:50:08</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:83-01-08943-1">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Poznań</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Państwowe Wydawnictwo Naukowe</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Bolesław Andrzejewski</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Przyroda i język. Filozofia wczesnego romantyzmu w Niemczech</dc:title>
+        <dc:date>1989</dc:date>
+        <z:numPages>188</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 83-01-08943-1</dc:identifier>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-83-245-7148-2">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Series>
+                <dc:title>Acta Universitatis Wratislaviensis</dc:title>
+                <dc:identifier>1410</dc:identifier>
+            </bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Wrocław</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Wydawnictwo Uniwersytetu Wrocławskiego</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Piotr Dehnel</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Przyroda i historia. Studium wczesnej filozofii F. W. J. Schellinga</dc:title>
+        <dc:date>1992</dc:date>
+        <z:numPages>352</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 978-83-245-7148-2</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/84089">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2017.2.3</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Ewa Domańska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Przestrzenie Zagłady w perspektywie ekologiczno-nekrologicznej</dc:title>
+        <bib:pages>34-60</bib:pages>
+        <dc:date>2017</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/84089</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:51:53</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="#item_29">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0867-0633"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Anna Barcz</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Przedmioty ekozagłady. Spekulatywna teoria hiperobiektów Timothy’ego Mortona i jej (możliwe) ślady w literaturze</dc:title>
+        <bib:pages>75–87</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0867-0633">
+        <dc:title>Teksty Drugie</dc:title>
+        <prism:number>2</prism:number>
+        <dcterms:alternative>td</dcterms:alternative>
+        <dc:identifier>DOI 10.18318/td.2018.2.5</dc:identifier>
+        <dc:identifier>ISSN 0867-0633</dc:identifier>
+    </bib:Journal>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273901/edition/237662">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>4</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2022.4.6</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Wojciech Małecki</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Powódź i pył. Rzeki w fikcji klimatycznej</dc:title>
+        <bib:pages>83-101</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273901/edition/237662</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:04:51</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-1-138-78418-5%20978-1-138-78419-2">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>London ; New York</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Routledge, Taylor &amp; Francis Group</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Graham Huggan</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Helen Tiffin</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Animals in literature</dc:subject>
+        <dc:subject>Ecocriticism</dc:subject>
+        <dc:subject>Human ecology in literature</dc:subject>
+        <dc:subject>Human-animal relationships in literature</dc:subject>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>Postcolonialism in literature</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>Postcolonial Ecocriticism: Literature, Animals, Environment</dc:title>
+        <prism:edition>Second edition</prism:edition>
+        <dc:date>2015</dc:date>
+        <z:numPages>294</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-1-138-78418-5 978-1-138-78419-2</dc:identifier>
+        <z:shortTitle>Postcolonial Ecocriticism</z:shortTitle>
+        <z:libraryCatalog>Library of Congress ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>PN98.E36 H85 2015</rdf:value></dcterms:LCC>
+        </dc:subject>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/239306/edition/204084">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>1</prism:volume>
+                <dcterms:alternative>td</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2020.1.5</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jerzy Franczak</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Postapokaliptyka. Rekonesans badawczy</dc:title>
+        <bib:pages>94-117</bib:pages>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/239306/edition/204084</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:53:23</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:97883-242-1211-8">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>Horyzonty Nowoczesności</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+               <foaf:name>Universitas</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Ewa Rewers</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Post-polis. Wstęp do filozofii ponowoczesnego miast</dc:title>
+        <prism:volume>41</prism:volume>
+        <dc:date>2005</dc:date>
+        <z:numPages>392</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 97883-242-1211-8</dc:identifier>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-0-367-51977-3">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                        <vcard:locality>Place of publication not identified</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Routledge</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Lucy Bond</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Ben De Bruyn</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jessica Rapson</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>Planetary Memory in Contemporary American Fiction</dc:title>
+        <dcterms:abstract>&quot;This book considers the ways in which contemporary American fiction seeks to imagine a mode of 'planetary memory' able to address the scalar and systemic complexities of the Anthropocene - the epoch in which the combined activity of the human species has become a geological force in its own right. Authors examine the recent emergence of a literary and cultural imaginary of planetary memory, an imaginary which attempts to give form to the complex interrelations between human and non-human worlds, between local, national, and global concerns, and, perhaps most importantly, between historical and geological pasts, presents and futures. Chapters highlight distinct regions and landscapes of the US - from the Appalachians, to the South West, the Rust Belt, New York City, Alaska, New Orleans and the Rocky Mountains - in order to examine how the ecological, economic and historical specificity of these environments is underpinned by their implication on networks of planetary significance and scope. Overall, the collection aims to study, develop, and recognise new models of cultural memory and anxious anticipation as they emerge and evolve, thus opening new conversations about practices of remembering and remembrance on an increasingly fragile planet.&quot;--Publisher's description</dcterms:abstract>
+        <dc:date>2020</dc:date>
+        <z:numPages>178</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-367-51977-3</dc:identifier>
+        <z:libraryCatalog>Open WorldCat</z:libraryCatalog>
+        <dc:description>OCLC: 1142406422</dc:description>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273907/edition/237656">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>4</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2022.4.12</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Justyna Tymieniecka-Suchanek</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>&quot;Oto, jaki jest szczur&quot;, czyli jak podążać w stronę hipotetycznej wizji koegzystencji ludzi i szczurów...</dc:title>
+        <bib:pages>168-183</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273907/edition/237656</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:19:05</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-83-242-1598-0">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Kraków</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Universitas</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Michał Tempczyk</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Ontologia świata przyrody</dc:title>
+        <dc:date>2005</dc:date>
+        <z:numPages>298</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 978-83-242-1598-0</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86928">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.16</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Clara Zgoła</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>O roślinnej historii miasta z perspektywy jego mieszkańca</dc:title>
+        <bib:pages>255-271</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86928</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:21:55</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:9788365304865">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Warszawa</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Instytut Wydawniczy Książka i Prasa</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Przemysław Czapliński</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Joanna B. Bednarek</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Dawid Gostyński</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>O jeden las za daleko. Demokracja, kapitalizm i nieposłuszeństwo ekologiczne w Polsce</dc:title>
+        <dc:date>2019</dc:date>
+        <z:numPages>368</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 9788365304865</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/84091">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2017.2.5</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Roma Sendyka</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Nie-miejsca pamięci i ich nie-ludzkie pomniki</dc:title>
+        <bib:pages>86-108</bib:pages>
+        <dc:date>2017</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/84091</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:12:39</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-0-393-00609-4">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>The Norton Library</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>New York</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Norton</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>M. H. Abrams</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>Natural Supernaturalism: Tradition and Revolution in Romantic Literature</dc:title>
+        <dc:date>1973</dc:date>
+        <z:numPages>550</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-393-00609-4</dc:identifier>
+        <z:shortTitle>Natural supernaturalism</z:shortTitle>
+        <z:libraryCatalog>Library of Congress ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>PN603 .A3 1973</rdf:value></dcterms:LCC>
+        </dc:subject>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273902/edition/237661">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>4</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2022.4.7</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Aleksander Nawarecki</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Nad wodą małą i czystą. Mikrologia &quot;Rzeczki&quot; Juliana Tuwima</dc:title>
+        <bib:pages>102-114</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273902/edition/237661</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:08:32</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86914">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.2</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Aleksandra Ubertowska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>&quot;Mówić w imieniu biotycznej wspólnoty&quot;. Anatomie i teorie tekstu środowiskowego/ekologicznego</dc:title>
+        <bib:pages>17-40</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86914</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:19:53</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:8324201254">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>Horyzonty Nowoczesności</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Kraków</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Universitas</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Elżbieta Rybicka</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Modernizowanie miasta. Zarys problematyki urbanistycznej w nowoczesnej literaturze polskiej,</dc:title>
+        <prism:volume>27</prism:volume>
+        <dc:date>2003</dc:date>
+        <z:numPages>342</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 8324201254</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/239316/edition/204102">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>1</prism:volume>
+                <dcterms:alternative>td</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2020.1.15</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Edwin Bendyk</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Mimetyczna pokusa apokalipsy</dc:title>
+        <bib:pages>259-267</bib:pages>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/239316/edition/204102</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:48:49</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86927">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.15</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Magdalena Śniedziewska</foaf:surname>
+                        <foaf:givenName>Magdalena</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Miłosz i ptaki</dc:title>
+        <bib:pages>235-254</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86927</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:15:40</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:8324206086">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>Horyzonty Nowoczesności</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Kraków</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Universitas</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Hanna Buczyńska-Garewicz</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Miejsca, strony, okolice. Przyczynek do fenomenologii przestrzeni</dc:title>
+        <prism:volume>49</prism:volume>
+        <dc:date>2006</dc:date>
+        <z:numPages>323</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 8324206086</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273900/edition/237663">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>4</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2022.4.5</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jagoda Budzik</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Między morzem a rzeką. Izraelskie i palestyńskie hydrofikcje</dc:title>
+        <bib:pages>70-82</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273900/edition/237663</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:50:49</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-1-78533-300-2%20978-1-78533-841-0">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>New York</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Berghahn Books</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Lucy Bond</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Stef Craps</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Pieter Vermeulen</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>Memory Unbound: Tracing the Dynamics of Memory Studies</dc:title>
+        <dcterms:abstract>Though still a relatively young field, memory studies has undergone significant transformations since it first coalesced as an area of inquiry. Increasingly, scholars understand memory to be a fluid, dynamic, unbound phenomenon-a process rather than a reified object. Embodying just such an elastic approach, this state-of-the-field collection systematically explores the transcultural, transgenerational, transmedial, and transdisciplinary dimensions of memory-four key dynamics that have sometimes been studied in isolation but never in such an integrated manner. Memory Unbound places leading researchers in conversation with emerging voices in the field to recast our understanding of memory's distinctive variability</dcterms:abstract>
+        <dc:date>2017</dc:date>
+        <z:numPages>302</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-1-78533-300-2 978-1-78533-841-0</dc:identifier>
+        <z:shortTitle>Memory unbound</z:shortTitle>
+        <z:libraryCatalog>BnF ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>153.12</rdf:value></dcterms:LCC>
+        </dc:subject>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/84093">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2017.2.7</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Aleksandra Ubertowska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Krajobraz po Zagładzie. Pastoralne dystopie i wizje &quot;terracydu&quot;</dc:title>
+        <bib:pages>132-146</bib:pages>
+        <dc:date>2017</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/84093</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:20:26</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/239305/edition/204083">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>1</prism:volume>
+                <dcterms:alternative>td</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2020.1.4</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Przemysław Czapliński</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Końca świata nie będzie. Parafraza krytycznoliteracka</dc:title>
+        <bib:pages>65-93</bib:pages>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/239305/edition/204083</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:51:20</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/84094">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2017.2.8</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Marta Tomczok</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Klimat Zagłady (w perspektywie powieści Pawła Huellego, Tadeusza Konwickiego, Andrzeja Kuśniewicza i Piotra Szewca)</dc:title>
+        <bib:pages>147-165</bib:pages>
+        <dc:date>2017</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/84094</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:18:25</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="#item_52">
+        <z:itemType>interview</z:itemType>
+        <z:interviewees>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Greg Garrard</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </z:interviewees>
+        <z:interviewers>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Julia Fiedorczuk</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </z:interviewers>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Język całkiem dziki. O ekokrytyce z Gregiem Garrardem rozmawiała Julia Fiedorczuk</dc:title>
+        <dc:date>2010</dc:date>
+        <z:medium>Fragile / nr 3</z:medium>
+        <z:language>pol</z:language>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86918">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.6</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Andrzej Marzec</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>&quot;Jesteśmy połączonym z sobą światem&quot; - Timothy Morton i widmo innej wspólnoty</dc:title>
+        <bib:pages>88-101</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86918</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:05:23</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:BookSection rdf:about="urn:isbn:8387045055">
+        <z:itemType>bookSection</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Book>
+                <dc:title>Pytania ostateczne</dc:title>
+                <dc:identifier>ISBN 8387045055</dc:identifier>
+            </bib:Book>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Warszawa</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Fundacja &quot;Aletheia&quot;</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Thomas Nagel</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <z:translators>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Adam Romaniuk</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </z:translators>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>Jak to jest być nietoperzem?</dc:title>
+        <dc:date>1997</dc:date>
+        <bib:pages>204-207</bib:pages>
+        <z:language>pol</z:language>
+    </bib:BookSection>
+    <bib:Book rdf:about="urn:isbn:8370062156">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Kraków</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Znak</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jacek Woźniakowski</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Klasyka ekokrytyki polskiej</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Góry niewzruszone. O różnych wyobrażeniach przyrody w dziejach nowożytnej kultury europejskiej</dc:title>
+        <prism:edition>Wyd. 3 zm.</prism:edition>
+        <dc:date>1995</dc:date>
+        <z:numPages>340</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 8370062156</dc:identifier>
+    </bib:Book>
+    <bib:Article rdf:about="#item_56">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:number>1</prism:number>
+                <dc:identifier>DOI 10.18318/td.2020.1.9</dc:identifier>
+                <dc:identifier>ISSN 0867-0633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Monika Bakke</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Gdy stawka jest większa niż życie. Sztuka wobec mineralno-biologicznych wspólnot</dc:title>
+        <bib:pages>165–185</bib:pages>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-0-8139-3135-7%20978-0-8139-3148-7%20978-0-8139-3163-0%20978-1-985914-10-0">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>Under the sign of nature</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Charlottesville</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>University of Virginia Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Axel Goodbody</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Kate Rigby</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>Ecocritical Theory: New European Approaches</dc:title>
+        <dc:date>2011</dc:date>
+        <z:numPages>336</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-8139-3135-7 978-0-8139-3148-7 978-0-8139-3163-0 978-1-985914-10-0</dc:identifier>
+        <z:shortTitle>Ecocritical Theory</z:shortTitle>
+        <z:libraryCatalog>BnF ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86925">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.13</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Zofia Jakubowicz-Prokop</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Być kobietą czy być rośliną? O formach podmiotowości w &quot;Wegetariance&quot; Han Kang</dc:title>
+        <bib:pages>206-220</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <z:shortTitle>Być kobietą czy być rośliną?</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86925</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:54:05</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86916">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.4</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Elżbieta Rybicka</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Biopolis - przyroda i miasto</dc:title>
+        <bib:pages>57-74</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86916</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:11:29</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86926">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.14</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Adam Fitas</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Avisacja, czyli ptaki Józefa Mackiewicza</dc:title>
+        <bib:pages>221-234</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86926</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:52:38</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/239303/edition/204081">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>1</prism:volume>
+                <dcterms:alternative>td</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2020.1.2</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Paweł Mościcki</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Apokalipsa Teraz!</dc:title>
+        <bib:pages>26-42</bib:pages>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/239303/edition/204081</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:07:40</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-0-231-17752-8">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Series>
+               <dc:title>Wellek Library lectures in critical theory</dc:title>
+            </bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>New York</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Columbia University Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Timothy Morton</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Effect of environment on Philosophy</dc:subject>
+        <dc:subject>Effect of human beings on Philosophy</dc:subject>
+        <dc:subject>Human beings</dc:subject>
+        <dc:subject>Human ecology</dc:subject>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>Naturalness (Environmental sciences)</dc:subject>
+        <dc:subject>Nature</dc:subject>
+        <dc:subject>Philosophy</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>Dark Ecology: For a Logic of Future Coexistence</dc:title>
+        <dc:date>2016</dc:date>
+        <z:numPages>191</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-231-17752-8</dc:identifier>
+        <z:shortTitle>Dark Ecology</z:shortTitle>
+        <z:libraryCatalog>Library of Congress ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>GF75 .M685 2016</rdf:value></dcterms:LCC>
+        </dc:subject>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273899/edition/237664">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>4</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2022.4.4</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Michał Kępski</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Dziedzictwo rzeki (rozpoznanie wstępne)</dc:title>
+        <bib:pages>52-69</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273899/edition/237664</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:58:03</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86923">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.11</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Agnieszka Karpowicz</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Dzika natura Mirona Białoszewskiego</dc:title>
+        <bib:pages>166-185</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86923</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:57:23</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86913">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.1</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Justyna Tabaszewska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Ekokrytyczna (samo)świadomość</dc:title>
+        <bib:pages>7-16</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86913</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:16:08</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/86915">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2018.2.3</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Małgorzata Sugiera</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Ekologie roślin i wiedzy</dc:title>
+        <bib:pages>41-56</bib:pages>
+        <dc:date>2018</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/86915</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:15:12</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/84090">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2017.2.4</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Mikołaj Smykowski</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Eksterminacja przyrody w Lesie Rzuchowskim</dc:title>
+        <bib:pages>61-85</bib:pages>
+        <dc:date>2017</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/84090</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:14:47</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273904/edition/237659">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>4</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2022.4.9</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Monika Lubińska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Estetyka petrokultury. Jak i dlaczego (nie) opowiadamy o ropie naftowej</dc:title>
+        <bib:pages>132-148</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273904/edition/237659</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:03:20</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273896/edition/237669">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>4</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2022.4.1</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Anna Nasiłowska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Głos rzek</dc:title>
+        <bib:pages>7-11</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273896/edition/237669</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:08:05</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/239314/edition/204098">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>1</prism:volume>
+                <dcterms:alternative>td</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2020.1.13</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Szymon Wróbel</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Gorączka łupkowa albo śmierć termiczna. (Wokół książki Agaty Stasik &quot;Współwytwarzanie wiedzy o technologii&quot;)</dc:title>
+        <bib:pages>231-248</bib:pages>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/239314/edition/204098</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:21:23</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/84092">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2017.2.6</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jacek Leociak</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Góry śmieci otulały watą smrodu wszystko, co żyło. (Śmieci w getcie warszawskim w perspektywie środowiskowej historii Zagłady)</dc:title>
+        <bib:pages>109-131</bib:pages>
+        <dc:date>2017</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/84092</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:02:33</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/239318/edition/204106">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>1</prism:volume>
+                <dcterms:alternative>td</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2020.1.17</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Marta Tomczok</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Historia środowiskowa Holokaustu. (O książce Jacka Małczyńskiego &quot;Krajobrazy Zagłady. Perspektywa historii środowiskowej&quot;)</dc:title>
+        <bib:pages>275-283</bib:pages>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/239318/edition/204106</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:17:42</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/84088">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>2</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2017.2.2</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jacek Małczyński</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Historia środowiskowa Zagłady</dc:title>
+        <bib:pages>17-33</bib:pages>
+        <dc:date>2017</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://rcin.org.pl/dlibra/publication/84088</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:04:23</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/239304/edition/204082">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>1</prism:volume>
+                <dcterms:alternative>td</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2020.1.3</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jakub Momro</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Implozje</dc:title>
+        <bib:pages>43-64</bib:pages>
+        <dc:date>2020</dc:date>
+        <z:language>pol</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/239304/edition/204082</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:05:53</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-0-8166-8922-4%20978-0-8166-8923-1">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Series>
+                <dc:title>Posthumanities</dc:title>
+                <dc:identifier>27</dc:identifier>
+            </bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Minneapolis</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>University of Minnesota Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Timothy Morton</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Future, The</dc:subject>
+        <dc:subject>Object (Philosophy)</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>Hyperobjects: Philosophy and Ecology After the End of the World</dc:title>
+        <dc:date>2013</dc:date>
+        <z:numPages>229</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-8166-8922-4 978-0-8166-8923-1</dc:identifier>
+        <z:shortTitle>Hyperobjects</z:shortTitle>
+        <z:libraryCatalog>Library of Congress ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>BD336 .M67 2013</rdf:value></dcterms:LCC>
+        </dc:subject>
+    </bib:Book>
+    <bib:Book rdf:about="#item_76">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Kraków</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Universitas</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Wolfgang Welsch</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <z:translators>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Katarzyna Guczalska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </z:translators>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>Estetyka poza estetyką: o nową postać estetyki</dc:title>
+        <dc:date>2005</dc:date>
+        <z:numPages>226</z:numPages>
+        <z:language>pol</z:language>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-1-78168-902-8%20978-1-78168-901-1">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>New York</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Verso</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jason W. Moore</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Economic development</dc:subject>
+        <dc:subject>Economic policy</dc:subject>
+        <dc:subject>Environmental aspects</dc:subject>
+        <dc:subject>Environmental policy</dc:subject>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>POLITICAL SCIENCE / Economic Conditions</dc:subject>
+        <dc:subject>POLITICAL SCIENCE / Public Policy / Environmental Policy</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>Capitalism in the Web of Life: Ecology and the Accumulation of Capital</dc:title>
+        <prism:edition>1st Edition</prism:edition>
+        <dc:date>2015</dc:date>
+        <z:numPages>316</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-1-78168-902-8 978-1-78168-901-1</dc:identifier>
+        <z:shortTitle>Capitalism in the web of life</z:shortTitle>
+        <z:libraryCatalog>Library of Congress ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>HD75.6 .M66 2015</rdf:value></dcterms:LCC>
+        </dc:subject>
+    </bib:Book>
+    <bib:Book rdf:about="#item_78">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>Horyzonty Nowoczesności</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Kraków</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Universitas</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Anna Wieczorkiewicz</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Apetyt turysty. O doświadczaniu świata w podróży</dc:title>
+        <prism:volume>66</prism:volume>
+        <dc:date>2008</dc:date>
+        <z:numPages>396</z:numPages>
+        <z:language>pol</z:language>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-0-415-20407-1%20978-0-415-20406-4">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>London</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Routledge</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:editors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Laurence Coupe</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:editors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>The Green Studies Reader: From Romanticism to Ecocriticism</dc:title>
+        <prism:edition>Transferred to digital print</prism:edition>
+        <dc:date>2008</dc:date>
+        <z:numPages>315</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-415-20407-1 978-0-415-20406-4</dc:identifier>
+        <z:shortTitle>The Green Studies Reader</z:shortTitle>
+        <z:libraryCatalog>K10plus ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-0-691-22055-0">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Princeton Oxford</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Princeton University Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Anna Lowenhaupt Tsing</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>The Mushroom at the End of the World: On the Possibility of Life in Capitalist Ruins</dc:title>
+        <prism:edition>New paperback printing</prism:edition>
+        <dc:date>2021</dc:date>
+        <z:numPages>331</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-691-22055-0</dc:identifier>
+        <z:shortTitle>The Mushroom at the End of the World</z:shortTitle>
+        <z:libraryCatalog>K10plus ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-0-7456-4158-4%20978-0-7456-4157-7">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Cambridge, UK Malden, MA</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Polity Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Rosi Braidotti</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>The Posthuman</dc:title>
+        <dc:date>2013</dc:date>
+        <z:numPages>229</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-7456-4158-4 978-0-7456-4157-7</dc:identifier>
+        <z:libraryCatalog>K10plus ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-1-78873-940-5">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>London Brooklyn, NY</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Verso</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Andreas Malm</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>The Progress of This Storm: Nature and Society in a Warming World</dc:title>
+        <prism:edition>Paperback first published</prism:edition>
+        <dc:date>2020</dc:date>
+        <z:numPages>248</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-1-78873-940-5</dc:identifier>
+        <z:shortTitle>The progress of this storm</z:shortTitle>
+        <z:libraryCatalog>K10plus ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-0-674-00818-2%20978-0-674-00168-8">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Cambridge, Mass</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Harvard University Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jonathan Bate</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>The Song of the Earth</dc:title>
+        <prism:edition>2. print</prism:edition>
+        <dc:date>2002</dc:date>
+        <z:numPages>335</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-674-00818-2 978-0-674-00168-8</dc:identifier>
+        <z:libraryCatalog>K10plus ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-0-674-03049-7%20978-0-674-02316-1">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Cambridge, MA</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Belknap Press of Harvard Univ. Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Pierre Hadot</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <z:translators>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Michael Chase</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </z:translators>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>The Veil of Isis: An Essay on the History of the Idea of Nature</dc:title>
+        <prism:edition>1. Harvard Univ. Press paperback ed</prism:edition>
+        <dc:date>2008</dc:date>
+        <z:numPages>399</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-674-03049-7 978-0-674-02316-1</dc:identifier>
+        <z:shortTitle>The veil of Isis</z:shortTitle>
+        <z:libraryCatalog>K10plus ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Article rdf:about="https://pressto.amu.edu.pl/index.php/pi/article/view/38598">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:2450-6435"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Ryszard Waksmund</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:subject>literatura piękna</dc:subject>
+        <dc:subject>solidarność</dc:subject>
+        <dc:subject>wspomnienia o dzieciństwie</dc:subject>
+        <dc:subject>zwierzęta</dc:subject>
+        <dc:title>Solidarność zwierząt - solidarność ze zwierzętami. Na przykładzie literatury pięknej i nie tylko</dc:title>
+        <dcterms:abstract>The bonds of solidarity connect not only people with each other, but also animals. An example of this is Orwell’s Animal Farm, which is assigned as a schoolbook, rooted in the tradition of Aesop’s fable. However, this is not only a phenomenon characteristic for literary fantasy, as it is confirmed in the research of naturalists and sociologists (animal as Other). The article provides an overview of works that illustrate the attitude of solidarity in the animal world and animals with people, both fantastic and realistic, for children and adults, which are either on school reading lists or could be included there. Not only foreign-language writers, such as the Brothers Grimm, Kipling, Lagerlȍf, Lofting, Chukovsky, Bonsels, Adams, Atkinson, but also Polish ones, such as Dygasiński, Reymont, Brzechwa, Żukrowski. This also applies to memoir prose about childhood, whose didactic sense is no less valuable.</dcterms:abstract>
+        <bib:pages>31-46</bib:pages>
+        <dc:date>2023-07-07</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://pressto.amu.edu.pl/index.php/pi/article/view/38598</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-02 20:09:39</dcterms:dateSubmitted>
+        <z:libraryCatalog>pressto.amu.edu.pl</z:libraryCatalog>
+        <dc:rights>Prawa autorskie (c) 2023 Ryszard Waksmund</dc:rights>
+        <dc:description>Number: 17</dc:description>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:2450-6435">
+        <dc:title>Polonistyka. Innowacje</dc:title>
+        <prism:number>17</prism:number>
+        <dc:identifier>DOI 10.14746/pi.2023.17.4</dc:identifier>
+        <dc:identifier>ISSN 2450-6435</dc:identifier>
+    </bib:Journal>
+    <bib:Book rdf:about="urn:isbn:978-1-78873-100-3">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>London New York</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Verso</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Timothy Morton</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>Humankind: Solidarity with Non-human People</dc:title>
+        <prism:edition>Paperback edition</prism:edition>
+        <dc:date>2019</dc:date>
+        <z:numPages>205</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-1-78873-100-3</dc:identifier>
+        <z:shortTitle>Humankind</z:shortTitle>
+        <z:libraryCatalog>K10plus ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Article rdf:about="https://pressto.amu.edu.pl/index.php/pi/article/view/38556">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Polonistyka. Innowacje</dc:title>
+                <prism:number>17</prism:number>
+                <dc:identifier>DOI 10.14746/pi.2023.17.3</dc:identifier>
+                <dc:identifier>ISSN 2450-6435</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Zofia Budrewicz</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>etyka ekologiczna</dc:subject>
+        <dc:subject>kryzys ekologiczny</dc:subject>
+        <dc:subject>kształtowanie postaw</dc:subject>
+        <dc:subject>literatura</dc:subject>
+        <dc:subject>nowe publikacje polskie</dc:subject>
+        <dc:subject>przyroda</dc:subject>
+        <dc:title>Etyka ekologiczna na lekcjach polskiego</dc:title>
+        <dcterms:abstract>The aim of the article is to justify the role of literature in shaping man’s attitudes towards nature in Polish studies, and to present these issues on the basis of representative interpretations of poetry. Such objectives stem from the social needs of the changes of man’s destructive behavior, as well as from the systemic absence of these problems in Polish studies. It makes use of literature which I perceive as a particularly sensitive tool which enables us to redefine the attitudes which are shaped by culture. The theoretical part of the article discusses biocentric concepts. They challenge the anthropocentric position of human communities in biosphere, and they are based on the ethics of ecology (ecoethics), meaning observations of systemic relations between man and nature. Ecoethics is not a synonym for ecology, a morally neutral area of science which deals with relations between organisms and nature. In the second part of the article, I depict some examples of interpretations of literary works according to the rules which emerged in research on directions of ethics of ecology (selected poems by J. Przyboś, J. Podsiadło, M. Świetlicki, L.A. Moczulski). The works which appeal to sensual experiences are particularly important. Experiencing beauty seems to play an exceptional role in evoking the readers’ imaginary experiences. Aesthetic influence intensifies ethical influence of literature and other works of culture, including the need to protect nature. It incorporates their ecoethical senses. As a result, a reconciliation between man’s civilisation aspirations and a friendly coexistence in nature does not have to mean utopian aspirations.</dcterms:abstract>
+        <bib:pages>17-30</bib:pages>
+        <dc:date>2023</dc:date>
+        <z:language>pl</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://pressto.amu.edu.pl/index.php/pi/article/view/38556</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-02 20:09:11</dcterms:dateSubmitted>
+        <z:libraryCatalog>pressto.amu.edu.pl</z:libraryCatalog>
+        <dc:rights>Prawa autorskie (c) 2023 Zofia Budrewicz</dc:rights>
+        <dc:description>Number: 17</dc:description>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-1-4725-0670-2%20978-1-4725-0648-1%20978-1-4725-0573-6%20978-1-4742-4630-9">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                        <vcard:locality>London New York Oxford New Dlhi Sydney</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Bloomsbury Academic</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Timothy Clark</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Najważniejsze nowe publikacje zagraniczne</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:title>Ecocriticism on the Edge: The Anthropocene as a Threshold Concept</dc:title>
+        <dc:date>2015</dc:date>
+        <z:numPages>218</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-1-4725-0670-2 978-1-4725-0648-1 978-1-4725-0573-6 978-1-4742-4630-9</dc:identifier>
+        <z:shortTitle>Ecocriticism on the edge</z:shortTitle>
+        <z:libraryCatalog>K10plus ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Book rdf:about="urn:isbn:978-1-03-200402-0%20978-1-03-200405-1">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>The New Critical Idiom</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>London New York</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Routledge, Taylor &amp; Francis Group</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Greg Garrard</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>Ecocriticism</dc:title>
+        <dcterms:abstract>&quot;Ecocriticism explores the ways in which we imagine and portray the relationship between humans and the environment across many areas of cultural production, including Romantic poetry, wildlife documentaries, climate models, the Hollywood blockbuster The Day After Tomorrow, and novels by Margaret Atwood, Kim Scott, Barbara Kingsolver and Octavia Butler. Greg Garrard's animated and accessible volume responds to the diversity of the field today and explores its key concepts, including: - pollution - pastoral - wilderness - apocalypse - animals - Indigeneity - the Earth. Thoroughly revised to reflect the breadth and diversity of twenty-first-century environmental writing and criticism, this edition addresses climate change and justice throughout, and features a new chapter on Indigeneity. It also presents a glossary of terms and suggestions for further reading. Concise, clear, and authoritative, Ecocriticism offers the ideal introduction to this crucial subject for students of literary and cultural studies&quot;--</dcterms:abstract>
+        <prism:edition>Third edition</prism:edition>
+        <dc:date>2023</dc:date>
+        <z:numPages>253</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-1-03-200402-0 978-1-03-200405-1</dc:identifier>
+        <z:libraryCatalog>K10plus ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/273898/edition/237665">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>4</prism:volume>
+                <dcterms:alternative>TD</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2022.4.3</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Andrzej Kowalczyk</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Lucyna Sadzikowska</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Marta Tomczok</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Paweł Tomczok</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Antropocenna Rawa: akwafilologia rzeki przemysłowej</dc:title>
+        <bib:pages>32-51</bib:pages>
+        <dc:date>2022</dc:date>
+        <z:shortTitle>Antropocenna Rawa</z:shortTitle>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/273898/edition/237665</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 08:59:35</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Article rdf:about="#item_91">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Ha!art. Interdyscyplinarny magazyn o kulturze</dc:title>
+                <prism:number>1-2 (28-29)</prism:number>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Julia Fiedorczuk</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Grzegorz Jankowicz</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Polska klasyka ekokrytyki</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Cyborg w ogrodzie. Założycielskie uwagi o ekokrytyce</dc:title>
+        <dc:date>2009</dc:date>
+    </bib:Article>
+    <bib:Article rdf:about="https://rcin.org.pl/dlibra/publication/239309/edition/204090">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf>
+            <bib:Journal>
+                <dc:title>Teksty Drugie</dc:title>
+                <prism:volume>1</prism:volume>
+                <dcterms:alternative>td</dcterms:alternative>
+                <dc:identifier>DOI 10.18318/td.2020.1.8</dc:identifier>
+                <dc:identifier>ISSN 08670633</dc:identifier>
+            </bib:Journal>
+        </dcterms:isPartOf>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Paweł Majewski</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>Nowe publikacje polskie</dc:subject>
+        <dc:subject>[etap I - czerwiec 24]</dc:subject>
+        <dc:title>Ciało Linneusza. O pewnych własnościach taksonomii, które wpływają na ludzkie widzenie świata</dc:title>
+        <bib:pages>152-164</bib:pages>
+        <dc:date>2020</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://rcin.org.pl/dlibra/publication/239309/edition/204090</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-06-26 09:03:54</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Book rdf:about="urn:isbn:978-0-674-25862-4%20978-0-674-25861-7">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Cambridge, Mass.</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Belknap Press of Harvard Univ. Press</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Lawrence Buell</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>The environmental imagination: Thoreau, nature writing, and the formation of American culture</dc:title>
+        <prism:edition>2. print</prism:edition>
+        <dc:date>1996</dc:date>
+        <z:numPages>586</z:numPages>
+        <z:language>eng</z:language>
+        <dc:identifier>ISBN 978-0-674-25862-4 978-0-674-25861-7</dc:identifier>
+        <z:shortTitle>The environmental imagination</z:shortTitle>
+        <z:libraryCatalog>K10plus ISBN</z:libraryCatalog>
+    </bib:Book>
+    <bib:Article rdf:about="https://www.jstor.org/stable/10.2307/25601183?origin=crossref">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:00393762"/>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Jonathan Bate</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>Living with the Weather</dc:title>
+        <bib:pages>431-447</bib:pages>
+        <dc:date>1996</dc:date>
+        <z:language>en</z:language>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://www.jstor.org/stable/10.2307/25601183?origin=crossref</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+        <dcterms:dateSubmitted>2024-07-04 10:43:49</dcterms:dateSubmitted>
+        <z:libraryCatalog>DOI.org (Crossref)</z:libraryCatalog>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:00393762">
+        <dc:title>Studies in Romanticism</dc:title>
+        <prism:volume>35</prism:volume>
+        <prism:number>3</prism:number>
+        <dc:identifier>DOI 10.2307/25601183</dc:identifier>
+        <dc:identifier>ISSN 00393762</dc:identifier>
+    </bib:Journal>
+    <bib:Book rdf:about="urn:isbn:978-83-7383-161-2">
+        <z:itemType>book</z:itemType>
+        <dcterms:isPartOf>
+           <bib:Series><dc:title>Humanistyka Europejska</dc:title></bib:Series>
+        </dcterms:isPartOf>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Warszawa</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>Wydawnictwo Naukowe &quot;Scholar&quot;</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Phil Macnaghten</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>John Urry</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <z:translators>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>Bogdan Baran</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </z:translators>
+        <dc:subject>Ekofilozofia</dc:subject>
+        <dc:subject>Ochrona przyrody</dc:subject>
+        <dc:subject>[etap II - lipiec 24]</dc:subject>
+        <dc:subject>socjologia</dc:subject>
+        <dc:subject>Środowisko człowieka</dc:subject>
+        <dc:subject>Światowa klasyka ekokrytyki</dc:subject>
+        <dc:title>Alternatywne przyrody: nowe myślenie o przyrodzie i społeczeństwie</dc:title>
+        <dc:date>2005</dc:date>
+        <z:numPages>399</z:numPages>
+        <z:language>pol</z:language>
+        <dc:identifier>ISBN 978-83-7383-161-2</dc:identifier>
+        <z:shortTitle>Alternatywne przyrody</z:shortTitle>
+        <z:libraryCatalog>National Library of Poland ISBN</z:libraryCatalog>
+        <dc:subject>
+           <dcterms:LCC><rdf:value>2.256.710 A</rdf:value></dcterms:LCC>
+        </dc:subject>
+    </bib:Book>
+</rdf:RDF>

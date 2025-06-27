@@ -3,8 +3,10 @@ $facetField = 'form_genre';
 if (!empty($value)) {
 	$value = (array)$value;
 	if (is_array($value))
-		foreach ($value as $formGenre) 
-			$res[] = '<a href="'.$this->buildUrl('results', ['core'=>'biblio', 'facetsCode'=>$this->buffer->createFacetsCode([$facetField.':"'.$formGenre->name.'"'])]).'">'.$formGenre->name.'</a>';
+		foreach ($value as $formGenre) {
+			# $res[] = '<a href="'.$this->buildUrl('results', ['core'=>'biblio', 'facetsCode'=>$this->buffer->createFacetsCode([$facetField.':"'.$formGenre->name.'"'])]).'">'.$formGenre->name.'</a>';
+			$res[] = $formGenre->name;
+			}
 			
 	if (count($res)>1)
 		$value = '<ol><li>'.implode('</li><li>', $res).'</li></ol>';

@@ -50,10 +50,7 @@ if (!empty($this->configJson->$currentCore)) {
 	$lookfor = $this->postParam('lookfor');
 	if (empty($lookFor) && !empty($this->GET['lookfor'])) {
 		$lookfor = $this->GET['lookfor'];
-		$query['q']=[ 
-				'field' => 'q',
-				'value' => $lookfor
-				];
+		$query['q']= $this->solr->lookFor($lookfor);
 		} else 
 		$query['q']=[ 
 				'field' => 'q',

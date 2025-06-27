@@ -8,18 +8,18 @@
 			"default-box" : {
 				"name" :"Boxes",
 				"value" : "default-box",
-				"icon" : "ph-bold ph-rows"
+				"icon" : "ph-bold ph-squares-four"
 				},
 			"simplelist" : {
 				"name" : "simple list",
 				"value" : "simplelist",
 				"icon" : "ph-bold ph-list-dashes"
 				},
-			"th" : {
-				"name" : "titles",
-				"value" : "th",
-				"icon" : "ph-bold ph-squares-four"
-				}
+			"showcase" : {
+				"name" : "Showcases",
+				"value" : "showcase",
+				"icon" : "ph-bold ph-rows"
+				}	
 			}
 		},
 	"sorting" : {
@@ -28,7 +28,7 @@
 		"optionsAvailable" : {
 			"r" : {"name" : "Relevance", "value" : "biblio_count desc"}, 
 			"dd" : {"name" : "Inception year desc", "value" : "year_start desc"},
-			"a" : {"name" : "Name", "value" : "biblio_labels asc"}
+			"a" : {"name" : "Name", "value" : "*_label_sort asc"}
 			}
 		},
 
@@ -143,8 +143,8 @@
 				"indexField" : "language",
 				"graphMode" : "pieGraph" 
 				},
-		"topic" : {  
-				"indexField" : "topic",
+		"subjects_str_mv" : {  
+				"indexField" : "subjects_str_mv",
 				"graphMode" : "pieGraph" 
 				},
 		"publishDate" : {

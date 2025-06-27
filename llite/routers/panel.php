@@ -2,35 +2,39 @@
 if (empty($this)) die;
 require_once('functions/class.helper.php');
 
-$export = $this->getConfig('export');
-$facets = $this->getConfig('search');
-$facets = $this->getConfig('facets');
-
 $this->addClass('buffer', 	new buffer()); 
 $this->addClass('solr', 	new solr($this)); 
 $this->addClass('helper', 	new helper()); 
 
 
-	
-$this->setTitle("Libri ".$this->transEsc('users'));
+$path = 'routers/panel/'.implode('/',$this->routeParam);
+if (file_exists($path.'/content.ini'))
+	$iniContent = parse_ini_file($path.'/content.ini', true);
+	else 
+	$iniContent = [];
 
-if (!empty($this->routeParam[0])) {
-	$a = explode('.', $this->routeParam[0]);
-	$mod =  end($a);
+if (!empty($iniContent['name']))	
+	$this->setTitle($iniContent['name'].' - '.$this->transEsc('User panel'));
+	else 
+	$iniContent['name'] = 'mysterious unknown site';
+		
+$mod = '';
+foreach ($this->routeParam as $stepValue) {
+	$a = explode('.', $stepValue);
+	$modPath[] = end($a);
 	}
-if (!empty($this->routeParam[1])) {
-	$a = explode('.', $this->routeParam[1]);
-	$mod .= '/'.end($a);
-	}
+$mod = implode('/',$modPath);	
+
 
 
 ?> 
 
 <?= $this->render('head.php') ?>
 <?= $this->render('core/header.php') ?>
+<div class="panel-header"><div class="container"><h1><?= $iniContent['name'] ?></h1></div></div>
 <div class="container">
 	<div class="main">
-		<?= $this->render('panel/'.$mod.'.php', ['facets' => $facets] ) ?>
+		<?= $this->render('panel/'.$mod.'.php' ) ?>
 	</div>
 </div>
 

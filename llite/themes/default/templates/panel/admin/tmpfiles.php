@@ -1,4 +1,3 @@
-<h1><?= $this->transEsc('Cleaning temporary files') ?></h1>
 <?php 
 $folders = [
 		'jsonFiles' => 'files/json',

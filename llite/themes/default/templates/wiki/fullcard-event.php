@@ -4,8 +4,14 @@
 	</div>
 	<div class="person-record">
 	
-		<?= $this->render('wikiResults/resultBoxes/linkPanel.php', ['AP' => $this->coreRecord->linkPanel()] ) ?>
-		<p><?= $this->wiki->get('descriptions') ?? '&nbsp;'  ?></p>
+		<div id="wikimediaDescription">
+		<?php
+			if (!empty($this->wiki->record->wikipediaDescription))
+				echo $this->wiki->record->wikipediaDescription;
+				else 
+				echo $this->wiki->get('descriptions');
+		?>
+		</div>
 		
 		<div class="record-left-panel">
 			<div class="thumbnail">
@@ -34,15 +40,6 @@
 				<?= $this->render('wiki/link.out.php', ['label'=>$this->transEsc('Official website'),  'value'=>$this->wiki->getStrVal('P856')]) ?>
 				
 			</ul>
-			<div class="text-right">
-			<small>
-				<a href="https://www.wikidata.org/wiki/<?=$this->wiki->getID() ?>" class="text-right"><?= $this->transEsc('Source of information')?> Wikidata</a><br/>
-				<a href="<?=$this->wiki->getSiteLink() ?>" class="text-right"><?= $this->transEsc('More information on')?> Wikipedia</a><br/>
-				<a href="https://www.entitree.com/en/employer/<?=$this->wiki->getID() ?>" class="text-right" target="_blank"><?= $this->transEsc('Explore with')?> EntiTree</a>
-			</small>
-			</div>
-			
 		</div>
-		
 	</div>
 	
